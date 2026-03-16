@@ -5,9 +5,11 @@ namespace LabDiner.Laboratory
 {
     public class LabIngredientSpawner : MonoBehaviour, IClickable
     {
+        [Header("Spawner Settings")]
         [SerializeField] bool _isDisableWhenClick;
         [SerializeField] Collider2D _collider;
         [SerializeField] GameObject _visual;
+        [SerializeField] private IngredientSO _ingredientData;
         public void OnPointerUp(Vector3 worldPosition)
         {
 
@@ -22,15 +24,11 @@ namespace LabDiner.Laboratory
 
             // 1. Spawn item từ pool
             var go = PoolManager.Instance.IngredientPool.Get(worldPosition + Vector3.down * 0.5f, Quaternion.identity);
+            LabIngredientContext labIngredientContext = go.GetComponent<LabIngredientContext>();
 
-            //2. Kiểm tra xem item mới spawn có SpawnerMember chưa, nếu chưa thì add vào để sau này trả về spawner
-            if (!go.TryGetComponent(out SpawnerMember spawnerMember))
-            {
-                // Nếu không có thì add thêm và log ra console
-                spawnerMember = go.AddComponent<SpawnerMember>();
-                Debug.Log($"<color=yellow>[PoolManager]</color> Đã thêm SpawnerMember vào {go.name} vì prefab đang thiếu!");
-            }
-            spawnerMember.SetOrigin(this);
+            //2. Set dữ liệu cho item mới spawn
+            labIngredientContext.Init(this, _ingredientData);
+            
 
             // 3. Lấy component Draggable từ item mới
             if (go.TryGetComponent(out IDraggable newDraggable))

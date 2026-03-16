@@ -6,45 +6,30 @@ namespace LabDiner.Laboratory
 {
     public class LabIngredientRemover : MonoBehaviour
     {
-        [SerializeField] private IngredientEvent OnIngredientRemoved;
+        // [SerializeField] private IngredientEvent OnIngredientRemoved;
         void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.TryGetComponent(out LabIngredient ingredient))
+            if (collision.TryGetComponent(out LabIngredientContext ingredient))
             {
-                //1. Phát hiện nguyên liệu rơi vào vùng xóa
-                OnIngredientRemoved?.Raise(ingredient.IngredientData);
+                // //1. Phát hiện nguyên liệu rơi vào vùng xóa
+                // OnIngredientRemoved?.Raise(ingredient.CtxData.IngredientData);
 
                 //2. Trả nguyên liệu về pool thay vì destroy
-                ReturnToPool(ingredient);
+                ReturnToPool(ingredient.CtxPoolMember);
 
                 //3. Gọi hàm OnEndDrag trên SpawnerMember nếu tồn tại
-                ReturnToSpawner(ingredient);
+                ReturnToSpawner(ingredient.CtxSpawnerMember);
             }
         }
 
-        void ReturnToPool(LabIngredient ingredient)
+        void ReturnToPool(PoolMember poolMember)
         {
-            if (ingredient.TryGetComponent(out PoolMember poolMember))
-            {
-                poolMember.ReturnToPool();
-            }
-            else
-            {
-                Debug.LogWarning($"LabIngredient {ingredient.name} không có PoolMember để trả về pool!");
-                Destroy(ingredient.gameObject); // Fallback nếu có lỗi
-            }
+            poolMember.ReturnToPool();
         }
 
-        void ReturnToSpawner(LabIngredient ingredient)
+        void ReturnToSpawner(SpawnerMember spawnerMember)
         {
-            if (ingredient.TryGetComponent(out SpawnerMember spawnerMember))
-            {
-                spawnerMember.ReturnToSpawner();
-            }
-            else
-            {
-                Debug.LogWarning($"LabIngredient {ingredient.name} không có SpawnerMember để trả về spawner!");
-            }
+            spawnerMember.ReturnToSpawner();
         }
     }
 }

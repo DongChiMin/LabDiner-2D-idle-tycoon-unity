@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 408802490501735400}
   - component: {fileID: 3937438751541357984}
   - component: {fileID: 3528628591134988160}
+  - component: {fileID: 5015841982983027253}
+  - component: {fileID: 1167618124431651250}
   m_Layer: 10
   m_Name: Lab Ingredient
   m_TagString: Untagged
@@ -164,6 +166,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c0c2b27d31b7040b7b99cd7da8815e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5015841982983027253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8015811790385571305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dd481025d32f9748b978d964e117d23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1167618124431651250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8015811790385571305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7df1508c0d9cab45a4a09d473d10b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 5015841982983027253}
+  drag: {fileID: 408802490501735400}
+  spawnerMember: {fileID: 3528628591134988160}
+  poolMember: {fileID: 3937438751541357984}
 --- !u!1 &8109706855699103636
 GameObject:
   m_ObjectHideFlags: 0

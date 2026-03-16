@@ -17,7 +17,6 @@ namespace LabDiner.Shared
         void OnDragContinue(Vector3 worldPosition);
         void OnDragEnd();
         Transform Transform { get; }
-        object GetData(); // Trả về IngredientSO hoặc bất cứ thứ gì
     }
 
     public interface IIngredient

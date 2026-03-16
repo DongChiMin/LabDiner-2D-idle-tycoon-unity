@@ -4,7 +4,7 @@ using UnityEngine;
 namespace LabDiner.Laboratory
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(TargetJoint2D))]
-    public class LabIngredient : MonoBehaviour, IDraggable, IIngredient
+    public class LabIngredientDrag : MonoBehaviour, IDraggable
     {
         [SerializeField] private IngredientSO data;
         [SerializeField] private Rigidbody2D _rb;
@@ -16,9 +16,7 @@ namespace LabDiner.Laboratory
         [SerializeField] private float _DragLinearDamping = 1f;
 
         public Transform Transform => transform;
-        public IngredientSO IngredientData => data;
         public Rigidbody2D Rigidbody => _rb;
-        public object GetData() => data;
 
         private void Awake()
         {
