@@ -17,9 +17,9 @@ TagManager:
   - 
   - Interactable
   - 
-  - Floor
+  - ChefFloor
   - Obstacle
-  - 
+  - GuestFloor
   - 
   - 
   - 

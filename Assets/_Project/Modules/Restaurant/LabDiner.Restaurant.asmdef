@@ -1,7 +1,9 @@
 {
     "name": "LabDiner.Restaurant",
     "rootNamespace": "LabDiner.Restaurant",
-    "references": [],
+    "references": [
+        "GUID:dc8c4b79b0dc7eb4395d971eb29c18a7"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

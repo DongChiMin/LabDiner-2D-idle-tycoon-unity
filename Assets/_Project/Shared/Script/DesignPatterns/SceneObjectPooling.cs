@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using LabDiner.Shared;
 using UnityEngine;
 
-public class SceneObjectPooling<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class SceneObjectPooling<T> : MonoBehaviour where T : MonoBehaviour
 {
     [SerializeField] private T prefab;
     [SerializeField] private int initialSize = 10;
