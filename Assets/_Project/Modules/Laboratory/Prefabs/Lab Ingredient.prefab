@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 9042678145288914227}
   - component: {fileID: 6469342106350047515}
   - component: {fileID: 408802490501735400}
-  - component: {fileID: 3937438751541357984}
   - component: {fileID: 3528628591134988160}
   - component: {fileID: 5015841982983027253}
   - component: {fileID: 1167618124431651250}
@@ -142,18 +141,6 @@ MonoBehaviour:
   _RandomRotationEndDragging: 2
   _DragDamping: 1
   _DragLinearDamping: 5
---- !u!114 &3937438751541357984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8015811790385571305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6bc67088d95a2740b967e8f123728cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3528628591134988160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +180,6 @@ MonoBehaviour:
   data: {fileID: 5015841982983027253}
   drag: {fileID: 408802490501735400}
   spawnerMember: {fileID: 3528628591134988160}
-  poolMember: {fileID: 3937438751541357984}
 --- !u!1 &8109706855699103636
 GameObject:
   m_ObjectHideFlags: 0

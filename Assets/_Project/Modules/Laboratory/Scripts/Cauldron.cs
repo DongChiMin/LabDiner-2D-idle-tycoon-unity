@@ -25,15 +25,7 @@ namespace LabDiner.Laboratory
                     onIngredientDroppedIn?.Raise(data);
 
                     // Trả nguyên liệu về pool thay vì destroy
-                    if (ingredient.TryGetComponent(out PoolMember poolMember))
-                    {
-                        poolMember.ReturnToPool();
-                    }
-                    else
-                    {
-                        Debug.LogWarning($"LabIngredient {ingredient.name} không có PoolMember để trả về pool!");
-                        Destroy(ingredient.gameObject); // Fallback nếu có lỗi
-                    }
+                    PoolContext.Instance.IngredientPool.ReturnToPool(ingredient);
                 }
 
             }
