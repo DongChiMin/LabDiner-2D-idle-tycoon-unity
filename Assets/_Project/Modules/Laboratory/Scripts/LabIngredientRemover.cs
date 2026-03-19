@@ -15,16 +15,16 @@ namespace LabDiner.Laboratory
                 // OnIngredientRemoved?.Raise(ingredient.CtxData.IngredientData);
 
                 //2. Trả nguyên liệu về pool thay vì destroy
-                ReturnToPool(ingredient.CtxPoolMember);
+                ReturnToPool(ingredient);
 
                 //3. Gọi hàm OnEndDrag trên SpawnerMember nếu tồn tại
                 ReturnToSpawner(ingredient.CtxSpawnerMember);
             }
         }
 
-        void ReturnToPool(PoolMember poolMember)
+        void ReturnToPool(LabIngredientContext ingredient)
         {
-            poolMember.ReturnToPool();
+            PoolContext.Instance.IngredientPool.ReturnToPool(ingredient);
         }
 
         void ReturnToSpawner(SpawnerMember spawnerMember)

@@ -21,7 +21,7 @@ namespace LabDiner.Laboratory
 
 
             // 1. Spawn item từ pool
-            var go = PoolManager.Instance.IngredientPool.Get(worldPosition + Vector3.down * 0.5f, Quaternion.identity);
+            var go = PoolContext.Instance.IngredientPool.Get(worldPosition + Vector3.down * 0.5f, Quaternion.identity);
             LabIngredientContext labIngredientContext = go.GetComponent<LabIngredientContext>();
 
             //2. Set dữ liệu cho item mới spawn
