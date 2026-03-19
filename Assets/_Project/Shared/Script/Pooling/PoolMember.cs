@@ -1,23 +1,23 @@
-using UnityEngine;
+// using UnityEngine;
 
-namespace LabDiner.Shared
-{
-    public class PoolMember : MonoBehaviour, IPoolable 
-{
-    private SceneObjectPooling _originPool;
+// namespace LabDiner.Shared
+// {
+//     public class PoolMember : MonoBehaviour, IPoolable 
+// {
+//     private SceneObjectPooling<PoolMember> _originPool;
 
-    public void SetOrigin(SceneObjectPooling pool) => _originPool = pool;
+//     public void SetOrigin(SceneObjectPooling<PoolMember> pool) => _originPool = pool;
 
-    public void ReturnToPool() 
-    {
-        if (_originPool != null) 
-        {
-            _originPool.ReturnToPool(gameObject);
-        }
-        else 
-        {
-            Destroy(gameObject); // Fallback nếu có lỗi
-        }
-    }
-}
-}
+//     public void ReturnToPool() 
+//     {
+//         if (_originPool != null) 
+//         {
+//             _originPool.ReturnToPool(this);
+//         }
+//         else 
+//         {
+//             Destroy(gameObject); // Fallback nếu có lỗi
+//         }
+//     }
+// }
+// }
