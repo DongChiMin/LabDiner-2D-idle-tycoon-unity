@@ -28,22 +28,27 @@ namespace LabDiner.Restaurant
         IEnumerator MainRoutine(Vector3 tablePos, Vector3 exitPos)
         {
             // 1. Đi đến bàn
-            Debug.Log("Moving to table: " + tablePos + " - Exit: " + exitPos + " - Mover: " + _mover);
             yield return _mover.MoveTo(tablePos);
 
-            // 2. Thực hiện hành động ăn
+            // 2. Đợi được phục vụ
+            yield return _behavior.WaitForServe();
+
+            // 3. Đợi mang đồ ăn đến
+            yield return _behavior.WaitForFood();
+
+            // 4. Thực hiện hành động ăn
             yield return _behavior.Eat();
 
-            // 3. Trả tiền (Dễ dàng thêm bước mới vào giữa)
+            // 5. Trả tiền (Dễ dàng thêm bước mới vào giữa)
             yield return _behavior.Pay();
 
-            // 4. Giải phóng bàn
+            // 6. Giải phóng bàn
             SeatingManager.Instance.ReleaseTable(_tableIndex);
 
-            // 5. Đi ra cửa
+            // 7. Đi ra cửa
             yield return _mover.MoveTo(exitPos);
 
-            // 6. Biến mất
+            // 8. Biến mất
             PoolContext.Instance.GuestPool.ReturnToPool(GetComponent<GuestContext>());
         }
 

@@ -9,6 +9,18 @@ namespace LabDiner.Restaurant
     [SerializeField] private float eatDuration = 3f;
     [SerializeField] private float payDuration = 0f;
 
+    public IEnumerator WaitForServe() {
+        Debug.Log("Đang chờ có bàn trống...");
+        // Ở đây có thể bật animation chờ đợi
+        yield return null; // Chờ cho đến khi được gọi tiếp tục
+    }
+
+    public IEnumerator WaitForFood() {
+        Debug.Log("Đang chờ đồ ăn...");
+        // Ở đây có thể bật animation chờ đợi
+        yield return null; // Chờ cho đến khi được gọi tiếp tục
+    }
+
     public IEnumerator Eat() {
         Debug.Log("Đang ăn...");
         // Ở đây có thể bật animation ăn uống
