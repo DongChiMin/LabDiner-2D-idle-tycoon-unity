@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace LabDiner.Player
 {
-    public class GlobalInputReader : SingletonNoDestroy<GlobalInputReader>
+    public class GlobalInputReader : Singleton<GlobalInputReader>
     {
         private GameInput _input;
 

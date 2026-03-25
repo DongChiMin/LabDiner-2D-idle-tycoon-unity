@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalObjectPooling : SingletonNoDestroy<GlobalObjectPooling>
+public class GlobalObjectPooling : Singleton<GlobalObjectPooling>
 {
     [SerializeField] private GameObject prefab;
     [SerializeField] private int initialSize = 10;

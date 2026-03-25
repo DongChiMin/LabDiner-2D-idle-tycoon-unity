@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LabDiner.Shared
 {
-    public class GameSystems : SingletonNoDestroy<GameSystems>
+    public class GameSystems : Singleton<GameSystems>
     {
         [Header("Sub Systems")]
         public LevelLoader levelLoader;
