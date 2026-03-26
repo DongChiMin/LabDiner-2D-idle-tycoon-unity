@@ -1,10 +1,29 @@
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
     public class ServeManager : MonoBehaviour
     {
-        // Hiện tại chưa có logic gì, nhưng có thể dùng để quản lý thông tin chung về phục vụ, như số lượng đơn hàng đang phục vụ, thời gian phục vụ trung bình, v.v.
+        [SerializeField] private OrderEvent _onNewUnservedOrder;
+        [Header("[DEBUG]")]
+        [SerializeField] List<Order> serveRequests;
+
+        void OnEnable()
+        {
+            _onNewUnservedOrder.Register(HandleNewOrder);
+        }
+
+        void OnDisable()
+        {
+            _onNewUnservedOrder.Unregister(HandleNewOrder);
+        }
+
+        void HandleNewOrder(Order order)
+        {
+            serveRequests.Add(order);
+        }
     }
 }

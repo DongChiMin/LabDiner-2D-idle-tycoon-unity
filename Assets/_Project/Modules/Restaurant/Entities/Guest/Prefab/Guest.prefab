@@ -47,7 +47,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 0
@@ -66,11 +66,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113033483746085093}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71230c04ed850c9479fe6637ce3cc47c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onGuestLeft: {fileID: 11400000, guid: 2eae20069de99e047bbb8173f70f0722, type: 2}
+  _onTableDirty: {fileID: 11400000, guid: 6c4fd0d5fea14a749b55688ad9b142c4, type: 2}
   _context: {fileID: 8124616965213968546}
 --- !u!114 &8124616965213968546
 MonoBehaviour:
@@ -94,13 +96,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113033483746085093}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1404e4c4060bb74088602b26181c8c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _context: {fileID: 8124616965213968546}
   _eatDuration: 3
   _payDuration: 0
+  _isServed: 0
 --- !u!114 &6383195246782047440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,9 +117,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e9326f826ee3c428a48f0d6f9afbad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _context: {fileID: 8124616965213968546}
   _agent: {fileID: 5029659182386443804}
   _stoppingDistance: 0.1
-  _speed: 3.5
+  _speed: 5
 --- !u!1 &1764047409128402624
 GameObject:
   m_ObjectHideFlags: 0

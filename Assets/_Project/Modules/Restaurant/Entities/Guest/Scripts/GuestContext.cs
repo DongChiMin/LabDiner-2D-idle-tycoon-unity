@@ -13,10 +13,18 @@ namespace LabDiner.Restaurant
         public GuestBehavior CtxBehavior => _guestBehavior;
         public GuestMover CtxMover => _guestMover;
 
-        public void Setup(Dictionary<CoreStation, int> _orderDict, Vector3 destination, Vector3 exitPos)
+        public void Setup(Order order, Vector3 destination, Vector3 exitPos, DiningTable table = null)
         {
-            _guestBehavior.SetOrder(_orderDict);
-            StartCoroutine(_guestAI.MainRoutine(destination, exitPos));
+            _guestBehavior.SetOrder(order);
+            StartCoroutine(_guestAI.MainRoutine(destination, exitPos, table));
+        }
+
+        public void SetServedStatus(bool status) {
+            _guestBehavior.SetServedStatus(status);
+        }
+
+        public void FromWaitingLineToDiningTable( DiningTable table) {
+            _guestAI.FromWaitingLineToDiningTable(table);
         }
     }
 }

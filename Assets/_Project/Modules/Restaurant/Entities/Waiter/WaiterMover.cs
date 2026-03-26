@@ -5,9 +5,8 @@ using UnityEngine.AI;
 
 namespace LabDiner.Restaurant
 {
-    public class GuestMover : MonoBehaviour 
+    public class WaiterMover : MonoBehaviour 
 {
-    [SerializeField] private GuestContext _context;
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private float _stoppingDistance = 0.1f;
     [SerializeField] private float _speed = 3.5f;
@@ -21,11 +20,7 @@ namespace LabDiner.Restaurant
 
     // Hàm này giúp Coroutine bên ngoài có thể "đợi" cho đến khi đến đích
     public IEnumerator MoveTo(Vector3 destination) {
-        _agent.isStopped = false;
         _agent.SetDestination(destination);
-
-        // Đợi 1 frame để Agent nhận destination
-        yield return null;
         
         // Đợi cho đến khi Agent bắt đầu tính toán xong đường đi
         yield return new WaitUntil(() => !_agent.pathPending);
@@ -34,8 +29,6 @@ namespace LabDiner.Restaurant
         while (_agent.remainingDistance > _agent.stoppingDistance) {
             yield return null; 
         }
-
-        _agent.isStopped = true;
     }
 
     public void SetZToZero() {

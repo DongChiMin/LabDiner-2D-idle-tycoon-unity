@@ -10,9 +10,22 @@ namespace LabDiner.Restaurant
         [Header("Spawn Settings")]
         [SerializeField] private Transform _startPoint;
         [SerializeField] private Vector3 _offsetDirection = new Vector3(-1.5f, 0, 0);
+        
+        [Header("Events")]
+        [SerializeField] private TableEvent _onTableFreed;
 
         [Header("[DEBUG]")]
         [SerializeField] private List<GuestContext> _waitingGuests;
+
+        void OnEnable()
+        {
+            _onTableFreed.Register(PopNextGuest);
+        }
+
+        void OnDisable()
+        {
+            _onTableFreed.Unregister(PopNextGuest);
+        }
 
         public bool HasWaitingGuest => _waitingGuests.Count > 0;
 
@@ -29,9 +42,9 @@ namespace LabDiner.Restaurant
             return _startPoint.position + (_offsetDirection * index);
         }
 
-        public GuestContext PopNextGuest()
+        public void PopNextGuest(DiningTable table)
         {
-            if (_waitingGuests.Count == 0) return null;
+            if (_waitingGuests.Count == 0) return;
 
             GuestContext guest = _waitingGuests[0];
             _waitingGuests.RemoveAt(0);
@@ -39,7 +52,8 @@ namespace LabDiner.Restaurant
             // Bắt tất cả người còn lại tiến lên
             RearrangeQueue();
 
-            return guest;
+            LevelManagerContext.Instance.diningTableManager.OccupyTable(table, guest);
+            guest.FromWaitingLineToDiningTable(table);
         }
 
         private void RearrangeQueue()
@@ -47,8 +61,7 @@ namespace LabDiner.Restaurant
             for (int i = 0; i < _waitingGuests.Count; i++)
             {
                 Vector3 newPos = CalculatePosition(i);
-                // _waitingGuests[i].CtxAI.GoToWaitingPoint(newPos);
-                Debug.Log("TODO: Di chuyển khách " + _waitingGuests[i].name + " đến " + newPos);
+                StartCoroutine(_waitingGuests[i].CtxMover.MoveTo(newPos));
             }
         }
     }

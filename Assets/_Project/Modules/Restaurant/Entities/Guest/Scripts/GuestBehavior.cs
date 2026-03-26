@@ -7,14 +7,34 @@ namespace LabDiner.Restaurant
 {
     public class GuestBehavior : MonoBehaviour 
 {
-    [SerializeField] Dictionary<CoreStation, int> _orderDict = new Dictionary<CoreStation, int>();
+    [SerializeField] private GuestContext _context;
     [SerializeField] private float _eatDuration = 3f;
     [SerializeField] private float _payDuration = 0f;
+    
+    [Header("[DEBUG]")]
+    [SerializeField] private bool _isServed = false;
+    [SerializeField] Order _order;
 
-    public IEnumerator WaitForServe() {
-        Debug.Log("Đang chờ phục vụ...");
+    void OnEnable() {
+        _isServed = false;
+        _order = null;
+    }
+
+    public IEnumerator WaitInLine() {
+        Debug.Log("TODO: giảm dần thanh patience của khách");
         // Ở đây có thể bật animation chờ đợi
-        yield return null; // Chờ cho đến khi được gọi tiếp tục
+        while(true) {
+            yield return null; // Chờ cho đến khi được gọi tiếp tục
+        }
+    }
+
+    public IEnumerator WaitForServe(DiningTable table) {
+        if(_order == null) Debug.LogError("Order của khách này đang trống!");
+        table.WaitingForServe(_order);
+        while(!_isServed) {
+            yield return null; // Chờ cho đến khi được gọi tiếp tục
+        }
+        yield return null; 
     }
 
     public IEnumerator WaitForFood() {
@@ -36,8 +56,12 @@ namespace LabDiner.Restaurant
         Debug.Log("Trả tiền xong rồi!");
     }
 
-    public void SetOrder(Dictionary<CoreStation, int> orderDict) {
-        _orderDict = orderDict;
+    public void SetOrder(Order order) {
+        _order = order;
+    }
+
+    public void SetServedStatus(bool status) {
+        _isServed = status;
     }
 }
 }

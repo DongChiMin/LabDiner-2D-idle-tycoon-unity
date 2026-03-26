@@ -7,10 +7,16 @@ namespace LabDiner.Restaurant
 {
     public class GuestAI : MonoBehaviour
     {
+        [SerializeField] private GuestEvent _onGuestLeft;
+        [SerializeField] private TableEvent _onTableDirty;
         [SerializeField] GuestContext _context;
         private GuestMover _mover;
         private GuestBehavior _behavior;
-        private int _tableIndex;
+
+        //Các biến lưu chữ MainRoutine
+        private DiningTable _targetTable;
+        private Vector3 _exitPos;
+        private DiningTable _table;
 
         void Awake()
         {
@@ -18,14 +24,33 @@ namespace LabDiner.Restaurant
             _behavior = _context.CtxBehavior;
         }
 
-        // // Đọc luồng logic ở đây như một câu chuyện
-        public IEnumerator MainRoutine(Vector3 destination, Vector3 exitPos)
+        void OnEnable()
         {
-            // 1. Đi đến bàn
-            yield return _mover.MoveTo(destination);
+            _targetTable = null;
+            _exitPos = Vector3.zero;
+            _table = null;
+        }
 
-            // 2. Đợi được phục vụ
-            yield return _behavior.WaitForServe();
+        // // Đọc luồng logic ở đây như một câu chuyện
+        public IEnumerator MainRoutine(Vector3 destination, Vector3 exitPos, DiningTable table = null)
+        {
+            _targetTable = table;
+            _exitPos = exitPos;
+            _table = table;
+
+            // 1. Đi đến bàn hoặc waitingLine
+            yield return MoveTo(destination);
+
+            //2.1. Nếu là đi đến waitingLine
+            if(_targetTable == null)
+            {
+                yield return _behavior.WaitInLine();
+            }
+
+            // 2.2. Nếu đã được chỉ định bàn ngay từ đầu, họ sẽ chờ phục vụ đến nhận order
+            yield return _behavior.WaitForServe(_targetTable);
+            
+            
 
             // 3. Đợi mang đồ ăn đến
             yield return _behavior.WaitForFood();
@@ -36,14 +61,27 @@ namespace LabDiner.Restaurant
             // 5. Trả tiền (Dễ dàng thêm bước mới vào giữa)
             yield return _behavior.Pay();
 
-            // 6. Giải phóng bàn
-            SeatingManager.Instance.ReleaseTable(_tableIndex);
+            // 6. Giải phóng bàn (chuyển bàn đó thành bàn bẩn, chưa ngồi được)
+            _onTableDirty.Raise(_targetTable);
 
             // 7. Đi ra cửa
-            yield return _mover.MoveTo(exitPos);
+            yield return MoveTo(exitPos);
 
             // 8. Biến mất
-            PoolContext.Instance.GuestPool.ReturnToPool(GetComponent<GuestContext>());
+            _onGuestLeft.Raise(_context);
+        }
+
+        IEnumerator MoveTo(Vector3 destination)
+        {
+            // Không cần check moveCoroutine thủ công nữa, cứ chạy trực tiếp
+            yield return StartCoroutine(_mover.MoveTo(destination));
+        }
+
+        public void FromWaitingLineToDiningTable(DiningTable table)
+        {
+            StopAllCoroutines();
+            _targetTable = table;
+            StartCoroutine(MainRoutine(table.transform.position, _exitPos, table));
         }
 
         void LateUpdate() => _mover.SetZToZero();
