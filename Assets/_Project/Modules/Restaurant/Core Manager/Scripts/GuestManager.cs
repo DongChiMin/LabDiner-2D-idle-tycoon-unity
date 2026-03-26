@@ -54,13 +54,11 @@ namespace LabDiner.Restaurant
 
                 //4. Tạo danh sách món ăn khách muốn gọi
                 Dictionary<CoreStation, int> order = LevelManagerContext.Instance.coreStationManager.GenerateRandomOrder(_maxUniqueStations, _maxTotalQty);
-                guest.CtxBehavior.SetOrder(order);
 
                 //5.[Hành động] Kiểm tra hàng chờ bên ngoài có > 0 không, nếu có thì khách mới sẽ đi vào hàng chờ
                 if(LevelManagerContext.Instance.waitingLineManager.HasWaitingGuest) {
                     Vector3 destination = LevelManagerContext.Instance.waitingLineManager.AddToWaitingLine(guest);
-                    StartCoroutine(guest.CtxMover.MoveTo(destination));
-                    Debug.Log("Có khách đang chờ, khách mới sẽ đi vào hàng chờ");
+                    guest.Setup(order, destination, _exitPoint.position);
                     continue;
                 }
 
@@ -70,15 +68,13 @@ namespace LabDiner.Restaurant
                 {
                     DiningTable selectedTable = availableTables[Random.Range(0, availableTables.Count)];
                     LevelManagerContext.Instance.diningTableManager.OccupyTable(selectedTable, guest);
-                    StartCoroutine(guest.CtxMover.MoveTo(selectedTable.transform.position));
-                    Debug.Log("Khách mới đi thẳng đến bàn ăn vì còn chỗ trống");
+                    guest.Setup(order, selectedTable.transform.position, _exitPoint.position);
                     continue;
                 }
                 else
                 {
                     Vector3 destination = LevelManagerContext.Instance.waitingLineManager.AddToWaitingLine(guest);
-                    StartCoroutine(guest.CtxMover.MoveTo(destination));
-                    Debug.Log("Hết bàn trống, khách mới sẽ đi vào hàng chờ");
+                    guest.Setup(order, destination, _exitPoint.position);
                     continue;
                 }
             }
