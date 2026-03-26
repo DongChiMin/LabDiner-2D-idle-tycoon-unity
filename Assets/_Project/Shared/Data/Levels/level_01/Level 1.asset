@@ -23,3 +23,6 @@ MonoBehaviour:
   targetDemands: 00000000
   missions:
   - {fileID: 0}
+  maxGuestCount: 5
+  maxUniqueStations: 2
+  maxTotalQtyPerOrder: 3

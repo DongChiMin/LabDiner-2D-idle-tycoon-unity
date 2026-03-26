@@ -20,6 +20,7 @@ namespace LabDiner.Restaurant
 
     // Hàm này giúp Coroutine bên ngoài có thể "đợi" cho đến khi đến đích
     public IEnumerator MoveTo(Vector3 destination) {
+        Debug.Log("Guest " + name + " đang di chuyển đến " + destination);
         _agent.SetDestination(destination);
         
         // Đợi cho đến khi Agent bắt đầu tính toán xong đường đi

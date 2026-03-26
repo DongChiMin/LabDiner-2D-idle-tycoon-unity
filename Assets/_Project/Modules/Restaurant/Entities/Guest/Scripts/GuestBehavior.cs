@@ -1,13 +1,15 @@
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
     public class GuestBehavior : MonoBehaviour 
 {
-    [SerializeField] private float eatDuration = 3f;
-    [SerializeField] private float payDuration = 0f;
+    [SerializeField] Dictionary<CoreStation, int> _orderDict = new Dictionary<CoreStation, int>();
+    [SerializeField] private float _eatDuration = 3f;
+    [SerializeField] private float _payDuration = 0f;
 
     public IEnumerator WaitForServe() {
         Debug.Log("Đang chờ phục vụ...");
@@ -24,14 +26,18 @@ namespace LabDiner.Restaurant
     public IEnumerator Eat() {
         Debug.Log("Đang ăn...");
         // Ở đây có thể bật animation ăn uống
-        yield return new WaitForSeconds(eatDuration);
+        yield return new WaitForSeconds(_eatDuration);
         Debug.Log("Ăn xong rồi!");
     }
 
     public IEnumerator Pay() {
         Debug.Log("Đang trả tiền...");
-        yield return new WaitForSeconds(payDuration);
+        yield return new WaitForSeconds(_payDuration);
         Debug.Log("Trả tiền xong rồi!");
+    }
+
+    public void SetOrder(Dictionary<CoreStation, int> orderDict) {
+        _orderDict = orderDict;
     }
 }
 }
