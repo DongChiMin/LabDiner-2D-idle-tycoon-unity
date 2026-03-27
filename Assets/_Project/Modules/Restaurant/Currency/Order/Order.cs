@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace LabDiner.Restaurant
 {
     [System.Serializable]
-    public class Order
+    public class Order : IStaffTask
     {
         public Dictionary<CoreStation, int> _orderDict; // CoreStation là món ăn, int là số lượng
         public GuestContext _orderBy;

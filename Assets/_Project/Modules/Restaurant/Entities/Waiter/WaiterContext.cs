@@ -3,9 +3,10 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
-    public class WaiterContext : MonoBehaviour
+    public class WaiterContext : MonoBehaviour, IStaff
     {
         [Header("Settings")]
+        [SerializeField] private OrderEvent _onOrderServed;
         [SerializeField] private Transform _restPosition;
         public Transform RestPosition => _restPosition;
 
@@ -21,11 +22,16 @@ namespace LabDiner.Restaurant
 
         public bool IsAvailable => isAvailable;
 
-        public void DoTask(Order order)
+        public void DoTask(IStaffTask task)
         {
-            // Implement task logic here
             isAvailable = false;
-            _ai.DoServe(order);
+            _ai.DoServe(task as Order);
+        }
+
+        public void OnTaskCompleted(IStaffTask task)
+        {
+            isAvailable = true;
+            _onOrderServed.Raise(task as Order);
         }
     }
 }

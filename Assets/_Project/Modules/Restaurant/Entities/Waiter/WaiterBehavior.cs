@@ -7,7 +7,6 @@ namespace LabDiner.Restaurant
 {
     public class WaiterBehavior : MonoBehaviour
     {
-        [SerializeField] private OrderEvent _onOrderServed;
         [SerializeField] private WaiterContext _context;
         [SerializeField] private float _serveDuration = 3f;
 
@@ -18,7 +17,7 @@ namespace LabDiner.Restaurant
             Debug.Log("TODO: show tiến trình serving tại đây");
             yield return new WaitForSeconds(_serveDuration);
             guest.SetServedStatus(true);
-            _onOrderServed.Raise(order);
+            _context.OnTaskCompleted(order);
         }
 
     }
