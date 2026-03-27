@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
+    [System.Serializable]
     public class CoreStation : MonoBehaviour
     {
         [Header("Economic Settings")]

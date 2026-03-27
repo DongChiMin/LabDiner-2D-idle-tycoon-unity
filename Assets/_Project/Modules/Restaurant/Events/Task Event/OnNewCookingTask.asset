@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce8898b86f58fab4aa877549f190a11e, type: 3}
+  m_Script: {fileID: 11500000, guid: 67f02ad90b102ad4ebf9a8fb05250ee3, type: 3}
   m_Name: OnNewCookingTask
   m_EditorClassIdentifier: 

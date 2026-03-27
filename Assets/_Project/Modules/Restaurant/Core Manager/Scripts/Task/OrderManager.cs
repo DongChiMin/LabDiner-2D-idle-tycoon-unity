@@ -4,15 +4,14 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
-
     public class OrderManager : MonoBehaviour
     {
         [SerializeField] private OrderEvent _onOrderServed;
-        [SerializeField] private StaffTaskEvent _onNewCookingTask;
+        [SerializeField] private CookingTaskEvent _onNewCookingTask;
         private Queue<CookingTask> _cookingQueue = new Queue<CookingTask>();
 
         [Header("[DEBUG ONLY]")]
-        [SerializeField] private List<CookingTask> _cookingQueueDebugView = new();
+        [SerializeField] private List<Order> _ordersQueue = new();
 
         void OnEnable()
         {
@@ -36,13 +35,13 @@ namespace LabDiner.Restaurant
                 // 2. Với mỗi loại, lặp lại 'quantity' lần để tạo Task lẻ
                 for (int i = 0; i < quantity; i++)
                 {
-                    IStaffTask singleTask = new CookingTask(newOrder, station);
+                    CookingTask singleTask = new CookingTask(newOrder, station);
 
                     // 3. Đẩy vào hàng đợi chung của bếp
                     _onNewCookingTask.Raise(singleTask);
                 }
             }
-            SyncDebugView();
+            SyncDebugView(newOrder);
         }
 
         public bool TryGetTask(out CookingTask task)
@@ -57,11 +56,14 @@ namespace LabDiner.Restaurant
             return false;
         }
 
-        private void SyncDebugView()
+        private void SyncDebugView(Order order = null)
         {
             // Chỉ chạy trong Editor để tránh tốn tài nguyên khi build game thật
             #if UNITY_EDITOR
-            _cookingQueueDebugView = new List<CookingTask>(_cookingQueue);
+            if(order != null)
+                _ordersQueue.Add(order);
+            else if (_ordersQueue.Count > 0)
+                _ordersQueue.RemoveAt(0);
             #endif
         }
     }

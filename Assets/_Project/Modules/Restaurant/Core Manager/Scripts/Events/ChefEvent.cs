@@ -4,6 +4,6 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
-    [CreateAssetMenu(fileName = "OnChefAvailable", menuName = "Events/Chef Event")]
+    [CreateAssetMenu(fileName = "OnChefAvailable", menuName = "Events/Staff/Chef Event")]
     public class ChefEvent : GameEvent<ChefContext> { }
 }

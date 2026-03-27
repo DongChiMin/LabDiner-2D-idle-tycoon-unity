@@ -4,6 +4,6 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
-    [CreateAssetMenu(fileName = "NewOrderEvent", menuName = "Events/Order Event")]
+    [CreateAssetMenu(fileName = "NewOrderEvent", menuName = "Events/Task/Order Event")]
     public class OrderEvent : GameEvent<Order> { }
 }
