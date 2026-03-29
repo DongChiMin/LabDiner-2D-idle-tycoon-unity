@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace LabDiner.Restaurant
 {
-    public class WaiterMover : MonoBehaviour 
+    public class StaffMover : MonoBehaviour 
 {
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private float _stoppingDistance = 0.1f;

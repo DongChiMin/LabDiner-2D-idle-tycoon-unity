@@ -9,7 +9,9 @@ namespace LabDiner.Restaurant
     {
         [SerializeField] WaiterContext _context;
         [SerializeField] private WaiterEvent _onWaiterAvailable;
-        private WaiterMover _mover;
+
+        // Cache các component cần thiết để tránh phải GetComponent nhiều lần
+        private StaffMover _mover;
         private WaiterBehavior _behavior;
 
         [Header("[DEBUG]")]

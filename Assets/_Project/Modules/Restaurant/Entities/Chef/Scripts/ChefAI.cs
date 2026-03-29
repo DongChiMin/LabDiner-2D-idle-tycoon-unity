@@ -16,10 +16,9 @@ namespace LabDiner.Restaurant
         void Start()
         {
             _mover = GetComponent<ChefMover>();
-            StartCoroutine(WorkRoutine());
         }
 
-        IEnumerator WorkRoutine()
+        public IEnumerator DoTask(CookingTask task)
         {
             Debug.Log("Chef đã sẵn sàng!");
             while (true)
@@ -43,6 +42,12 @@ namespace LabDiner.Restaurant
                 // yield return _mover.MoveTo(counterStation.position);
                 // Debug.Log("Đã xong món " + currentOrder.DishName + " cho bàn " + currentOrder.TableIndex);
             }
+        }
+
+        public void StartTask(CookingTask task)
+        {
+            StopAllCoroutines();
+            StartCoroutine(DoTask(null));
         }
     }
 }

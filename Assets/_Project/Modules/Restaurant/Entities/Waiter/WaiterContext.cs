@@ -11,15 +11,13 @@ namespace LabDiner.Restaurant
         public Transform RestPosition => _restPosition;
 
         [Header("Components")]
-        [SerializeField] private WaiterMover _mover;
+        [SerializeField] private StaffMover _mover;
         [SerializeField] private WaiterBehavior _behavior;
         [SerializeField] private WaiterAI _ai;
-        public WaiterMover CtxMover => _mover;
+        public StaffMover CtxMover => _mover;
         public WaiterBehavior CtxBehavior => _behavior;
         public WaiterAI CtxAI => _ai;
-
         private bool isAvailable = true;
-
         public bool IsAvailable => isAvailable;
 
         public void DoTask(IStaffTask task)
