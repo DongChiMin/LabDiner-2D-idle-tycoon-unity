@@ -22,7 +22,7 @@ namespace LabDiner.Restaurant
             Debug.Log("TODO: hoàn thiện công thức thời gian nấu");
             // Bật hiệu ứng khói, lửa, âm thanh xèo xèo...
             yield return new WaitForSeconds(3 * (1/ cookMultiplier));
-            task.StationTarget.IsAvailable = true;
+            task.StationTarget.SetStatus(true);
         }
 
         public IEnumerator PlaceOnPassTable(CookingTask task)

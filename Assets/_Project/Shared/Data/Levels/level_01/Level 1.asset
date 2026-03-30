@@ -25,4 +25,4 @@ MonoBehaviour:
   - {fileID: 0}
   maxGuestCount: 5
   maxUniqueStations: 2
-  maxTotalQtyPerOrder: 3
+  maxTotalQtyPerOrder: 99

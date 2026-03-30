@@ -1,21 +1,26 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
     public class GuestBehavior : MonoBehaviour
     {
-        [SerializeField] private GuestContext _context;
+        [Header("Settings")]
         [SerializeField] private float _eatDuration = 3f;
         [SerializeField] private float _payDuration = 0f;
+        [Header("UI")]
+        [SerializeField] private GameObject _orderDetailUI;
 
         [Header("[DEBUG]")]
         [SerializeField] private bool _isServed = false;
-        [SerializeField] Order _order;
+        [SerializeField] private Order _order;
         [SerializeField] private List<TaskMapping> _taskMappings;
+
         [System.Serializable]
         private class TaskMapping
         {
@@ -27,6 +32,7 @@ namespace LabDiner.Restaurant
         {
             _isServed = false;
             _order = null;
+            _orderDetailUI.SetActive(false);
         }
 
         public IEnumerator WaitInLine()
@@ -45,8 +51,10 @@ namespace LabDiner.Restaurant
             table.WaitingForServe(_order);
             while (!_isServed)
             {
-                yield return null; // Chờ cho đến khi được gọi tiếp tục
+                yield return null;
             }
+            //Sau khi được serve
+            _orderDetailUI.SetActive(true);
             yield return null;
         }
 

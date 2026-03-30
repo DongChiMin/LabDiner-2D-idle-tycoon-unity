@@ -22,7 +22,7 @@ namespace LabDiner.Restaurant
             _context = GetComponent<ChefContext>();
         }
 
-        public IEnumerator DoTask(CookingTask task)
+        private IEnumerator DoTask(CookingTask task)
         {
             currentTask = task;
             Station station = task.StationTarget;
@@ -36,7 +36,7 @@ namespace LabDiner.Restaurant
             yield return _behavior.Cook(task);
 
             //3. Di chuyển đến vị trí PassTable (nếu có)
-            yield return _mover.MoveTo(passTable.WorkPos.position);
+            yield return _mover.MoveTo(passTable.WorkPos_PutOn.position);
 
             //4. Đặt món lên PassTable
             yield return _behavior.PlaceOnPassTable(task);

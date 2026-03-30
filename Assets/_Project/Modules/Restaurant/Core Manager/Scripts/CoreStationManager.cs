@@ -8,7 +8,6 @@ namespace LabDiner.Restaurant
     public class CoreStationManager : MonoBehaviour
     {
         [SerializeField] private List<CoreStation> coreStations = new List<CoreStation>();
-
         #region API
         /// <summary>
         /// Kiểm tra xem có bất kỳ trạm chính nào đã được mở khóa hay không. Nếu chưa có trạm nào được mở khóa, nhà hàng sẽ không thể hoạt động vì không có trạm nào để phục vụ khách hàng.
@@ -84,7 +83,7 @@ namespace LabDiner.Restaurant
             Station availableStation = stations.Find(ws => ws.IsAvailable);
             if (availableStation != null)
             {
-                availableStation.IsAvailable = false; // Đánh dấu trạm này đang bận
+                availableStation.SetStatus(false); // Đánh dấu trạm này đang bận
                 return availableStation;
             }
             return null; // Không có trạm nào sẵn sàng

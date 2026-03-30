@@ -5,6 +5,10 @@ namespace LabDiner.Restaurant
 {
     public class WaiterContext : MonoBehaviour, IStaff
     {
+        public StaffMover CtxMover => _mover;
+        public WaiterBehavior CtxBehavior => _behavior;
+        public WaiterAI CtxAI => _ai;
+
         [Header("Settings")]
         [SerializeField] private OrderEvent _onOrderServed;
         [SerializeField] private Transform _restPosition;
@@ -14,22 +18,46 @@ namespace LabDiner.Restaurant
         [SerializeField] private StaffMover _mover;
         [SerializeField] private WaiterBehavior _behavior;
         [SerializeField] private WaiterAI _ai;
-        public StaffMover CtxMover => _mover;
-        public WaiterBehavior CtxBehavior => _behavior;
-        public WaiterAI CtxAI => _ai;
-        private bool isAvailable = true;
-        public bool IsAvailable => isAvailable;
+
+        [Header("[Debug]")]
+        [SerializeField] private bool _isAvailable = true;
+        public bool IsAvailable {
+            get => _isAvailable; 
+            set => _isAvailable = value;
+        }
 
         public void DoTask(IStaffTask task)
         {
-            isAvailable = false;
-            _ai.DoServe(task as Order);
+            IsAvailable = false;
+            switch (task)
+            {
+                case Order order:
+                    _ai.StartServe(order);
+                    break;
+                case CookingTask cookingTask:
+                    _ai.StartShip(cookingTask);
+                    break;
+                default:
+                    Debug.LogWarning("Waiter received an unsupported task: " + task);
+                    IsAvailable = true; // Trả lại trạng thái sẵn sàng nếu không thể xử lý task
+                    break;
+            }
         }
 
         public void OnTaskCompleted(IStaffTask task)
         {
-            isAvailable = true;
-            _onOrderServed.Raise(task as Order);
+            IsAvailable = true;
+            switch (task)
+            {
+                case Order order:
+                    _onOrderServed.Raise(order);
+                    break;
+                case CookingTask cookingTask:
+                    break;
+                default:
+                    Debug.LogWarning("Waiter completed an unsupported task: " + task);
+                    break;
+            }
         }
     }
 }

@@ -7,14 +7,16 @@ namespace LabDiner.Restaurant
 
     public class DiningTable : MonoBehaviour
     {
+        public bool IsOccupied => _occupiedGuest != null;
+        public Transform WorkPos => _workPos;
+
         [Header("Settings")]
         [SerializeField] private OrderEvent _onNewUnservedOrder;
+        [SerializeField] private Transform _workPos;
 
         [Header("DEBUG")]
         [SerializeField] private GuestContext _occupiedGuest;
         [SerializeField] private Order _order;
-
-        public bool IsOccupied => _occupiedGuest != null;
 
         public void Occupy(GuestContext guest)
         {

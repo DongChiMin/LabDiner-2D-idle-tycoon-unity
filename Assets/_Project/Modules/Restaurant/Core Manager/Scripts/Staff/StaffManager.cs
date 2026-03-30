@@ -1,12 +1,18 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using LabDiner.Restaurant;
 using LabDiner.Shared.Events;
 using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
+    /// <summary>
+    /// Một nhân viên có thể được quản lý bởi nhiều manager
+    /// </summary>
+    /// <typeparam name="TStaff"></typeparam>
+    /// <typeparam name="TTask"></typeparam>
     public class StaffManager<TStaff, TTask> : MonoBehaviour
         where TStaff : IStaff
         where TTask : IStaffTask
@@ -16,8 +22,10 @@ namespace LabDiner.Restaurant
         [SerializeField] private GameEvent<TTask> _onNewTask;
         [SerializeField] private GameEvent<TStaff> _onStaffAvailable;
         [SerializeField] List<TStaff> _staffs = new();
-        [SerializeField] Queue<TStaff> _availableStaffs = new();
         [SerializeField] Queue<TTask> _taskQueue = new();
+
+        [Header("Optional")]
+        [SerializeField, MaybeNull] private GameEvent<Station> _onStationAvailable;
 
         [Header("[DEBUG VIEW]")]
         [SerializeField] protected List<TStaff> _debugAvailableStaffs = new();
@@ -27,17 +35,18 @@ namespace LabDiner.Restaurant
         {
             _onNewTask.Register(HandleNewTask);
             _onStaffAvailable.Register(HandleStaffAvailable);
+            _onStationAvailable?.Register(HandleStationAvailable);
         }
 
         void OnDisable()
         {
             _onNewTask.Unregister(HandleNewTask);
             _onStaffAvailable.Unregister(HandleStaffAvailable);
+            _onStationAvailable?.Unregister(HandleStationAvailable);
         }
 
         void Start()
         {
-            _availableStaffs = new Queue<TStaff>(_staffs);
             SyncDebugView();
         }
 
@@ -58,13 +67,13 @@ namespace LabDiner.Restaurant
 
         protected void HandleNewTask(TTask newTask)
         {
-            if (_availableStaffs.Count > 0)
-            {
-                if (!CanAssignTask(newTask)) return;
+            TStaff availableStaff = GetAvailableStaff();
 
+            if (availableStaff != null && CanAssignTask(newTask))
+            {
                 TTask processedTask = ProcessTaskBeforeExecute(newTask);
 
-                AssignTaskToStaff(_availableStaffs.Dequeue(), processedTask);
+                AssignTaskToStaff(availableStaff, processedTask);
             }
             else
             {
@@ -84,20 +93,46 @@ namespace LabDiner.Restaurant
                 nextTask = _taskQueue.Dequeue();
                 TTask processedTask = ProcessTaskBeforeExecute(nextTask);
 
-                
                 AssignTaskToStaff(staff, processedTask);
             }
             else
             {
-                _availableStaffs.Enqueue(staff);
+                // _availableStaffs.Enqueue(staff);
                 Debug.Log("Không có đơn hàng nào đang chờ, nhân viên " + staff + " đã sẵn sàng.");
             }
             SyncDebugView();
         }
 
+        protected void HandleStationAvailable(Station station)
+        {
+            TStaff availableStaff = GetAvailableStaff();
+            if (_taskQueue.Count > 0 && availableStaff != null)
+            {
+                TTask nextTask = _taskQueue.Peek();
+                if (!CanAssignTask(nextTask)) return;
+
+                nextTask = _taskQueue.Dequeue();
+                TTask processedTask = ProcessTaskBeforeExecute(nextTask);
+
+                AssignTaskToStaff(availableStaff, processedTask);
+            }
+        }
+
         protected void AssignTaskToStaff(TStaff staff, TTask task)
         {
             staff.DoTask(task);
+        }
+
+        private TStaff GetAvailableStaff()
+        {
+            for (int i = 0; i < _staffs.Count; i++)
+            {
+                if (_staffs[i].IsAvailable)
+                {
+                    return _staffs[i];
+                }
+            }
+            return default;
         }
 
 
@@ -107,7 +142,19 @@ namespace LabDiner.Restaurant
             // Chỉ chạy trong Editor để tránh tốn tài nguyên khi build game thật
 #if UNITY_EDITOR
             _debugTasksQueue = new List<TTask>(_taskQueue);
-            _debugAvailableStaffs = new List<TStaff>(_availableStaffs);
+            for (int i = 0; i < _staffs.Count; i++)
+            {
+                if (_staffs[i].IsAvailable)
+                {
+                    if (!_debugAvailableStaffs.Contains(_staffs[i]))
+                        _debugAvailableStaffs.Add(_staffs[i]);
+                }
+                else
+                {
+                    if (_debugAvailableStaffs.Contains(_staffs[i]))
+                        _debugAvailableStaffs.Remove(_staffs[i]);
+                }
+            }
 #endif
         }
         #endregion

@@ -4,18 +4,30 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
+    /// <summary>
+    /// Là nơi chứa các component và các API liên quan đến khách hàng
+    /// </summary>
     public class GuestContext : MonoBehaviour
     {
         [SerializeField] private GuestAI _guestAI;
         [SerializeField] private GuestBehavior _guestBehavior;
         [SerializeField] private GuestMover _guestMover;
+        [SerializeField] private GuestLogic _guestLogic;
         public GuestAI CtxAI => _guestAI;
         public GuestBehavior CtxBehavior => _guestBehavior;
         public GuestMover CtxMover => _guestMover;
+        public DiningTable DiningTable => _diningTable;
 
+        [Header("[Debug]")]
+        [SerializeField] private DiningTable _diningTable;
+
+
+        #region API
         public void Setup(Order order, Vector3 destination, Vector3 exitPos, DiningTable table = null)
         {
             _guestBehavior.SetOrder(order);
+            _guestLogic.SetOrder(order);
+            _diningTable = table;
             StartCoroutine(_guestAI.MainRoutine(destination, exitPos, table));
         }
 
@@ -24,7 +36,14 @@ namespace LabDiner.Restaurant
         }
 
         public void FromWaitingLineToDiningTable( DiningTable table) {
+            _diningTable = table;
             _guestAI.FromWaitingLineToDiningTable(table);
         }
+
+        public void ReceiveFood(CookingTask cookingTask)
+        {
+            _guestLogic.ReceiveFood(cookingTask);
+        }
+        #endregion
     }
 }

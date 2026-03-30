@@ -17,19 +17,18 @@ namespace LabDiner.Restaurant
         public StaffMover CtxMover => _mover;
         public ChefBehavior CtxBehavior => _behavior;
         public ChefAI CtxAI => _ai;
-        private bool isAvailable = true;
-        public bool IsAvailable => isAvailable;
-        
+        public bool IsAvailable { get ; set ; } = true;
+
         public void DoTask(IStaffTask task)
         {
-             isAvailable = false;
+            IsAvailable = false;
             _ai.StartTask(task as CookingTask);
         }
 
         //Hoàn thành sau khi chef bê đồ ăn tới passTable
         public void OnTaskCompleted(IStaffTask task)
         {
-            isAvailable = true;
+            IsAvailable = true;
             _onCookingTaskComplete.Raise(task as CookingTask);
         }
     }

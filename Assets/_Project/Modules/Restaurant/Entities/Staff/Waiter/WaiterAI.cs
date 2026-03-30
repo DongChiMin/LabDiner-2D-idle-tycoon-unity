@@ -29,31 +29,58 @@ namespace LabDiner.Restaurant
         }
 
         // // Đọc luồng logic ở đây như một câu chuyện
-        public IEnumerator DoServeTask(Order order)
+        IEnumerator DoServe(Order order)
         {
             servingOrder = order;
             // 1. Đi đến bàn
-            yield return _mover.MoveTo(servingOrder.OrderBy.transform.position);
+            yield return _mover.MoveTo(servingOrder.OrderBy.DiningTable.WorkPos.position);
 
             //2. Phục vụ
             yield return _behavior.Serve(servingOrder);
 
-            //3. Quay về vị trí ban đầu (hoặc có thể đi phục vụ bàn khác nếu có order mới)
-            yield return Rest();
+            //3. Thông báo hoàn thành
 
+            //3. Quay về vị trí ban đầu (hoặc có thể đi phục vụ bàn khác nếu có order mới)
+            yield return Rest(order);
         }
 
-        IEnumerator Rest()
+        IEnumerator DoShip(CookingTask cookingTask)
         {
+            //1. Đi đến PassTable
+            yield return _mover.MoveTo(cookingTask.PassTableTarget.WorkPos_PickUp.position);
+
+            //2. Lấy món từ PassTable
+            yield return _behavior.PickUpFromPassTable(cookingTask);
+
+            //3. Đi đến bàn
+            yield return _mover.MoveTo(cookingTask.Order.OrderBy.DiningTable.WorkPos.position);
+
+            //4. Phục vụ
+            yield return _behavior.GiveFoodToGuest(cookingTask);
+
+            //5. Quay về vị trí ban đầu (hoặc có thể đi phục vụ bàn khác nếu có order mới)
+            yield return Rest(cookingTask);
+        }
+
+
+        IEnumerator Rest(IStaffTask completedTask)
+        {
+            _context.OnTaskCompleted(completedTask);
             servingOrder = null;
             _onWaiterAvailable.Raise(_context);
             yield return _mover.MoveTo(_context.RestPosition.position);
         }
 
-        public void DoServe(Order order)
+        public void StartServe(Order order)
         {
             StopAllCoroutines();
-            StartCoroutine(DoServeTask(order));
+            StartCoroutine(DoServe(order));
+        }
+
+        public void StartShip(CookingTask cookingTask)
+        {
+            StopAllCoroutines();
+            StartCoroutine(DoShip(cookingTask));
         }
 
         void LateUpdate() => _mover.SetZToZero();
