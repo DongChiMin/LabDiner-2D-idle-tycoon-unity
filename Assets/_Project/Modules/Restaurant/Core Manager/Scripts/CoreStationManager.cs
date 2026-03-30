@@ -9,18 +9,34 @@ namespace LabDiner.Restaurant
     {
         [SerializeField] private List<CoreStation> coreStations = new List<CoreStation>();
 
+        #region API
+        /// <summary>
+        /// Kiểm tra xem có bất kỳ trạm chính nào đã được mở khóa hay không. Nếu chưa có trạm nào được mở khóa, nhà hàng sẽ không thể hoạt động vì không có trạm nào để phục vụ khách hàng.
+        /// </summary>
+        /// <returns></returns>
         public bool HasAnyUnlockedStation()
         {
-            return coreStations.Exists(station => station.isUnlocked);
+            return coreStations.Exists(coreStation => coreStation.isUnlocked);
         }
 
-        private List<CoreStation> GetUnlockedStations()
+        /// <summary>
+        /// Kiểm tra xem có bất kỳ trạm nào trong số các trạm chính đã được mở khóa có trạm con nào đang sẵn sàng để thực hiện nhiệm vụ hay không.
+        /// </summary>
+        /// <param name="station"></param>
+        /// <returns></returns>
+        public bool HasAnyAvailableStation(CoreStation station)
         {
-            return coreStations.FindAll(station => station.isUnlocked);
+            List<Station> stations = station.Stations;
+            return stations.Exists(ws => ws.IsAvailable);
         }
 
-        //Tạo đơn hàng ngẫu nhiên dựa trên các trạm đã mở khóa, tổng số lượng món và số lượng món khác nhau tối đa
-        //VD: maxUniqueStations = 1, maxTotalQty = 5 => thì chỉ được tạo món từ 1 trạm, max số lượng 5 
+        /// <summary>
+        /// Tạo một order ngẫu nhiên dựa trên các trạm đã mở khóa, với số lượng loại trạm tối đa và tổng số lượng món ăn tối đa được chỉ định.
+        ///VD: maxUniqueStations = 1, maxTotalQty = 5 => thì chỉ được tạo món từ 1 trạm, max số lượng 5 
+        /// </summary>
+        /// <param name="maxUniqueStations"></param>
+        /// <param name="maxTotalQty"></param>
+        /// <returns></returns>
         public Dictionary<CoreStation, int> GenerateRandomOrder(int maxUniqueStations, int maxTotalQty)
         {
             Dictionary<CoreStation, int> order = new Dictionary<CoreStation, int>();
@@ -58,8 +74,27 @@ namespace LabDiner.Restaurant
                     order.Add(randomStation, 1);
                 }
             }
-
             return order;
+        }
+
+
+        public Station PopAvailableStation(CoreStation station)
+        {
+            List<Station> stations = station.Stations;
+            Station availableStation = stations.Find(ws => ws.IsAvailable);
+            if (availableStation != null)
+            {
+                availableStation.IsAvailable = false; // Đánh dấu trạm này đang bận
+                return availableStation;
+            }
+            return null; // Không có trạm nào sẵn sàng
+        }
+
+        #endregion
+
+        private List<CoreStation> GetUnlockedStations()
+        {
+            return coreStations.FindAll(station => station.isUnlocked);
         }
     }
 }

@@ -1,10 +1,28 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
     public class PassTableManager : MonoBehaviour
     {
-        // Hiện tại chưa có logic gì, nhưng có thể dùng để quản lý thông tin chung về hàng đợi, như số lượng khách đang chờ, thời gian chờ trung bình, v.v.
+        [SerializeField] private List<PassTable> _passTables;
+        
+        #region API
+        /// <summary>
+        /// Lấy PassTable ngẫu nhiên
+        /// </summary>
+        /// <returns></returns>
+        public PassTable GetAvailablePassTable()
+        {
+            if (_passTables == null || _passTables.Count == 0)
+            {
+                Debug.LogWarning("Không có PassTable nào được gán trong PassTableManager!");
+                return null;
+            }
+            int index = Random.Range(0, _passTables.Count);
+            return _passTables[index];
+        }
+        #endregion
     }
 }

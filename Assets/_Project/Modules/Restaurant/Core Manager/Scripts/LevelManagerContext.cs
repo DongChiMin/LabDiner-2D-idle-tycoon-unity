@@ -8,31 +8,31 @@ namespace LabDiner.Restaurant
         //Các manager đều là dạng Singleton, để tránh spaghetti code thì chỉ các manager được phép gọi nhau
         //Các object ngoài chỉ được gọi thông qua SOEvent
         [Header("Objects")]
-        public ChefManager chefManager;
-        public WaiterManager waiterManager;
-        public GuestManager guestManager;
+        public ChefManager ChefManager;
+        public WaiterManager WiterManager;
+        public GuestManager GuestManager;
 
         [Header("Places")]
-        public DiningTableManager diningTableManager;
-        public CoreStationManager coreStationManager;
+        public DiningTableManager DiningTableManager;
+        public CoreStationManager CoreStationManager;
 
         [Header("Logics")]
-        public ServeManager serveManager;
-        public LevelCurrencyManager levelCurrencyManager;
-        public OrderManager orderManager;
-        public LevelConfigSO levelConfigSO;
+        public ServeManager ServeManager;
+        public LevelCurrencyManager LevelCurrencyManager;
+        public OrderManager OrderManager;
+        public LevelConfigSO LevelConfigSO;
 
         [Header("[Optional]")]  //có thể null tùy level
-        public WaitingLineManager waitingLineManager;
-        public PassTableManager passTableManager;
+        public WaitingLineManager WaitingLineManager;
+        public PassTableManager PassTableManager;
 
-        public bool HasWaitingLine => waitingLineManager != null;
-        public bool HasPassTable => passTableManager != null;
+        public bool HasWaitingLine => WaitingLineManager != null;
+        public bool HasPassTable => PassTableManager != null;
 
         protected override void Awake()
         {
             base.Awake();
-            guestManager.OnInit(levelConfigSO);
+            GuestManager.OnInit(LevelConfigSO);
         }
     }
 }

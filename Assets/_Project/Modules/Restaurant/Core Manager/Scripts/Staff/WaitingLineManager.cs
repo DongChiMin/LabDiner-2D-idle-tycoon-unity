@@ -52,7 +52,7 @@ namespace LabDiner.Restaurant
             // Bắt tất cả người còn lại tiến lên
             RearrangeQueue();
 
-            LevelManagerContext.Instance.diningTableManager.OccupyTable(table, guest);
+            LevelManagerContext.Instance.DiningTableManager.OccupyTable(table, guest);
             guest.FromWaitingLineToDiningTable(table);
         }
 

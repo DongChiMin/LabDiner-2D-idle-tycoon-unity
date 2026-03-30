@@ -21,7 +21,7 @@ namespace LabDiner.Restaurant
 
         [Header("[DEBUG VIEW]")]
         [SerializeField] protected List<TStaff> _debugAvailableStaffs = new();
-        [SerializeField] protected List<TTask> _debugTasks = new();
+        [SerializeField] protected List<TTask> _debugTasksQueue = new();
 
         void OnEnable()
         {
@@ -41,11 +41,30 @@ namespace LabDiner.Restaurant
             SyncDebugView();
         }
 
+        #region API
+        /// <summary>
+        /// Kiểm tra xem task có thể được giao cho nhân viên hay không (ví dụ: dựa trên loại task, trạng thái nhân viên...)
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
+        protected virtual bool CanAssignTask(TTask task) => true;
+        /// <summary>
+        /// Xử lý task trước khi giao cho nhân viên (ví dụ: thêm thông tin, chuyển đổi dữ liệu...)
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
+        protected virtual TTask ProcessTaskBeforeExecute(TTask task) => task;
+        #endregion
+
         protected void HandleNewTask(TTask newTask)
         {
             if (_availableStaffs.Count > 0)
             {
-                AssignTaskToStaff(_availableStaffs.Dequeue(), newTask);
+                if (!CanAssignTask(newTask)) return;
+
+                TTask processedTask = ProcessTaskBeforeExecute(newTask);
+
+                AssignTaskToStaff(_availableStaffs.Dequeue(), processedTask);
             }
             else
             {
@@ -59,8 +78,14 @@ namespace LabDiner.Restaurant
         {
             if (_taskQueue.Count > 0)
             {
-                TTask nextTask = _taskQueue.Dequeue();
-                AssignTaskToStaff(staff, nextTask);
+                TTask nextTask = _taskQueue.Peek();
+                if (!CanAssignTask(nextTask)) return;
+
+                nextTask = _taskQueue.Dequeue();
+                TTask processedTask = ProcessTaskBeforeExecute(nextTask);
+
+                
+                AssignTaskToStaff(staff, processedTask);
             }
             else
             {
@@ -76,14 +101,15 @@ namespace LabDiner.Restaurant
         }
 
 
-
+        #region EDITOR_ONLY
         private void SyncDebugView()
         {
             // Chỉ chạy trong Editor để tránh tốn tài nguyên khi build game thật
 #if UNITY_EDITOR
-            _debugTasks = new List<TTask>(_taskQueue);
+            _debugTasksQueue = new List<TTask>(_taskQueue);
             _debugAvailableStaffs = new List<TStaff>(_availableStaffs);
 #endif
         }
+        #endregion
     }
 }

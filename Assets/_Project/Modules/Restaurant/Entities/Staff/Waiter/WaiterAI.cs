@@ -33,7 +33,7 @@ namespace LabDiner.Restaurant
         {
             servingOrder = order;
             // 1. Đi đến bàn
-            yield return _mover.MoveTo(servingOrder._orderBy.transform.position);
+            yield return _mover.MoveTo(servingOrder.OrderBy.transform.position);
 
             //2. Phục vụ
             yield return _behavior.Serve(servingOrder);

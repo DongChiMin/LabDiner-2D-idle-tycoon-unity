@@ -70,8 +70,8 @@ namespace LabDiner.Restaurant
 
                 //0. Các biến cần sử dụng
                 bool HasWaitingLine = LevelManagerContext.Instance.HasWaitingLine;
-                bool hasAnyUnlockedStation = LevelManagerContext.Instance.coreStationManager.HasAnyUnlockedStation();
-                List<DiningTable> availableTables = LevelManagerContext.Instance.diningTableManager.GetAvailableTables();
+                bool hasAnyUnlockedStation = LevelManagerContext.Instance.CoreStationManager.HasAnyUnlockedStation();
+                List<DiningTable> availableTables = LevelManagerContext.Instance.DiningTableManager.GetAvailableTables();
 
 
                 //1. Kiểm tra số lượng khách hiện tại có vượt quá max không
@@ -87,14 +87,14 @@ namespace LabDiner.Restaurant
                 GuestContext guest = SpawnGuest();
 
                 //4. Tạo danh sách món ăn khách muốn gọi
-                Dictionary<CoreStation, int> orderDict = LevelManagerContext.Instance.coreStationManager.GenerateRandomOrder(_maxUniqueStations, _maxTotalQty);
+                Dictionary<CoreStation, int> orderDict = LevelManagerContext.Instance.CoreStationManager.GenerateRandomOrder(_maxUniqueStations, _maxTotalQty);
                 Order order = new Order(orderDict, guest, 0, false);
                 Debug.Log("TODO: cập nhật giá tiền cho order ở đây");
 
                 //5.[Hành động] Kiểm tra hàng chờ bên ngoài có > 0 không, nếu có thì khách mới sẽ đi vào hàng chờ
-                if (HasWaitingLine && LevelManagerContext.Instance.waitingLineManager.HasWaitingGuest)
+                if (HasWaitingLine && LevelManagerContext.Instance.WaitingLineManager.HasWaitingGuest)
                 {
-                    Vector3 destination = LevelManagerContext.Instance.waitingLineManager.AddToWaitingLine(guest);
+                    Vector3 destination = LevelManagerContext.Instance.WaitingLineManager.AddToWaitingLine(guest);
                     guest.Setup(order, destination, _exitPoint.position);
                     continue;
                 }
@@ -103,14 +103,14 @@ namespace LabDiner.Restaurant
                 if (availableTables.Count > 0)
                 {
                     DiningTable selectedTable = availableTables[Random.Range(0, availableTables.Count)];
-                    LevelManagerContext.Instance.diningTableManager.OccupyTable(selectedTable, guest);
+                    LevelManagerContext.Instance.DiningTableManager.OccupyTable(selectedTable, guest);
                     guest.Setup(order, selectedTable.transform.position, _exitPoint.position, selectedTable);
                     continue;
                 }
                 //7.[Hành động] Nếu không có bàn trống nhưng có hàng chờ, khách sẽ đi vào hàng chờ
                 else if (HasWaitingLine)
                 {
-                    Vector3 destination = LevelManagerContext.Instance.waitingLineManager.AddToWaitingLine(guest);
+                    Vector3 destination = LevelManagerContext.Instance.WaitingLineManager.AddToWaitingLine(guest);
                     guest.Setup(order, destination, _exitPoint.position);
                     continue;
                 }

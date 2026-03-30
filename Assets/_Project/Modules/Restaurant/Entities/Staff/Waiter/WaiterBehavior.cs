@@ -12,7 +12,7 @@ namespace LabDiner.Restaurant
 
         public IEnumerator Serve(Order order)
         {
-            GuestContext guest = order._orderBy;
+            GuestContext guest = order.OrderBy;
 
             Debug.Log("TODO: show tiến trình serving tại đây");
             yield return new WaitForSeconds(_serveDuration);

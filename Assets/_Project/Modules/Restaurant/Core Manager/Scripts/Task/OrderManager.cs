@@ -27,7 +27,7 @@ namespace LabDiner.Restaurant
         //Tiếp nhận các order từ khách hàng, phân rã ra thành các cookingTask để phân phối từng task cho đầu bếp
         void HandleOrderServed(Order newOrder)
         {
-            foreach (var item in newOrder._orderDict)
+            foreach (var item in newOrder.OrderDict)
             {
                 CoreStation station = item.Key;
                 int quantity = item.Value;
@@ -36,7 +36,6 @@ namespace LabDiner.Restaurant
                 for (int i = 0; i < quantity; i++)
                 {
                     CookingTask singleTask = new CookingTask(newOrder, station);
-
                     // 3. Đẩy vào hàng đợi chung của bếp
                     _onNewCookingTask.Raise(singleTask);
                 }
