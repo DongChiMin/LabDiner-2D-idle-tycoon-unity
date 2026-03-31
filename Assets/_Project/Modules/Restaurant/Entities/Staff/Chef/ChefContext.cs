@@ -15,9 +15,12 @@ namespace LabDiner.Restaurant
         [SerializeField] private StaffMover _mover;
         [SerializeField] private ChefBehavior _behavior;
         [SerializeField] private ChefAI _ai;
+        [SerializeField] private ChefLogic _logic;
         public StaffMover CtxMover => _mover;
         public ChefBehavior CtxBehavior => _behavior;
         public ChefAI CtxAI => _ai;
+        public ChefLogic CtxLogic => _logic;
+        
         [Header("[Debug]")]
         [SerializeField] private bool _isAvailable = true;
         public bool IsAvailable {

@@ -10,6 +10,8 @@ namespace LabDiner.Restaurant
         public bool isUnlocked => _currentLevel >= 0;
         public List<Station> Stations => _stations;
         public string Name => _name;
+        public Sprite DishIcon => _dishIcon;
+        public double CurrentPrice => currentPrice;
 
         [Header("Economic Settings")]
         [SerializeField] private int _baseUpgradeCost;  // Chi phí nâng cấp cơ bản cho trạm chính
@@ -17,6 +19,8 @@ namespace LabDiner.Restaurant
 
         [Header("Object Settings")]
         [SerializeField] private string _name = "New CoreStation";
+        [SerializeField] private Sprite _dishIcon;
+        [SerializeField] private double currentPrice;
         [SerializeField] private int _currentLevel = -1;
         [SerializeField] private List<Station> _stations = new List<Station>();
 

@@ -18,11 +18,12 @@ namespace LabDiner.Restaurant
 
         public IEnumerator Cook(CookingTask task)
         {
-            CoreStation coreStation = task.CoreStation;
             Debug.Log("TODO: hoàn thiện công thức thời gian nấu");
             // Bật hiệu ứng khói, lửa, âm thanh xèo xèo...
             yield return new WaitForSeconds(3 * (1/ cookMultiplier));
             task.StationTarget.SetStatus(true);
+            _context.CtxLogic.UpdateCookingTaskPrice(task);
+            _context.CtxLogic.CarryDish(task);
         }
 
         public IEnumerator PlaceOnPassTable(CookingTask task)
@@ -30,6 +31,7 @@ namespace LabDiner.Restaurant
             task.PassTableTarget.PlaceTaskOnPassTable(task);
             // Di chuyển món ăn đến PassTable, bật hiệu ứng đặt món...
             yield return new WaitForSeconds(placeOnPassTableDuration);
+            _context.CtxLogic.FinishTask(task);
         }
     }
 }

@@ -34,6 +34,7 @@ namespace LabDiner.Restaurant
             PassTable passTable = cookingTask.PassTableTarget;
             passTable.PickUpDish(cookingTask);
             yield return new WaitForSeconds(_pickUpDuration); // Giả lập thời gian lấy món
+            _ctx.CtxLogic.CarryDish(cookingTask);
         }
 
         public IEnumerator GiveFoodToGuest(CookingTask cookingTask)
@@ -42,6 +43,7 @@ namespace LabDiner.Restaurant
             guest.ReceiveFood(cookingTask);
             Debug.Log("TODO: show tiến trình phục vụ tại đây");
             yield return new WaitForSeconds(_giveFoodDuration);
+            _ctx.CtxLogic.FinishTask(cookingTask);
         }
     }
 }

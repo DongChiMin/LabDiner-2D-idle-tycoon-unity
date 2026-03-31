@@ -1612,6 +1612,8 @@ MonoBehaviour:
   _baseUpgradeCost: 0
   _upgradeCostMultiplier: 0
   _name: CoreStation 1
+  _dishIcon: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
+  currentPrice: 150
   _currentLevel: 1
   _stations:
   - {fileID: 1374027152}

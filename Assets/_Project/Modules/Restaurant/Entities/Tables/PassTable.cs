@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace LabDiner.Restaurant
@@ -11,13 +12,23 @@ namespace LabDiner.Restaurant
         [Header("Settings")]
         [SerializeField] Transform _putOnPos;
         [SerializeField] Transform _pickUpPos;
+        [Header("Visual")]
+        [SerializeField] private GameObject _dishVisual;
+        [SerializeField] private SpriteRenderer _dishIcon;
+        [SerializeField] private TextMeshProUGUI _priceText;
         [Header("[DEBUG]")]
         [SerializeField] private List<CookingTask> tasksOnPassTable = new();
+        void OnEnable()
+        {
+            ToggleDishVisual(false);
+        }
 
         #region API
         public void PlaceTaskOnPassTable(CookingTask task)
         {
             tasksOnPassTable.Add(task);
+            UpdateDishVisual(task);
+            ToggleDishVisual(true);
             Debug.Log($"Task {task} placed on PassTable {name}. Current tasks on PassTable: {tasksOnPassTable.Count}");
         }
 
@@ -26,7 +37,13 @@ namespace LabDiner.Restaurant
             if (tasksOnPassTable.Contains(task))
             {
                 tasksOnPassTable.Remove(task);
-                Debug.Log($"TODO: show tiến trình pick up tại đây. Task {task} picked up from PassTable {name}. Remaining tasks on PassTable: {tasksOnPassTable.Count}");
+                if(tasksOnPassTable.Count == 0)
+                    ToggleDishVisual(false);
+                else
+                {
+                    UpdateDishVisual(tasksOnPassTable[tasksOnPassTable.Count - 1]);
+                    ToggleDishVisual(true);
+                }
             }
             else
             {
@@ -34,5 +51,16 @@ namespace LabDiner.Restaurant
             }
         }
         #endregion
+
+        private void UpdateDishVisual(CookingTask task)
+        {
+            _dishIcon.sprite = task.CoreStation.DishIcon;
+            _priceText.text = task.Price.ToString();   
+        }
+
+        private void ToggleDishVisual(bool isOn)
+        {
+            _dishVisual.SetActive(isOn);
+        }
     }
 }
