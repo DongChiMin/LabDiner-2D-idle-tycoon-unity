@@ -8,11 +8,17 @@ namespace LabDiner.Restaurant
     public class WaiterBehavior : MonoBehaviour
     {
         [Header("Serve")]
-        [SerializeField] private WaiterContext _context;
         [SerializeField] private float _serveDuration = 3f;
         [Header("Shipp")]
         [SerializeField] private float _pickUpDuration = 0f;
         [SerializeField] private float _giveFoodDuration = 0f;
+
+        private WaiterContext _ctx;
+
+        private void Awake()
+        {
+            _ctx = GetComponent<WaiterContext>();
+        }
 
         public IEnumerator Serve(Order order)
         {

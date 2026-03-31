@@ -7,20 +7,17 @@ namespace LabDiner.Restaurant
 {
     public class WaiterAI : MonoBehaviour
     {
-        [SerializeField] WaiterContext _context;
         [SerializeField] private WaiterEvent _onWaiterAvailable;
 
         // Cache các component cần thiết để tránh phải GetComponent nhiều lần
-        private StaffMover _mover;
-        private WaiterBehavior _behavior;
+        private WaiterContext _context;
 
         [Header("[DEBUG]")]
         [SerializeField] private Order servingOrder;
 
         void Awake()
         {
-            _mover = _context.CtxMover;
-            _behavior = _context.CtxBehavior;
+            _context = GetComponent<WaiterContext>();
         }
 
         void OnEnable()
@@ -33,10 +30,10 @@ namespace LabDiner.Restaurant
         {
             servingOrder = order;
             // 1. Đi đến bàn
-            yield return _mover.MoveTo(servingOrder.OrderBy.DiningTable.WorkPos.position);
+            yield return _context.CtxMover.MoveTo(servingOrder.OrderBy.DiningTable.WorkPos.position);
 
             //2. Phục vụ
-            yield return _behavior.Serve(servingOrder);
+            yield return _context.CtxBehavior.Serve(servingOrder);
 
             //3. Thông báo hoàn thành
 
@@ -47,16 +44,16 @@ namespace LabDiner.Restaurant
         IEnumerator DoShip(CookingTask cookingTask)
         {
             //1. Đi đến PassTable
-            yield return _mover.MoveTo(cookingTask.PassTableTarget.WorkPos_PickUp.position);
+            yield return _context.CtxMover.MoveTo(cookingTask.PassTableTarget.WorkPos_PickUp.position);
 
             //2. Lấy món từ PassTable
-            yield return _behavior.PickUpFromPassTable(cookingTask);
+            yield return _context.CtxBehavior.PickUpFromPassTable(cookingTask);
 
             //3. Đi đến bàn
-            yield return _mover.MoveTo(cookingTask.Order.OrderBy.DiningTable.WorkPos.position);
+            yield return _context.CtxMover.MoveTo(cookingTask.Order.OrderBy.DiningTable.WorkPos.position);
 
             //4. Phục vụ
-            yield return _behavior.GiveFoodToGuest(cookingTask);
+            yield return _context.CtxBehavior.GiveFoodToGuest(cookingTask);
 
             //5. Quay về vị trí ban đầu (hoặc có thể đi phục vụ bàn khác nếu có order mới)
             yield return Rest(cookingTask);
@@ -68,7 +65,7 @@ namespace LabDiner.Restaurant
             _context.OnTaskCompleted(completedTask);
             servingOrder = null;
             _onWaiterAvailable.Raise(_context);
-            yield return _mover.MoveTo(_context.RestPosition.position);
+            yield return _context.CtxMover.MoveTo(_context.RestPosition.position);
         }
 
         public void StartServe(Order order)
@@ -83,6 +80,6 @@ namespace LabDiner.Restaurant
             StartCoroutine(DoShip(cookingTask));
         }
 
-        void LateUpdate() => _mover.SetZToZero();
+        void LateUpdate() => _context.CtxMover.SetZToZero();
     }
 }
