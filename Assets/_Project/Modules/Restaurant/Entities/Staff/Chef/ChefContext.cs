@@ -7,6 +7,7 @@ namespace LabDiner.Restaurant
     { 
         [Header("Settings")]
         [SerializeField] private CookingTaskEvent _onCookingTaskComplete;
+        [SerializeField] private ChefEvent _onChefAvailable;
         [SerializeField] private Transform _restPosition;
         public Transform RestPosition => _restPosition;
 
@@ -34,6 +35,7 @@ namespace LabDiner.Restaurant
         public void OnTaskCompleted(IStaffTask task)
         {
             IsAvailable = true;
+            _onChefAvailable.Raise(this);
             _onCookingTaskComplete.Raise(task as CookingTask);
         }
     }

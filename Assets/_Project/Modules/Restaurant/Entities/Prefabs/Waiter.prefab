@@ -159,10 +159,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onOrderServed: {fileID: 11400000, guid: c714de0f369beda40919630f2d7f8cef, type: 2}
+  _onWaiterAvailable: {fileID: 11400000, guid: 44bea33991e542f4abc297df2d13af2f, type: 2}
   _restPosition: {fileID: 0}
   _mover: {fileID: 6331310006697010263}
   _behavior: {fileID: 3664275028018625969}
   _ai: {fileID: 2935893761585097525}
+  _isAvailable: 1
 --- !u!114 &3664275028018625969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,8 +177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: debbed0ac1e50494b942d2a8591d35cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _context: {fileID: 6144651245979672222}
   _serveDuration: 3
+  _pickUpDuration: 0
+  _giveFoodDuration: 0
 --- !u!114 &2935893761585097525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,8 +192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2278fcd5ed511248813e979da21252e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _context: {fileID: 6144651245979672222}
-  _onWaiterAvailable: {fileID: 11400000, guid: 44bea33991e542f4abc297df2d13af2f, type: 2}
   servingOrder:
     OrderBy: {fileID: 0}
     Profit: 0

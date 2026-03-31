@@ -42,7 +42,7 @@ namespace LabDiner.Restaurant
             yield return _behavior.PlaceOnPassTable(task);
 
             //5. Quay về vị trí nghỉ ngơi hoặc làm task khác nếu có
-            yield return Rest();
+            yield return Rest(task);
 
         }
 
@@ -52,10 +52,10 @@ namespace LabDiner.Restaurant
             StartCoroutine(DoTask(task));
         }
 
-        IEnumerator Rest()
+        IEnumerator Rest(CookingTask task)
         {
             currentTask = null;
-            _onChefAvailable.Raise(_context);
+            _context.OnTaskCompleted(task);
             yield return _mover.MoveTo(_context.RestPosition.position);
         }
 

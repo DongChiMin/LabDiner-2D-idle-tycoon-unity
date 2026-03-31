@@ -7,8 +7,6 @@ namespace LabDiner.Restaurant
 {
     public class WaiterAI : MonoBehaviour
     {
-        [SerializeField] private WaiterEvent _onWaiterAvailable;
-
         // Cache các component cần thiết để tránh phải GetComponent nhiều lần
         private WaiterContext _context;
 
@@ -61,10 +59,9 @@ namespace LabDiner.Restaurant
 
 
         IEnumerator Rest(IStaffTask completedTask)
-        {
-            _context.OnTaskCompleted(completedTask);
+        {   
             servingOrder = null;
-            _onWaiterAvailable.Raise(_context);
+            _context.OnTaskCompleted(completedTask);
             yield return _context.CtxMover.MoveTo(_context.RestPosition.position);
         }
 

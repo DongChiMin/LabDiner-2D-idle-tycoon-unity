@@ -28,7 +28,6 @@ namespace LabDiner.Restaurant
         public IEnumerator PlaceOnPassTable(CookingTask task)
         {
             task.PassTableTarget.PlaceTaskOnPassTable(task);
-            _context.OnTaskCompleted(task);
             // Di chuyển món ăn đến PassTable, bật hiệu ứng đặt món...
             yield return new WaitForSeconds(placeOnPassTableDuration);
         }

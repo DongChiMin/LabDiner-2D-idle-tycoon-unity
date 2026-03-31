@@ -11,6 +11,7 @@ namespace LabDiner.Restaurant
 
         [Header("Settings")]
         [SerializeField] private OrderEvent _onOrderServed;
+        [SerializeField] private WaiterEvent _onWaiterAvailable;
         [SerializeField] private Transform _restPosition;
         public Transform RestPosition => _restPosition;
 
@@ -47,6 +48,7 @@ namespace LabDiner.Restaurant
         public void OnTaskCompleted(IStaffTask task)
         {
             IsAvailable = true;
+            _onWaiterAvailable.Raise(this);
             switch (task)
             {
                 case Order order:
