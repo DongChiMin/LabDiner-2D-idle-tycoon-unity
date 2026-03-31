@@ -13,11 +13,10 @@ namespace LabDiner.Restaurant
         [Header("Settings")]
         [SerializeField] private float _eatDuration = 3f;
         [SerializeField] private float _payDuration = 0f;
-        [Header("UI")]
-        [SerializeField] private GameObject _orderDetailUI;
 
         [Header("[DEBUG]")]
         [SerializeField] private bool _isServed = false;
+        [SerializeField] private bool _isFoodReceivedEnough = false;
         [SerializeField] private Order _order;
         [SerializeField] private List<TaskMapping> _taskMappings;
 
@@ -28,20 +27,27 @@ namespace LabDiner.Restaurant
             public int quantity; // Value
         }
 
+        private GuestContext _ctx;
+
         void OnEnable()
         {
             _isServed = false;
+            _isFoodReceivedEnough = false;
             _order = null;
-            _orderDetailUI.SetActive(false);
+        }
+
+        void Start()
+        {
+            _ctx = GetComponent<GuestContext>();
         }
 
         public IEnumerator WaitInLine()
         {
             Debug.Log("TODO: giảm dần thanh patience của khách");
-            // Ở đây có thể bật animation chờ đợi
+            //Chờ cho đến khi được StopAllCoroutines và được gọi di chuyển đến bàn
             while (true)
             {
-                yield return null; // Chờ cho đến khi được gọi tiếp tục
+                yield return null;
             }
         }
 
@@ -54,7 +60,7 @@ namespace LabDiner.Restaurant
                 yield return null;
             }
             //Sau khi được serve
-            _orderDetailUI.SetActive(true);
+            _ctx.CtxLogic.ToggleOrderDetailUI(true);
             yield return null;
         }
 
@@ -62,10 +68,11 @@ namespace LabDiner.Restaurant
         {
             Debug.Log("Đang chờ đồ ăn...");
             // Ở đây có thể bật animation chờ đợi
-            while (true)
+            while (!_isFoodReceivedEnough)
             {
                 yield return null; // Chờ cho đến khi được gọi tiếp tục
             }
+            _ctx.CtxLogic.ToggleOrderDetailUI(false);
         }
 
         public IEnumerator Eat()
@@ -92,6 +99,11 @@ namespace LabDiner.Restaurant
         public void SetServedStatus(bool status)
         {
             _isServed = status;
+        }
+
+        public void SetFoodReceivedEnough(bool status)
+        {
+            _isFoodReceivedEnough = status;
         }
 
         #region EDITOR_ONLY

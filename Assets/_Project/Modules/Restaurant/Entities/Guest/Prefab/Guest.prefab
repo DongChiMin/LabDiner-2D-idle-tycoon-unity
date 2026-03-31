@@ -107,8 +107,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eatDuration: 3
   _payDuration: 0
-  _orderDetailUI: {fileID: 4298715913420693353}
   _isServed: 0
+  _isFoodReceivedEnough: 0
   _order:
     OrderBy: {fileID: 0}
     Profit: 0
@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugOrderText: {fileID: 4469540131103477915}
+  _orderDetailUI: {fileID: 4298715913420693353}
 --- !u!1 &1390083977154387256
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ namespace LabDiner.Restaurant
     {
         [Header("UI")]
         [SerializeField] private TextMeshProUGUI _debugOrderText;
+        [SerializeField] private GameObject _orderDetailUI;
 
         [Header("Debug")]
         [SerializeField] 
@@ -24,6 +25,7 @@ namespace LabDiner.Restaurant
         void OnEnable()
         {
             _remainingDishes.Clear();
+            _orderDetailUI.SetActive(false);
         }
 
         #region API
@@ -32,6 +34,11 @@ namespace LabDiner.Restaurant
         {
             _remainingDishes = order.OrderDict;
             UpdateOrderDetailText();
+        }
+
+        public void ToggleOrderDetailUI(bool isActive)
+        {
+            _orderDetailUI.SetActive(isActive);
         }
 
         public void ReceiveFood(CookingTask cookingTask)
@@ -43,6 +50,11 @@ namespace LabDiner.Restaurant
                 if(_remainingDishes[receivedDish] <= 0)
                 {
                     _remainingDishes.Remove(receivedDish);
+                }
+
+                if(_remainingDishes.Count == 0)
+                {
+                    _ctx.CtxBehavior.SetFoodReceivedEnough(true);
                 }
                 UpdateOrderDetailText();
             }

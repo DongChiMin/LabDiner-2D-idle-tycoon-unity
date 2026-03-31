@@ -9,18 +9,20 @@ namespace LabDiner.Restaurant
     /// </summary>
     public class GuestContext : MonoBehaviour
     {
+        public GuestAI CtxAI => _guestAI;
+        public GuestBehavior CtxBehavior => _guestBehavior;
+        public GuestMover CtxMover => _guestMover;
+        public GuestLogic CtxLogic => _guestLogic;
+        public DiningTable DiningTable => _diningTable;
+
+        [Header("Context")]
         [SerializeField] private GuestAI _guestAI;
         [SerializeField] private GuestBehavior _guestBehavior;
         [SerializeField] private GuestMover _guestMover;
         [SerializeField] private GuestLogic _guestLogic;
-        public GuestAI CtxAI => _guestAI;
-        public GuestBehavior CtxBehavior => _guestBehavior;
-        public GuestMover CtxMover => _guestMover;
-        public DiningTable DiningTable => _diningTable;
 
         [Header("[Debug]")]
         [SerializeField] private DiningTable _diningTable;
-
 
         #region API
         public void Setup(Order order, Vector3 destination, Vector3 exitPos, DiningTable table = null)
