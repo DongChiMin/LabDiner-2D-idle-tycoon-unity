@@ -7,7 +7,6 @@ namespace LabDiner.Restaurant
     {
         [Header("Cook Settings")]
         [SerializeField] private float cookMultiplier = 1f;
-        [SerializeField] private float placeOnPassTableDuration = 0f;
         [Header("Serve Settings")]
         [SerializeField] private float _serveDuration = 3f;
         [SerializeField] private float _giveFoodDuration = 0f;
