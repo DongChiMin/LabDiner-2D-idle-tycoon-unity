@@ -1,11 +1,12 @@
 
 using System.Collections.Generic;
+using LabDiner.Shared.Input;
 using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
     [System.Serializable]
-    public class Station : MonoBehaviour
+    public class Station : MonoBehaviour, IInteractable
     {
         public CoreStation CoreStation => _coreStation;
         public Transform WorkPos => _workPos;
@@ -31,6 +32,16 @@ namespace LabDiner.Restaurant
             {
                 onStationAvailable.Raise(this);
             }
+        }
+
+        public void OnInteract()
+        {
+            Debug.Log("Đã click vào station");
+        }
+
+        public bool CanInteract()
+        {
+            return IsUnlocked;
         }
 
         #endregion

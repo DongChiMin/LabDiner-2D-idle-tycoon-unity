@@ -1,11 +1,12 @@
 
 using System.Collections.Generic;
+using LabDiner.Shared.Input;
 using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
     [System.Serializable]
-    public class CoreStation : MonoBehaviour
+    public class CoreStation : MonoBehaviour, IInteractable
     {
         public bool isUnlocked => _currentLevel >= 0;
         public List<Station> Stations => _stations;
@@ -24,6 +25,18 @@ namespace LabDiner.Restaurant
         [SerializeField] private int _currentLevel = -1;
         [SerializeField] private List<Station> _stations = new List<Station>();
 
-        
+        #region API
+
+        public void OnInteract()
+        {
+            Debug.Log($"Đã click vào CoreStation: {Name}");
+        }
+
+        public bool CanInteract()
+        {
+            return true;
+        }
+
+        #endregion
     }
 }

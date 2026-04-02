@@ -57,6 +57,12 @@ namespace LabDiner.Restaurant
             _onGuestLeft.Raise(_context);
         }
 
+        public IEnumerator LeaveRoutine(Vector3 exitPos)
+        {
+            yield return MoveTo(exitPos);
+            _onGuestLeft.Raise(_context);
+        }
+
         IEnumerator MoveTo(Vector3 destination)
         {
             // Không cần check moveCoroutine thủ công nữa, cứ chạy trực tiếp
@@ -68,6 +74,12 @@ namespace LabDiner.Restaurant
             StopAllCoroutines();
             _targetTable = table;
             StartCoroutine(MainRoutine(table.transform.position, _exitPos, table));
+        }
+
+        public void LeaveAngry()
+        {
+            StopAllCoroutines();
+            StartCoroutine(LeaveRoutine(_exitPos));
         }
 
         void LateUpdate() => _context.CtxMover.SetZToZero();

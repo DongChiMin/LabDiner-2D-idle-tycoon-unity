@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1404e4c4060bb74088602b26181c8c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onGuestWaitInLine: {fileID: 11400000, guid: 62a72b63a8976a04a94723456fb4e067, type: 2}
   _eatDuration: 3
   _payDuration: 0
   _isServed: 0

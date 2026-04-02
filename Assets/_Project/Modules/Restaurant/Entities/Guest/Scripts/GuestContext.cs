@@ -46,6 +46,11 @@ namespace LabDiner.Restaurant
         {
             _guestLogic.ReceiveFood(cookingTask);
         }
+
+        public void LeaveAngry()
+        {
+            _guestAI.LeaveAngry();
+        }
         #endregion
     }
 }

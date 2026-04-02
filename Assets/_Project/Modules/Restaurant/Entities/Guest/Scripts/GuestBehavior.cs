@@ -10,6 +10,8 @@ namespace LabDiner.Restaurant
 {
     public class GuestBehavior : MonoBehaviour
     {
+        [Header("Events")]
+        [SerializeField] private GuestEvent _onGuestWaitInLine;
         [Header("Settings")]
         [SerializeField] private float _eatDuration = 3f;
         [SerializeField] private float _payDuration = 0f;
@@ -43,9 +45,8 @@ namespace LabDiner.Restaurant
 
         public IEnumerator WaitInLine()
         {
-            Debug.Log("TODO: giảm dần thanh patience của khách");
-            //Chờ cho đến khi được StopAllCoroutines và được gọi di chuyển đến bàn
-            while (true)
+            _onGuestWaitInLine.Raise(_ctx);
+             while (true)
             {
                 yield return null;
             }

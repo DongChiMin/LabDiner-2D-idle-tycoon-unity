@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 
 namespace LabDiner.Shared.Input
 {
@@ -12,6 +13,7 @@ namespace LabDiner.Shared.Input
 
         // Khai báo các Action của New Input System
         private InputAction _clickAction;
+        private InputAction _deltaAction;
         private InputAction _positionAction;
 
         private void Awake()
@@ -19,6 +21,9 @@ namespace LabDiner.Shared.Input
             // Tự động map phím: <Pointer> bao gồm cả Chuột và Cảm ứng Mobile!
             _clickAction = new InputAction("Click", binding: "<Pointer>/press");
             _positionAction = new InputAction("Position", binding: "<Pointer>/position");
+
+            // <Pointer>/delta: Trả về Vector2 (x, y) là độ dời của ngón tay/chuột
+            _deltaAction = new InputAction("Delta", binding: "<Pointer>/delta");
 
             // Đăng ký sự kiện: Khi người chơi vừa buông tay/nhả chuột ra
             _clickAction.canceled += OnClickPerformed;
@@ -28,12 +33,14 @@ namespace LabDiner.Shared.Input
         {
             _clickAction.Enable();
             _positionAction.Enable();
+            _deltaAction.Enable();
         }
 
         private void OnDisable()
         {
             _clickAction.Disable();
             _positionAction.Disable();
+            _deltaAction.Disable();
         }
 
         private void OnClickPerformed(InputAction.CallbackContext context)
@@ -41,10 +48,13 @@ namespace LabDiner.Shared.Input
             // 1. Lấy vị trí chuột/ngón tay
             Vector2 screenPos = _positionAction.ReadValue<Vector2>();
 
-            // 2. Chặn nếu bấm trúng UI
-            if (IsPointerOverUI()) return;
+            // 2. Lấy PointerId (DeviceId) từ thiết bị vừa thực hiện action
+            int deviceId = context.control.device.deviceId;
 
-            // 3. Bắn Raycast vào thế giới game
+            // 3. Chặn nếu bấm trúng UI
+            if (IsPointerOverUI(deviceId, screenPos)) return;
+
+            // 4. Bắn Raycast vào thế giới game
             HandleWorldInteraction(screenPos);
         }
 
@@ -52,9 +62,10 @@ namespace LabDiner.Shared.Input
         {
             Ray ray = Camera.main.ScreenPointToRay(screenPos);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, _maxRayDistance, _interactableLayer))
+            RaycastHit2D hit = Physics2D.GetRayIntersection(ray, _maxRayDistance, _interactableLayer);
+
+            if (hit.collider != null)
             {
-                // Tìm Interface trên vật bị bắn trúng
                 if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
                 {
                     if (interactable.CanInteract())
@@ -65,12 +76,20 @@ namespace LabDiner.Shared.Input
             }
         }
 
-        private bool IsPointerOverUI()
+        private bool IsPointerOverUI(int pointerId, Vector2 screenPos)
         {
-            if (EventSystem.current == null) return false;
+            var eventSystem = EventSystem.current;
+            if (eventSystem == null) return false;
 
-            // Trong New Input System, hàm này tự động check cả chuột và cảm ứng cực chuẩn
-            return EventSystem.current.IsPointerOverGameObject();
+            // Lấy Module mới từ EventSystem
+            var uiModule = eventSystem.currentInputModule as InputSystemUIInputModule;
+            if (uiModule == null) return false;
+
+            // Truy vấn kết quả Raycast UI của Pointer cụ thể tại frame này
+            RaycastResult lastResult = uiModule.GetLastRaycastResult(pointerId);
+
+            // Kiểm tra xem kết quả đó có tồn tại và có thuộc về một GameObject nào không
+            return lastResult.isValid;
         }
     }
 }
