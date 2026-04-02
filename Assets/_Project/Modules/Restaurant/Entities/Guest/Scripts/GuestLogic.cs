@@ -7,25 +7,12 @@ namespace LabDiner.Restaurant
 {
     public class GuestLogic : MonoBehaviour
     {
-        [Header("UI")]
-        [SerializeField] private TextMeshProUGUI _debugOrderText;
-        [SerializeField] private GameObject _orderDetailUI;
-
-        [Header("Debug")]
-        [SerializeField] 
-
-        private Dictionary<CoreStation, int> _remainingDishes = new Dictionary<CoreStation, int>();
         private GuestContext _ctx;
+        private Dictionary<CoreStation, int> _remainingDishes = new Dictionary<CoreStation, int>();
 
-        private void Awake()
+        void Awake()
         {
             _ctx = GetComponent<GuestContext>();
-        }
-
-        void OnEnable()
-        {
-            _remainingDishes.Clear();
-            _orderDetailUI.SetActive(false);
         }
 
         #region API
@@ -33,12 +20,7 @@ namespace LabDiner.Restaurant
         public void SetOrder(Order order)
         {
             _remainingDishes = order.OrderDict;
-            UpdateOrderDetailText();
-        }
-
-        public void ToggleOrderDetailUI(bool isActive)
-        {
-            _orderDetailUI.SetActive(isActive);
+            _ctx.OrderCanvas.UpdateOrderDetailText(_remainingDishes);
         }
 
         public void ReceiveFood(CookingTask cookingTask)
@@ -56,7 +38,7 @@ namespace LabDiner.Restaurant
                 {
                     _ctx.CtxBehavior.SetFoodReceivedEnough(true);
                 }
-                UpdateOrderDetailText();
+                _ctx.OrderCanvas.UpdateOrderDetailText(_remainingDishes);
             }
             else
             {
@@ -65,15 +47,6 @@ namespace LabDiner.Restaurant
         }
 
         #endregion
-
-        private void UpdateOrderDetailText()
-        {
-            string orderDetails = "";
-            foreach (var item in _remainingDishes)
-            {
-                orderDetails += $"{item.Key.Name}: {item.Value}\n";
-            }
-            _debugOrderText.text = orderDetails;
-        }
+        
     }
 }

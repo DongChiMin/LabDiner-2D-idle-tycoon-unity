@@ -14,12 +14,15 @@ namespace LabDiner.Restaurant
         public GuestMover CtxMover => _guestMover;
         public GuestLogic CtxLogic => _guestLogic;
         public DiningTable DiningTable => _diningTable;
+        public GuestOrderCanvas OrderCanvas => _guestOrderCanvas;
 
         [Header("Context")]
         [SerializeField] private GuestAI _guestAI;
         [SerializeField] private GuestBehavior _guestBehavior;
         [SerializeField] private GuestMover _guestMover;
         [SerializeField] private GuestLogic _guestLogic;
+        [Header("UI Canvas")]
+        [SerializeField] private GuestOrderCanvas _guestOrderCanvas;
 
         [Header("[Debug]")]
         [SerializeField] private DiningTable _diningTable;

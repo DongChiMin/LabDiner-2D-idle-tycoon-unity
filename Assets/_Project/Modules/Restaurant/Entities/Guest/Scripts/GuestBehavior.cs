@@ -61,7 +61,7 @@ namespace LabDiner.Restaurant
                 yield return null;
             }
             //Sau khi được serve
-            _ctx.CtxLogic.ToggleOrderDetailUI(true);
+            _ctx.OrderCanvas.gameObject.SetActive(true);
             yield return null;
         }
 
@@ -73,7 +73,7 @@ namespace LabDiner.Restaurant
             {
                 yield return null; // Chờ cho đến khi được gọi tiếp tục
             }
-            _ctx.CtxLogic.ToggleOrderDetailUI(false);
+            _ctx.OrderCanvas.gameObject.SetActive(false);
         }
 
         public IEnumerator Eat()
