@@ -16,6 +16,9 @@ namespace LabDiner.Restaurant
         public DiningTable DiningTable => _diningTable;
         public GuestOrderUI OrderCanvas => _guestOrderCanvas;
 
+        [Header("Events")]
+        [SerializeField] private GuestEvent _onGuestLeaveAngry;
+
         [Header("Context")]
         [SerializeField] private GuestAI _guestAI;
         [SerializeField] private GuestBehavior _guestBehavior;
@@ -53,6 +56,7 @@ namespace LabDiner.Restaurant
         public void LeaveAngry()
         {
             _guestAI.LeaveAngry();
+            _onGuestLeaveAngry.Raise(this);
         }
         #endregion
     }

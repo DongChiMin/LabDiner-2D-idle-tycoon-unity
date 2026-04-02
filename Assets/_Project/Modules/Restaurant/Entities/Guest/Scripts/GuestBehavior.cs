@@ -12,6 +12,7 @@ namespace LabDiner.Restaurant
     {
         [Header("Events")]
         [SerializeField] private GuestEvent _onGuestWaitInLine;
+        [SerializeField] private GuestEvent _onGuestHappy;
         [Header("Settings")]
         [SerializeField] private float _eatDuration = 3f;
         [SerializeField] private float _payDuration = 0f;
@@ -81,7 +82,7 @@ namespace LabDiner.Restaurant
             Debug.Log("Đang ăn...");
             // Ở đây có thể bật animation ăn uống
             yield return new WaitForSeconds(_eatDuration);
-            Debug.Log("Ăn xong rồi!");
+            _onGuestHappy.Raise(_ctx);
         }
 
         public IEnumerator Pay()

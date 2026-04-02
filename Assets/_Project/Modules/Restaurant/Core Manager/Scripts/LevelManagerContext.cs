@@ -20,6 +20,7 @@ namespace LabDiner.Restaurant
         public ServeManager ServeManager;
         public LevelCurrencyManager LevelCurrencyManager;
         public OrderManager OrderManager;
+        public ReputationManager ReputationManager;
         public LevelConfigSO LevelConfigSO;
 
         [Header("[Optional]")]  //có thể null tùy level

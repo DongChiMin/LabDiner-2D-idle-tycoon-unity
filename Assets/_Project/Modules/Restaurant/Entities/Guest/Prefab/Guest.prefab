@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758037ee65f5ec3429af30a875f09347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onGuestLeaveAngry: {fileID: 11400000, guid: f742d52c9cabb064fb2b4824bab06a08, type: 2}
   _guestAI: {fileID: 2867363319320583959}
   _guestBehavior: {fileID: 1362104788878941351}
   _guestMover: {fileID: 6383195246782047440}
@@ -107,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onGuestWaitInLine: {fileID: 11400000, guid: 62a72b63a8976a04a94723456fb4e067, type: 2}
+  _onGuestHappy: {fileID: 11400000, guid: 0926f04a3771e9d438fc583df8f66adc, type: 2}
   _eatDuration: 3
   _payDuration: 0
   _isServed: 0
