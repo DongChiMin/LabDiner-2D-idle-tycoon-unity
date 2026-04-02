@@ -1,4 +1,5 @@
 using System.Collections;
+using LabDiner.Shared.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,13 @@ namespace LabDiner.Restaurant
         [SerializeField] private Color _lowColor = Color.red;
         [SerializeField] private float _flashThreshold = 0.25f;
         [SerializeField] private float _flashSpeed = 1f;
+
+        private PopScaleEffect _popScaleEffect;
+
+        void Awake()
+        {
+            _popScaleEffect = GetComponent<PopScaleEffect>();
+        }
 
         public void UpdateVisual(float ratio)
         {
@@ -38,7 +46,11 @@ namespace LabDiner.Restaurant
 
         public void SetActive(bool isActive)
         {
-            gameObject.SetActive(isActive);
+            if (!isActive && _popScaleEffect != null)
+            {
+                _popScaleEffect.Hide();
+            }
+            else gameObject.SetActive(isActive);
         }
     }
 }
