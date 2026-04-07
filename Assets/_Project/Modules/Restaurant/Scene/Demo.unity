@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 111295405}
   - component: {fileID: 111295404}
   m_Layer: 5
-  m_Name: IMG_coin
+  m_Name: IMG_clock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7844638, b: 0.028301716, a: 1}
+  m_Color: {r: 0.4881665, g: 0.7156388, b: 0.9547169, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -908,6 +908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
+  LevelConfigSO: {fileID: 11400000, guid: 7e8b9843fefac3948af00b17fe8c0703, type: 2}
   ChefManager: {fileID: 1276889468}
   WiterManager: {fileID: 1328925402}
   GuestManager: {fileID: 1252726890}
@@ -917,7 +918,6 @@ MonoBehaviour:
   LevelCurrencyManager: {fileID: 0}
   OrderManager: {fileID: 2095169870}
   ReputationManager: {fileID: 1950174481}
-  LevelConfigSO: {fileID: 11400000, guid: 7e8b9843fefac3948af00b17fe8c0703, type: 2}
   WaitingLineManager: {fileID: 378729258}
   PassTableManager: {fileID: 1780244861}
 --- !u!4 &213425632
@@ -1231,7 +1231,7 @@ GameObject:
   - component: {fileID: 303260776}
   - component: {fileID: 303260775}
   m_Layer: 5
-  m_Name: IMG_coin
+  m_Name: IMG_BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2907,7 +2907,7 @@ GameObject:
   - component: {fileID: 954762077}
   - component: {fileID: 954762076}
   m_Layer: 5
-  m_Name: TMP_Cost
+  m_Name: TMP_ProcessTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3225,17 +3225,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50ac42ab96caba489c7fdd6aa64bcf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseUpgradeCost: 0
-  _upgradeCostMultiplier: 0
   _name: CoreStation 1
   _dishIcon: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
-  currentPrice: 150
-  _currentLevel: 1
+  _baseUpgradeCost: 0
+  _upgradeCostMultiplier: 0
   _stations:
   - {fileID: 1374027152}
   - {fileID: 1360441470}
   - {fileID: 1690477204}
-  _upgradeCanvas: {fileID: 0}
+  _currentProfit: 150
+  _currentCost: 75
+  _currentProcessTime: 3.5
+  _currentStar: 1
+  _currentLevel: 2
+  _CoreStationUI: {fileID: 1910425583}
 --- !u!212 &1023153863
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5395,7 +5398,7 @@ GameObject:
   - component: {fileID: 1737738087}
   - component: {fileID: 1737738086}
   m_Layer: 5
-  m_Name: TMP_Cost
+  m_Name: TMP_Profit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5791,8 +5794,10 @@ GameObject:
   - component: {fileID: 1910425580}
   - component: {fileID: 1910425579}
   - component: {fileID: 1910425578}
+  - component: {fileID: 1910425582}
+  - component: {fileID: 1910425583}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5884,7 +5889,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1184846954}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -5897,6 +5902,43 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 10
   m_TargetDisplay: 0
+--- !u!114 &1910425582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910425576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7682ff09678014c80b2d799c19b389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvas: {fileID: 1910425581}
+--- !u!114 &1910425583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910425576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a73ec1f54ae3e4cac04e3c918b9418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nameText: {fileID: 379600989}
+  _levelText: {fileID: 1658777901}
+  _starImages:
+  - {fileID: 543067674}
+  - {fileID: 963794755}
+  - {fileID: 1339333029}
+  - {fileID: 1189997913}
+  - {fileID: 1978501918}
+  _starProgressFill: {fileID: 1655317311}
+  _profitText: {fileID: 1737738086}
+  _processTimeText: {fileID: 954762076}
+  _costText: {fileID: 1309792422}
 --- !u!1 &1950174480
 GameObject:
   m_ObjectHideFlags: 0
