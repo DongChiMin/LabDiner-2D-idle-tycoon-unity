@@ -8,21 +8,21 @@ namespace LabDiner.Restaurant
         public Station StationTarget;
         public CoreStation CoreStation;
         public PassTable PassTableTarget;
-        public double Price;
+        public double Profit;
         // Bạn có thể thêm các thông tin như thời gian nấu, prefab món ăn...
 
         public CookingTask(Order parentOrder, CoreStation coreStation)
         {
             Order = parentOrder;
             CoreStation = coreStation;
-            Price = 0;
+            Profit = 0;
         }
 
         public CookingTask(Station station, PassTable passTable)
         {
             StationTarget = station;
             PassTableTarget = passTable;
-            Price = 0;
+            Profit = 0;
         }
     }
 }

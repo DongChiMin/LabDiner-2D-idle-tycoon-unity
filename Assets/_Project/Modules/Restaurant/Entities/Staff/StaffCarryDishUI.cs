@@ -21,15 +21,15 @@ namespace LabDiner.Restaurant
         public void UpdateCookingTaskPrice(CookingTask task)
         {
             CoreStation station = task.CoreStation;
-            task.Price = station.CurrentPrice;
+            task.Profit = station.CurrentProfit;
             Debug.Log("TODO: hoàn thiện công thức tính giá tiền");
-            currentPrice = task.Price;
+            currentPrice = task.Profit;
         }
 
         public void CarryDish(CookingTask task)
         {
             _dishIcon.sprite = task.CoreStation.DishIcon;
-            currentPrice = task.Price;
+            currentPrice = task.Profit;
 
             ToggleCarryDish(true);
         }

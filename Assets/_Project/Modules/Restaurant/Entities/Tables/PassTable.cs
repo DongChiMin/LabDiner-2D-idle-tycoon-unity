@@ -55,7 +55,7 @@ namespace LabDiner.Restaurant
         private void UpdateDishVisual(CookingTask task)
         {
             _dishIcon.sprite = task.CoreStation.DishIcon;
-            _priceText.text = task.Price.ToString();   
+            _priceText.text = task.Profit.ToString();   
         }
 
         private void ToggleDishVisual(bool isOn)
