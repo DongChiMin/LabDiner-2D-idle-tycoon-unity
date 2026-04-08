@@ -75,12 +75,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onCookingTaskComplete: {fileID: 11400000, guid: 822a13be6b45ee143ae554a175d9ab4e, type: 2}
   _onChefAvailable: {fileID: 11400000, guid: 4b65bf85517f71e42a3df099e2e32fae, type: 2}
+  _onCoinAdded: {fileID: 11400000, guid: 762700b435a5f8341a777a47398735eb, type: 2}
   _restPosition: {fileID: 0}
   _mover: {fileID: 9139414825624459821}
   _behavior: {fileID: 2804824971023976153}
   _ai: {fileID: 309563359440462122}
-  _carryDishLogic: {fileID: 770697551293887493}
-  _progressPieLogic: {fileID: 6754761875068378625}
+  _carryDishUI: {fileID: 770697551293887493}
+  _progressPieUI: {fileID: 6754761875068378625}
   _isAvailable: 1
 --- !u!114 &9139414825624459821
 MonoBehaviour:
@@ -132,7 +133,7 @@ MonoBehaviour:
     StationTarget: {fileID: 0}
     CoreStation: {fileID: 0}
     PassTableTarget: {fileID: 0}
-    Price: 0
+    Profit: 0
 --- !u!1 &8766472321007531139
 GameObject:
   m_ObjectHideFlags: 0

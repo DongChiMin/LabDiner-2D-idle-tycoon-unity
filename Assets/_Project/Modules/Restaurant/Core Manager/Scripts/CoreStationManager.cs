@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using LabDiner.Shared;
 using UnityEngine;
 
 namespace LabDiner.Restaurant
@@ -8,7 +9,14 @@ namespace LabDiner.Restaurant
     public class CoreStationManager : MonoBehaviour
     {
         [SerializeField] private List<CoreStation> coreStations = new List<CoreStation>();
+        
         #region API
+
+        public void OnInit(LevelConfigSO levelConfig)
+        {
+            
+        }
+
         /// <summary>
         /// Kiểm tra xem có bất kỳ trạm chính nào đã được mở khóa hay không. Nếu chưa có trạm nào được mở khóa, nhà hàng sẽ không thể hoạt động vì không có trạm nào để phục vụ khách hàng.
         /// </summary>

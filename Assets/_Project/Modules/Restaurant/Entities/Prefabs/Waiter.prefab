@@ -162,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onOrderServed: {fileID: 11400000, guid: c714de0f369beda40919630f2d7f8cef, type: 2}
   _onWaiterAvailable: {fileID: 11400000, guid: 44bea33991e542f4abc297df2d13af2f, type: 2}
+  _onCoinAdded: {fileID: 11400000, guid: 762700b435a5f8341a777a47398735eb, type: 2}
   _restPosition: {fileID: 0}
   _mover: {fileID: 6331310006697010263}
   _behavior: {fileID: 3664275028018625969}

@@ -19,6 +19,7 @@ namespace LabDiner.Restaurant
         [Header("Settings")]
         [SerializeField] private OrderEvent _onOrderServed;
         [SerializeField] private WaiterEvent _onWaiterAvailable;
+        [SerializeField] private LevelCoinEvent _onCoinAdded;
         [SerializeField] private Transform _restPosition;
         public Transform RestPosition => _restPosition;
 
@@ -62,6 +63,7 @@ namespace LabDiner.Restaurant
                     _onOrderServed.Raise(order);
                     break;
                 case CookingTask cookingTask:
+                    _onCoinAdded.Raise(cookingTask.Profit);
                     break;
                 default:
                     Debug.LogWarning("Waiter completed an unsupported task: " + task);

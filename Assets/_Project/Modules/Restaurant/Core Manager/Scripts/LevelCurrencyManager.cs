@@ -5,6 +5,29 @@ namespace LabDiner.Restaurant
 {
     public class LevelCurrencyManager : MonoBehaviour
     {
-        // Hiện tại chưa có logic gì, nhưng có thể dùng để quản lý thông tin chung về hàng đợi, như số lượng khách đang chờ, thời gian chờ trung bình, v.v.
+        public double CurrentCoin => _currentCoin;
+
+        [Header("Events")]
+        [SerializeField] private LevelCoinEvent _onCoinAdded;
+        [SerializeField] private LevelCoinEvent _onCoinUpdated;
+
+        [Header("[DEBUG]")]
+        [SerializeField] private double _currentCoin;
+
+        void OnEnable()
+        {
+            _onCoinAdded.Register(AddCoin);
+        }
+
+        void OnDisable()
+        {
+            _onCoinAdded.Unregister(AddCoin);
+        }
+
+        private void AddCoin(double amount)
+        {
+            _currentCoin += amount;
+            _onCoinUpdated.Raise(_currentCoin);
+        }
     }
 }
