@@ -9,6 +9,7 @@ namespace LabDiner.Restaurant
 
         [Header("Events")]
         [SerializeField] private LevelCoinEvent _onCoinAdded;
+        [SerializeField] private LevelCoinEvent _onCoinSpent;
         [SerializeField] private LevelCoinEvent _onCoinUpdated;
 
         [Header("[DEBUG]")]
@@ -17,16 +18,24 @@ namespace LabDiner.Restaurant
         void OnEnable()
         {
             _onCoinAdded.Register(AddCoin);
+            _onCoinSpent.Register(SpendCoin);
         }
 
         void OnDisable()
         {
             _onCoinAdded.Unregister(AddCoin);
+            _onCoinSpent.Unregister(SpendCoin);
         }
 
         private void AddCoin(double amount)
         {
             _currentCoin += amount;
+            _onCoinUpdated.Raise(_currentCoin);
+        }
+
+        private void SpendCoin(double amount)
+        {
+            _currentCoin -= amount;
             _onCoinUpdated.Raise(_currentCoin);
         }
     }

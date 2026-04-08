@@ -23,7 +23,7 @@ namespace LabDiner.Restaurant
         /// <returns></returns>
         public bool HasAnyUnlockedStation()
         {
-            return coreStations.Exists(coreStation => coreStation.isUnlocked);
+            return coreStations.Exists(coreStation => coreStation.IsUnlocked);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace LabDiner.Restaurant
 
         private List<CoreStation> GetUnlockedStations()
         {
-            return coreStations.FindAll(station => station.isUnlocked);
+            return coreStations.FindAll(station => station.IsUnlocked);
         }
     }
 }

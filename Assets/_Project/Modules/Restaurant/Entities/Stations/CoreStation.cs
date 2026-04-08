@@ -8,7 +8,7 @@ namespace LabDiner.Restaurant
     [System.Serializable]
     public class CoreStation : MonoBehaviour, IInteractable
     {
-        public bool isUnlocked => _currentLevel >= 0;
+        public bool IsUnlocked => _currentLevel >= 0;
         public List<Station> Stations => _stations;
         public string Name => _name;
         public Sprite DishIcon => _dishIcon;
@@ -17,11 +17,13 @@ namespace LabDiner.Restaurant
         [Header("Static Attributes ")]
         [SerializeField] private string _name = "New CoreStation";
         [SerializeField] private Sprite _dishIcon;
+        [SerializeField] private int _maxStar = 5;
+        [SerializeField] private int _levelPerStar = 2;
         [SerializeField] private int _baseUpgradeCost;  // Chi phí nâng cấp cơ bản cho trạm chính
         [SerializeField] private int _upgradeCostMultiplier;    // Hệ số nhân cho chi phí nâng cấp (ví dụ: 1.5 sẽ làm tăng chi phí mỗi lần nâng cấp)
         [SerializeField] private List<Station> _stations = new List<Station>();
 
-        [Header("Dynamic Attributes")]
+        [Header("Dynamic Attributes [DEBUG]")]
         [SerializeField] private double _currentProfit;
         [SerializeField] private double _currentCost;
         [SerializeField] private float _currentProcessTime;
@@ -30,25 +32,60 @@ namespace LabDiner.Restaurant
 
         [Header("Logic")]
         [SerializeField] private CoreStationUI _CoreStationUI;
+        [SerializeField] private CoreStationStarUI _CoreStationStarUI;
+
+        private int MaxLevel => _maxStar * _levelPerStar;
 
         #region API
 
-        public void OnInteract()
+        public void Upgrade()
         {
+            _currentLevel++;
+            _currentCost = _currentLevel * 100;
+            _currentProfit += 100;
+            _currentProcessTime -= 0.1f;
+            _currentStar = Mathf.Min(_currentLevel / _levelPerStar, _maxStar);   // Ví dụ: cứ mỗi _levelPerStar cấp độ sẽ được 1 sao, tối đa _maxStar sao
+
+            if(_currentLevel >= MaxLevel)
+            {
+                _CoreStationUI.MaxLevelReached();
+                return;
+            }
+            
             CoreStationUIData data = new CoreStationUIData()
             {
                 CurrentLevel = _currentLevel,
                 Name = _name,
 
                 StarQuantity = _currentStar,
-                StarProgress = 0.3f,   // TODO: tính toán phần trăm tiến độ sao dựa trên doanh thu hiện tại và mục tiêu doanh thu của từng sao
+                StarProgress = (_currentLevel == 1) ? 0 : (_currentLevel % _levelPerStar) / (float)_levelPerStar,
+                CurrentProfit = _currentProfit,
+                CurrentCost = _currentCost,
+                CurrentProcessTime = _currentProcessTime,
+            };
+            _CoreStationStarUI.Setup(_currentStar, _maxStar);
+            _CoreStationUI.Setup(data);
+        }
+
+        public void OnInteract()
+        {
+            Debug.Log("TODO: mở UI nâng cấp trạm chính tại đây");
+            CoreStationUIData data = new CoreStationUIData()
+            {
+                CurrentLevel = _currentLevel,
+                Name = _name,
+
+                StarQuantity = _currentStar,
+                StarProgress = (_currentLevel == 1) ? 0 : (_currentLevel % _levelPerStar) / (float)_levelPerStar,
 
                 CurrentProfit = _currentProfit,
                 CurrentCost = _currentCost,
                 CurrentProcessTime = _currentProcessTime,
             };
             _CoreStationUI.Setup(data);
+            _CoreStationStarUI.Setup(_currentStar, _maxStar);
             _CoreStationUI.gameObject.SetActive(true);
+            
         }
 
         public bool CanInteract()
