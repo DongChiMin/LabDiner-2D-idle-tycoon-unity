@@ -8,8 +8,8 @@ namespace LabDiner.Restaurant
         public StaffMover CtxMover => _mover;
         public ChefBehavior CtxBehavior => _behavior;
         public ChefAI CtxAI => _ai;
-        public StaffCarryDishUI CarryDishLogic => _carryDishLogic;
-        public StaffProgressPieUI ProgressPieLogic => _progressPieLogic;
+        public StaffCarryDishUI CarryDishUI => _carryDishUI;
+        public StaffProgressPieUI ProgressPieUI => _progressPieUI;
 
         [Header("Settings")]
         [SerializeField] private CookingTaskEvent _onCookingTaskComplete;
@@ -23,8 +23,8 @@ namespace LabDiner.Restaurant
         [SerializeField] private ChefAI _ai;
 
         [Header("Visual Logics")]
-        [SerializeField] private StaffCarryDishUI _carryDishLogic;
-        [SerializeField] private StaffProgressPieUI _progressPieLogic;
+        [SerializeField] private StaffCarryDishUI _carryDishUI;
+        [SerializeField] private StaffProgressPieUI _progressPieUI;
 
         [Header("[Debug]")]
         [SerializeField] private bool _isAvailable = true;
