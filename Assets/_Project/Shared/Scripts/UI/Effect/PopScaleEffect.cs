@@ -16,6 +16,8 @@ namespace LabDiner.Shared.UI
 
         private void OnEnable()
         {
+            transform.DOKill();
+
             // Vừa bật lên là thu nhỏ về 0 ngay lập tức
             transform.localScale = Vector3.zero;
             

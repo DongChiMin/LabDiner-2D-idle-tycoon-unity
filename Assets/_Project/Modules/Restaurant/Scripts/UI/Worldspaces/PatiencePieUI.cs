@@ -46,11 +46,33 @@ namespace LabDiner.Restaurant
 
         public void SetActive(bool isActive)
         {
-            if (!isActive && _popScaleEffect != null)
+            if (isActive)
             {
-                _popScaleEffect.Hide();
+                // Nếu nó đang bị tắt, bật lên sẽ tự kích hoạt OnEnable (Pop effect)
+                if (!gameObject.activeSelf)
+                {
+                    gameObject.SetActive(true);
+                }
+                else
+                {
+                    // Nếu nó ĐANG bật (trường hợp khách tiếp theo thay thế ngay lập tức)
+                    // Ta cần ép nó chạy lại hiệu ứng Pop bằng cách tắt đi bật lại ngay trong 1 nốt nhạc
+                    // hoặc gọi thẳng logic từ PopScaleEffect nếu có thể.
+                    gameObject.SetActive(false);
+                    gameObject.SetActive(true);
+                }
             }
-            else gameObject.SetActive(isActive);
+            else
+            {
+                if (_popScaleEffect != null)
+                {
+                    _popScaleEffect.Hide();
+                }
+                else
+                {
+                    gameObject.SetActive(false);
+                }
+            }
         }
     }
 }
