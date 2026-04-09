@@ -63,6 +63,7 @@ namespace LabDiner.Restaurant
             ToggleUpgradeButton(false);
             _levelText.text = $"Lvl MAX";
             _costText.text = "Lvl MAX";
+            _starProgressFill.fillAmount = 1f;
         }
 
         public void Setup(CoreStationUIData data)

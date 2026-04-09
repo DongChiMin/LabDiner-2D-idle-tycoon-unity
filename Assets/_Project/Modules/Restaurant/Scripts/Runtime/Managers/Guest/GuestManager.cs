@@ -44,9 +44,9 @@ namespace LabDiner.Restaurant
 
         public void OnInit(LevelConfigSO levelConfigSO)
         {
-            _levelMaxGuests = levelConfigSO.maxGuestCount;
-            _maxUniqueStations = levelConfigSO.maxUniqueStations;
-            _maxTotalQty = levelConfigSO.maxTotalQtyPerOrder;
+            _levelMaxGuests = levelConfigSO.MaxGuestCount;
+            _maxUniqueStations = levelConfigSO.MaxUniqueStations;
+            _maxTotalQty = levelConfigSO.MaxTotalQtyPerOrder;
         }
 
         public GuestContext SpawnGuest()

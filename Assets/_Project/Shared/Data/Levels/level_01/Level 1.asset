@@ -12,17 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9781a546e8ce7db41b5ef091387ab3ea, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  levelIndex: 0
-  levelName: Breakfast Bread
-  availableItems:
-  - {fileID: 11400000, guid: 78330c3bf66f12d41ab1f2b4e5de140f, type: 2}
-  - {fileID: 11400000, guid: d1bfdb0beb0a6164083e9a5d1db2d34b, type: 2}
-  - {fileID: 11400000, guid: 866c8b43d4eca8e4ab1748c6e711e1b3, type: 2}
-  - {fileID: 11400000, guid: b65b54d7f4fd46f439ec0d8ec017df61, type: 2}
-  - {fileID: 11400000, guid: f06b7d06b484ee04d89b5bb1807f3266, type: 2}
-  targetDemands: 00000000
-  missions:
-  - {fileID: 0}
-  maxGuestCount: 5
-  maxUniqueStations: 2
-  maxTotalQtyPerOrder: 15
+  LevelIndex: 0
+  LevelName: 
+  AvailableUpgrades:
+  - {fileID: 11400000, guid: 3e6b30727c2bd4845b66c47d92e4dff9, type: 2}
+  - {fileID: 11400000, guid: 3e6b30727c2bd4845b66c47d92e4dff9, type: 2}
+  - {fileID: 11400000, guid: 3e6b30727c2bd4845b66c47d92e4dff9, type: 2}
+  - {fileID: 11400000, guid: 8d617600d4773fc48ab0f9d66663bb25, type: 2}
+  - {fileID: 11400000, guid: 8d617600d4773fc48ab0f9d66663bb25, type: 2}
+  - {fileID: 11400000, guid: 8d617600d4773fc48ab0f9d66663bb25, type: 2}
+  - {fileID: 11400000, guid: 8d617600d4773fc48ab0f9d66663bb25, type: 2}
+  - {fileID: 11400000, guid: aebfcd857ee0a2147b5b3e014d986e47, type: 2}
+  - {fileID: 11400000, guid: aebfcd857ee0a2147b5b3e014d986e47, type: 2}
+  - {fileID: 11400000, guid: aebfcd857ee0a2147b5b3e014d986e47, type: 2}
+  - {fileID: 11400000, guid: aebfcd857ee0a2147b5b3e014d986e47, type: 2}
+  MaxGuestCount: 5
+  MaxUniqueStations: 2
+  MaxTotalQtyPerOrder: 5

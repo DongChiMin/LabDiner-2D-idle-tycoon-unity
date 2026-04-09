@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
-    public class CurrencyPanelUI : MonoBehaviour
+    public class CurrencyHUD : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _coinText;
         [SerializeField] private TextMeshProUGUI _gemText;

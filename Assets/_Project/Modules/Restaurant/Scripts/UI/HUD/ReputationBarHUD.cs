@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace LabDiner.Restaurant
 {
-    public class ReputationBarUI : MonoBehaviour
+    public class ReputationBarHUD : MonoBehaviour
     {
         [SerializeField] private ReputationEvent _onReputationChanged;
         [SerializeField] private Image _fillImage;

@@ -49,6 +49,7 @@ namespace LabDiner.Restaurant
             if(_currentLevel >= MaxLevel)
             {
                 _CoreStationUI.MaxLevelReached();
+                _CoreStationStarUI.Setup(_maxStar, _maxStar);
                 return;
             }
             
