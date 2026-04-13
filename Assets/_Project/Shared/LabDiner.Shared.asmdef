@@ -2,7 +2,8 @@
     "name": "LabDiner.Shared",
     "rootNamespace": "LabDiner.Shared",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:b1ba79df32a59d447863145bde183846"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

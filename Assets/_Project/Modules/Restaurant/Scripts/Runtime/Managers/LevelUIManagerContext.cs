@@ -6,11 +6,11 @@ namespace LabDiner.Restaurant
     public class LevelUIManagerContext : MonoBehaviour
     {
         [SerializeField] private LevelConfigSO levelConfigSO;
-        [SerializeField] private LevelUpgradePanel levelUpgradePanel;
+        [SerializeField] private LevelUpgradeController levelUpgradeController;
 
         void Awake()
         {
-            levelUpgradePanel.Init(levelConfigSO);
+            levelUpgradeController.Init(levelConfigSO);
         }
     }
 }

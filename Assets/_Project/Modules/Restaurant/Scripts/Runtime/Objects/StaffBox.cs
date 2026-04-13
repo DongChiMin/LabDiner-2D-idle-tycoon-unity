@@ -6,11 +6,11 @@ namespace LabDiner.Restaurant
 {
     public class StaffBox : MonoBehaviour, IInteractable
     {
-        private ChefContext _chef;
-        private ChefSpawner _spawner;
-        public void Setup(ChefContext chef, ChefSpawner spawner)
+        private Component _staff;
+        private IStaffUnboxer _spawner;
+        public void Setup(Component staff, IStaffUnboxer spawner)
         {
-            _chef = chef;
+            _staff = staff;
             _spawner = spawner;
         }
         public bool CanInteract()
@@ -20,7 +20,7 @@ namespace LabDiner.Restaurant
 
         public void OnInteract()
         {
-            _spawner.UnboxStaff(_chef);
+            _spawner.UnboxStaff(_staff);
             PoolContext.Instance.StaffBoxPool.ReturnToPool(this);
         }
     }

@@ -15,7 +15,7 @@ namespace LabDiner.Restaurant
         private ChefBehavior _behavior;
         private ChefContext _context;
 
-        void Start()
+        void Awake()
         {
             _mover = GetComponent<StaffMover>();
             _behavior = GetComponent<ChefBehavior>();

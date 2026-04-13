@@ -13,7 +13,7 @@ namespace LabDiner.Restaurant
     /// </summary>
     /// <typeparam name="TStaff"></typeparam>
     /// <typeparam name="TTask"></typeparam>
-    public class StaffManager<TStaff, TTask> : MonoBehaviour
+    public class StaffManager<TStaff, TTask> : MonoBehaviour, IStaffRegisterable<TStaff>
         where TStaff : IStaff
         where TTask : IStaffTask
     {

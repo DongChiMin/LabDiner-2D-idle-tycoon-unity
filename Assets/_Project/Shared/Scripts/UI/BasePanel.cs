@@ -11,24 +11,7 @@ namespace LabDiner.Shared
 
     public abstract class BasePanel : MonoBehaviour
     {
-        [SerializeField] private Button _closeButton;
-        private PopScaleEffect _popScaleEffect;
-        protected virtual void Awake()
-        {
-            // Tự đăng ký với UIManager
-            UIManager.Instance.Register(this);
-            gameObject.SetActive(false);
-
-            //
-            _popScaleEffect = GetComponent<PopScaleEffect>();
-            if (_closeButton != null)
-            {
-                _closeButton.onClick.AddListener(() => _popScaleEffect.Hide());
-            }
-            else
-            {
-                _closeButton.onClick.AddListener(() => gameObject.SetActive(false));
-            }
-        }
+        public abstract void Show();
+        public abstract void Hide(System.Action onComplete = null);
     }
 }

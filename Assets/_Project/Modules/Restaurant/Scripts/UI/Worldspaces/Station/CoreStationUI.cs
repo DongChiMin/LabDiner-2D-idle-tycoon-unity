@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using LabDiner.Shared;
+using LabDiner.Shared.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,14 +20,12 @@ namespace LabDiner.Restaurant
         public double CurrentCost;
         public float CurrentProcessTime;
     }
-    public class CoreStationUI : MonoBehaviour
+    public class CoreStationUI : BasePanel
     {
+        public Action OnUpgradeButtonClicked;
+
         [Header("Events")]
         [SerializeField] private LevelCoinEvent _onCoinUpdated;
-        [SerializeField] private LevelCoinEvent _onCoinSpent;
-
-        [Header("Logic")]
-        [SerializeField] private CoreStation _coreStation;
 
         [Header("UI References")]
         [SerializeField] private TextMeshProUGUI _nameText;
@@ -35,6 +36,10 @@ namespace LabDiner.Restaurant
         [SerializeField] private TextMeshProUGUI _costText;
         [SerializeField] private Button _upgradeButton;
 
+        [Header("Effect")]
+        [SerializeField] private PopScaleEffect _popScaleEffect;
+        [SerializeField] private ClickOutsideEffect _clickOutsideEffect;
+
         // Internal state
         private double _currentCost;
         private bool _isMaxLevel = false;
@@ -42,16 +47,18 @@ namespace LabDiner.Restaurant
         void OnEnable()
         {
             _onCoinUpdated.Register(OnCoinUpdated);
+            _clickOutsideEffect.OnClickOutside += HandleClickOutside;
         }
 
         void OnDisable()
         {
             _onCoinUpdated.Unregister(OnCoinUpdated);
+            _clickOutsideEffect.OnClickOutside -= HandleClickOutside;
         }
 
         void Awake()
         {
-            _upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
+            _upgradeButton.onClick.AddListener(() => OnUpgradeButtonClicked?.Invoke());
         }
 
         #region API
@@ -87,7 +94,25 @@ namespace LabDiner.Restaurant
             ToggleUpgradeButton(currentCoin >= data.CurrentCost);
         }
 
+        public override void Show()
+        {
+            _popScaleEffect.Show();
+        }
+
+        public override void Hide(Action onComplete = null)
+        {
+                _popScaleEffect.Hide(() =>
+                {
+                    onComplete?.Invoke();
+                });
+        }
+
         #endregion
+
+        private void HandleClickOutside()
+        {
+            Hide();
+        }
 
         private void OnCoinUpdated(double newCoinAmount)
         {
@@ -101,12 +126,6 @@ namespace LabDiner.Restaurant
         private void ToggleUpgradeButton(bool canUpgrade)
         {
             _upgradeButton.interactable = canUpgrade;
-        }
-
-        private void OnUpgradeButtonClicked()
-        {
-            _onCoinSpent.Raise(_currentCost);
-            _coreStation.Upgrade();
         }
     }
 }

@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using LabDiner.Shared.Input;
+using log4net.Core;
 using UnityEngine;
 
 namespace LabDiner.Restaurant
@@ -34,12 +35,27 @@ namespace LabDiner.Restaurant
         [SerializeField] private CoreStationUI _CoreStationUI;
         [SerializeField] private CoreStationStarUI _CoreStationStarUI;
 
+        [Header("Events")]
+        [SerializeField] private LevelCoinEvent _onCoinSpent;
+
         private int MaxLevel => _maxStar * _levelPerStar;
+
+        void OnEnable()
+        {
+            _CoreStationUI.OnUpgradeButtonClicked += Upgrade;
+        }
+
+        void OnDisable()
+        {
+            _CoreStationUI.OnUpgradeButtonClicked -= Upgrade;
+        }
 
         #region API
 
         public void Upgrade()
         {
+            _onCoinSpent?.Raise(_currentCost);
+
             _currentLevel++;
             _currentCost = _currentLevel * 100;
             _currentProfit += 100;
@@ -85,7 +101,7 @@ namespace LabDiner.Restaurant
             };
             _CoreStationUI.Setup(data);
             _CoreStationStarUI.Setup(_currentStar, _maxStar);
-            _CoreStationUI.gameObject.SetActive(true);
+            _CoreStationUI.Show();
             
         }
 
