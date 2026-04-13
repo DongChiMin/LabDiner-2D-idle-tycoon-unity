@@ -21,12 +21,12 @@ namespace LabDiner.Shared.UI
 
         private void OnEnable()
         {
-            InputReader.OnGlobalClick += HandleGlobalClick;
+            InputReader.OnTap += HandleGlobalClick;
         }
 
         private void OnDisable()
         {
-            InputReader.OnGlobalClick -= HandleGlobalClick;
+            InputReader.OnTap -= HandleGlobalClick;
         }
 
         private void HandleGlobalClick(Vector2 mousePos)
