@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
-    public class MultitaskCheftitaskChefShipManager : StaffManager<MultitaskChefContext, CookingTask>
+    public class MultitaskChefShipManager : StaffManager<MultitaskChefContext, CookingTask>
     {
         //Event: _OnCookingTaskComplete
         //Event: _OnMultitaskChefAvailable
