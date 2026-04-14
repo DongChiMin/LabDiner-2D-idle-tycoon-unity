@@ -11,6 +11,7 @@ namespace LabDiner.Restaurant
         [Header("Base Settings")]
         [SerializeField] protected LevelUpgradeEvent _onUpgradeEvent;
         [SerializeField] protected TStaff _staffPrefab;
+        [SerializeField] private Transform _spawnParent;
         
         // Dùng class base StaffManager trực tiếp để bỏ được tham số TManager thứ 3
         [SerializeField] protected List<MonoBehaviour> _mainManagers; 
@@ -40,7 +41,7 @@ namespace LabDiner.Restaurant
             if (index >= _restPositions.Count)
                 Debug.LogWarning($"Not enough rest positions for {typeof(TStaff).Name}!");
 
-            TStaff staff = Instantiate(_staffPrefab, restPoint.position, Quaternion.identity, transform);
+            TStaff staff = Instantiate(_staffPrefab, restPoint.position, Quaternion.identity, _spawnParent);
             staff.RestPosition = restPoint;
             _spawnedStaffs.Add(staff);
             return staff;

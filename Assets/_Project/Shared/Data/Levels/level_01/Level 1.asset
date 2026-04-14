@@ -29,3 +29,5 @@ MonoBehaviour:
   MaxGuestCount: 5
   MaxUniqueStations: 2
   MaxTotalQtyPerOrder: 5
+  minVerticalPos: -5
+  maxVerticalPos: 5

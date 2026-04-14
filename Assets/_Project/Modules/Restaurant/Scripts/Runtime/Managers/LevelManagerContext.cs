@@ -3,12 +3,8 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
-    public class LevelManagerContext : Singleton<LevelManagerContext>
+    public class LevelManagerContext : Singleton<LevelManagerContext>, ILevelInitializable
     {
-        //Các manager đều là dạng Singleton, để tránh spaghetti code thì chỉ các manager được phép gọi nhau
-        //Các object ngoài chỉ được gọi thông qua SOEvent
-        public LevelConfigSO LevelConfigSO;
-
         [Header("Objects")]
         public ChefManager ChefManager;
         public WaiterManager WiterManager;
@@ -31,11 +27,10 @@ namespace LabDiner.Restaurant
         public bool HasWaitingLine => WaitingLineManager != null;
         public bool HasPassTable => PassTableManager != null;
 
-        protected override void Awake()
+        public void Init(LevelConfigSO config)
         {
-            base.Awake();
-            GuestManager.OnInit(LevelConfigSO);
-            CoreStationManager.OnInit(LevelConfigSO);
+            GuestManager.OnInit(config);
+            CoreStationManager.OnInit(config);
         }
     }
 }

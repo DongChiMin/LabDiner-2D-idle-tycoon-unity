@@ -3,14 +3,13 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
-    public class LevelUIManagerContext : MonoBehaviour
+    public class LevelUIManagerContext : MonoBehaviour, ILevelInitializable
     {
-        [SerializeField] private LevelConfigSO levelConfigSO;
         [SerializeField] private LevelUpgradeController levelUpgradeController;
 
-        void Awake()
+        public void Init(LevelConfigSO config)
         {
-            levelUpgradeController.Init(levelConfigSO);
+            levelUpgradeController.Init(config);
         }
     }
 }
