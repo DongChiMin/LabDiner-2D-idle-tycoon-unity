@@ -11,7 +11,6 @@ namespace LabDiner.Shared.UI
     public class FadeSlideEffect : BaseUIEffect
     {
         public enum SlideDirection { Left, Right, Top, Bottom }
-        public float Duration => _duration;
 
         [Header("Settings")]
         [SerializeField] private float _slideDistance = 50f;
