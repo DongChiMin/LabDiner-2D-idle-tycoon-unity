@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using LabDiner.Shared;
 using LabDiner.Shared.SO;
 using LabDiner.Shared.UI;
+using LabDiner.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,7 +35,7 @@ namespace LabDiner.Restaurant
         [SerializeField] private TextMeshProUGUI _profitText;
         [SerializeField] private TextMeshProUGUI _processTimeText;
         [SerializeField] private TextMeshProUGUI _costText;
-        [SerializeField] private Button _upgradeButton;
+        [SerializeField] private HoldableButton _upgradeButton;
 
         [Header("Effect")]
         [SerializeField] private PopScaleEffect _popScaleEffect;
@@ -56,7 +57,7 @@ namespace LabDiner.Restaurant
 
         void Awake()
         {
-            _upgradeButton.onClick.AddListener(() => OnUpgradeButtonClicked?.Invoke());
+            _upgradeButton.OnTurboTick += () => OnUpgradeButtonClicked?.Invoke();
         }
 
         #region API
