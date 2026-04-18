@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc094ae34a83cb4c96fa50c12b84c21, type: 3}
+  m_Name: station_star_2
+  m_EditorClassIdentifier: 
+  StarIcon: {fileID: 7175521830830924091, guid: 18d2cccc63b7da54786c0eeffa28c57d, type: 3}
+  Effects:
+  - {fileID: 11400000, guid: 49d1f8a18c5087e47a200de1c45c596a, type: 2}
+  - {fileID: 11400000, guid: 9350ed0de5f04fa46a6b5cabc181e62f, type: 2}
+  rewards:
+  - Event: {fileID: 11400000, guid: 7beb386ee4a21204ba5e095ce75e2ee5, type: 2}
+    Amount: 1
+    Icon: {fileID: 7175521830830924091, guid: 18d2cccc63b7da54786c0eeffa28c57d, type: 3}

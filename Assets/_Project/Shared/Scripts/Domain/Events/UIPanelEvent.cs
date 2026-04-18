@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using LabDiner.Shared.Events;
-using LabDiner.Shared.SO;
 using UnityEngine;
 
 namespace LabDiner.Shared

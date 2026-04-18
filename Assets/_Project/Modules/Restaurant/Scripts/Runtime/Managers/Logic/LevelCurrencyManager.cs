@@ -1,4 +1,5 @@
 
+using LabDiner.Shared;
 using UnityEngine;
 
 namespace LabDiner.Restaurant
@@ -13,7 +14,15 @@ namespace LabDiner.Restaurant
         [SerializeField] private LevelCoinEvent _onCoinUpdated;
 
         [Header("[DEBUG]")]
-        [SerializeField] private double _currentCoin;
+
+        [Tooltip("Có thể nhập đơn vị a, b, c để test nhanh số tiền lớn")]
+        [SerializeField] private string _cheatCoin = "5.23a";
+        [ReadOnly] [SerializeField] private double _currentCoin;
+
+        void Start()
+        {
+            _onCoinUpdated.Raise(_currentCoin);
+        }
 
         void OnEnable()
         {
@@ -36,6 +45,16 @@ namespace LabDiner.Restaurant
         private void SpendCoin(double amount)
         {
             _currentCoin -= amount;
+            _onCoinUpdated.Raise(_currentCoin);
+        }
+
+        void OnValidate()
+        {
+            if(!string.IsNullOrEmpty(_cheatCoin))
+            {
+                double parsedValue = CurrencyFormatter.Format(_cheatCoin);
+                _currentCoin = parsedValue;
+            }
             _onCoinUpdated.Raise(_currentCoin);
         }
     }

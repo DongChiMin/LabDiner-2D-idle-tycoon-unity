@@ -1,4 +1,5 @@
 using UnityEngine;
+using LabDiner.Shared.SO;
 
 namespace LabDiner.Shared
 {

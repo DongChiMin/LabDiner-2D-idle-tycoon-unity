@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using LabDiner.Shared;
+using LabDiner.Shared.SO;
 using UnityEngine;
 
 namespace LabDiner.Restaurant

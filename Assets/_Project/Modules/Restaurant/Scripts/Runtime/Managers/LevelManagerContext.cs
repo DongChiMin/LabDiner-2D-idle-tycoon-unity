@@ -30,7 +30,6 @@ namespace LabDiner.Restaurant
         public void Init(LevelConfigSO config)
         {
             GuestManager.OnInit(config);
-            CoreStationManager.OnInit(config);
         }
     }
 }

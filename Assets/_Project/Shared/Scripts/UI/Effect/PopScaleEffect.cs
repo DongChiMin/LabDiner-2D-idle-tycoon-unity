@@ -12,7 +12,7 @@ namespace LabDiner.Shared.UI
         [SerializeField] private Ease _showEase = Ease.OutBack; 
         [SerializeField] private Ease _hideEase = Ease.InBack;
 
-        public override void Show()
+        public override void Show(Action onComplete = null)
         {
             transform.DOKill();
 
@@ -20,7 +20,11 @@ namespace LabDiner.Shared.UI
             
             transform.DOScale(_targetScale, _duration)
                      .SetEase(_showEase)
-                     .SetUpdate(true);
+                     .SetUpdate(true)
+                     .OnComplete(() =>
+                    {
+                        onComplete?.Invoke();
+                    });
         }
 
         public override void Hide(Action onComplete = null)

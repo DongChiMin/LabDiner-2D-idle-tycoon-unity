@@ -1,3 +1,4 @@
+using LabDiner.Shared.SO;
 using LabDiner.Shared;
 using LabDiner.Shared.Input;
 using UnityEngine;

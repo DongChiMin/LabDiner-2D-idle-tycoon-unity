@@ -1,3 +1,4 @@
+using LabDiner.Shared;
 using TMPro;
 using UnityEngine;
 
@@ -22,7 +23,8 @@ namespace LabDiner.Restaurant
 
         private void UpdateCoinUI(double newCoinAmount)
         {
-            _coinText.text = newCoinAmount.ToString("0");
+            string formattedString = CurrencyFormatter.Format(newCoinAmount);
+            _coinText.text = formattedString;
         }
     }
 }

@@ -12,9 +12,6 @@ namespace LabDiner.Restaurant
     {
         public Action OnUpgradeButtonClicked;
 
-        [Header("Events")]
-        [SerializeField] private LevelCoinEvent _onCoinUpdated;
-
         [Header("UI References")]
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _costText;
@@ -25,17 +22,16 @@ namespace LabDiner.Restaurant
         [SerializeField] private ClickOutsideEffect _clickOutsideEffect;
 
         // Internal state
-        private double _currentCost;
+        [Header("[DEBUG]")]
+        [SerializeField] private double _currentCost;
 
         void OnEnable()
         {
-            _onCoinUpdated.Register(OnCoinUpdated);
             _clickOutsideEffect.OnClickOutside += HandleClickOutside;
         }
 
         void OnDisable()
         {
-            _onCoinUpdated.Unregister(OnCoinUpdated);
             _clickOutsideEffect.OnClickOutside -= HandleClickOutside;
         }
 
@@ -53,8 +49,7 @@ namespace LabDiner.Restaurant
             _nameText.text = data.Name;
             _costText.text = $"${data.CurrentCost:F0}";
 
-            double currentCoin = LevelManagerContext.Instance.LevelCurrencyManager.CurrentCoin;
-            ToggleUpgradeButton(currentCoin >= data.CurrentCost);
+            ToggleUpgradeButton(data.CanUpgrade);
         }
 
         public void Show()
@@ -77,11 +72,6 @@ namespace LabDiner.Restaurant
         private void HandleClickOutside()
         {
             Hide();
-        }
-
-        private void OnCoinUpdated(double newCoinAmount)
-        {
-            ToggleUpgradeButton(newCoinAmount >= _currentCost);
         }
 
         private void ToggleUpgradeButton(bool canUpgrade)

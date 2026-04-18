@@ -12,7 +12,7 @@ namespace LabDiner.Restaurant
         [Header("[DEBUG]")]
         [SerializeField] private Order servingOrder;
 
-        void Start()
+        void Awake()
         {
             _mover = GetComponent<StaffMover>();
             _behavior = GetComponent<MultitaskChefBehavior>();
@@ -42,6 +42,8 @@ namespace LabDiner.Restaurant
         IEnumerator DoServe(Order order)
         {
             servingOrder = order;
+            Debug.Log("MultitaskChef bắt đầu phục vụ order: " + order.OrderBy);
+            Debug.Log("Context" + _context.CtxMover.name + " - " + _context.CtxBehavior.name);
             // 1. Đi đến bàn
             yield return _context.CtxMover.MoveTo(servingOrder.OrderBy.DiningTable.WorkPos.position);
 

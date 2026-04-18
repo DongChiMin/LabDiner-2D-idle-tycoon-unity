@@ -35,7 +35,7 @@ namespace LabDiner.Shared.UI
             _isInitialized = true;
         }
 
-        public override void Show()
+        public override void Show(Action onComplete = null)
         {
             EnsureInitialized();
             DOTween.Kill(_canvasGroup);

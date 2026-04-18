@@ -9,7 +9,7 @@ namespace LabDiner.Shared.UI
         public float Duration => _duration;
         [Header("Settings")]
         [SerializeField] protected float _duration = 0.3f;
-        public abstract void Show();
+        public abstract void Show(Action onComplete = null);
         public abstract void Hide(Action onComplete = null);
     }
 }

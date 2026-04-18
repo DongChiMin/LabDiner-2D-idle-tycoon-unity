@@ -3,11 +3,13 @@ using UnityEngine;
 
 namespace LabDiner.Shared.Events
 {
+    public abstract class BaseGameEvent : ScriptableObject { }
+
     /// <summary>
     /// GameEvent có generic type để truyền data khi Raise event. Các class kế thừa sẽ chỉ cần định nghĩa kiểu data cụ thể (ví dụ: ChefContext, double, v.v.) mà không cần phải viết lại logic quản lý listener.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class GameEvent<T> : ScriptableObject
+    public abstract class GameEvent<T> : BaseGameEvent
     {
         private readonly List<ListenerData> _listeners = new List<ListenerData>();
 

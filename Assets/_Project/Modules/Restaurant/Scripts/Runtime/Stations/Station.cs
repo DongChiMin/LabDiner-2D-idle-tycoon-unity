@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using LabDiner.Shared.Input;
 using UnityEngine;
@@ -8,16 +9,14 @@ namespace LabDiner.Restaurant
     [System.Serializable]
     public class Station : MonoBehaviour, IInteractable
     {
-        public CoreStation CoreStation => _coreStation;
+        public Action OnClickStation;
         public Transform WorkPos => _workPos;
         public bool IsAvailable => _isAvailable;
         [SerializeField] private StationEvent onStationAvailable;
         
         [Header("[DEBUG]")]
-        [SerializeField] private CoreStation _coreStation;
         [SerializeField] private Transform _workPos;
         [SerializeField] private bool _isAvailable = true;
-        [SerializeField] private bool IsUnlocked = false;
         
         #region API
         
@@ -36,12 +35,12 @@ namespace LabDiner.Restaurant
 
         public void OnInteract()
         {
-            Debug.Log("Đã click vào station");
+            OnClickStation?.Invoke();
         }
 
         public bool CanInteract()
         {
-            return IsUnlocked;
+            return true;
         }
 
         #endregion

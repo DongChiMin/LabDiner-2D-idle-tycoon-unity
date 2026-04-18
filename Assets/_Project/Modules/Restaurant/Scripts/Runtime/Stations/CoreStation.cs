@@ -1,128 +1,309 @@
 
+using System;
 using System.Collections.Generic;
+using LabDiner.Restaurant.UI;
+using LabDiner.Shared.Enum;
 using LabDiner.Shared.Input;
+using LabDiner.Shared.SO;
+using LabDiner.Shared.UI;
 using log4net.Core;
 using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
     [System.Serializable]
-    public class CoreStation : MonoBehaviour, IInteractable
+    public class CoreStation : MonoBehaviour
     {
-        public bool IsUnlocked => _currentLevel >= 0;
+        // API
+        public bool IsUnlocked => _currentLevel >= 1;
         public List<Station> Stations => _stations;
         public string Name => _name;
         public Sprite DishIcon => _dishIcon;
         public double CurrentProfit => _currentProfit;
 
-        [Header("Static Attributes ")]
+        // Events
+        public Action OnDataChanged;
+        public Action<int> OnMaxLevel;  // Truyền vào số sao tối đa khi đạt max level
+
+        [Header("References")]
+        [SerializeField] private CoreStationUIController _CoreStationUIController;
+        [SerializeField] private StationSpawner _stationSpawner;
+        [SerializeField] private PopScaleEffect _upgradeSprite;
+
+        [Header("Events")]
+        [SerializeField] private LevelCoinEvent _onCoinSpent;
+        [SerializeField] private LevelCoinEvent _onCoinUpdated;
+
+        [Header("Data")]
+        [SerializeField] private CoreStationSO _coreStationSO;
+
+        [Header("[DEBUG] Static Attributes")]
         [SerializeField] private string _name = "New CoreStation";
         [SerializeField] private Sprite _dishIcon;
         [SerializeField] private int _maxStar = 5;
         [SerializeField] private int _levelPerStar = 2;
-        [SerializeField] private int _baseUpgradeCost;  // Chi phí nâng cấp cơ bản cho trạm chính
-        [SerializeField] private int _upgradeCostMultiplier;    // Hệ số nhân cho chi phí nâng cấp (ví dụ: 1.5 sẽ làm tăng chi phí mỗi lần nâng cấp)
+
+        [SerializeField] private double _baseProfit;  // Lợi nhuận cơ bản của trạm chính
+        [SerializeField] private float _profitMultiplier;   
+
+        [SerializeField] private double _baseUpgradeCost;  // Chi phí nâng cấp cơ bản cho trạm chính
+        [SerializeField] private float _upgradeCostMultiplier;    // Hệ số nhân cho chi phí nâng cấp (ví dụ: 1.5 sẽ làm tăng chi phí mỗi lần nâng cấp)
         [SerializeField] private List<Station> _stations = new List<Station>();
 
-        [Header("Dynamic Attributes [DEBUG]")]
+        [Header("[DEBUG] Dynamic Attributes")]
         [SerializeField] private double _currentProfit;
         [SerializeField] private double _currentCost;
         [SerializeField] private float _currentProcessTime;
         [SerializeField] private int _currentStar = 0;
-        [SerializeField] private int _currentLevel = -1;
-
-        [Header("Logic")]
-        [SerializeField] private CoreStationUI _CoreStationUI;
-        [SerializeField] private CoreStationStarUI _CoreStationStarUI;
-        [SerializeField] private CoreStationUnlockUI _CoreStationUnlockUI;
-
-        [Header("Events")]
-        [SerializeField] private LevelCoinEvent _onCoinSpent;
-
-        private int MaxLevel => _maxStar * _levelPerStar;
+        [SerializeField] private int _currentLevel = 0;
 
         void OnEnable()
         {
-            _CoreStationUI.OnUpgradeButtonClicked += Upgrade;
+            _onCoinUpdated.Register(HandleCoinUpdated);
+            foreach(var station in _stations)
+            {
+                station.OnClickStation += HandleStationClick;
+            }
         }
 
         void OnDisable()
         {
-            _CoreStationUI.OnUpgradeButtonClicked -= Upgrade;
+            _onCoinUpdated.Unregister(HandleCoinUpdated);
+            foreach(var station in _stations)
+            {
+                station.OnClickStation -= HandleStationClick;
+            }
         }
+
+        void Start()
+        {
+            Initialize();
+            OnDataChanged?.Invoke();
+            
+            #if UNITY_EDITOR
+            ValidateData();
+            #endif
+        }
+
 
         #region API
 
+        /// <summary>
+        /// Nâng cấp trạm chính:
+        /// - Tăng cấp độ của trạm chính lên 1.
+        /// - Tính toán lại chi phí nâng cấp tiếp theo dựa trên công thức: chi phí nâng cấp tiếp theo = chi phí nâng cấp cơ bản * (hệ số nhân ^ (cấp độ hiện tại * 2)). Ví dụ: nếu cấp độ hiện tại là 3, hệ số nhân là 1.5, và chi phí nâng cấp cơ bản là 100, thì chi phí nâng cấp tiếp theo sẽ là 100 * (1.5 ^ (3 * 2)) = 100 * (1.5 ^ 6) = 100 * 11.39 = 1139.
+        /// - Tính toán lại lợi nhuận hiện tại dựa trên công thức: lợi nhuận hiện tại = lợi nhuận cơ bản * (hệ số nhân lợi nhuận ^ (cấp độ hiện tại - 1)). Ví dụ: nếu cấp độ hiện tại là 3, hệ số nhân lợi nhuận là 2, và lợi nhuận cơ bản là 10, thì lợi nhuận hiện tại sẽ là 10 * (2 ^ (3 - 1)) = 10 * (2 ^ 2) = 10 * 4 = 40.
+        /// - Tính toán lại số sao hiện tại dựa trên công thức: số sao hiện tại = cấp độ hiện tại / cấp độ mỗi sao, và giới hạn tối đa bằng số sao tối đa. Ví dụ: nếu cấp độ hiện tại là 3, cấp độ mỗi sao là 2, và số sao tối đa là 5, thì số sao hiện tại sẽ là min(3 / 2, 5) = min(1.5, 5) = 1.
+        /// - Nếu cấp độ hiện tại đạt đến cấp độ tối đa, hiển thị thông báo "Max Level Reached" trên UI và thiết lập UI sao với số sao tối đa.
+        /// </summary>
         public void Upgrade()
         {
             _onCoinSpent?.Raise(_currentCost);
-
             _currentLevel++;
-            _currentCost = _currentLevel * 100;
-            _currentProfit += 100;
-            _currentProcessTime -= 0.1f;
-            _currentStar = Mathf.Min(_currentLevel / _levelPerStar, _maxStar);   // Ví dụ: cứ mỗi _levelPerStar cấp độ sẽ được 1 sao, tối đa _maxStar sao
 
-            if(_currentLevel >= MaxLevel)
+            //Kiểm tra đã qua sao mới chưa
+            int newStar = _currentLevel / _levelPerStar;
+            bool isNewStar = newStar > _currentStar;
+
+            // Tính toán lại chi phí nâng cấp tiếp theo
+            _currentCost = _baseUpgradeCost * Mathf.Pow(_upgradeCostMultiplier, _currentLevel * 2);
+            _currentProfit = _baseProfit * Mathf.Pow(_profitMultiplier, _currentLevel - 1);
+            _currentStar = Mathf.Min(_currentLevel / _levelPerStar, _maxStar);
+
+            // Làm tròn số để hiển thị đẹp hơn
+            _currentCost = Math.Floor(_currentCost);
+            _currentProfit = Math.Floor(_currentProfit);
+
+            // Kiểm tra nếu đạt cấp độ tối đa
+            int maxLevel = _maxStar * _levelPerStar;
+            if(_currentLevel >= maxLevel)
             {
-                _CoreStationUI.MaxLevelReached();
-                _CoreStationStarUI.Setup(_maxStar, _maxStar);
+                OnMaxLevel?.Invoke(_maxStar);
                 return;
             }
+
+            // Kiểm tra nếu là level 1: spawn station
+            if(_currentLevel == 1)
+            {
+                CreateNewStation(1);
+            }
             
+            //Nếu đã qua sao mới
+            // - chạy reward (thưởng gem, ...)
+            // - chạy effect (effect x2 profit, effect tạo station mới, ...)
+            if(isNewStar)
+            {
+                StationStarSO starData = _coreStationSO.StationStars[Mathf.Min(newStar, _coreStationSO.StationStars.Count - 1)];
+                starData.GiveRewards();
+
+                foreach(var effect in starData.Effects)
+                {
+                    switch(effect.EffectType)
+                    {
+                        case StationStarEffect.MultiplyProfit:
+                            MultiplyProfit(effect.Value);
+                            _CoreStationUIController.ShowUpgradeEffect($"Profit x{effect.Value}");
+                            break;
+                        case StationStarEffect.CreateNewStation:
+                            CreateNewStation(effect.Value);
+                            string text = (effect.Value > 1) ? $"New Stations +{effect.Value}" : "New Station";
+                            _CoreStationUIController.ShowUpgradeEffect(text);
+                            break;
+                    }
+                }
+            }
+
+
+            OnDataChanged?.Invoke();
+        }
+
+        public CoreStationUIData GetUIData()
+        {
+            // Lấy số coin hiện tại của người chơi để so sánh với chi phí nâng cấp
+            double currentCoin = LevelManagerContext.Instance.LevelCurrencyManager.CurrentCoin;
+
+            // Tính toán phần thưởng sao dựa trên số sao hiện tại và dữ liệu từ CoreStationSO
+            StationStarSO currentStarData = _coreStationSO.StationStars[Mathf.Min(_currentStar, _coreStationSO.StationStars.Count - 1)];
+            List<RewardData> rewardDatas = currentStarData.rewards;
+            List<Sprite> starRewardIcons = new List<Sprite>();
+            foreach(var reward in rewardDatas)
+            {
+                starRewardIcons.Add(reward.Icon);
+            }
+
+            // Tạo struct dữ liệu để truyền vào UI
             CoreStationUIData data = new CoreStationUIData()
             {
                 CurrentLevel = _currentLevel,
                 Name = _name,
 
                 StarQuantity = _currentStar,
+                MaxStar = _maxStar, 
                 StarProgress = (_currentLevel == 1) ? 0 : (_currentLevel % _levelPerStar) / (float)_levelPerStar,
-                CurrentProfit = _currentProfit,
-                CurrentCost = _currentCost,
-                CurrentProcessTime = _currentProcessTime,
-            };
-            _CoreStationStarUI.Setup(_currentStar, _maxStar);
-            _CoreStationUI.Setup(data);
-        }
-
-        //Khi click vào trạm:
-        // Nếu chưa mở khóa: Hiện UI mở khóa, hiển thị thông tin về trạm và yêu cầu người chơi chi tiền để mở khóa
-        // Nếu đã mở khóa: Hiện UI nâng cấp, hiển thị thông tin về trạm, lợi nhuận hiện tại, chi phí nâng cấp và tiến trình sao. Cho phép người chơi nâng cấp trạm nếu có đủ tiền.
-        public void OnInteract()
-        {
-            CoreStationUIData data = new CoreStationUIData()
-            {
-                CurrentLevel = _currentLevel,
-                Name = _name,
-
-                StarQuantity = _currentStar,
-                StarProgress = (_currentLevel == 1) ? 0 : (_currentLevel % _levelPerStar) / (float)_levelPerStar,
+                StarRewardIcons = starRewardIcons,
 
                 CurrentProfit = _currentProfit,
                 CurrentCost = _currentCost,
                 CurrentProcessTime = _currentProcessTime,
+                CanUpgrade = currentCoin >= _currentCost
             };
-
-            if(_currentLevel <= 0)
-            {
-                _CoreStationUnlockUI.Setup(data);
-                _CoreStationUnlockUI.Show();
-                return;
-            }
-            else
-            {
-                _CoreStationStarUI.Setup(_currentStar, _maxStar);
-                _CoreStationUI.Setup(data);
-                _CoreStationUI.Show();
-            }
-            
-        }
-
-        public bool CanInteract()
-        {
-            return true;
+            return data;
         }
 
         #endregion
+
+        #region Private Methods 
+        private void Initialize()
+        {
+            if(_coreStationSO == null)
+            {
+                Debug.LogError("CoreStationSO is not assigned in the inspector.");
+                return;
+            }
+
+            _name = _coreStationSO.Dish.name;
+            _dishIcon = _coreStationSO.Dish.Icon;
+            _maxStar = _coreStationSO.StationStars.Count;
+            _levelPerStar = _coreStationSO.LevelPerStar;
+
+            _baseProfit = _coreStationSO.BaseProfit;
+            _profitMultiplier = _coreStationSO.ProfitMultiplier;
+            _baseUpgradeCost = _coreStationSO.BaseUpgradeCost;
+            _upgradeCostMultiplier = _coreStationSO.UpgradeCostMultiplier;
+
+
+            _currentProfit = _baseProfit;
+            _currentCost = _baseUpgradeCost;
+            _currentProcessTime = _coreStationSO.BaseProcessTime;
+            _currentStar = 0;
+            _currentLevel = 0;
+        }
+
+        private void MultiplyProfit(float multiplier)
+        {
+            Debug.Log($"TODO: Applying profit multiplier: {multiplier}");
+        }
+
+        private void CreateNewStation(float quantity)
+        {
+            for(int i = 0; i < quantity; i++)
+            {
+                Station newStation = _stationSpawner.RequestSpawn();
+                _stations.Add(newStation);
+                newStation.OnClickStation += HandleStationClick;
+            }
+        }
+
+        private void HandleCoinUpdated(double currentCoin)
+        {
+            bool canUpgrade = currentCoin >= _currentCost;
+            if(canUpgrade && !_upgradeSprite.gameObject.activeSelf)
+            {
+                _upgradeSprite.gameObject.SetActive(true);
+                _upgradeSprite.Show();
+            }
+            else if(!canUpgrade && _upgradeSprite.gameObject.activeSelf)
+            {
+                _upgradeSprite.Hide(() =>
+                {
+                    _upgradeSprite.gameObject.SetActive(false);
+                });
+            }
+        }
+
+        private void HandleStationClick()
+         {
+             if (!_CoreStationUIController.CanInteract())
+             {
+                 return;
+             }
+
+             _CoreStationUIController.OnInteract();
+         }
+        #endregion
+
+
+        #region EDITOR ONLY
+
+        private CoreStationSO _lastCoreStationSO;
+
+        void OnValidate()
+        {
+            if (_coreStationSO != _lastCoreStationSO)
+            {
+                if (_coreStationSO != null)
+                {
+                    Initialize();
+                }
+                
+                // Cập nhật lại biến tạm để không chạy lại lần sau
+                _lastCoreStationSO = _coreStationSO;
+            }
+            OnDataChanged?.Invoke();
+        }
+
+        void ValidateData()
+        {
+            int spawnPointCount = _stationSpawner.SpawnPoints.Count;
+            int maxStationQuantity = 1;
+            List<StationStarSO> stars = _coreStationSO.StationStars;
+            foreach(var star in stars)
+            {
+                foreach(var effect in star.Effects)
+                {
+                    if(effect.EffectType == StationStarEffect.CreateNewStation)
+                    {
+                        maxStationQuantity += (int)effect.Value;
+                    }
+                }
+            }
+
+            if(maxStationQuantity > spawnPointCount)
+            {
+                Debug.LogError($"CoreStation '{_name}' cần {maxStationQuantity} điểm spawn, nhưng chỉ có {spawnPointCount} điểm spawn khả dụng trong StationSpawner.");
+            }
+        }
+
+        #endregion        
     }
 }

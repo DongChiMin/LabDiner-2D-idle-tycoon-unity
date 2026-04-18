@@ -3,9 +3,8 @@ namespace LabDiner.Shared.Enum
 {
     public enum StationStarEffect
     {
-        MuliplyProfit,
+        MultiplyProfit,
         CreateNewStation,
         ReduceProcessTime,
-        RewardGem
     }
 }

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6db314abbe8d554daa7cd86cdb0245e, type: 3}
+  m_Name: Apple
+  m_EditorClassIdentifier: 
+  Dish: {fileID: 11400000, guid: 5fb6c1ff8a5604143820488853beb000, type: 2}
+  LevelPerStar: 10
+  StationStars:
+  - {fileID: 11400000, guid: bf58ef3e9ce26074e82be8749f31957b, type: 2}
+  - {fileID: 11400000, guid: 54bb59c629dfab744823ac02029698fb, type: 2}
+  - {fileID: 11400000, guid: bf58ef3e9ce26074e82be8749f31957b, type: 2}
+  - {fileID: 11400000, guid: 54bb59c629dfab744823ac02029698fb, type: 2}
+  BaseProfit: 10
+  ProfitMultiplier: 1.15
+  BaseProcessTime: 5
+  BaseUpgradeCost: 15
+  UpgradeCostMultiplier: 1.07
+  MaxLevel: 40
+  MaxStar: 4
+  MaxQuantity: 3
