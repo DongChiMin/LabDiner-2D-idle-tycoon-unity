@@ -17,7 +17,7 @@ namespace LabDiner.Shared.SO
     {
         public Sprite StarIcon; 
         public List<StationStarEffectSO> Effects;   //ví dụ cột mốc này vừa x2 profit, vừa tạo station mới
-        public List<RewardData> rewards;
+        public List<RewardData> rewards;        //ví dụ thưởng gem, thưởng sự kiện
 
         public void GiveRewards()
         {

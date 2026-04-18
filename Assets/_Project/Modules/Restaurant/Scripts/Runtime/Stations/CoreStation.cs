@@ -52,6 +52,7 @@ namespace LabDiner.Restaurant
 
         [Header("[DEBUG] Dynamic Attributes")]
         [SerializeField] private double _currentProfit;
+        [SerializeField] private float _currentProfitBuff = 1;
         [SerializeField] private double _currentCost;
         [SerializeField] private float _currentProcessTime;
         [SerializeField] private int _currentStar = 0;
@@ -101,26 +102,18 @@ namespace LabDiner.Restaurant
             _onCoinSpent?.Raise(_currentCost);
             _currentLevel++;
 
+            // Tính toán lại profit tiếp theo
+            double rawProfit = _baseProfit * Mathf.Pow(_profitMultiplier, _currentLevel - 1);
+            _currentProfit = _currentProfit = Math.Floor(rawProfit * _currentProfitBuff);
+
+            // Tính toán lại chi phí nâng cấp tiếp theo
+            double rawCost = _baseUpgradeCost * _currentProfitBuff * Mathf.Pow(_upgradeCostMultiplier, _currentLevel * 2);
+            _currentCost = Math.Floor(rawCost);
+
             //Kiểm tra đã qua sao mới chưa
             int newStar = _currentLevel / _levelPerStar;
             bool isNewStar = newStar > _currentStar;
-
-            // Tính toán lại chi phí nâng cấp tiếp theo
-            _currentCost = _baseUpgradeCost * Mathf.Pow(_upgradeCostMultiplier, _currentLevel * 2);
-            _currentProfit = _baseProfit * Mathf.Pow(_profitMultiplier, _currentLevel - 1);
-            _currentStar = Mathf.Min(_currentLevel / _levelPerStar, _maxStar);
-
-            // Làm tròn số để hiển thị đẹp hơn
-            _currentCost = Math.Floor(_currentCost);
-            _currentProfit = Math.Floor(_currentProfit);
-
-            // Kiểm tra nếu đạt cấp độ tối đa
-            int maxLevel = _maxStar * _levelPerStar;
-            if(_currentLevel >= maxLevel)
-            {
-                OnMaxLevel?.Invoke(_maxStar);
-                return;
-            }
+            _currentStar = Mathf.Min(newStar, _maxStar);
 
             // Kiểm tra nếu là level 1: spawn station
             if(_currentLevel == 1)
@@ -131,26 +124,19 @@ namespace LabDiner.Restaurant
             //Nếu đã qua sao mới
             // - chạy reward (thưởng gem, ...)
             // - chạy effect (effect x2 profit, effect tạo station mới, ...)
-            if(isNewStar)
+            if(isNewStar && _currentStar <= _maxStar)
             {
-                StationStarSO starData = _coreStationSO.StationStars[Mathf.Min(newStar, _coreStationSO.StationStars.Count - 1)];
-                starData.GiveRewards();
+                ProcessStarUpgrade(newStar);
+                // Sau khi có Buff mới từ Star, tính lại Profit một lần nữa để UI nhận số mới nhất
+                _currentProfit = Math.Floor(rawProfit * _currentProfitBuff);
+            }
 
-                foreach(var effect in starData.Effects)
-                {
-                    switch(effect.EffectType)
-                    {
-                        case StationStarEffect.MultiplyProfit:
-                            MultiplyProfit(effect.Value);
-                            _CoreStationUIController.ShowUpgradeEffect($"Profit x{effect.Value}");
-                            break;
-                        case StationStarEffect.CreateNewStation:
-                            CreateNewStation(effect.Value);
-                            string text = (effect.Value > 1) ? $"New Stations +{effect.Value}" : "New Station";
-                            _CoreStationUIController.ShowUpgradeEffect(text);
-                            break;
-                    }
-                }
+            // Kiểm tra nếu đạt cấp độ tối đa
+            int maxLevel = _maxStar * _levelPerStar;
+            if(_currentLevel >= maxLevel)
+            {
+                OnMaxLevel?.Invoke(_maxStar);
+                return;
             }
 
 
@@ -213,15 +199,11 @@ namespace LabDiner.Restaurant
 
 
             _currentProfit = _baseProfit;
+            _currentProfitBuff = 1;
             _currentCost = _baseUpgradeCost;
             _currentProcessTime = _coreStationSO.BaseProcessTime;
             _currentStar = 0;
             _currentLevel = 0;
-        }
-
-        private void MultiplyProfit(float multiplier)
-        {
-            Debug.Log($"TODO: Applying profit multiplier: {multiplier}");
         }
 
         private void CreateNewStation(float quantity)
@@ -259,6 +241,27 @@ namespace LabDiner.Restaurant
              }
 
              _CoreStationUIController.OnInteract();
+         }
+
+         private void ProcessStarUpgrade(int newStar)
+         {
+            StationStarSO starData = _coreStationSO.StationStars[Mathf.Min(newStar - 1, _coreStationSO.StationStars.Count - 1)];
+            starData.GiveRewards();
+
+            foreach(var effect in starData.Effects)
+            {
+                switch(effect.EffectType)
+                {
+                    case StationStarEffect.MultiplyProfit:
+                        _currentProfitBuff += effect.Value; 
+                        _CoreStationUIController.ShowUpgradeEffect($"Profit x{effect.Value:F1}");
+                        break;
+                    case StationStarEffect.CreateNewStation:
+                        CreateNewStation(effect.Value);
+                        _CoreStationUIController.ShowUpgradeEffect($"New Station(s)!");
+                        break;
+                }
+            }
          }
         #endregion
 
