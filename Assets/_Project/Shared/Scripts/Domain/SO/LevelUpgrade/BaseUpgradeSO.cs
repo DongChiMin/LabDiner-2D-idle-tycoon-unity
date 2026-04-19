@@ -14,6 +14,7 @@ namespace LabDiner.Shared.SO
     //     GlobalProfitMultiplier   // x3 Profit toàn bộ
     // }
 
+    [CreateAssetMenu(fileName = "New Level Upgrade", menuName = "Game/Upgrades/Level Upgrade")]
     public class BaseUpgradeSO : ScriptableObject
     {
         [Header("Upgrade Info")]
@@ -33,19 +34,5 @@ namespace LabDiner.Shared.SO
             if (OnUpgradeRaised != null)
                 OnUpgradeRaised.Raise(this);
         }
-    }
-
-    // Nhóm 1: Nâng cấp chỉ số chung (Speed, Quantity, Global Profit...)
-    [CreateAssetMenu(fileName = "New Level Stat Upgrade", menuName = "Game/Upgrades/Level Stat Upgrade")]
-    public class LevelStatUpgradeSO : BaseUpgradeSO
-    {
-    }
-
-    // Nhóm 2: Nâng cấp dành riêng cho món ăn
-    [CreateAssetMenu(fileName = "New Dish Upgrade", menuName = "Game/Upgrades/Dish Upgrade")]
-    public class DishUpgradeSO : BaseUpgradeSO
-    {
-        [Header("Dish Effect")]
-        public DishSO Dish;
     }
 }
