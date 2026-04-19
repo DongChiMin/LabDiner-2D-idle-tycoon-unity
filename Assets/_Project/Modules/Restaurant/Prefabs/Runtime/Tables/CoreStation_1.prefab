@@ -1333,8 +1333,10 @@ MonoBehaviour:
   _upgradeCostMultiplier: 1.07
   _stations: []
   _currentProfit: 10
+  _currentProfitBuff: 0
   _currentCost: 15
   _currentProcessTime: 5
+  _currentProcessTimeBuff: 0
   _currentStar: 0
   _currentLevel: 0
 --- !u!114 &571652241901407734
@@ -3582,6 +3584,7 @@ GameObject:
   - component: {fileID: 3469491203351953700}
   - component: {fileID: 6413481113735023022}
   - component: {fileID: 8951396474685308219}
+  - component: {fileID: 4329126754954801197}
   m_Layer: 10
   m_Name: Sprite_Upgrade
   m_TagString: Untagged
@@ -3675,6 +3678,22 @@ MonoBehaviour:
   _targetScale: {x: 1, y: 1, z: 1}
   _showEase: 27
   _hideEase: 26
+--- !u!114 &4329126754954801197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8672259034720646204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044dcd2f5f767b04182841a5febf2fa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scaleStrength: 1.2
+  _rotateAngle: 10
+  _animationDuration: 0.6
+  _pauseDuration: 2
 --- !u!1 &8796462251139608243
 GameObject:
   m_ObjectHideFlags: 0
