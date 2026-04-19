@@ -37,7 +37,11 @@ namespace LabDiner.Restaurant
 
         void Awake()
         {
-            _upgradeButton.onClick.AddListener(() => OnUpgradeButtonClicked?.Invoke());
+            _upgradeButton.onClick.AddListener(() =>
+            {
+                _upgradeButton.interactable = false;
+                OnUpgradeButtonClicked?.Invoke();
+            });
         }
 
         #region API
