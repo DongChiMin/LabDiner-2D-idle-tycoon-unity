@@ -128,7 +128,6 @@ namespace LabDiner.Shared
 
         private void HandlePanelShow(BasePanel panel)
         {
-            Debug.Log($"Panel {panel.name} được show, kiểm tra và cập nhật stack nếu cần.");
             if (_historyStack.Count > 0 && _historyStack.Peek() == panel) return;
 
             // Đưa instance cụ thể của Panel đó vào stack
@@ -139,7 +138,6 @@ namespace LabDiner.Shared
 
         private void HandlePanelHide(BasePanel panel)
         {
-            Debug.Log($"Panel {panel.name} được hide, kiểm tra và cập nhật stack nếu cần.");
             if (_historyStack.Count == 0) return;
 
             if (_historyStack.Peek() == panel)

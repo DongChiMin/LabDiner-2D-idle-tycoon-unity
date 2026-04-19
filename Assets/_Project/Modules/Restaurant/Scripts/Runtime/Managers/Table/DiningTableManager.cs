@@ -70,7 +70,7 @@ namespace LabDiner.Restaurant
         #region Private Methods
         private void SetSeatDirty(DiningSeat seat)
         {
-            Debug.Log("TODO: có thể set trạng thái ghế bẩn vào đây");
+            //TODO: có thể thêm hiệu ứng ghế bẩn ở đây
             seat.Occupy(null);
 
             //Sau khi dọn xong

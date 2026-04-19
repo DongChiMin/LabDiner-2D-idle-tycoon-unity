@@ -22,7 +22,6 @@ namespace LabDiner.Restaurant
         {
             CoreStation station = task.CoreStation;
             task.Profit = station.CurrentProfit;
-            Debug.Log("TODO: hoàn thiện công thức tính giá tiền");
             currentPrice = task.Profit;
         }
 

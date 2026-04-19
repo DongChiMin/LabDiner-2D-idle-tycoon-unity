@@ -75,8 +75,6 @@ namespace LabDiner.Restaurant
             double levelCoin = LevelManagerContext.Instance.LevelCurrencyManager.CurrentCoin;
             HandleCoinUpdated(levelCoin);
 
-            Debug.Log("Show Level Upgrade Panel");
-
             _panel.Show();
         }
 

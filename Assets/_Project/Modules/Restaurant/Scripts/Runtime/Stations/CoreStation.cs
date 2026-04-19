@@ -17,6 +17,7 @@ namespace LabDiner.Restaurant
     {
         // API
         public bool IsUnlocked => _currentLevel >= 1;
+        public float RawProcessTime => _currentProcessTime / (1 + _currentProcessTimeBuff);
         public List<Station> Stations => _stations;
         public string Name => _name;
         public Sprite DishIcon => _dishIcon;

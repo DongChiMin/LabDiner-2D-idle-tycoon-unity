@@ -47,7 +47,6 @@ namespace LabDiner.Restaurant.UI
 
         public void ShowUpgradeEffect(string effectText)
         {
-            Debug.Log($"Showing upgrade effect: {effectText}");
             _coreStationToastUI.Show(effectText);
         }
 

@@ -68,8 +68,6 @@ namespace LabDiner.Restaurant
 
         public IEnumerator WaitForFood()
         {
-            Debug.Log("Đang chờ đồ ăn...");
-            // Ở đây có thể bật animation chờ đợi
             while (!_isFoodReceivedEnough)
             {
                 yield return null; // Chờ cho đến khi được gọi tiếp tục
@@ -79,17 +77,15 @@ namespace LabDiner.Restaurant
 
         public IEnumerator Eat()
         {
-            Debug.Log("Đang ăn...");
-            // Ở đây có thể bật animation ăn uống
+            // TODO: có thể điều chỉnh thời gian ăn dựa trên số lượng món ăn trong order hoặc các yếu tố khác
             yield return new WaitForSeconds(_eatDuration);
             _onGuestHappy.Raise(_ctx);
         }
 
         public IEnumerator Pay()
         {
-            Debug.Log("Đang trả tiền...");
+            // TODO: có thể thêm logic thanh toán ở đây, ví dụ như hiển thị số tiền cần thanh toán dựa trên order, hoặc điều chỉnh thời gian thanh toán nếu muốn
             yield return new WaitForSeconds(_payDuration);
-            Debug.Log("Trả tiền xong rồi!");
         }
 
         public void SetOrder(Order order)

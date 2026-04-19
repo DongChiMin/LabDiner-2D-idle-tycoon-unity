@@ -86,14 +86,12 @@ namespace LabDiner.Restaurant
             else
             {
                 _taskQueue.Enqueue(newTask);
-                Debug.Log("Hết nhân viên rảnh để phục vụ đơn hàng mới!");
             }
             SyncDebugView();
         }
 
         protected void HandleStaffAvailable(TStaff staff)
         {
-            Debug.Log("Được gọi từ manager " + this + " khi nhân viên " + staff + " sẵn sàng." + staff.IsAvailable);
             if (_taskQueue.Count > 0 && staff.IsAvailable)
             {
                 TTask nextTask = _taskQueue.Peek();
@@ -106,8 +104,8 @@ namespace LabDiner.Restaurant
             }
             else
             {
-                // _availableStaffs.Enqueue(staff);
-                Debug.Log("Không có đơn hàng nào đang chờ, hoặc nhân viên đã bận");
+                //  _availableStaffs.Enqueue(staff);
+                // ("Không có đơn hàng nào đang chờ, hoặc nhân viên đã bận");
             }
             SyncDebugView();
         }

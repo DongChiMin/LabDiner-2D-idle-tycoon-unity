@@ -29,7 +29,6 @@ namespace LabDiner.Restaurant
             tasksOnPassTable.Add(task);
             UpdateDishVisual(task);
             ToggleDishVisual(true);
-            Debug.Log($"Task {task} placed on PassTable {name}. Current tasks on PassTable: {tasksOnPassTable.Count}");
         }
 
         public void PickUpDish(CookingTask task)

@@ -9,7 +9,6 @@ namespace LabDiner.Restaurant
 
         public void Init(LevelConfigSO config)
         {
-            Debug.Log("CameraManagerContext Init with config: " + config.name);
             cameraController.Init(config);
         }
     }

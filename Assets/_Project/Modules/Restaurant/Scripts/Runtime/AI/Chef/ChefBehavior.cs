@@ -18,8 +18,10 @@ namespace LabDiner.Restaurant
 
         public IEnumerator Cook(CookingTask task)
         {
-            Debug.Log("TODO: hoàn thiện công thức thời gian nấu");
-            float cookTime = 3 * (1/ cookMultiplier);
+            //IMPORTANT: Công thức nấu ăn: Thời gian nấu = Thời gian cơ bản của món ăn / (1 + cookMultiplier)
+            CoreStation coreStation = task.CoreStation;
+            float cookTime = coreStation.RawProcessTime / (1 + cookMultiplier);
+
             _context.ProgressPieUI.StartProgressPie(cookTime);
             yield return new WaitForSeconds(cookTime);
             task.StationTarget.SetStatus(true);

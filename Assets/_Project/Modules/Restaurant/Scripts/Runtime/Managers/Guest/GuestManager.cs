@@ -95,7 +95,6 @@ namespace LabDiner.Restaurant
                 //4. Tạo danh sách món ăn khách muốn gọi
                 Dictionary<CoreStation, int> orderDict = LevelManagerContext.Instance.CoreStationManager.GenerateRandomOrder(_maxUniqueStations, _maxTotalQty);
                 Order order = new Order(orderDict, guest, 0, false);
-                Debug.Log("TODO: cập nhật giá tiền cho order ở đây");
 
                 //5.[Hành động] Kiểm tra hàng chờ bên ngoài có > 0 không, nếu có thì khách mới sẽ đi vào hàng chờ
                 if (HasWaitingLine && LevelManagerContext.Instance.WaitingLineManager.HasWaitingGuest)

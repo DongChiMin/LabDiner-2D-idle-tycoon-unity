@@ -42,8 +42,6 @@ namespace LabDiner.Restaurant
         IEnumerator DoServe(Order order)
         {
             servingOrder = order;
-            Debug.Log("MultitaskChef bắt đầu phục vụ order: " + order.OrderBy);
-            Debug.Log("Context" + _context.CtxMover.name + " - " + _context.CtxBehavior.name);
             // 1. Đi đến bàn
             yield return _context.CtxMover.MoveTo(servingOrder.OrderBy.DiningSeat.WorkPos.position);
 

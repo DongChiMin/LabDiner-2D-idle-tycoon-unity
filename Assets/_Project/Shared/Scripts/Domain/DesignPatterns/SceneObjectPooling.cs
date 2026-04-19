@@ -45,7 +45,6 @@ public abstract class SceneObjectPooling<T> : MonoBehaviour where T : MonoBehavi
         // {
         //     // Nếu không có thì add thêm và log ra console
         //     poolMember = obj.gameObject.AddComponent<PoolMember>();
-        //     Debug.Log($"<color=yellow>[PoolManager]</color> Đã thêm PoolMember vào {obj.name} vì prefab đang thiếu!");
         // }
 
         obj.gameObject.SetActive(false);
