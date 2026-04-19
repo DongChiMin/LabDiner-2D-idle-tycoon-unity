@@ -50,5 +50,10 @@ namespace LabDiner.Restaurant
             _onChefAvailable.Raise(this);
             _onCookingTaskComplete.Raise(task as CookingTask);
         }
+
+        public void UpgradeMoveSpeed(float speedBuffValue)
+        {
+            _mover.UpgradeMoveSpeed(speedBuffValue);
+        }
     }
 }

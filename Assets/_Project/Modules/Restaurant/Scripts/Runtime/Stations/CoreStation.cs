@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using LabDiner.Restaurant.UI;
+using LabDiner.Shared;
 using LabDiner.Shared.Enum;
 using LabDiner.Shared.Input;
 using LabDiner.Shared.SO;
@@ -52,9 +53,10 @@ namespace LabDiner.Restaurant
 
         [Header("[DEBUG] Dynamic Attributes")]
         [SerializeField] private double _currentProfit;
-        [SerializeField] private float _currentProfitBuff = 1;
+        [SerializeField] private float _currentProfitBuff = 0;
         [SerializeField] private double _currentCost;
         [SerializeField] private float _currentProcessTime;
+        [SerializeField] private float _currentProcessTimeBuff = 0;
         [SerializeField] private int _currentStar = 0;
         [SerializeField] private int _currentLevel = 0;
 
@@ -105,11 +107,11 @@ namespace LabDiner.Restaurant
             _currentLevel++;
 
             // Tính toán lại profit tiếp theo
-            double rawProfit = _baseProfit * Mathf.Pow(_profitMultiplier, _currentLevel - 1);
-            _currentProfit = _currentProfit = Math.Floor(rawProfit * _currentProfitBuff);
+            double rawProfit = _baseProfit * (_currentProfitBuff + 1) * Mathf.Pow(_profitMultiplier, _currentLevel - 1);
+            _currentProfit = Math.Floor(rawProfit);
 
             // Tính toán lại chi phí nâng cấp tiếp theo
-            double rawCost = _baseUpgradeCost * _currentProfitBuff * Mathf.Pow(_upgradeCostMultiplier, _currentLevel * 2);
+            double rawCost = _baseUpgradeCost * Mathf.Pow(_upgradeCostMultiplier, _currentLevel * 2);
             _currentCost = Math.Floor(rawCost);
 
             //Kiểm tra đã qua sao mới chưa
@@ -130,7 +132,7 @@ namespace LabDiner.Restaurant
             {
                 ProcessStarUpgrade(newStar);
                 // Sau khi có Buff mới từ Star, tính lại Profit một lần nữa để UI nhận số mới nhất
-                _currentProfit = Math.Floor(rawProfit * _currentProfitBuff);
+                _currentProfit = Math.Floor(rawProfit * (1 + _currentProfitBuff));
             }
 
             // Kiểm tra nếu đạt cấp độ tối đa
@@ -181,6 +183,26 @@ namespace LabDiner.Restaurant
             return data;
         }
 
+        public bool VerifyData(DishSO dishSO)
+        {
+            return _coreStationSO.Dish == dishSO;
+        }
+
+        public void UpgradeProfit(float value)
+        {
+            _currentProfitBuff += value;
+            double rawProfit = _baseProfit * Mathf.Pow(_profitMultiplier, _currentLevel - 1);
+            _currentProfit = _currentProfit = Math.Floor(rawProfit * (1+ _currentProfitBuff));
+            OnDataChanged?.Invoke();
+        }
+
+        public void UpgradeProcessTime(float value)
+        {
+            _currentProcessTimeBuff += value;
+            _currentProcessTime = _coreStationSO.BaseProcessTime / (1 + _currentProcessTimeBuff);
+            OnDataChanged?.Invoke();
+        }
+
         #endregion
 
         #region Private Methods 
@@ -204,7 +226,8 @@ namespace LabDiner.Restaurant
 
 
             _currentProfit = _baseProfit;
-            _currentProfitBuff = 1;
+            _currentProfitBuff = 0;
+            _currentProcessTimeBuff = 0;
             _currentCost = _baseUpgradeCost;
             _currentProcessTime = _coreStationSO.BaseProcessTime;
             _currentStar = 0;

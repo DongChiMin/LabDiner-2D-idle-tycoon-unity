@@ -8,8 +8,11 @@ namespace LabDiner.Restaurant
     public abstract class StaffSpawner<TStaff> : MonoBehaviour, IStaffUnboxer
         where TStaff : Component, IStaff
     {
+        [Header("Events")]
+        [SerializeField] private GlobalUpgradeEvent _onUpgradeAllStaffMoveSpeed;
+
         [Header("Base Settings")]
-        [SerializeField] protected LevelUpgradeEvent _onUpgradeEvent;
+        [SerializeField] protected GlobalUpgradeEvent _onUpgradeQuantity;
         [SerializeField] protected TStaff _staffPrefab;
         [SerializeField] private Transform _spawnParent;
         
@@ -20,12 +23,23 @@ namespace LabDiner.Restaurant
         [SerializeField] protected int _initialCount = 1;
         [SerializeField] protected bool _spawnInBox = true;
 
-        protected List<TStaff> _spawnedStaffs = new List<TStaff>();
+        [Header("[DEBUG]")]
+
+        [SerializeField] protected List<TStaff> _spawnedStaffs = new List<TStaff>();
 
         protected virtual void Start() => Spawn(_initialCount);
 
-        protected virtual void OnEnable() => _onUpgradeEvent.Register(HandleUpgrade);
-        protected virtual void OnDisable() => _onUpgradeEvent.Unregister(HandleUpgrade);
+        protected virtual void OnEnable()
+        {
+            _onUpgradeQuantity.Register(HandleUpgrade);
+            _onUpgradeAllStaffMoveSpeed.Register(HandleUpgradeAllStaffMoveSpeed);
+
+        }
+        protected virtual void OnDisable()
+        {
+            _onUpgradeQuantity.Unregister(HandleUpgrade);
+            _onUpgradeAllStaffMoveSpeed.Unregister(HandleUpgradeAllStaffMoveSpeed);
+        } 
 
         private void HandleUpgrade(BaseUpgradeSO upgradeSO)
         {
@@ -94,6 +108,14 @@ namespace LabDiner.Restaurant
                 {
                     manager.AssignNewStaff(staff);
                 }
+            }
+        }
+
+        private void HandleUpgradeAllStaffMoveSpeed(BaseUpgradeSO upgradeSO)
+        {
+            foreach(IStaff staff in _spawnedStaffs)
+            {
+                staff.UpgradeMoveSpeed(upgradeSO.UpgradeValue);
             }
         }
     }

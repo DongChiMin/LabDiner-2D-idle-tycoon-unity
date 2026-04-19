@@ -10,5 +10,7 @@ namespace LabDiner.Restaurant
         void DoTask(IStaffTask task);
 
         void OnTaskCompleted(IStaffTask task);
+
+        void UpgradeMoveSpeed(float speedBuffValue);
     }
 }

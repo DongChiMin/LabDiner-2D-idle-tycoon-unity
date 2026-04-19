@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 488645e676b05824caa55cfa1fa871a2, type: 3}
-  m_Name: MultitaskChef+1C400
+  m_Script: {fileID: 11500000, guid: ff866561218601b4abed604b648e5a56, type: 3}
+  m_Name: WaiterQuantity+1C400
   m_EditorClassIdentifier: 
-  Title: Staff +1
-  Description: "T\u0103ng s\u1ED1 l\u01B0\u1EE3ng nh\xE2n vi\xEAn "
+  Title: "Thu\xEA nh\xE2n vi\xEAn ph\u1EE5c v\u1EE5"
+  Description: "T\u0103ng s\u1ED1 l\u01B0\u1EE3ng nh\xE2n vi\xEAn ph\u1EE5c v\u1EE5
+    + 1"
   Icon: {fileID: 0}
   UpgradeTypeSprite: {fileID: 0}
   UpgradeCost: 400
   UpgradeValue: 1
-  OnUpgradeRaised: {fileID: 11400000, guid: b77e016882a10ac4fbcaf9cdf152e52f, type: 2}
+  OnUpgradeRaised: {fileID: 11400000, guid: 17a7d3eaf98389d449efb6a91c215bc9, type: 2}

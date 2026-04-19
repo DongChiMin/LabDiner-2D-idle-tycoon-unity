@@ -14,8 +14,7 @@ namespace LabDiner.Shared.SO
     //     GlobalProfitMultiplier   // x3 Profit toàn bộ
     // }
 
-    [CreateAssetMenu(fileName = "New Level Upgrade", menuName = "Game/Upgrades/Level Upgrade")]
-    public class BaseUpgradeSO : ScriptableObject
+    public abstract class BaseUpgradeSO : ScriptableObject
     {
         [Header("Upgrade Info")]
         public string Title;
@@ -25,14 +24,9 @@ namespace LabDiner.Shared.SO
 
         [Header("Upgrade Effect")]
         public double UpgradeCost;
+        [Tooltip("Giá trị nâng cấp dựa theo Event\n- dishProcessTime: 1 (100%) --> Tăng gấp đôi tốc độ nấu\n- dishProfit: 2 --> tăng gấp đôi profit\n- Quantity: cộng số lượng nhân viên")]
         public float UpgradeValue;
-        public LevelUpgradeEvent OnUpgradeRaised;
 
-        public void ApplyUpgrade()
-        {
-            // Gửi chính Asset này đi qua Event
-            if (OnUpgradeRaised != null)
-                OnUpgradeRaised.Raise(this);
-        }
+        public abstract void ApplyUpgrade();
     }
 }

@@ -56,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7583996862649584025}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -77,14 +77,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e751baf7cd9fc9947a9bf5b3ebfcf521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onUpgradeGuestQuantity: {fileID: 11400000, guid: d179a8eceddb55643a63dcdd0989eca1, type: 2}
   _guestPrefab: {fileID: 2867363319320583959, guid: c542f46721b0ba844af99a51114b3639, type: 3}
   _spawnPoint: {fileID: 6229521056814861960}
   _exitPoint: {fileID: 724997400809163468}
   _spawnInterval: 2
   _onGuestLeft: {fileID: 11400000, guid: 2eae20069de99e047bbb8173f70f0722, type: 2}
+  _onGuestQuantityChanged: {fileID: 11400000, guid: ea756710eb2c4ae4eaf737fb827f9086, type: 2}
   _guests: []
-  _currentMaxGuests: 4
-  _levelMaxGuests: 10
+  _currentMaxGuests: 1
   _maxUniqueStations: 2
   _maxTotalQty: 10
 --- !u!1 &7892943937346007424

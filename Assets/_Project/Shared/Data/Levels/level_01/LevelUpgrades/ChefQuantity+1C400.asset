@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 488645e676b05824caa55cfa1fa871a2, type: 3}
-  m_Name: Waiter+1C400
+  m_Script: {fileID: 11500000, guid: ff866561218601b4abed604b648e5a56, type: 3}
+  m_Name: ChefQuantity+1C400
   m_EditorClassIdentifier: 
-  Title: Waiter +1
-  Description: "T\u0103ng s\u1ED1 l\u01B0\u1EE3ng nh\xE2n vi\xEAn ph\u1EE5c v\u1EE5"
+  Title: "Thu\xEA \u0111\u1EA7u b\u1EBFp"
+  Description: "T\u0103ng s\u1ED1 l\u01B0\u1EE3ng \u0111\u1EA7u b\u1EBFp + 1"
   Icon: {fileID: 0}
   UpgradeTypeSprite: {fileID: 0}
-  UpgradeCost: 200
+  UpgradeCost: 400
   UpgradeValue: 1
-  OnUpgradeRaised: {fileID: 11400000, guid: 17a7d3eaf98389d449efb6a91c215bc9, type: 2}
+  OnUpgradeRaised: {fileID: 11400000, guid: fd5ead87270dea444be060f0b3940ea5, type: 2}

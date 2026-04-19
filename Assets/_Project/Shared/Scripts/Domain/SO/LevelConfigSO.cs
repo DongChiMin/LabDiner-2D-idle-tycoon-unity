@@ -22,5 +22,24 @@ namespace LabDiner.Shared
         [Header("--- Camera Settings ---")]
         public float minVerticalPos; // Điểm thấp nhất camera có thể xuống (thường là 0)
         public float maxVerticalPos; // Điểm cao nhất camera có thể lên (tùy độ dài nhà hàng)
+
+        [Header("Summary")]
+        [SerializeField] private GlobalUpgradeEvent _onUpgradeGuestQuantity;
+        [ReadOnly] public int maxGuestQuantity;
+
+        void OnValidate()
+        {
+            maxGuestQuantity = 1;
+            foreach(BaseUpgradeSO upgrade in AvailableUpgrades)
+            {
+                if (upgrade is GlobalUpgradeSO globalUpgrade)
+                {
+                    if (globalUpgrade.OnUpgradeRaised == _onUpgradeGuestQuantity)
+                    {
+                        maxGuestQuantity += Mathf.RoundToInt(globalUpgrade.UpgradeValue);
+                    }
+                }
+            }
+        }
     }
 }

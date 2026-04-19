@@ -135,7 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc61d4338aaf00f48a118fb6863dec87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onUpgradeEvent: {fileID: 11400000, guid: 17a7d3eaf98389d449efb6a91c215bc9, type: 2}
+  _onUpgradeAllStaffMoveSpeed: {fileID: 11400000, guid: 15e86ca88a5d7634497e8064c2023ba7, type: 2}
+  _onUpgradeQuantity: {fileID: 11400000, guid: 17a7d3eaf98389d449efb6a91c215bc9, type: 2}
   _staffPrefab: {fileID: 6144651245979672222, guid: b9d16bd03230de84d894297ebdf0661b, type: 3}
   _spawnParent: {fileID: 6719317106291797654}
   _mainManagers:
@@ -150,6 +151,7 @@ MonoBehaviour:
   - {fileID: 1552881535934527432}
   _initialCount: 1
   _spawnInBox: 1
+  _spawnedStaffs: []
 --- !u!114 &6411108583045803783
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,12 +3,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using LabDiner.Shared;
+using LabDiner.Shared.SO;
 using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
     public class GuestManager : MonoBehaviour
     {
+        [Header("Upgrade Events")]
+        [SerializeField] private GlobalUpgradeEvent _onUpgradeGuestQuantity;
+
         [Header("Spawn Settings")]
         [SerializeField] private GuestAI _guestPrefab;
         [SerializeField] private Transform _spawnPoint;
@@ -17,34 +21,36 @@ namespace LabDiner.Restaurant
 
         [Header("Event")]
         [SerializeField] private GuestEvent _onGuestLeft;
+        [SerializeField] private GuestQuantityEvent _onGuestQuantityChanged;
 
         [Header("[DEBUG]")]
         [SerializeField] private List<GuestContext> _guests;
         [SerializeField] private int _currentMaxGuests = 1;
         [Header("[DEBUG] Level Config")]
-        [SerializeField] private int _levelMaxGuests = 10;
         [SerializeField] private int _maxUniqueStations = 2;
         [SerializeField] private int _maxTotalQty = 3;
 
         void OnEnable()
         {
             _onGuestLeft.Register(RemoveGuest);
+            _onUpgradeGuestQuantity.Register(HandleUpgradeGuestQuantity);
         }
 
         void OnDisable()
         {
             _onGuestLeft.Unregister(RemoveGuest);
+            _onUpgradeGuestQuantity.Unregister(HandleUpgradeGuestQuantity);
         }
 
         void Start()
         {
             // mỗi 5 giây thử spawn 1 lần
             StartCoroutine(SpawnLoop());
+            _onGuestQuantityChanged.Raise(_currentMaxGuests);
         }
 
         public void OnInit(LevelConfigSO levelConfigSO)
         {
-            _levelMaxGuests = levelConfigSO.MaxGuestCount;
             _maxUniqueStations = levelConfigSO.MaxUniqueStations;
             _maxTotalQty = levelConfigSO.MaxTotalQtyPerOrder;
         }
@@ -121,6 +127,12 @@ namespace LabDiner.Restaurant
                     RemoveGuest(guest);
                 }
             }
+        }
+
+        private void HandleUpgradeGuestQuantity(GlobalUpgradeSO upgradeSO)
+        {
+            _currentMaxGuests = _currentMaxGuests + Mathf.RoundToInt(upgradeSO.UpgradeValue);
+            _onGuestQuantityChanged.Raise(_currentMaxGuests);
         }
     }
 }

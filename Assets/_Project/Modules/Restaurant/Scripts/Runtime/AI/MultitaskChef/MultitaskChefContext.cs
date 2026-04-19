@@ -76,5 +76,10 @@ namespace LabDiner.Restaurant
                     break;
             }
         }
+
+        public void UpgradeMoveSpeed(float speedBuffValue)
+        {
+            _mover.UpgradeMoveSpeed(speedBuffValue);
+        }
     }
 }
