@@ -20,9 +20,10 @@ namespace LabDiner.Restaurant
 
         public IEnumerator Cook(CookingTask task)
         {
+            //IMPORTANT: Công thức nấu ăn: Thời gian nấu = Thời gian cơ bản của món ăn / (1 + cookMultiplier)
             CoreStation coreStation = task.CoreStation;
-            Debug.Log("TODO: hoàn thiện công thức thời gian nấu");
-            float cookTime = 3 * (1/ cookMultiplier);
+            float cookTime = coreStation.RawProcessTime / (1 + cookMultiplier);
+
             _context.ProgressPieUI.StartProgressPie(cookTime);
             yield return new WaitForSeconds(cookTime);
             task.StationTarget.SetStatus(true);
@@ -43,7 +44,6 @@ namespace LabDiner.Restaurant
         {
             GuestContext guest = cookingTask.Order.OrderBy;
             guest.ReceiveFood(cookingTask);
-            Debug.Log("TODO: show tiến trình phục vụ tại đây");
             yield return new WaitForSeconds(_giveFoodDuration);
             _context.CarryDishUI.Finish(cookingTask);
         }

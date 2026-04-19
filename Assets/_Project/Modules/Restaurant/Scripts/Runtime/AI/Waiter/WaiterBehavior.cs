@@ -30,7 +30,6 @@ namespace LabDiner.Restaurant
 
         public IEnumerator PickUpFromPassTable(CookingTask cookingTask)
         {
-            Debug.Log("TODO: show tiến trình pick up tại đây");
             PassTable passTable = cookingTask.PassTableTarget;
             passTable.PickUpDish(cookingTask);
             _ctx.ProgressPieLogic.StartProgressPie(_pickUpDuration);
@@ -42,7 +41,8 @@ namespace LabDiner.Restaurant
         {
             GuestContext guest = cookingTask.Order.OrderBy;
             guest.ReceiveFood(cookingTask);
-            Debug.Log("TODO: show tiến trình phục vụ tại đây");
+            
+            //TODO: điều chỉnh thời gian phục vụ nếu cần thiết, hiện tại để 0 để món ăn được giao ngay lập tức
             _ctx.ProgressPieLogic.StartProgressPie(_giveFoodDuration);
             yield return new WaitForSeconds(_giveFoodDuration);
             _ctx.CarryDishLogic.Finish(cookingTask);
