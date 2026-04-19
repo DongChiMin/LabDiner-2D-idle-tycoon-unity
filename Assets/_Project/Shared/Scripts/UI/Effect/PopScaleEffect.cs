@@ -29,6 +29,8 @@ namespace LabDiner.Shared.UI
 
         public override void Hide(Action onComplete = null)
         {
+            transform.DOKill();
+
             transform.DOScale(Vector3.zero, _duration)
                      .SetEase(_hideEase)
                      .SetUpdate(true)

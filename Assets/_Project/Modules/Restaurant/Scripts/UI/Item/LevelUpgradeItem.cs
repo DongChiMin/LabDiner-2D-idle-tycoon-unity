@@ -10,9 +10,6 @@ namespace LabDiner.Restaurant
     {         
         public BaseUpgradeSO UpgradeSO => _baseUpgradeSO;
         public Button UpgradeButton => _upgradeButton;
-
-        [Header("Events")]
-        [SerializeField] private LevelCoinEvent _onCoinSpent;
         
         [Header("UI References")]
         [SerializeField] private TextMeshProUGUI _titleText;

@@ -99,7 +99,9 @@ namespace LabDiner.Restaurant
         /// </summary>
         public void Upgrade()
         {
+            //Sau khi tính toán giá trị mới thì mới trừ tiền để đảm bảo giá trị hiển thị trên UI là chính xác nhất
             _onCoinSpent?.Raise(_currentCost);
+
             _currentLevel++;
 
             // Tính toán lại profit tiếp theo
@@ -138,6 +140,9 @@ namespace LabDiner.Restaurant
                 OnMaxLevel?.Invoke(_maxStar);
                 return;
             }
+
+            // Sau khi cập nhật cost, cập nhật lại coin để xem có toggle attention upgrade hay không
+            _onCoinSpent.Raise(0);
 
 
             OnDataChanged?.Invoke();
@@ -226,10 +231,7 @@ namespace LabDiner.Restaurant
             }
             else if(!canUpgrade && _upgradeSprite.gameObject.activeSelf)
             {
-                _upgradeSprite.Hide(() =>
-                {
-                    _upgradeSprite.gameObject.SetActive(false);
-                });
+                _upgradeSprite.Hide(() => _upgradeSprite.gameObject.SetActive(false));
             }
         }
 
