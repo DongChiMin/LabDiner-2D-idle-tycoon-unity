@@ -8,6 +8,8 @@ namespace LabDiner.Restaurant.Manager
 {
     public class CoreStationManager : MonoBehaviour
     {
+        public List<CoreStation> CoreStations => coreStations;
+
         [Header("Events")]
         [SerializeField] private GlobalUpgradeEvent _onAllDishProfitUpgrade;
         [SerializeField] private DishUpgradeEvent _onDishProfitUpgrade;

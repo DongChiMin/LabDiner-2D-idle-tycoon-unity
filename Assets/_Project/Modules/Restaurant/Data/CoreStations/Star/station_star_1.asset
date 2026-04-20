@@ -16,6 +16,6 @@ MonoBehaviour:
   Buffs:
   - {fileID: 11400000, guid: 49d1f8a18c5087e47a200de1c45c596a, type: 2}
   rewards:
-  - Event: {fileID: 11400000, guid: 7beb386ee4a21204ba5e095ce75e2ee5, type: 2}
+  - Event: {fileID: 11400000, guid: 7544e3ce532a74a448d1f45265ea3c60, type: 2}
     Amount: 1
     Icon: {fileID: 7175521830830924091, guid: 18d2cccc63b7da54786c0eeffa28c57d, type: 3}

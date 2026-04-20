@@ -6,8 +6,11 @@ namespace LabDiner.Restaurant.SO
     // public enum MissionType
     // {
     //     UpgradeDish,      // Nâng cấp món a đến level b
-    //     CollectTips,    // Nhặt số lượng a tiền tip
+    //     CollectTips,    // Nhặt a lần tiền tip
     //     HireChefs,      // Tổng số lượng đầu bếp đạt a
+    //     SetupStation,  // Mở khóa trạm chính a
+    //     CompleteOrder,     // Phục vụ món cho khách a lần
+    //     BuyUpgrades,       // Mua a lần nâng cấp (có thể là bất kỳ nâng cấp nào, miễn là mua thành công)
     // }
 
     public abstract class BaseGemMissionSO : ScriptableObject
@@ -20,13 +23,18 @@ namespace LabDiner.Restaurant.SO
         [Header("Reward Info")]
         public Sprite RewardIcon;
         public float RewardValue;
-        public LevelGemEvent OnGemAdded;
+        public LevelGemFlyEvent OnGemFlyAdded;
 
-        public void ApplyReward()
+        public void ApplyReward(Vector3 startPos)
         {
             // Gửi chính Asset này đi qua Event
-            if (OnGemAdded != null)
-                OnGemAdded.Raise(Mathf.RoundToInt(MissionValue));
+            if (OnGemFlyAdded != null)
+                OnGemFlyAdded.Raise(
+                    new GemRewardData
+                    {
+                        startPos = startPos,
+                        RewardValue = Mathf.RoundToInt(RewardValue)
+                    });
         }
     }
 }

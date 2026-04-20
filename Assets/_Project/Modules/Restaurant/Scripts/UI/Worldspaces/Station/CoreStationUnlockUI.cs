@@ -23,6 +23,8 @@ namespace LabDiner.Restaurant.UI
         [Header("[DEBUG]")]
         [SerializeField] private double _currentCost;
 
+        private bool _isClicked = false;
+
         void OnEnable()
         {
             _clickOutsideEffect.OnClickOutside += HandleClickOutside;
@@ -37,6 +39,9 @@ namespace LabDiner.Restaurant.UI
         {
             _upgradeButton.onClick.AddListener(() =>
             {
+                if(_isClicked) return; // Prevent multiple clicks
+
+                _isClicked = true;
                 _upgradeButton.interactable = false;
                 OnUpgradeButtonClicked?.Invoke();
             });

@@ -8,13 +8,6 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.Manager
 {
-    [System.Serializable]
-    public struct DiningTable
-    {
-        public GameObject TableInstance;
-        public List<DiningSeat> Seats;
-    }
-
     public class DiningTableManager : MonoBehaviour, ILevelInitializable
     {
         [Header("Events")]
@@ -94,7 +87,7 @@ namespace LabDiner.Restaurant.Manager
             DiningTable spawnTable = _tables[index];
             _spawnedTables.Add(spawnTable);
 
-            spawnTable.TableInstance.SetActive(true);
+            spawnTable.gameObject.SetActive(true);
             foreach(DiningSeat seat in spawnTable.Seats)
             {
                 _spawnedSeats.Add(seat);
@@ -111,9 +104,10 @@ namespace LabDiner.Restaurant.Manager
             {
                 totalSeat += table.Seats.Count;
             }
-            if (_levelConfig.MaxGuestCount > totalSeat)
+
+            if (_levelConfig.maxGuestQuantity > totalSeat)
             {
-                Debug.LogError($"Số lượng khách tối đa: {_levelConfig.MaxGuestCount} vượt quá số ghế có thể mở khóa: {totalSeat}. Cần điều chỉnh lại LevelConfigSO hoặc thêm nhiều bàn hơn!");
+                Debug.LogError($"Số lượng khách tối đa: {_levelConfig.maxGuestQuantity} vượt quá số ghế có thể mở khóa: {totalSeat}. Cần điều chỉnh lại LevelConfigSO hoặc thêm nhiều bàn hơn!");
             }
         }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using LabDiner.Restaurant.Enum;
+using LabDiner.Restaurant.Event;
 using LabDiner.Restaurant.Manager;
 using LabDiner.Restaurant.SO;
 using LabDiner.Restaurant.UI;
@@ -14,6 +15,8 @@ namespace LabDiner.Restaurant.Environment
     public class CoreStation : MonoBehaviour
     {
         // API
+        public CoreStationSO CoreStationSO => _coreStationSO;
+        public int CurrentLevel => _currentLevel;
         public bool IsUnlocked => _currentLevel >= 1;
         public float RawProcessTime => _currentProcessTime / (1 + _currentProcessTimeBuff);
         public List<Station> Stations => _stations;
@@ -29,10 +32,12 @@ namespace LabDiner.Restaurant.Environment
         [SerializeField] private CoreStationUIController _CoreStationUIController;
         [SerializeField] private StationSpawner _stationSpawner;
         [SerializeField] private PopScaleEffect _upgradeSprite;
+        [SerializeField] private Transform gemRewardStartPos;   // Điểm xuất hiện hiệu ứng gem khi nhận thưởng từ star upgrade
 
         [Header("Events")]
         [SerializeField] private LevelCoinEvent _onCoinSpent;
         [SerializeField] private LevelCoinEvent _onCoinUpdated;
+        [SerializeField] private CoreStationEvent _onCoreStationLevelUpgraded;
 
         [Header("Data")]
         [SerializeField] private CoreStationSO _coreStationSO;
@@ -139,12 +144,13 @@ namespace LabDiner.Restaurant.Environment
             if(_currentLevel >= maxLevel)
             {
                 OnMaxLevel?.Invoke(_maxStar);
+                _onCoreStationLevelUpgraded.Raise(this);
                 return;
             }
 
             // Sau khi cập nhật cost, cập nhật lại coin để xem có toggle attention upgrade hay không
             _onCoinSpent.Raise(0);
-
+            _onCoreStationLevelUpgraded.Raise(this);
 
             OnDataChanged?.Invoke();
         }
@@ -270,7 +276,10 @@ namespace LabDiner.Restaurant.Environment
          private void ProcessStarUpgrade(int newStar)
          {
             StationStarSO starData = _coreStationSO.StationStars[Mathf.Min(newStar - 1, _coreStationSO.StationStars.Count - 1)];
-            starData.GiveRewards();
+            Vector3 screenPoint = Camera.main.WorldToScreenPoint(gemRewardStartPos.position);
+            screenPoint.z = 0;
+            Vector3 startPos = screenPoint;
+            starData.GiveRewards(startPos);
 
             foreach(var buff in starData.Buffs)
             {

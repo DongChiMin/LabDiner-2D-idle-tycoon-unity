@@ -11,9 +11,7 @@ namespace LabDiner.Restaurant.SO
         public int LevelIndex;
         public string LevelName;
         public List<BaseUpgradeSO> AvailableUpgrades;
-
-        [Header("Guest Settings")]
-        public int MaxGuestCount;                      // Số lượng khách tối đa xuất hiện trong level này
+        public List<BaseGemMissionSO> AvailableMissions;
         
         [Header("Guest Order Settings")]
         public int MaxUniqueStations;           // Số lượng trạm chính khác nhau tối đa có trong đơn hàng của khách (ví dụ: 2 thì khách chỉ gọi món từ 2 trạm chính khác nhau, dù có thể gọi nhiều món từ mỗi trạm)

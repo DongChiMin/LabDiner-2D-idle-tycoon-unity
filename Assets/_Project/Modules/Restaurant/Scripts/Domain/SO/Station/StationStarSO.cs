@@ -19,7 +19,7 @@ namespace LabDiner.Restaurant.SO
         public List<StationStarBuffSO> Buffs;   //ví dụ cột mốc này vừa x2 profit, vừa tạo station mới
         public List<RewardData> rewards;        //ví dụ thưởng gem, thưởng sự kiện
 
-        public void GiveRewards()
+        public void GiveRewards(Vector3 startPos = default(Vector3))
         {
             foreach (var reward in rewards)
             {
@@ -30,6 +30,14 @@ namespace LabDiner.Restaurant.SO
                 else if (reward.Event is GameEvent<int> intEvent)
                 {
                     intEvent.Raise((int)reward.Amount);
+                }
+                else if(reward.Event is GameEvent<GemRewardData> gemRewardEvent)
+                {
+                    gemRewardEvent.Raise(new GemRewardData
+                    {
+                        startPos = startPos,
+                        RewardValue = (int)reward.Amount
+                    });
                 }
                 else
                 {

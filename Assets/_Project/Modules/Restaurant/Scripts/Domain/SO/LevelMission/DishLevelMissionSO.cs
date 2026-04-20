@@ -6,10 +6,10 @@ namespace LabDiner.Restaurant.SO
     /// <summary>
     /// 
     /// </summary>
-    [CreateAssetMenu(fileName = "New Dish Mission", menuName = "Game/Missions/Dish Mission")]
-    public class DishLevelMissionSO : BaseGemMissionSO
+    [CreateAssetMenu(fileName = "New CoreStation Mission", menuName = "Game/Missions/CoreStation Mission")]
+    public class CoreStationLevelMissionSO : BaseGemMissionSO
     {
         [Header("Target")]
-        public DishSO TargetDish;
+        public CoreStationSO TargetCoreStation;
     }
 }
