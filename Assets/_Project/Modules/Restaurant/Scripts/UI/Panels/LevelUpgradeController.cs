@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using LabDiner.Restaurant.Event;
 using LabDiner.Restaurant.Manager;
 using LabDiner.Restaurant.SO;
 using LabDiner.Shared.Event;
@@ -12,6 +13,7 @@ namespace LabDiner.Restaurant.UI
         [Header("Events")]
         [SerializeField] private LevelCoinEvent _onCoinUpdated;
         [SerializeField] private LevelCoinEvent _onCoinSpent;
+        [SerializeField] private LevelUpgradableEvent _onLevelUpgradable;
         [SerializeField] private UIPopupEvent _onPopupShow;
 
         [Header("Item References")]
@@ -85,11 +87,16 @@ namespace LabDiner.Restaurant.UI
 
         private void HandleCoinUpdated(double newCoinValue)
         {
+            bool canUpgrade = false;
             foreach(LevelUpgradeItem item in upgradeItems)
             {
                 bool isBuyable = item.UpgradeSO.UpgradeCost <= newCoinValue;
                 item.ToggleUpgradeButton(isBuyable);
+                if (isBuyable)
+                    canUpgrade = true;
             }
+            
+            _onLevelUpgradable.Raise(canUpgrade);
         }
 
     }
