@@ -118,19 +118,6 @@ namespace LabDiner.Restaurant.Manager
                 Debug.LogError($"Số lượng khách tối đa: {_levelConfig.maxGuestQuantity} vượt quá số ghế có thể mở khóa: {totalSeat}. Cần điều chỉnh lại LevelConfigSO hoặc thêm nhiều bàn hơn!");
             }
         }
-
-        void OnDrawGizmos(){
-            if(_tables == null) return;
-
-            foreach(DiningTable table in _tables)
-            {
-                foreach(DiningSeat seat in table.Seats)
-                {
-                    Gizmos.color = seat.IsOccupied ? Color.red : Color.green;
-                    Gizmos.DrawWireSphere(seat.transform.position, 0.2f);
-                }
-            }
-        }
         #endif
     }
 }

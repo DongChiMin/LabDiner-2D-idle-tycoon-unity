@@ -7,13 +7,10 @@ namespace LabDiner.Restaurant.Environment
 {
     public class StationSpawner : MonoBehaviour, IStationUnboxer
     {
-        #if UNITY_EDITOR
-        public List<Transform> SpawnPoints => _spawnPoints;     //chỉ dùng cho debug 
-        #endif
-
+        public List<StationPosition> StationPos => _stationPos;
         [Header("Base Settings")]
         [SerializeField] private Station _stationPrefab;
-        [SerializeField] private List<Transform> _spawnPoints;
+        [SerializeField] private List<StationPosition> _stationPos;
         [SerializeField] private Transform _spawnParent;
         [SerializeField] protected bool _spawnInBox = true;
 
@@ -25,10 +22,11 @@ namespace LabDiner.Restaurant.Environment
         {
             int nextIndex = _spawnedStations.Count;
 
-            if (nextIndex < _spawnPoints.Count)
+            if (nextIndex < _stationPos.Count)
             {
-                // Sinh máy mới ngay tại vị trí đã định sẵn
-                Station newStation = Instantiate(_stationPrefab, _spawnPoints[nextIndex].position, Quaternion.identity, _spawnParent);
+                // Sinh máy mới ngay tại vị trí đã định sẵn, đặt lại vị trí làm việc
+                Station newStation = Instantiate(_stationPrefab, _stationPos[nextIndex].spawnPos.position, Quaternion.identity, _spawnParent);
+                newStation.SetWorkPos(_stationPos[nextIndex].workPos);
                 newStation.SetStatus(false);
                 _spawnedStations.Add(newStation);
 
@@ -64,10 +62,20 @@ namespace LabDiner.Restaurant.Environment
 
         void OnDrawGizmos()
         {
-            foreach(Transform spawnPoint in _spawnPoints)
+            foreach(StationPosition stationPos in _stationPos)
             {
+                if( stationPos.spawnPos == null || stationPos.workPos == null)
+                {
+                    continue;
+                }
+                
                 Gizmos.color = Color.green;
-                Gizmos.DrawWireCube(spawnPoint.position, Vector3.one * 1.5f);
+                Gizmos.DrawWireCube(stationPos.spawnPos.position, Vector3.one * 1.5f);
+            
+                Gizmos.color = Color.yellow;
+                Vector3 pos = stationPos.workPos.position;
+                    Vector3 center = pos + Vector3.up * 0.5f;
+                    Gizmos.DrawWireCube(center, new Vector3(0.6f, 1.2f, 0.1f));
             }
         }
     }
