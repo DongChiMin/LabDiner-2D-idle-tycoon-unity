@@ -12,7 +12,7 @@ namespace LabDiner.Restaurant.UI
         [SerializeField] private GuestOrderItem _orderItemPrefab;
         [SerializeField] private Transform _orderItemContainer;
 
-        private Dictionary<GuestOrderItem, int> _currentOrder = new Dictionary<GuestOrderItem, int>();
+        private Dictionary<CoreStation, GuestOrderItem> _currentOrder = new Dictionary<CoreStation, GuestOrderItem>();
 
         void Start()
         {
@@ -36,9 +36,9 @@ namespace LabDiner.Restaurant.UI
                 int quantity = item.Value;
 
                 GuestOrderItem newItem = Instantiate(_orderItemPrefab, _orderItemContainer);
-                newItem.Setup(dish.DishIcon, quantity);
+                newItem.Setup(dish, quantity);
 
-                _currentOrder[newItem] = quantity;
+                _currentOrder[dish] = newItem;
             }
         }
 
@@ -48,9 +48,9 @@ namespace LabDiner.Restaurant.UI
             // Tìm item tương ứng với món ăn đã nhận
             foreach (var item in _currentOrder)
             {
-                if (item.Key != null && item.Key.gameObject.activeInHierarchy && item.Key.GetComponent<CoreStation>() == dish)
+                if (item.Key != null && item.Key == dish)
                 {
-                    itemToDecrease = item.Key;
+                    itemToDecrease = item.Value;
                     break;
                 }
             }
@@ -58,9 +58,8 @@ namespace LabDiner.Restaurant.UI
             // Nếu tìm thấy item, giảm số lượng và cập nhật UI
             if (itemToDecrease != null)
             {
-                _currentOrder[itemToDecrease]--;
-                itemToDecrease.DecreaseQuantity();
-                if (_currentOrder[itemToDecrease] <= 0)
+                bool hasQuantityLeft = itemToDecrease.DecreaseQuantity();
+                if (!hasQuantityLeft)
                 {
                     itemToDecrease.gameObject.SetActive(false);
                 }

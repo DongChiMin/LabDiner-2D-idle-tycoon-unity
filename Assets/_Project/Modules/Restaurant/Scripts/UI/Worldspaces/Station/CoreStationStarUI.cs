@@ -17,7 +17,7 @@ namespace LabDiner.Restaurant.UI
         [SerializeField] private Transform _rewardContainer;
 
         [Header("ProgressBar Settings")]
-        [SerializeField] private Image _starProgressFill;
+        [SerializeField] private Slider _starProgressFill;
 
         private List<Image> _spawnedStars = new List<Image>();
         private List<Image> _spawnedRewards = new List<Image>();
@@ -26,7 +26,7 @@ namespace LabDiner.Restaurant.UI
         {
             int currentStars = data.StarQuantity;
             int maxStars = data.MaxStar;
-            _starProgressFill.fillAmount = data.StarProgress;
+            _starProgressFill.value = data.StarProgress;
             // Nếu số lượng sao đã sinh ra khác với yêu cầu, mới cần xử lý
             if (_spawnedStars.Count != maxStars)
             {
@@ -40,7 +40,7 @@ namespace LabDiner.Restaurant.UI
         public void MaxLevelReached(int maxStar)
         {
             UpdateRating(maxStar);
-            _starProgressFill.fillAmount = 1f;
+            _starProgressFill.value = 1f;
         }
 
         public void UpdateRating(int currentStars)

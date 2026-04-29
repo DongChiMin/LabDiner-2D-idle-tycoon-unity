@@ -78,6 +78,9 @@ namespace LabDiner.Restaurant.UI
                 // Hiệu ứng "nảy" nhẹ HUD để tạo cảm giác phản hồi (Feedback)
                 _coinText.transform.parent.DOKill(true);
                 _coinText.transform.parent.DOPunchScale(Vector3.one * 0.1f, 0.1f);
+
+                //Thông báo coin đã được cập nhật sau khi hiệu ứng bay kết thúc
+                _onCoinUpdated.Raise(_currentCoin);
             });
         }
 
@@ -102,6 +105,9 @@ namespace LabDiner.Restaurant.UI
                 // Hiệu ứng "nảy" nhẹ HUD để tạo cảm giác phản hồi (Feedback)
                 _gemText.transform.parent.DOKill(true);
                 _gemText.transform.parent.DOPunchScale(Vector3.one * 0.1f, 0.1f);
+
+                //Thông báo gem đã được cập nhật sau khi hiệu ứng bay kết thúc
+                _onGemUpdated.Raise(_currentGem);
             });
         }
     }

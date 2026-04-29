@@ -20,7 +20,7 @@ namespace LabDiner.Restaurant.UI
         [SerializeField] private TextMeshProUGUI _missionText;
         [SerializeField] private TextMeshProUGUI _progressText;
         [SerializeField] private Image _rewardMissionIcon;
-        [SerializeField] private Image _progressFillImage;
+        [SerializeField] private Slider _progressSlider;
 
         [Header("Reward UI")]
         [SerializeField] private GameObject _rewardUI;    //UI phiên bản đã hoàn thành nhiệm vụ, có thể nhận thưởng
@@ -47,7 +47,7 @@ namespace LabDiner.Restaurant.UI
             _missionText.text = mission.Title;
             _rewardMissionIcon.sprite = mission.RewardIcon;
             _progressText.text = $"{currentProgress}/{mission.MissionValue}";
-            _progressFillImage.fillAmount = (float)currentProgress / mission.MissionValue;
+            _progressSlider.value = (float)currentProgress / mission.MissionValue;
 
             //Reward UI Setup
             _rewardUI.SetActive(false);
@@ -67,8 +67,7 @@ namespace LabDiner.Restaurant.UI
             if(_isRewardable) return; // Nếu đã hoàn thành nhiệm vụ, không cập nhật tiến độ nữa
 
             _progressText.text = $"{currentValue}/{targetValue}";
-            float fillAmount = (float)currentValue / targetValue;
-            _progressFillImage.fillAmount = fillAmount;
+            _progressSlider.value = (float)currentValue / targetValue;
 
             if (currentValue >= targetValue)
             {

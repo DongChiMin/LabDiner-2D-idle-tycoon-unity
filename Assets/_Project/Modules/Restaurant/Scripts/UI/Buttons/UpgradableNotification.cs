@@ -9,7 +9,7 @@ namespace LabDiner.Restaurant.UI
     {
         [SerializeField] private LevelUpgradableEvent _onLevelUpgradable;
         [SerializeField] private PopScaleEffect _popScaleEffect;
-        // [SerializeField] private AttentionEffect _attentionEffect;
+        [SerializeField] private AttentionEffect _attentionEffect;
         private bool isOn = false;
 
         void OnEnable()
@@ -35,7 +35,7 @@ namespace LabDiner.Restaurant.UI
                 _popScaleEffect.gameObject.SetActive(true);
                 _popScaleEffect.Show(() =>
                 {
-                    // _attentionEffect.enabled = true;
+                    
                 });
             }
             else if (!canUpgrade && isOn)
@@ -44,8 +44,6 @@ namespace LabDiner.Restaurant.UI
                 _popScaleEffect.Hide(() =>
                 {
                     _popScaleEffect.gameObject.SetActive(false);
-                    _popScaleEffect.transform.localScale = Vector3.one;
-                    // _attentionEffect.enabled = false;
                 });
             }
         }

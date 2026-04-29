@@ -10,14 +10,22 @@ namespace LabDiner.Restaurant.UI
     {
         [SerializeField] private Image _dishIcon;
         [SerializeField] private TextMeshProUGUI _quantityText;
+        private CoreStation _associatedDish;
+        private int _quantity;
 
-        public void Setup(Sprite dishSprite, int quantity)
+        public void Setup(CoreStation associatedDish, int quantity)
         {
-            _dishIcon.sprite = dishSprite;
+            _associatedDish = associatedDish;
+            _dishIcon.sprite = associatedDish.DishIcon;
+            _quantity = quantity;
             _quantityText.text = quantity.ToString();
         }
 
-        public void DecreaseQuantity()
+        /// <summary>
+        /// Giảm số lượng món ăn và cập nhật UI. Trả về true nếu vẫn còn món ăn, false nếu đã hết.
+        /// </summary>
+        /// <returns></returns>
+        public bool DecreaseQuantity()
         {
             if (int.TryParse(_quantityText.text, out int currentQuantity))
             {
@@ -28,6 +36,8 @@ namespace LabDiner.Restaurant.UI
             {
                 Debug.LogWarning("Failed to parse quantity text.");
             }
+            return _quantity > 0;
         }
+        
     }
 }
