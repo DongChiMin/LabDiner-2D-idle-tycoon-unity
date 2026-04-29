@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 74eeda6ab676f1c4d8db5d778307be23
+guid: f7b60faccc1f689419671e2f19a839c9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1777915348784690793
-    second: Group (7)_0
+      213: 3558201573125892532
+    second: staff box_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -98,6 +98,19 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Android
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -113,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Group (7)_0
+      name: staff box_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 362
-        height: 580
+        width: 220
+        height: 400
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 30, y: 75, z: 30, w: 80}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 79949faf8639357e0800000000000000
-      internalID: -1777915348784690793
+      spriteID: 4b9a7658a75416130800000000000000
+      internalID: 3558201573125892532
       vertices: []
       indices: 
       edges: []
@@ -138,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a8f4ac01471c2b64d9c60e89eed397f6
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Group (7)_0: -1777915348784690793
+      staff box_0: 3558201573125892532
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

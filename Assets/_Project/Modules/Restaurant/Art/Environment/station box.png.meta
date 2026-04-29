@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c48a028fb9f09314f9b48f2c2a4cf581
+guid: 905d93b3a12a81348a9082a4fd31684d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3168968341720054032
-    second: Solid 2_0
+      213: 1962818582807694937
+    second: station box_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     buildTarget: Android
     maxTextureSize: 512
     resizeAlgorithm: 0
-    textureFormat: 47
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Solid 2_0
+      name: station box_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 419
-        height: 56
+        width: 220
+        height: 400
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 10, y: 10, z: 10, w: 10}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 019bea8baef6afb20800000000000000
-      internalID: 3168968341720054032
+      spriteID: 95ec9c20a155d3b10800000000000000
+      internalID: 1962818582807694937
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d92cb6e2e5e0e9645a7044854d1871b6
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Solid 2_0: 3168968341720054032
+      station box_0: 1962818582807694937
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

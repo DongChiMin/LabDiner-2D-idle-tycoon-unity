@@ -15,7 +15,7 @@ MonoBehaviour:
   Title: Reach Apple level 20
   MissionIcon: {fileID: 2641698482785147981, guid: c79e1e14d34769d42a87e2d2668d9546, type: 3}
   MissionValue: 20
-  RewardIcon: {fileID: -5640203773006490952, guid: 97f5ccfaf01d8354e9f01f8a4570f65b, type: 3}
+  RewardIcon: {fileID: 1714103667931503152, guid: 209be6344ed8bc94889134e171412db6, type: 3}
   RewardValue: 1
   OnGemFlyAdded: {fileID: 11400000, guid: 7544e3ce532a74a448d1f45265ea3c60, type: 2}
   TargetCoreStation: {fileID: 11400000, guid: 71de0ce8923041146bf74047af20e4dd, type: 2}

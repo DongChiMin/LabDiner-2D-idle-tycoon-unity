@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 187ad5196a955c746b24d268a0377568
+guid: d315085b60e847d4f822322350529df3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5781976533511221666
-    second: Group (9)_0
+      213: 7399064652914247897
+    second: Layer_34_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -98,6 +98,19 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Android
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: 47
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -113,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Group (9)_0
+      name: Layer_34_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 360
-        height: 336
+        width: 342
+        height: 33
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 8, y: 8, z: 8, w: 8}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2a1b493e505bd3050800000000000000
-      internalID: 5781976533511221666
+      spriteID: 9d84a139912cea660800000000000000
+      internalID: 7399064652914247897
       vertices: []
       indices: 
       edges: []
@@ -138,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 73bea6becd078124d9a09db1a889dc84
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Group (9)_0: 5781976533511221666
+      Layer_34_0: 7399064652914247897
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
