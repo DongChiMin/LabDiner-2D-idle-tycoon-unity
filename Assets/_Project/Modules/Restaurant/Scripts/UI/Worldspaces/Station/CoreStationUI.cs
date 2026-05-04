@@ -12,6 +12,7 @@ namespace LabDiner.Restaurant.UI
     {
         public int CurrentLevel;
         public string Name;
+        public Sprite StationIcon;
 
         public int StarQuantity;
         public int MaxStar;

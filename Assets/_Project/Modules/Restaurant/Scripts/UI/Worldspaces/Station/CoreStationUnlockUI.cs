@@ -14,6 +14,7 @@ namespace LabDiner.Restaurant.UI
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _costText;
         [SerializeField] private Button _upgradeButton;
+        [SerializeField] private Image _iconImage;
 
         [Header("Effect")]
         [SerializeField] private PopScaleEffect _popScaleEffect;
@@ -55,6 +56,7 @@ namespace LabDiner.Restaurant.UI
 
             _nameText.text = data.Name;
             _costText.text = $"${data.CurrentCost:F0}";
+            _iconImage.sprite = data.StationIcon;
 
             ToggleUpgradeButton(data.CanUpgrade);
         }

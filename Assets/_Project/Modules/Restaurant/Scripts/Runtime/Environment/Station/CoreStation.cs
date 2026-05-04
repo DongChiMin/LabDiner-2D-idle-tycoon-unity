@@ -45,6 +45,7 @@ namespace LabDiner.Restaurant.Environment
         [Header("[DEBUG] Static Attributes")]
         [SerializeField] private string _name = "New CoreStation";
         [SerializeField] private Sprite _dishIcon;
+        [SerializeField] private Sprite _stationIcon;
         [SerializeField] private int _maxStar = 5;
         [SerializeField] private int _levelPerStar = 2;
 
@@ -174,6 +175,8 @@ namespace LabDiner.Restaurant.Environment
             {
                 CurrentLevel = _currentLevel,
                 Name = _name,
+                StationIcon = _stationIcon,
+                
 
                 StarQuantity = _currentStar,
                 MaxStar = _maxStar, 
@@ -220,7 +223,8 @@ namespace LabDiner.Restaurant.Environment
             }
 
             _name = _coreStationSO.Dish.name;
-            _dishIcon = _coreStationSO.Dish.Icon;
+            _dishIcon = _coreStationSO.Dish.Dishicon;
+            _stationIcon = _coreStationSO.Dish.StationIcon;
             _maxStar = _coreStationSO.StationStars.Count;
             _levelPerStar = _coreStationSO.LevelPerStar;
 
@@ -252,7 +256,8 @@ namespace LabDiner.Restaurant.Environment
         private void HandleCoinUpdated(double currentCoin)
         {
             bool canUpgrade = currentCoin >= _currentCost;
-            if(canUpgrade && !_upgradeSprite.gameObject.activeSelf)
+            bool isMaxLevel = _currentLevel >= _maxStar * _levelPerStar;
+            if(!isMaxLevel && canUpgrade && !_upgradeSprite.gameObject.activeSelf)
             {
                 _upgradeSprite.gameObject.SetActive(true);
                 _upgradeSprite.Show();
@@ -333,7 +338,7 @@ namespace LabDiner.Restaurant.Environment
                     }
                 }
             }
-
+            
             if(maxStationQuantity > spawnPointCount)
             {
                 Debug.LogError($"CoreStation '{_name}' cần {maxStationQuantity} điểm spawn, nhưng chỉ có {spawnPointCount} điểm spawn khả dụng trong StationSpawner.");

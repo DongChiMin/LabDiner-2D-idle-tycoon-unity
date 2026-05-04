@@ -18,12 +18,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bf58ef3e9ce26074e82be8749f31957b, type: 2}
   - {fileID: 11400000, guid: 54bb59c629dfab744823ac02029698fb, type: 2}
   - {fileID: 11400000, guid: bf58ef3e9ce26074e82be8749f31957b, type: 2}
-  - {fileID: 11400000, guid: 54bb59c629dfab744823ac02029698fb, type: 2}
   BaseProfit: 10
   ProfitMultiplier: 1.15
   BaseProcessTime: 5
   BaseUpgradeCost: 15
   UpgradeCostMultiplier: 1.07
-  MaxLevel: 40
-  MaxStar: 4
-  MaxQuantity: 3
+  MaxLevel: 30
+  MaxStar: 3
+  MaxQuantity: 2

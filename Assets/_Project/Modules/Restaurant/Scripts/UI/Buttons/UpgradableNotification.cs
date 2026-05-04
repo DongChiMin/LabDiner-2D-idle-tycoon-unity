@@ -8,9 +8,20 @@ namespace LabDiner.Restaurant.UI
     public class UpgradableNotification : MonoBehaviour
     {
         [SerializeField] private LevelUpgradableEvent _onLevelUpgradable;
-        [SerializeField] private PopScaleEffect _popScaleEffect;
         [SerializeField] private AttentionEffect _attentionEffect;
-        private bool isOn = false;
+        [SerializeField] private PopScaleEffect _popScaleEffect;
+        private bool _isOn = true;
+        private GameObject _upgradeIconInstance;
+
+        void Awake()
+        {
+            _upgradeIconInstance = _attentionEffect.gameObject;
+        }
+
+        void Start()
+        {
+            _isOn = _upgradeIconInstance.activeSelf;
+        }
 
         void OnEnable()
         {
@@ -22,28 +33,26 @@ namespace LabDiner.Restaurant.UI
             _onLevelUpgradable.Unregister(HandleLevelUpgradable);
         }
 
-        void Awake()
-        {
-            _popScaleEffect.gameObject.SetActive(false);
-        }
-
         private void HandleLevelUpgradable(bool canUpgrade)
         {
-            if (canUpgrade && !isOn)
+            if (canUpgrade && !_isOn)
             {
-                isOn = true;
-                _popScaleEffect.gameObject.SetActive(true);
+                _upgradeIconInstance.SetActive(true);
                 _popScaleEffect.Show(() =>
                 {
-                    
+                    _attentionEffect.enabled = true;
+                    _popScaleEffect.enabled = false;
+                    _isOn = true;
                 });
             }
-            else if (!canUpgrade && isOn)
+            else if(!canUpgrade && _isOn)
             {
-                isOn = false;
+                _popScaleEffect.enabled = true;
+                _attentionEffect.enabled = false;
                 _popScaleEffect.Hide(() =>
                 {
-                    _popScaleEffect.gameObject.SetActive(false);
+                    _upgradeIconInstance.SetActive(false);
+                    _isOn = false;
                 });
             }
         }

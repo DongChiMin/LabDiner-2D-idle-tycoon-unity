@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: 
   Name: Apple
-  Icon: {fileID: 2641698482785147981, guid: c79e1e14d34769d42a87e2d2668d9546, type: 3}
+  Dishicon: {fileID: 2641698482785147981, guid: c79e1e14d34769d42a87e2d2668d9546, type: 3}
+  StationIcon: {fileID: -4197890398980553806, guid: 7688d0565f7160e40b7315a1519d762b, type: 3}

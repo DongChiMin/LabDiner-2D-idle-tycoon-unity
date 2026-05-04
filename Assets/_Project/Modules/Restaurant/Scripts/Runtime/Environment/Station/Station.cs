@@ -12,6 +12,7 @@ namespace LabDiner.Restaurant.Environment
         public Transform WorkPos => _workPos;
         public bool IsAvailable => _isAvailable;
         [SerializeField] private StationEvent onStationAvailable;
+        [SerializeField] private SpriteRenderer _stationSprite;
         
         [Header("[DEBUG]")]
         [SerializeField] private Transform _workPos;
@@ -29,6 +30,18 @@ namespace LabDiner.Restaurant.Environment
             if(_isAvailable)
             {
                 onStationAvailable.Raise(this);
+            }
+        }
+
+        public void SetStationSprite(Sprite newSprite)
+        {
+            if(_stationSprite != null)
+            {
+                _stationSprite.sprite = newSprite;
+            }
+            else
+            {
+                Debug.LogWarning($"Station '{gameObject.name}' không có SpriteRenderer được gán để thay đổi sprite trạm!");
             }
         }
 

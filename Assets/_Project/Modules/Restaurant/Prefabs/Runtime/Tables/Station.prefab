@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onStationAvailable: {fileID: 11400000, guid: f5470e48837e73443b8ac8e48dd35183, type: 2}
+  _stationSprite: {fileID: 583041343674674830}
   _workPos: {fileID: 7623063786277498806}
   _isAvailable: 1
 --- !u!61 &4869369995518955733

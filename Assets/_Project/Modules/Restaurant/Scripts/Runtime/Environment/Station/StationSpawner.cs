@@ -16,6 +16,13 @@ namespace LabDiner.Restaurant.Environment
 
         protected List<Station> _spawnedStations = new List<Station>();
 
+        void Start()
+        {
+            #if UNITY_EDITOR
+            ValidateData();
+            #endif
+        }
+
         #region API
 
         public Station RequestSpawn()
@@ -78,5 +85,28 @@ namespace LabDiner.Restaurant.Environment
                     Gizmos.DrawWireCube(center, new Vector3(0.6f, 1.2f, 0.1f));
             }
         }
+
+        #region EDITOR ONLY
+        #if UNITY_EDITOR
+
+        private void ValidateData()
+        {
+            foreach(var stationPos in _stationPos)
+            {
+                if(stationPos == null)
+                {
+                    Debug.LogError($"StationSpawner '{gameObject.name}' có một StationPosition bị gán null, vui lòng kiểm tra lại dữ liệu để đảm bảo tất cả các StationPosition đều được gán hợp lệ!");
+                    return;
+                }
+
+                if(stationPos.spawnPos == null || stationPos.workPos == null)
+                {
+                    Debug.LogError($"StationSpawner '{gameObject.name}' có StationPosition nào đó chưa được gán đầy đủ spawnPos hoặc workPos, vui lòng kiểm tra lại dữ liệu để đảm bảo tất cả các StationPosition đều có spawnPos và workPos hợp lệ!");
+                    return;
+                }
+            }
+        }
+        #endif 
+        #endregion
     }
 }
