@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c987d14107ff04fbfafd6bf2eac133, type: 3}
+  m_Name: UpgradeApple20
+  m_EditorClassIdentifier: 
+  Title: Reach Apple level 20
+  MissionIcon: {fileID: 2641698482785147981, guid: c79e1e14d34769d42a87e2d2668d9546, type: 3}
+  MissionValue: 20
+  RewardIcon: {fileID: 1714103667931503152, guid: 209be6344ed8bc94889134e171412db6, type: 3}
+  RewardValue: 1
+  OnGemFlyAdded: {fileID: 11400000, guid: 7544e3ce532a74a448d1f45265ea3c60, type: 2}
+  TargetCoreStation: {fileID: 11400000, guid: 71de0ce8923041146bf74047af20e4dd, type: 2}

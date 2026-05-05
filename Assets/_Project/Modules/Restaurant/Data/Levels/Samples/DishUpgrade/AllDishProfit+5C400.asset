@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff866561218601b4abed604b648e5a56, type: 3}
+  m_Name: AllDishProfit+5C400
+  m_EditorClassIdentifier: 
+  Title: All dish Profit
+  Description: "Doanh thu t\u1EA5t c\u1EA3 c\xE1c m\xF3n x5"
+  Icon: {fileID: 0}
+  UpgradeTypeSprite: {fileID: 0}
+  UpgradeCost: 400
+  UpgradeValue: 5
+  OnUpgradeRaised: {fileID: 11400000, guid: f3d6527a341d0a44c86092d0f3e2d9d9, type: 2}
