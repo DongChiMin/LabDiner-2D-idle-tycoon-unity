@@ -23,6 +23,11 @@ namespace LabDiner.Restaurant.Manager
             _onAllDishProfitUpgrade.Register(HandleAllDishProfitUpgrade);
             _onDishProfitUpgrade.Register(HandleDishProfitUpgrade);
             _onDishProcessTimeUpgrade.Register(HandleDishProcessTimeUpgrade);
+
+            for(int i = 0; i < coreStations.Count; i++)
+            {
+                coreStations[i].OnMaxLevel += HandleCoreStationMaxLevel;
+            }
         }
 
         void OnDisable()
@@ -30,6 +35,11 @@ namespace LabDiner.Restaurant.Manager
             _onAllDishProfitUpgrade.Unregister(HandleAllDishProfitUpgrade);
             _onDishProfitUpgrade.Unregister(HandleDishProfitUpgrade);
             _onDishProcessTimeUpgrade.Unregister(HandleDishProcessTimeUpgrade);
+
+            for(int i = 0; i < coreStations.Count; i++)
+            {
+                coreStations[i].OnMaxLevel -= HandleCoreStationMaxLevel;
+            }
         }
 
 
@@ -171,6 +181,11 @@ namespace LabDiner.Restaurant.Manager
                     station.UpgradeProcessTime(processTimeBuffValue);
                 }
             }
+        }
+
+        private void HandleCoreStationMaxLevel(int maxStar)
+        {
+            bool isAllStationMaxLevel = coreStations.TrueForAll(s => s.IsMaxLevel);
         }
         #endregion
     }

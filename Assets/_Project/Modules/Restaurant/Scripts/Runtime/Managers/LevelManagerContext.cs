@@ -31,7 +31,8 @@ namespace LabDiner.Restaurant.Manager
 
         public void Init(LevelConfigSO config)
         {
-            GuestManager.OnInit(config);
+            GuestManager.Init(config);
+            DiningTableManager.Init(config);
         }
     }
 }

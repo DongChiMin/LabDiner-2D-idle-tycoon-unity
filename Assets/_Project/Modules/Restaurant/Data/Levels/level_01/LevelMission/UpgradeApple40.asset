@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: Reach Apple level 40
   MissionIcon: {fileID: 2641698482785147981, guid: c79e1e14d34769d42a87e2d2668d9546, type: 3}
-  MissionValue: 30
+  TargetValue: 40
   RewardIcon: {fileID: 1714103667931503152, guid: 209be6344ed8bc94889134e171412db6, type: 3}
   RewardValue: 99
   OnGemFlyAdded: {fileID: 11400000, guid: 7544e3ce532a74a448d1f45265ea3c60, type: 2}

@@ -18,12 +18,12 @@ namespace LabDiner.Restaurant.SO
 
         [Header("Currency")]
         public double BaseProfit = 10;
-        public float ProfitMultiplier = 2;
 
         public float BaseProcessTime = 5f;
         
-        public double BaseUpgradeCost = 100;
-        public float UpgradeCostMultiplier = 2;
+        public double BaseUpgradeCost = 15;
+        public float CostMultiplier = 1.07f;
+        public float ProfitMultiplier = 1.15f;
 
         [Header("[DEBUG]")]
         [ReadOnly] public int MaxLevel;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using LabDiner.Restaurant.Environment;
 using LabDiner.Restaurant.Event;
 using LabDiner.Restaurant.Humanoid;
+using LabDiner.Restaurant.Interface;
 using LabDiner.Restaurant.Model;
 using LabDiner.Restaurant.Pooling;
 using LabDiner.Restaurant.SO;
@@ -10,7 +11,7 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.Manager
 {
-    public class GuestManager : MonoBehaviour
+    public class GuestManager : MonoBehaviour, ILevelInitializable
     {
         [Header("Upgrade Events")]
         [SerializeField] private GlobalUpgradeEvent _onUpgradeGuestQuantity;
@@ -51,7 +52,7 @@ namespace LabDiner.Restaurant.Manager
             _onGuestQuantityChanged.Raise(_currentMaxGuests);
         }
 
-        public void OnInit(LevelConfigSO levelConfigSO)
+        public void Init(LevelConfigSO levelConfigSO)
         {
             _maxUniqueStations = levelConfigSO.MaxUniqueStations;
             _maxTotalQty = levelConfigSO.MaxTotalQtyPerOrder;

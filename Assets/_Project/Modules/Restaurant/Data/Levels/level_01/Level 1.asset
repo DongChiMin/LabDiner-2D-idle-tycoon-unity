@@ -26,7 +26,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 50d136f6f947e8b42b725b77255cbccd, type: 2}
   AvailableMissions:
   - {fileID: 11400000, guid: e967c9511b0683845a43d323a6ce6e6d, type: 2}
-  - {fileID: 11400000, guid: b9a3389561337a14ea19a3d81aedc9f9, type: 2}
+  FinalMission: {fileID: 11400000, guid: 7f08af7674856d44fa9c0e79e39a4986, type: 2}
+  CoreStations: []
   MaxUniqueStations: 2
   MaxTotalQtyPerOrder: 5
   minVerticalPos: 0

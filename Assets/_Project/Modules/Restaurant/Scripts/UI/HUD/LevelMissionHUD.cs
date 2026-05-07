@@ -28,6 +28,7 @@ namespace LabDiner.Restaurant.UI
         [SerializeField] private Image _rewardIcon;
         [SerializeField] private TextMeshProUGUI _rewardValueText;
 
+        private BaseGemMissionSO _currentMission;
         private bool _isRewardable = false;
 
         void Awake()
@@ -35,8 +36,11 @@ namespace LabDiner.Restaurant.UI
             _claimRewardButton.onClick.AddListener(() => OnRewardClaimed?.Invoke());
         }
 
-        public void Setup(BaseGemMissionSO mission, int currentProgress, Action onCompleted = null)
+        #region API
+        public void Setup(BaseGemMissionSO mission, Action onCompleted = null)
         {
+            _currentMission = mission;
+
             _isRewardable = false;
             
             //Common UI Setup
@@ -46,41 +50,45 @@ namespace LabDiner.Restaurant.UI
             _missionUI.SetActive(true);
             _missionText.text = mission.Title;
             _rewardMissionIcon.sprite = mission.RewardIcon;
-            _progressText.text = $"{currentProgress}/{mission.MissionValue}";
-            _progressSlider.value = (float)currentProgress / mission.MissionValue;
+            _progressText.text = $"{mission.GetCurrentValue():F0}/{mission.TargetValue:F0}";
+            _progressSlider.value = (float)mission.GetCurrentValue() / mission.TargetValue;
 
             //Reward UI Setup
             _rewardUI.SetActive(false);
             _rewardIcon.sprite = mission.RewardIcon;
             _rewardValueText.text = mission.RewardValue.ToString();
 
-            if(currentProgress >= mission.MissionValue)
-            {
-                _isRewardable = true;
-                onCompleted?.Invoke();
-                HandleRewardable();
-            }
+            FetchCompleteStatus(onCompleted);
         }
 
-        public void UpdateProgress(int currentValue, int targetValue, Action onRewardable = null)
+        public void UpdateProgress(Action onCompleted = null)
         {
             if(_isRewardable) return; // Nếu đã hoàn thành nhiệm vụ, không cập nhật tiến độ nữa
 
-            _progressText.text = $"{currentValue}/{targetValue}";
-            _progressSlider.value = (float)currentValue / targetValue;
+            _progressText.text = $"{_currentMission.GetCurrentValue():F0}/{_currentMission.TargetValue:F0}";
+            _progressSlider.value = (float)_currentMission.GetCurrentValue() / _currentMission.TargetValue;
 
-            if (currentValue >= targetValue)
+            FetchCompleteStatus(onCompleted);
+        }
+
+        public void ToggleProgressText(bool isVisible)
+        {
+            _progressText.gameObject.SetActive(isVisible);
+        }
+        #endregion
+        
+
+        #region Private Methods
+        private void FetchCompleteStatus(Action onCompleted )
+        {
+            if(_currentMission.IsCompleted() && !_isRewardable)
             {
                 _isRewardable = true;
-                onRewardable?.Invoke();
-                HandleRewardable();
+                onCompleted?.Invoke();
+                _missionUI.SetActive(false);
+                _rewardUI.SetActive(true);
             }
         }
-
-        private void HandleRewardable()
-        {
-            _missionUI.SetActive(false);
-            _rewardUI.SetActive(true);
-        }
+        #endregion
     }
 }

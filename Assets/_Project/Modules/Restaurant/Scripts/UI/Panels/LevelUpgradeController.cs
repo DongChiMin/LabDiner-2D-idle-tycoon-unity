@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using LabDiner.Restaurant.Event;
+using LabDiner.Restaurant.Interface;
 using LabDiner.Restaurant.Manager;
 using LabDiner.Restaurant.SO;
 using LabDiner.Shared.Event;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 
 namespace LabDiner.Restaurant.UI
 {
-    public class LevelUpgradeController : MonoBehaviour
+    public class LevelUpgradeController : MonoBehaviour, ILevelInitializable
     {
         [Header("Events")]
         [SerializeField] private LevelCoinEvent _onCoinUpdated;

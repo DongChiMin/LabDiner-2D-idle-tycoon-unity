@@ -23,6 +23,7 @@ namespace LabDiner.Restaurant.Environment
         public string Name => _name;
         public Sprite DishIcon => _dishIcon;
         public double CurrentProfit => _currentProfit;
+        public bool IsMaxLevel => _currentLevel >= _maxStar * _levelPerStar;
 
         // Events
         public Action OnDataChanged;
@@ -231,7 +232,7 @@ namespace LabDiner.Restaurant.Environment
             _baseProfit = _coreStationSO.BaseProfit;
             _profitMultiplier = _coreStationSO.ProfitMultiplier;
             _baseUpgradeCost = _coreStationSO.BaseUpgradeCost;
-            _upgradeCostMultiplier = _coreStationSO.UpgradeCostMultiplier;
+            _upgradeCostMultiplier = _coreStationSO.CostMultiplier;
 
 
             _currentProfit = _baseProfit;
