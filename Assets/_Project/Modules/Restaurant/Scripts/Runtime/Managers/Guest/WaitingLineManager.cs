@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using LabDiner.Restaurant.Environment;
 using LabDiner.Restaurant.Event;
 using LabDiner.Restaurant.Humanoid;
+using LabDiner.Restaurant.SO;
 using LabDiner.Restaurant.UI;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace LabDiner.Restaurant.Manager
     public class WaitingLineManager : MonoBehaviour
     {
         public bool HasWaitingGuest => _waitingGuests.Count > 0;
+
+        [SerializeField] private DiningSeatRuntimeSetSO _diningSeatRuntimeSet;
 
         [Header("Spawn Settings")]
         [SerializeField] private Transform _startPoint;
@@ -62,7 +65,7 @@ namespace LabDiner.Restaurant.Manager
             // Bắt tất cả người còn lại tiến lên
             RearrangeQueue();
 
-            LevelManagerContext.Instance.DiningTableManager.OccupySeat(seat, guest);
+            _diningSeatRuntimeSet.SetOccupy(seat, guest);
             guest.FromWaitingLineToDiningSeat(seat);
 
             StopPatience();

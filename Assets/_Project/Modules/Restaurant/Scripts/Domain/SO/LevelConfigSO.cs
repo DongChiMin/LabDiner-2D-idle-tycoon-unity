@@ -15,6 +15,9 @@ namespace LabDiner.Restaurant.SO
         public List<BaseGemMissionSO> AvailableMissions;
         public BaseGemMissionSO FinalMission;
         public Action OnLevelComplete;
+
+        [Header("Feature Settings")]
+        public bool WaitingLine;
         
         [Header("Core Station Settings")]
         public List<CoreStationSO> CoreStations;   // Danh sách các trạm chính có trong level, dùng để tính toán tiến độ level dựa trên level max của các trạm chính này

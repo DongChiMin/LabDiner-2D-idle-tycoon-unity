@@ -10,11 +10,11 @@ namespace LabDiner.Restaurant.Manager
         [Header("Objects")]
         public ChefManager ChefManager;
         public WaiterManager WiterManager;
-        public GuestManager GuestManager;
+        public GuestSpawner GuestSpawner;
 
         [Header("Places")]
-        public DiningTableManager DiningTableManager;
-        public CoreStationManager CoreStationManager;
+        [SerializeField] private DiningTableManager DiningTableManager;
+        [SerializeField] public CoreStationManager CoreStationManager;
 
         [Header("Logics")]
         public ServeManager ServeManager;
@@ -31,7 +31,7 @@ namespace LabDiner.Restaurant.Manager
 
         public void Init(LevelConfigSO config)
         {
-            GuestManager.Init(config);
+            GuestSpawner.Init(config);
             DiningTableManager.Init(config);
         }
     }

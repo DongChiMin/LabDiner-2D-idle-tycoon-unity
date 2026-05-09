@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.Manager
 {
-    public class DiningTableManager : MonoBehaviour, ILevelInitializable
+    public partial class DiningTableManager : MonoBehaviour, ILevelInitializable
     {
         [Header("Events")]
         [SerializeField] private GuestQuantityEvent _onGuestQuantityChanged;
@@ -16,12 +16,8 @@ namespace LabDiner.Restaurant.Manager
         [SerializeField] private TableEvent _onTableDirty;
 
         [Header("References")]
+        [SerializeField] private DiningSeatRuntimeSetSO _diningSeatRuntimeSet;
         [SerializeField] private List<DiningTable> _tables = new List<DiningTable>();
-
-        [Header("DEBUG")]
-        [SerializeField] private List<DiningSeat> _spawnedSeats = new List<DiningSeat>();
-        [SerializeField] private List<DiningTable> _spawnedTables = new List<DiningTable>();
-        private LevelConfigSO _levelConfig;
 
         void OnEnable()
         {
@@ -37,6 +33,7 @@ namespace LabDiner.Restaurant.Manager
 
         void Awake()
         {
+            _diningSeatRuntimeSet.Clear();
             foreach(DiningTable table in _tables)
             {
                 table.gameObject.SetActive(false);
@@ -46,29 +43,8 @@ namespace LabDiner.Restaurant.Manager
         public void Init(LevelConfigSO config)
         {
             _levelConfig = config;
-            #if UNITY_EDITOR
-            ValidateData();
-            #endif
+            Debug_ValidateData();
         }
-
-        #region API
-        public List<DiningSeat> GetAvailableSeats()
-        {
-            List<DiningSeat> availableSeats = new List<DiningSeat>();
-            foreach (var seat in _spawnedSeats)
-            {
-                if (!seat.IsOccupied)
-                    availableSeats.Add(seat);
-            }
-            return availableSeats;   
-        }
-
-        public void OccupySeat(DiningSeat seat, GuestContext guest)
-        {
-            seat.Occupy(guest);
-        }
-
-        #endregion
 
 
         #region Private Methods
@@ -93,31 +69,17 @@ namespace LabDiner.Restaurant.Manager
         {
             int index = _spawnedTables.Count;
             DiningTable spawnTable = _tables[index];
-            _spawnedTables.Add(spawnTable);
-
             spawnTable.gameObject.SetActive(true);
+
             foreach(DiningSeat seat in spawnTable.Seats)
             {
-                _spawnedSeats.Add(seat);
+                _diningSeatRuntimeSet.Add(seat);
             }
+            Debug_FetchData();
         }
 
         #endregion
 
-        #if UNITY_EDITOR
-        private void ValidateData()
-        {
-            int totalSeat = 0;
-            foreach(DiningTable table in _tables)
-            {
-                totalSeat += table.Seats.Count;
-            }
-
-            if (_levelConfig.maxGuestQuantity > totalSeat)
-            {
-                Debug.LogError($"Số lượng khách tối đa: {_levelConfig.maxGuestQuantity} vượt quá số ghế có thể mở khóa: {totalSeat}. Cần điều chỉnh lại LevelConfigSO hoặc thêm nhiều bàn hơn!");
-            }
-        }
-        #endif
+        private partial void Debug_FetchData();
     }
 }
