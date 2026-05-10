@@ -17,6 +17,16 @@ namespace LabDiner.Restaurant.Manager
 
         [Header("Core Stations")]
         [SerializeField] private List<CoreStation> coreStations = new List<CoreStation>();
+        [SerializeField] private CoreStationRuntimeSO coreStationRuntimeSO;
+
+        void Awake()
+        {
+            coreStationRuntimeSO.Clear();
+            foreach(var station in coreStations)
+            {
+                coreStationRuntimeSO.AddCoreStation(station);
+            }
+        }
 
         void OnEnable()
         {

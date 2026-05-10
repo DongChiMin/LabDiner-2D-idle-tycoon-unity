@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 937a74d47b75dc644b1c691897a299dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _taskRuntimeSO: {fileID: 11400000, guid: 728242de5e1b9534e96d49351d7255cc, type: 2}
   _onNewUnservedOrder: {fileID: 11400000, guid: 7c5e3288b2179da4d90d0906782504de, type: 2}
   _workPos: {fileID: 4866547160653113531}
   _occupiedGuest: {fileID: 0}

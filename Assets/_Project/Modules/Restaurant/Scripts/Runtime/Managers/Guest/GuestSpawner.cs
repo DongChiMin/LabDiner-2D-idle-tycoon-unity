@@ -15,6 +15,7 @@ namespace LabDiner.Restaurant.Manager
 {
     public partial class GuestSpawner : MonoBehaviour, ILevelInitializable
     {
+        [SerializeField] private CoreStationRuntimeSO _coreStationRuntime;
         [Header("Upgrade Events")]
         [SerializeField] private GlobalUpgradeEvent _onUpgradeGuestQuantity;
 
@@ -79,6 +80,11 @@ namespace LabDiner.Restaurant.Manager
             while (true)
             {
                 yield return new WaitForSeconds(_spawnInterval);
+
+                if (!_coreStationRuntime.HasAnyUnlockedStation())
+                {
+                    continue; // Nếu chưa có trạm nào được mở khóa, không spawn khách
+                }
 
                 GuestContext guest = SpawnGuest();
                 _guestManager.Assign(guest, _exitPoint.position, _maxUniqueStations, _maxTotalQty);
