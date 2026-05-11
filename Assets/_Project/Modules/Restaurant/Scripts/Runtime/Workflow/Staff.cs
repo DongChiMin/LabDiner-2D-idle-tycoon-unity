@@ -5,7 +5,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace LabDiner.Restaurant.Humanoid
+namespace LabDiner.Restaurant.Workflow
 {
     public class Staff : MonoBehaviour
     {
@@ -27,12 +27,12 @@ namespace LabDiner.Restaurant.Humanoid
 
         void OnEnable()
         {
-            _taskRegistry.OnTaskAdded += HandleTaskAdded;
+            _taskRegistry.OnTasksUpdated += HandleTasksUpdated;
         }
 
         void OnDisable()
         {
-            _taskRegistry.OnTaskAdded -= HandleTaskAdded;
+            _taskRegistry.OnTasksUpdated -= HandleTasksUpdated;
         }
 
         void Awake()
@@ -40,7 +40,7 @@ namespace LabDiner.Restaurant.Humanoid
             _mySkills.Sort((a, b) => b.Priority.CompareTo(a.Priority)); // Sắp xếp kỹ năng theo độ ưu tiên
         }
 
-        private void HandleTaskAdded()
+        private void HandleTasksUpdated()
         {
             if (!_isWorking)
             {
@@ -52,12 +52,12 @@ namespace LabDiner.Restaurant.Humanoid
         {
             foreach (var skill in _mySkills)
             {
-                _currentTask = _taskRegistry.GetTask<BaseTask>(skill.SkillType);
+                _currentTask = _taskRegistry.TryGetTask<BaseTask>(skill.SkillType);
                 if (_currentTask != null)
                 {
                     _isWorking = true;
                     StopAllCoroutines();
-                    StartCoroutine(skill.PerformTask(_currentTask, onComplete: () =>
+                    StartCoroutine(skill.Execute(_currentTask, onComplete: () =>
                     {
                         _currentTask = null;
                         _isWorking = false;

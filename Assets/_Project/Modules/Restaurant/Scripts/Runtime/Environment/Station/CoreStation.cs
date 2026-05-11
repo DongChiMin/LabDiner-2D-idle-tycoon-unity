@@ -96,6 +96,30 @@ namespace LabDiner.Restaurant.Environment
 
 
         #region API
+        public bool HasAnyAvailableWorkPos()
+        {
+            foreach(var station in _stations)
+            {
+                if(station.IsAvailable)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Station PopAvailableStation()
+        {
+            List<Station> stations = _stations;
+            Station availableStation = stations.Find(ws => ws.IsAvailable);
+            if (availableStation != null)
+            {
+                availableStation.SetStatus(false); // Đánh dấu trạm này đang bận
+                return availableStation;
+            }
+            return null; // Không có trạm nào sẵn sàng
+        }
+
 
         /// <summary>
         /// Nâng cấp trạm chính:

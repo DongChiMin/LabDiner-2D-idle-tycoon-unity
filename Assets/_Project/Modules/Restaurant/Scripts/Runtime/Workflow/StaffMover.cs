@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace LabDiner.Restaurant.Humanoid
+namespace LabDiner.Restaurant.Workflow
 {
     public class StaffMover : MonoBehaviour
     {

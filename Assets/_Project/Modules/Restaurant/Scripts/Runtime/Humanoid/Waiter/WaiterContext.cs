@@ -9,7 +9,7 @@ namespace LabDiner.Restaurant.Humanoid
 {
     public class WaiterContext : MonoBehaviour, IStaff
     {
-        public StaffMover CtxMover => _mover;
+        public Restaurant.Workflow.StaffMover CtxMover => _mover;
         public WaiterBehavior CtxBehavior => _behavior;
         public WaiterAI CtxAI => _ai;
         public StaffCarryDishUI CarryDishLogic => _carryDishLogic;
@@ -33,7 +33,7 @@ namespace LabDiner.Restaurant.Humanoid
         [SerializeField] private Transform _restPosition;
 
         [Header("Components")]
-        [SerializeField] private StaffMover _mover;
+        [SerializeField] private Restaurant.Workflow.StaffMover _mover;
         [SerializeField] private WaiterBehavior _behavior;
         [SerializeField] private WaiterAI _ai;
 

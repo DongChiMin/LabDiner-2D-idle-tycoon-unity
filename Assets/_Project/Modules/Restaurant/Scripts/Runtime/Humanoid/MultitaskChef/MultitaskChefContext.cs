@@ -9,7 +9,7 @@ namespace LabDiner.Restaurant.Humanoid
 {
     public class MultitaskChefContext : MonoBehaviour, IStaff
     {         
-        public StaffMover CtxMover => _mover;
+        public Workflow.StaffMover CtxMover => _mover;
         public MultitaskChefBehavior CtxBehavior => _behavior;
         public MultitaskChefAI CtxAI => _ai;
         public StaffCarryDishUI CarryDishUI => _carryDishUI;
@@ -31,7 +31,7 @@ namespace LabDiner.Restaurant.Humanoid
         [SerializeField] private LevelCoinEvent _onCoinAdded;
         
         [Header("Components")]
-        [SerializeField] private StaffMover _mover;
+        [SerializeField] private Restaurant.Workflow.StaffMover _mover;
         [SerializeField] private MultitaskChefBehavior _behavior;
         [SerializeField] private MultitaskChefAI _ai;
 

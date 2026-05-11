@@ -22,15 +22,16 @@ namespace LabDiner.Restaurant.Humanoid
 
         public IEnumerator Cook(CookingTask task)
         {
-            //IMPORTANT: Công thức nấu ăn: Thời gian nấu = Thời gian cơ bản của món ăn / (1 + cookMultiplier)
-            CoreStation coreStation = task.CoreStation;
-            float cookTime = coreStation.RawProcessTime / (1 + cookMultiplier);
+                yield return null;
+            // //IMPORTANT: Công thức nấu ăn: Thời gian nấu = Thời gian cơ bản của món ăn / (1 + cookMultiplier)
+            // CoreStation coreStation = task.CoreStation;
+            // float cookTime = coreStation.RawProcessTime / (1 + cookMultiplier);
 
-            _context.ProgressPieUI.StartProgressPie(cookTime);
-            yield return new WaitForSeconds(cookTime);
-            task.StationTarget.SetStatus(true);
-            _context.CarryDishUI.UpdateCookingTaskPrice(task);
-            _context.CarryDishUI.CarryDish(task);
+            // _context.ProgressPieUI.StartProgressPie(cookTime);
+            // yield return new WaitForSeconds(cookTime);
+            // task.StationTarget.SetStatus(true);
+            // _context.CarryDishUI.UpdateCookingTaskPrice(task);
+            // _context.CarryDishUI.CarryDish(task);
         }
 
         public IEnumerator Serve(Order order)
@@ -44,10 +45,11 @@ namespace LabDiner.Restaurant.Humanoid
 
         public IEnumerator GiveFoodToGuest(CookingTask cookingTask)
         {
-            GuestContext guest = cookingTask.Order.OrderBy;
-            guest.ReceiveFood(cookingTask);
-            yield return new WaitForSeconds(_giveFoodDuration);
-            _context.CarryDishUI.Finish(cookingTask);
+            yield return null;
+        //     GuestContext guest = cookingTask.Order.OrderBy;
+        //     guest.ReceiveFood(cookingTask);
+        //     yield return new WaitForSeconds(_giveFoodDuration);
+        //     _context.CarryDishUI.Finish(cookingTask);
         }
     }
 }

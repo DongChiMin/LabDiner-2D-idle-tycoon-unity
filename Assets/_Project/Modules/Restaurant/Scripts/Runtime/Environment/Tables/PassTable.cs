@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using LabDiner.Restaurant.Model;
+using LabDiner.Restaurant.Workflow;
 using TMPro;
 using UnityEngine;
 

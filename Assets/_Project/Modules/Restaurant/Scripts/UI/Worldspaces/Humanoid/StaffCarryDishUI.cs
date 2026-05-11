@@ -1,5 +1,4 @@
-using LabDiner.Restaurant.Environment;
-using LabDiner.Restaurant.Model;
+using LabDiner.Restaurant.Workflow;
 using TMPro;
 using UnityEngine;
 
@@ -22,8 +21,6 @@ namespace LabDiner.Restaurant.UI
 
         public void UpdateCookingTaskPrice(CookingTask task)
         {
-            CoreStation station = task.CoreStation;
-            task.Profit = station.CurrentProfit;
             currentPrice = task.Profit;
         }
 

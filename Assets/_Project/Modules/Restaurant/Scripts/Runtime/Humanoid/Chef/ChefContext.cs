@@ -8,7 +8,7 @@ namespace LabDiner.Restaurant.Humanoid
 {
     public class ChefContext : MonoBehaviour, IStaff
     { 
-        public StaffMover CtxMover => _mover;
+        public Restaurant.Workflow.StaffMover CtxMover => _mover;
         public ChefBehavior CtxBehavior => _behavior;
         public ChefAI CtxAI => _ai;
         public StaffCarryDishUI CarryDishUI => _carryDishUI;
@@ -28,7 +28,7 @@ namespace LabDiner.Restaurant.Humanoid
         [SerializeField] private ChefEvent _onChefAvailable;
 
         [Header("Components")]
-        [SerializeField] private StaffMover _mover;
+        [SerializeField] private Restaurant.Workflow.StaffMover _mover;
         [SerializeField] private ChefBehavior _behavior;
         [SerializeField] private ChefAI _ai;
 

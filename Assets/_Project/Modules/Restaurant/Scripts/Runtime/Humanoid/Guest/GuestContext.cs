@@ -50,7 +50,7 @@ namespace LabDiner.Restaurant.Humanoid
             _guestAI.FromWaitingLineToDiningSeat(seat);
         }
 
-        public void ReceiveFood(CookingTask cookingTask)
+        public void ReceiveFood(Restaurant.Workflow.CookingTask cookingTask)
         {
             _guestLogic.ReceiveFood(cookingTask);
         }

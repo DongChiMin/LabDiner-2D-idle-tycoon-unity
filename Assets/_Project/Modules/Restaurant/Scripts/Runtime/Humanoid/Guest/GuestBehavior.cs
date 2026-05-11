@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using LabDiner.Restaurant.Environment;
 using LabDiner.Restaurant.Event;
 using LabDiner.Restaurant.Model;
+using LabDiner.Restaurant.SO;
+using LabDiner.Restaurant.Workflow;
 using UnityEngine;
 
 namespace LabDiner.Restaurant.Humanoid
 {
     public class GuestBehavior : MonoBehaviour
     {
+        [Header("References")]
+        [SerializeField] private TaskRuntimeSO _taskRuntimeSO;
+        
         [Header("Events")]
         [SerializeField] private GuestEvent _onGuestWaitInLine;
         [SerializeField] private GuestEvent _onGuestHappy;
@@ -30,6 +35,12 @@ namespace LabDiner.Restaurant.Humanoid
         }
 
         private GuestContext _ctx;
+        private ServingTask _servingTask;
+
+        void Awake()
+        {
+            _servingTask = new ServingTask(null, null);
+        }
 
         void OnEnable()
         {
@@ -55,7 +66,9 @@ namespace LabDiner.Restaurant.Humanoid
         public IEnumerator WaitForServe(DiningSeat seat)
         {
             if (_order == null) Debug.LogError("Order của khách này đang trống!");
-            seat.WaitingForServe(_order);
+            _servingTask.SetOrder(_order);
+            _servingTask.SetLocation(seat.WorkPos);
+            _taskRuntimeSO.Add(_servingTask);
             while (!_isServed)
             {
                 yield return null;

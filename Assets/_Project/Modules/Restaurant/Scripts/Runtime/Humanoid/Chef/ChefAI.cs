@@ -2,6 +2,7 @@ using System.Collections;
 using LabDiner.Restaurant.Environment;
 using LabDiner.Restaurant.Event;
 using LabDiner.Restaurant.Model;
+using LabDiner.Restaurant.Workflow;
 using UnityEngine;
 
 namespace LabDiner.Restaurant.Humanoid
@@ -11,7 +12,7 @@ namespace LabDiner.Restaurant.Humanoid
         [Header("Event")]
         [SerializeField] private ChefEvent _onChefAvailable;
         [Header("[DEBUG]")]
-        [SerializeField] private CookingTask currentTask;
+        [SerializeField] private Restaurant.Model.CookingTask currentTask;
 
         private StaffMover _mover;
         private ChefBehavior _behavior;
@@ -24,7 +25,7 @@ namespace LabDiner.Restaurant.Humanoid
             _context = GetComponent<ChefContext>();
         }
 
-        private IEnumerator DoTask(CookingTask task)
+        private IEnumerator DoTask(Restaurant.Model.CookingTask task)
         {
             currentTask = task;
             Station station = task.StationTarget;
@@ -48,13 +49,13 @@ namespace LabDiner.Restaurant.Humanoid
 
         }
 
-        public void StartTask(CookingTask task)
+        public void StartTask(Restaurant.Model.CookingTask task)
         {
             StopAllCoroutines();
             StartCoroutine(DoTask(task));
         }
 
-        IEnumerator Rest(CookingTask task)
+        IEnumerator Rest(Restaurant.Model.CookingTask task)
         {
             currentTask = null;
             _context.OnTaskCompleted(task);

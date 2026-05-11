@@ -23,7 +23,7 @@ namespace LabDiner.Restaurant.Humanoid
             _ctx.OrderCanvas.Setup(_remainingDishes);
         }
 
-        public void ReceiveFood(CookingTask cookingTask)
+        public void ReceiveFood(LabDiner.Restaurant.Workflow.CookingTask cookingTask)
         {
             CoreStation receivedDish = cookingTask.CoreStation;
             if(_remainingDishes.ContainsKey(receivedDish))

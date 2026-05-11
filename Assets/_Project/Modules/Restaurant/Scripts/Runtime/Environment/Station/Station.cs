@@ -1,5 +1,6 @@
 using System;
 using LabDiner.Restaurant.Event;
+using LabDiner.Restaurant.SO;
 using LabDiner.Shared.Input;
 using UnityEngine;
 
@@ -11,7 +12,8 @@ namespace LabDiner.Restaurant.Environment
         public Action OnClickStation;
         public Transform WorkPos => _workPos;
         public bool IsAvailable => _isAvailable;
-        [SerializeField] private StationEvent onStationAvailable;
+        // [SerializeField] private StationEvent onStationAvailable;
+        [SerializeField] private TaskRuntimeSO _taskRuntimeSO;
         [SerializeField] private SpriteRenderer _stationSprite;
         
         [Header("[DEBUG]")]
@@ -29,7 +31,7 @@ namespace LabDiner.Restaurant.Environment
             _isAvailable = isAvailable;
             if(_isAvailable)
             {
-                onStationAvailable.Raise(this);
+                _taskRuntimeSO.OnTasksUpdated?.Invoke();
             }
         }
 

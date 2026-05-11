@@ -12,3 +12,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 628953114380b614f9731bf9d65bd41b, type: 3}
   m_Name: TaskRuntimeSet
   m_EditorClassIdentifier: 
+  _filterType: 1
+  _viewingTasks:
+  - rid: 8708649090536702094
+  - rid: 8708649090536702095
+  - rid: 8708649090536702096
+  - rid: 8708649090536702097
+  - rid: 8708649090536702098
+  references:
+    version: 2
+    RefIds:
+    - rid: 8708649090536702094
+      type: {class: CookingTask, ns: LabDiner.Restaurant.Workflow, asm: LabDiner.Restaurant}
+      data:
+        _type: 1
+        _location: {fileID: 0}
+        _isAssigned: 0
+        _order:
+          OrderBy: {fileID: 0}
+          Profit: 0
+          IsServed: 0
+        _coreStation: {fileID: 0}
+        _passTableTarget: {fileID: 0}
+        _stationTarget: {fileID: 0}
+        _profit: 0
+    - rid: 8708649090536702095
+      type: {class: CookingTask, ns: LabDiner.Restaurant.Workflow, asm: LabDiner.Restaurant}
+      data:
+        _type: 1
+        _location: {fileID: 0}
+        _isAssigned: 0
+        _order:
+          OrderBy: {fileID: 0}
+          Profit: 0
+          IsServed: 0
+        _coreStation: {fileID: 0}
+        _passTableTarget: {fileID: 0}
+        _stationTarget: {fileID: 0}
+        _profit: 0
+    - rid: 8708649090536702096
+      type: {class: CookingTask, ns: LabDiner.Restaurant.Workflow, asm: LabDiner.Restaurant}
+      data:
+        _type: 1
+        _location: {fileID: 0}
+        _isAssigned: 0
+        _order:
+          OrderBy: {fileID: 0}
+          Profit: 0
+          IsServed: 0
+        _coreStation: {fileID: 0}
+        _passTableTarget: {fileID: 0}
+        _stationTarget: {fileID: 0}
+        _profit: 0
+    - rid: 8708649090536702097
+      type: {class: CookingTask, ns: LabDiner.Restaurant.Workflow, asm: LabDiner.Restaurant}
+      data:
+        _type: 1
+        _location: {fileID: 0}
+        _isAssigned: 0
+        _order:
+          OrderBy: {fileID: 0}
+          Profit: 0
+          IsServed: 0
+        _coreStation: {fileID: 0}
+        _passTableTarget: {fileID: 0}
+        _stationTarget: {fileID: 0}
+        _profit: 0
+    - rid: 8708649090536702098
+      type: {class: CookingTask, ns: LabDiner.Restaurant.Workflow, asm: LabDiner.Restaurant}
+      data:
+        _type: 1
+        _location: {fileID: 0}
+        _isAssigned: 0
+        _order:
+          OrderBy: {fileID: 0}
+          Profit: 0
+          IsServed: 0
+        _coreStation: {fileID: 0}
+        _passTableTarget: {fileID: 0}
+        _stationTarget: {fileID: 0}
+        _profit: 0

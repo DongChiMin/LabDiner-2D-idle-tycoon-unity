@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5db6061436c05a645bd7117280319819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onStationAvailable: {fileID: 11400000, guid: f5470e48837e73443b8ac8e48dd35183, type: 2}
+  _taskRuntimeSO: {fileID: 11400000, guid: 728242de5e1b9534e96d49351d7255cc, type: 2}
   _stationSprite: {fileID: 583041343674674830}
   _workPos: {fileID: 7623063786277498806}
   _isAvailable: 1

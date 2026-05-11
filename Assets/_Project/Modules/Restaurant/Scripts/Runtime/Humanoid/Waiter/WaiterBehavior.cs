@@ -31,22 +31,24 @@ namespace LabDiner.Restaurant.Humanoid
 
         public IEnumerator PickUpFromPassTable(CookingTask cookingTask)
         {
-            PassTable passTable = cookingTask.PassTableTarget;
-            passTable.PickUpDish(cookingTask);
-            _ctx.ProgressPieLogic.StartProgressPie(_pickUpDuration);
-            yield return new WaitForSeconds(_pickUpDuration); // Giả lập thời gian lấy món
-            _ctx.CarryDishLogic.CarryDish(cookingTask);
+            yield break;
+            // PassTable passTable = cookingTask.PassTableTarget;
+            // passTable.PickUpDish(cookingTask);
+            // _ctx.ProgressPieLogic.StartProgressPie(_pickUpDuration);
+            // yield return new WaitForSeconds(_pickUpDuration); // Giả lập thời gian lấy món
+            // _ctx.CarryDishLogic.CarryDish(cookingTask);
         }
 
         public IEnumerator GiveFoodToGuest(CookingTask cookingTask)
         {
-            GuestContext guest = cookingTask.Order.OrderBy;
-            guest.ReceiveFood(cookingTask);
+            yield break;
+            // GuestContext guest = cookingTask.Order.OrderBy;
+            // guest.ReceiveFood(cookingTask);
             
-            //TODO: điều chỉnh thời gian phục vụ nếu cần thiết, hiện tại để 0 để món ăn được giao ngay lập tức
-            _ctx.ProgressPieLogic.StartProgressPie(_giveFoodDuration);
-            yield return new WaitForSeconds(_giveFoodDuration);
-            _ctx.CarryDishLogic.Finish(cookingTask);
+            // //TODO: điều chỉnh thời gian phục vụ nếu cần thiết, hiện tại để 0 để món ăn được giao ngay lập tức
+            // _ctx.ProgressPieLogic.StartProgressPie(_giveFoodDuration);
+            // yield return new WaitForSeconds(_giveFoodDuration);
+            // _ctx.CarryDishLogic.Finish(cookingTask);
         }
     }
 }

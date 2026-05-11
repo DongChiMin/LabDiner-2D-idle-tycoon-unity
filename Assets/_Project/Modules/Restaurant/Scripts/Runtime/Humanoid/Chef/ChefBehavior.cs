@@ -20,24 +20,26 @@ namespace LabDiner.Restaurant.Humanoid
 
         public IEnumerator Cook(CookingTask task)
         {
-            //IMPORTANT: Công thức nấu ăn: Thời gian nấu = Thời gian cơ bản của món ăn / (1 + cookMultiplier)
-            CoreStation coreStation = task.CoreStation;
-            float cookTime = coreStation.RawProcessTime / (1 + cookMultiplier);
+            yield return null;
+            // //IMPORTANT: Công thức nấu ăn: Thời gian nấu = Thời gian cơ bản của món ăn / (1 + cookMultiplier)
+            // CoreStation coreStation = task.CoreStation;
+            // float cookTime = coreStation.RawProcessTime / (1 + cookMultiplier);
 
-            _context.ProgressPieUI.StartProgressPie(cookTime);
-            yield return new WaitForSeconds(cookTime);
-            task.StationTarget.SetStatus(true);
-            _context.CarryDishUI.UpdateCookingTaskPrice(task);
-            _context.CarryDishUI.CarryDish(task);
+            // _context.ProgressPieUI.StartProgressPie(cookTime);
+            // yield return new WaitForSeconds(cookTime);
+            // task.StationTarget.SetStatus(true);
+            // _context.CarryDishUI.UpdateCookingTaskPrice(task);
+            // _context.CarryDishUI.CarryDish(task);
         }
 
         public IEnumerator PlaceOnPassTable(CookingTask task)
         {
-            task.PassTableTarget.PlaceTaskOnPassTable(task);
-            // Di chuyển món ăn đến PassTable, bật hiệu ứng đặt món...
-            _context.ProgressPieUI.StartProgressPie(placeOnPassTableDuration);
-            yield return new WaitForSeconds(placeOnPassTableDuration);
-            _context.CarryDishUI.Finish(task);
+            yield return null;
+            // task.PassTableTarget.PlaceTaskOnPassTable(task);
+            // // Di chuyển món ăn đến PassTable, bật hiệu ứng đặt món...
+            // _context.ProgressPieUI.StartProgressPie(placeOnPassTableDuration);
+            // yield return new WaitForSeconds(placeOnPassTableDuration);
+            // _context.CarryDishUI.Finish(task);
         }
     }
 }

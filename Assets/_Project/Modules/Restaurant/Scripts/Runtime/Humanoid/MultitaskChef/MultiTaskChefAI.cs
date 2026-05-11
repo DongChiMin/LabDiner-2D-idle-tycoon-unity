@@ -8,7 +8,7 @@ namespace LabDiner.Restaurant.Humanoid
 {
     public class MultitaskChefAI : MonoBehaviour
     {
-        private StaffMover _mover;
+        private Restaurant.Workflow.StaffMover _mover;
         private MultitaskChefBehavior _behavior;
         private MultitaskChefContext _context;
         [Header("[DEBUG]")]
@@ -16,7 +16,7 @@ namespace LabDiner.Restaurant.Humanoid
 
         void Awake()
         {
-            _mover = GetComponent<StaffMover>();
+            _mover = GetComponent<Restaurant.Workflow.StaffMover>();
             _behavior = GetComponent<MultitaskChefBehavior>();
             _context = GetComponent<MultitaskChefContext>();
         }

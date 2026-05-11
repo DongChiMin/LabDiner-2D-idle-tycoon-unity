@@ -7,7 +7,7 @@ using LabDiner.Restaurant.Interface;
 using LabDiner.Restaurant.UI;
 using UnityEngine;
 
-namespace LabDiner.Restaurant
+namespace LabDiner.Restaurant.Workflow
 {
     
     public partial class ServingSkill : StaffSkill

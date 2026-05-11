@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using LabDiner.Restaurant.Enum;
-using LabDiner.Restaurant.Humanoid;
+using LabDiner.Restaurant.Workflow;
 using LabDiner.Restaurant.Interface;
 using UnityEngine;
 
-namespace LabDiner.Restaurant
+namespace LabDiner.Restaurant.Workflow
 {
     [RequireComponent(typeof(Staff))]
     public abstract class StaffSkill : MonoBehaviour
@@ -19,7 +19,8 @@ namespace LabDiner.Restaurant
             _staff = GetComponent<Staff>();
         }
 
-        public abstract TaskType SkillType { get; } 
-        public abstract IEnumerator PerformTask(BaseTask task, Action onComplete);
+        public abstract IEnumerator Execute(BaseTask task, Action onComplete);
+
+        public abstract TaskType SkillType { get; }
     }
 }
