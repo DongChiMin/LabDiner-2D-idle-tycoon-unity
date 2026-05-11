@@ -7806,6 +7806,7 @@ MonoBehaviour:
   _progressPieUI: {fileID: 1277184783}
   _carryDishUI: {fileID: 1454399392}
   _passTableRuntimeSO: {fileID: 11400000, guid: 9471fea5369dd2b40a37efd6fcf47f7b, type: 2}
+  _onCoinAdded: {fileID: 11400000, guid: 762700b435a5f8341a777a47398735eb, type: 2}
 --- !u!1001 &1612960281
 PrefabInstance:
   m_ObjectHideFlags: 0
