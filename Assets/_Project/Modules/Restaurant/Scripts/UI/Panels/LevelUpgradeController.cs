@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using LabDiner.Restaurant.Event;
 using LabDiner.Restaurant.Interface;
 using LabDiner.Restaurant.Manager;
 using LabDiner.Restaurant.SO;
 using LabDiner.Shared.Event;
+using LabDiner.Shared.SO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +13,9 @@ namespace LabDiner.Restaurant.UI
 {
     public class LevelUpgradeController : MonoBehaviour, ILevelInitializable
     {
+        [Header("Data")]
+        [SerializeField] private DoubleRuntimeSO _coinData;
         [Header("Events")]
-        [SerializeField] private LevelCoinEvent _onCoinUpdated;
-        [SerializeField] private LevelCoinEvent _onCoinSpent;
         [SerializeField] private BoolEvent _onLevelUpgradable;
         [SerializeField] private UIPopupEvent _onPopupShow;
 
@@ -29,7 +31,7 @@ namespace LabDiner.Restaurant.UI
             _panel.CloseButton.onClick.AddListener(HandlePopupHide);
 
             _onPopupShow.Register(HandlePopupShow);
-            _onCoinUpdated.Register(HandleCoinUpdated);
+            _coinData.OnValueChanged += HandleCoinUpdated;
         }
 
         void OnDisable()
@@ -37,7 +39,7 @@ namespace LabDiner.Restaurant.UI
             _panel.CloseButton.onClick.RemoveListener(HandlePopupHide);
 
             _onPopupShow.Unregister(HandlePopupShow);
-            _onCoinUpdated.Unregister(HandleCoinUpdated);
+            _coinData.OnValueChanged -= HandleCoinUpdated;
         }
 
         #region API
@@ -45,8 +47,8 @@ namespace LabDiner.Restaurant.UI
         public void Init(LevelConfigSO levelConfigSO)
         {
             List<BaseUpgradeSO> baseUpgradeSOs = levelConfigSO.AvailableUpgrades;
-            double levelCoin = LevelManagerContext.Instance.LevelCurrencyManager.CurrentCoin;
-            
+            double levelCoin = _coinData.Value;
+
             foreach (Transform child in _itemParent)
             {
                 Destroy(child.gameObject);
@@ -62,7 +64,7 @@ namespace LabDiner.Restaurant.UI
                 Button upgradeButton = item.UpgradeButton;
                 upgradeButton.onClick.AddListener(() => 
                 {
-                    _onCoinSpent.Raise(data.UpgradeCost);
+                    _coinData.Add(-data.UpgradeCost);
                     data.ApplyUpgrade();
                     item.gameObject.SetActive(false);
                 });
@@ -75,7 +77,7 @@ namespace LabDiner.Restaurant.UI
 
         private void HandlePopupShow()
         {
-            double levelCoin = LevelManagerContext.Instance.LevelCurrencyManager.CurrentCoin;
+            double levelCoin = _coinData.Value;
             HandleCoinUpdated(levelCoin);
 
             _panel.Show();

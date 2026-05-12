@@ -15,7 +15,7 @@ namespace LabDiner.Restaurant.Manager
         [SerializeField] public CoreStationManager CoreStationManager;
 
         [Header("Logics")]
-        public LevelCurrencyManager LevelCurrencyManager;
+        // public LevelCurrencyManager LevelCurrencyManager;
         public ReputationManager ReputationManager;
 
         [Header("[Optional]")]  //có thể null tùy level

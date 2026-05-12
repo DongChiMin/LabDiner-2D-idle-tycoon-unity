@@ -1,6 +1,7 @@
 using LabDiner.Restaurant.Environment;
 using LabDiner.Shared.Event;
 using LabDiner.Shared.Input;
+using LabDiner.Shared.SO;
 using UnityEngine;
 
 namespace LabDiner.Restaurant.UI
@@ -9,7 +10,7 @@ namespace LabDiner.Restaurant.UI
     {
         
         [Header("Events")]
-        [SerializeField] private LevelCoinEvent _onCoinUpdated;
+        [SerializeField] private DoubleRuntimeSO _coinData;
 
         [Header("View")]
         [SerializeField] private CoreStationUI _CoreStationUI;
@@ -25,7 +26,7 @@ namespace LabDiner.Restaurant.UI
             _CoreStation.OnDataChanged += UpdateUI;
             _CoreStation.OnMaxLevel += HandleMaxLevelReached;
 
-            _onCoinUpdated.Register(HandleCoinUpdated);
+            _coinData.OnValueChanged += HandleCoinUpdated;
 
             _CoreStationUI.OnUpgradeButtonClicked += RequestUpgrade;
             _CoreStationUnlockUI.OnUpgradeButtonClicked += RequestUpgrade;
@@ -36,7 +37,7 @@ namespace LabDiner.Restaurant.UI
             _CoreStation.OnDataChanged -= UpdateUI;
             _CoreStation.OnMaxLevel -= HandleMaxLevelReached;
 
-            _onCoinUpdated.Unregister(HandleCoinUpdated);
+            _coinData.OnValueChanged -= HandleCoinUpdated;
 
             _CoreStationUI.OnUpgradeButtonClicked -= RequestUpgrade;
             _CoreStationUnlockUI.OnUpgradeButtonClicked -= RequestUpgrade;

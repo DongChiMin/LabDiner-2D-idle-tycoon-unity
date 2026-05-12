@@ -6,6 +6,7 @@ using LabDiner.Restaurant.Humanoid;
 using LabDiner.Restaurant.SO;
 using LabDiner.Restaurant.UI;
 using LabDiner.Shared.Event;
+using LabDiner.Shared.SO;
 using UnityEngine;
 
 namespace LabDiner.Restaurant.Workflow
@@ -20,7 +21,7 @@ namespace LabDiner.Restaurant.Workflow
         [SerializeField] private StaffProgressPieUI _progressPieUI;
         [SerializeField] private StaffCarryDishUI _carryDishUI;
         [SerializeField] private PassTableRuntimeSO _passTableRuntimeSO;
-        [SerializeField] private LevelCoinEvent _onCoinAdded;
+        [SerializeField] private DoubleRuntimeSO _coinData;
 
         public override TaskType SkillType => TaskType.Cooking;
         public override IEnumerator Execute(BaseTask task, Action onComplete)
@@ -77,7 +78,7 @@ namespace LabDiner.Restaurant.Workflow
 
                 //4. Hoàn thành
                 Debug_FetchData(null);
-                _onCoinAdded.Raise(cookingTask.Profit);
+                _coinData.Add(cookingTask.Profit);
                 onComplete?.Invoke();
 
                 //5. Di chuyển về vị trí nghỉ ngơi

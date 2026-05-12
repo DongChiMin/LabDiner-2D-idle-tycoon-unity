@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.SO
 {
-    [CreateAssetMenu(fileName = "CoreStationRuntimeSet", menuName = "LabDiner/RuntimeSet/CoreStation")]
+    [CreateAssetMenu(fileName = "CoreStationRuntimeSet", menuName = "SO/Runtime//CoreStation")]
     public class CoreStationRuntimeSO : ScriptableObject
     {
         // Danh sách CoreStation có trên level, được quản lý bởi CoreStationManager

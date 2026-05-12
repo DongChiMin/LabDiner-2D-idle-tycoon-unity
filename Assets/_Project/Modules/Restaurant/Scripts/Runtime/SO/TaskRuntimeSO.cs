@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.SO
 {
-    [CreateAssetMenu(fileName = "TaskRuntimeSet", menuName = "LabDiner/RuntimeSet/Task")]
+    [CreateAssetMenu(fileName = "TaskRuntimeSet", menuName = "SO/Runtime//Task")]
     public partial class TaskRuntimeSO : ScriptableObject
     {
         //Ví dụ: Dict<ServingTask, danh sách task có type tương ứng...> 

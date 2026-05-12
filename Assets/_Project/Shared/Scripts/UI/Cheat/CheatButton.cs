@@ -1,4 +1,5 @@
 using LabDiner.Shared.Event;
+using LabDiner.Shared.SO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,9 +7,12 @@ namespace LabDiner.Shared
 {
     public class CheatButton : MonoBehaviour
     {
+        [Header("Data")]
+        [SerializeField] private DoubleRuntimeSO _coinData;
+        [SerializeField] private IntRuntimeSO _gemData;
+
         [Header("Gem Add")]
         [SerializeField] private Button _gemAddedButton;
-        [SerializeField] private LevelGemEvent _onGemAdded;
         [SerializeField] private int _gemAddedValue;
 
         [Header("Gem Fly")]
@@ -19,7 +23,6 @@ namespace LabDiner.Shared
 
         [Header("Coin Add")]
         [SerializeField] private Button _coinAddedButton;
-        [SerializeField] private LevelCoinEvent _onCoinAdded;
         [SerializeField] private int _coinAddedValue;
 
         [Header("Coin Fly")]
@@ -31,7 +34,7 @@ namespace LabDiner.Shared
 
         void Awake()
         {
-            _gemAddedButton.onClick.AddListener(() => _onGemAdded.Raise(_gemAddedValue));
+            _gemAddedButton.onClick.AddListener(() => _gemData.Add(_gemAddedValue));
             _gemFlyButton.onClick.AddListener(() => 
             {
                 GemRewardData data = new GemRewardData
@@ -42,7 +45,7 @@ namespace LabDiner.Shared
                 _onGemFlyAdded.Raise(data);
             });
 
-            _coinAddedButton.onClick.AddListener(() => _onCoinAdded.Raise(_coinAddedValue));
+            _coinAddedButton.onClick.AddListener(() => _coinData.Add(_coinAddedValue));
             _coinFlyButton.onClick.AddListener(() =>
             {
                CoinRewardData data = new CoinRewardData

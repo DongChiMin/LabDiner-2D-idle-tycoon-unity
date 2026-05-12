@@ -5,6 +5,7 @@ using LabDiner.Shared.Extension;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using LabDiner.Shared.SO;
 
 namespace LabDiner.Restaurant.UI
 {
@@ -12,33 +13,28 @@ namespace LabDiner.Restaurant.UI
     {
         [SerializeField] private TextMeshProUGUI _coinText;
         [SerializeField] private TextMeshProUGUI _gemText;
+        [SerializeField] private DoubleRuntimeSO _coinRuntimeData;
+        [SerializeField] private IntRuntimeSO _gemRuntimeData;
 
         [Header("Events")]
-        [SerializeField] private LevelCoinEvent _onCoinUpdated;
         [SerializeField] private LevelCoinFlyEvent _onCoinFlyAdded;
-
-        [SerializeField] private LevelGemEvent _onGemUpdated;
         [SerializeField] private LevelGemFlyEvent _onGemFlyAdded;
-
-        // Xóa _tweenDuration và các biến _displayed nếu không còn nhu cầu dùng cho việc gì khác
-        private double _currentCoin;
-        private int _currentGem;
 
         void OnEnable()
         {
-            _onCoinUpdated.Register(UpdateCoinUI);
+            _coinRuntimeData.OnValueChanged += UpdateCoinUI;
             _onCoinFlyAdded.Register(HandleCoinFlyAdded);
 
-            _onGemUpdated.Register(UpdateGemUI);
+            _gemRuntimeData.OnValueChanged += UpdateGemUI;
             _onGemFlyAdded.Register(HandleGemFlyAdded);
         }
 
         void OnDisable()
         {
-            _onCoinUpdated.Unregister(UpdateCoinUI);
+            _coinRuntimeData.OnValueChanged -= UpdateCoinUI;
             _onCoinFlyAdded.Unregister(HandleCoinFlyAdded);
 
-            _onGemUpdated.Unregister(UpdateGemUI);
+            _gemRuntimeData.OnValueChanged -= UpdateGemUI;
             _onGemFlyAdded.Unregister(HandleGemFlyAdded);
             
             // Dừng các hiệu ứng scale nếu đang chạy
@@ -47,14 +43,12 @@ namespace LabDiner.Restaurant.UI
 
         private void UpdateCoinUI(double newCoinAmount)
         {
-            _currentCoin = newCoinAmount;
-            _coinText.text = CurrencyFormatter.Format(_currentCoin);
+            _coinText.text = CurrencyFormatter.Format(newCoinAmount);
         }
 
         private void UpdateGemUI(int newGemAmount)
         {
-            _currentGem = newGemAmount;
-            _gemText.text = _currentGem.ToString();
+            _gemText.text = _gemRuntimeData.Value.ToString();
         }
 
         private void HandleCoinFlyAdded(CoinRewardData data)
@@ -70,17 +64,14 @@ namespace LabDiner.Restaurant.UI
                 // Khi viên coin đầu tiên chạm đích, cập nhật text ngay lập tức
                 if (!hasUpdatedText)
                 {
-                    _currentCoin += data.RewardValue;
-                    _coinText.text = CurrencyFormatter.Format(_currentCoin); 
+                    _coinRuntimeData.Add(data.RewardValue);
+                    _coinText.text = CurrencyFormatter.Format(_coinRuntimeData.Value);
                     hasUpdatedText = true;
                 }
 
                 // Hiệu ứng "nảy" nhẹ HUD để tạo cảm giác phản hồi (Feedback)
                 _coinText.transform.parent.DOKill(true);
                 _coinText.transform.parent.DOPunchScale(Vector3.one * 0.1f, 0.1f);
-
-                //Thông báo coin đã được cập nhật sau khi hiệu ứng bay kết thúc
-                _onCoinUpdated.Raise(_currentCoin);
             });
         }
 
@@ -97,17 +88,14 @@ namespace LabDiner.Restaurant.UI
                 // Khi viên gem đầu tiên chạm đích, cập nhật text ngay lập tức
                 if (!hasUpdatedText)
                 {
-                    _currentGem += data.RewardValue;
-                    _gemText.text = CurrencyFormatter.Format(_currentGem); 
+                    _gemRuntimeData.Add(data.RewardValue);
+                    _gemText.text = CurrencyFormatter.Format(_gemRuntimeData.Value);
                     hasUpdatedText = true;
                 }
 
                 // Hiệu ứng "nảy" nhẹ HUD để tạo cảm giác phản hồi (Feedback)
                 _gemText.transform.parent.DOKill(true);
                 _gemText.transform.parent.DOPunchScale(Vector3.one * 0.1f, 0.1f);
-
-                //Thông báo gem đã được cập nhật sau khi hiệu ứng bay kết thúc
-                _onGemUpdated.Raise(_currentGem);
             });
         }
     }

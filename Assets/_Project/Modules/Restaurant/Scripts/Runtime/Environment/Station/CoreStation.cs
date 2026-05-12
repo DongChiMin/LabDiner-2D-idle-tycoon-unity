@@ -6,6 +6,7 @@ using LabDiner.Restaurant.Manager;
 using LabDiner.Restaurant.SO;
 using LabDiner.Restaurant.UI;
 using LabDiner.Shared.Event;
+using LabDiner.Shared.SO;
 using LabDiner.Shared.UI;
 using UnityEngine;
 
@@ -36,12 +37,11 @@ namespace LabDiner.Restaurant.Environment
         [SerializeField] private Transform gemRewardStartPos;   // Điểm xuất hiện hiệu ứng gem khi nhận thưởng từ star upgrade
 
         [Header("Events")]
-        [SerializeField] private LevelCoinEvent _onCoinSpent;
-        [SerializeField] private LevelCoinEvent _onCoinUpdated;
         [SerializeField] private CoreStationEvent _onCoreStationLevelUpgraded;
 
         [Header("Data")]
         [SerializeField] private CoreStationSO _coreStationSO;
+        [SerializeField] private DoubleRuntimeSO _coinRuntimeData;
 
         [Header("[DEBUG] Static Attributes")]
         [SerializeField] private string _name = "New CoreStation";
@@ -68,7 +68,7 @@ namespace LabDiner.Restaurant.Environment
 
         void OnEnable()
         {
-            _onCoinUpdated.Register(HandleCoinUpdated);
+            _coinRuntimeData.OnValueChanged += HandleCoinUpdated;
             foreach(var station in _stations)
             {
                 station.OnClickStation += HandleStationClick;
@@ -77,7 +77,7 @@ namespace LabDiner.Restaurant.Environment
 
         void OnDisable()
         {
-            _onCoinUpdated.Unregister(HandleCoinUpdated);
+            _coinRuntimeData.OnValueChanged -= HandleCoinUpdated;
             foreach(var station in _stations)
             {
                 station.OnClickStation -= HandleStationClick;
@@ -132,7 +132,7 @@ namespace LabDiner.Restaurant.Environment
         public void Upgrade()
         {
             //Sau khi tính toán giá trị mới thì mới trừ tiền để đảm bảo giá trị hiển thị trên UI là chính xác nhất
-            _onCoinSpent?.Raise(_currentCost);
+            _coinRuntimeData.Add(-_currentCost);
 
             _currentLevel++;
 
@@ -175,7 +175,7 @@ namespace LabDiner.Restaurant.Environment
             }
 
             // Sau khi cập nhật cost, cập nhật lại coin để xem có toggle attention upgrade hay không
-            _onCoinSpent.Raise(0);
+            _coinRuntimeData.Add(0);
             _onCoreStationLevelUpgraded.Raise(this);
 
             OnDataChanged?.Invoke();
@@ -184,7 +184,7 @@ namespace LabDiner.Restaurant.Environment
         public CoreStationUIData GetUIData()
         {
             // Lấy số coin hiện tại của người chơi để so sánh với chi phí nâng cấp
-            double currentCoin = LevelManagerContext.Instance.LevelCurrencyManager.CurrentCoin;
+            double currentCoin = _coinRuntimeData.Value;
 
             // Tính toán phần thưởng sao dựa trên số sao hiện tại và dữ liệu từ CoreStationSO
             StationStarSO currentStarData = _coreStationSO.StationStars[Mathf.Min(_currentStar, _coreStationSO.StationStars.Count - 1)];
