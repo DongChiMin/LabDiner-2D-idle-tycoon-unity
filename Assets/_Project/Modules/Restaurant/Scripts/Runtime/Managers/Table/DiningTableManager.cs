@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.Manager
 {
-    public partial class DiningTableManager : MonoBehaviour, ILevelInitializable
+    public partial class DiningTableManager : MonoBehaviour, ILevelInitializable, ILevelRebuildable
     {
         [Header("Events")]
         [SerializeField] private IntEvent _onGuestQuantityChanged;
@@ -34,7 +34,7 @@ namespace LabDiner.Restaurant.Manager
             _onGuestQuantityChanged.Unregister(HandleGuestQuantityChanged);
         }
 
-        public void Init(LevelConfigSO config)
+        public void Rebuild()
         {
             //Xóa list cũ, tạo mới list, thêm các bàn ăn vào list
             _tables.Clear();
@@ -48,7 +48,10 @@ namespace LabDiner.Restaurant.Manager
                 table.gameObject.SetActive(false);
                 table.Init();
             }
+        }
 
+        public void Init(LevelConfigSO config)
+        {
             Debug_ValidateData(config);
         }
 

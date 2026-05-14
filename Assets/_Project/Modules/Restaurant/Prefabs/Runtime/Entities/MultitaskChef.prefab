@@ -125,7 +125,7 @@ MonoBehaviour:
   _progressPieUI: {fileID: 2192753701787223607}
   _carryDishUI: {fileID: 6858982222219013643}
   _passTableRuntimeSO: {fileID: 11400000, guid: 9471fea5369dd2b40a37efd6fcf47f7b, type: 2}
-  _onCoinAdded: {fileID: 11400000, guid: 762700b435a5f8341a777a47398735eb, type: 2}
+  _coinData: {fileID: 11400000, guid: dfffcaeb65047244ba51b6f65e6fbaf8, type: 2}
 --- !u!114 &2333676677103525307
 MonoBehaviour:
   m_ObjectHideFlags: 0

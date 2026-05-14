@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.Manager
 {
-    public class CoreStationManager : MonoBehaviour, ILevelInitializable
+    public class CoreStationManager : MonoBehaviour, ILevelInitializable, ILevelRebuildable
     {
         public List<CoreStation> CoreStations => coreStations;
 
@@ -39,7 +39,7 @@ namespace LabDiner.Restaurant.Manager
 
         #region API
 
-        public void Init(LevelConfigSO levelConfig)
+        public void Rebuild()
         {
             //Xóa list cũ, tạo mới list, thêm các trạm chính vào list
             coreStations.Clear();
@@ -52,6 +52,11 @@ namespace LabDiner.Restaurant.Manager
                 coreStationRuntimeSO.AddCoreStation(station);
                 station.OnMaxLevel += HandleCoreStationMaxLevel;
             }
+        }
+
+        public void Init(LevelConfigSO levelConfig)
+        {
+            List<CoreStationSO> coreStationSOs = levelConfig.CoreStations;
         }
 
         /// <summary>

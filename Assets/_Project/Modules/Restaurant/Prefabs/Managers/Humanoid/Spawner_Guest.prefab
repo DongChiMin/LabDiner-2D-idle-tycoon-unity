@@ -103,7 +103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfdd1214be639d4caa1528825199480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _guestSpawner: {fileID: 275348292881645874}
   _diningSeatRuntimeSet: {fileID: 11400000, guid: eef96bd73081a5740b060818e8f03c4d, type: 2}
+  _coreStationRuntimeSO: {fileID: 11400000, guid: 014d0306fd640c34d825b497c1c9b9f8, type: 2}
   OrderComposerBehaviour: {fileID: 0}
 --- !u!1 &7892943937346007424
 GameObject:

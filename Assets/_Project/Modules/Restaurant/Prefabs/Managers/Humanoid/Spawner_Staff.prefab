@@ -186,7 +186,7 @@ MonoBehaviour:
   _spawnedStaffs: []
   _showGizmos: 1
   _gizmoColor: {r: 0, g: 1, b: 1, a: 1}
-  _restPointDimensions: {x: 0.6, y: 1.2, z: 0.1}
+  _restPointDimensions: {x: 1.5, y: 2.25, z: 0.1}
 --- !u!1 &8694703192594328721
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,9 +9,7 @@ namespace LabDiner.LevelSystem.Runtime
     public class LevelLoader : MonoBehaviour
     {
         [Header("Level Init")]
-        [SerializeField] private Transform _levelRoot;
-        [SerializeField] private Transform _esstensialInit;
-        [SerializeField] private Transform _rule;
+        [SerializeField] private List<Transform> _initRoots;
 
         [Header("Phase 2 Settings [Runtime]")]
         [SerializeField] private LevelConfigSO _config;
@@ -28,8 +26,8 @@ namespace LabDiner.LevelSystem.Runtime
         public void LoadLevel(LevelConfigSO configSO)
         {
             StopAllCoroutines();
-            // Phase 1: Sinh ra thực thể
-            // ExecutePhase1_SetupLayout(layoutSO.layoutData);
+            // Phase 1: Sinh ra thực thể/Sắp xếp thực thể vào list
+            ExecutePhase1_SetupLayout();
 
             // Phase 2: Bơm dữ liệu cấu hình
             ExecutePhase2_InitLogic(configSO);
@@ -38,24 +36,27 @@ namespace LabDiner.LevelSystem.Runtime
             // ExecutePhase3_RestoreProgress();
         }
 
+        private void ExecutePhase1_SetupLayout()
+        {
+            foreach (var root in _initRoots)
+            {
+                ILevelRebuildable[] initializables = root.GetComponentsInChildren<ILevelRebuildable>();
+                foreach (var init in initializables)
+                {
+                    init.Rebuild();
+                }
+            }
+        }
+
         private void ExecutePhase2_InitLogic(LevelConfigSO configSO)
         {
-            ILevelInitializable[] initializables = _levelRoot.GetComponentsInChildren<ILevelInitializable>();
-            foreach (var init in initializables)
+            foreach (var root in _initRoots)
             {
-                init.Init(configSO);
-            }
-
-            initializables = _esstensialInit.GetComponentsInChildren<ILevelInitializable>();
-            foreach (var init in initializables)
-            {
-                init.Init(configSO);
-            }
-
-            initializables = _rule.GetComponentsInChildren<ILevelInitializable>();
-            foreach (var init in initializables)
-            {
-                init.Init(configSO);
+                ILevelInitializable[] initializables = root.GetComponentsInChildren<ILevelInitializable>();
+                foreach (var init in initializables)
+                {
+                    init.Init(configSO);
+                }
             }
         }
     }

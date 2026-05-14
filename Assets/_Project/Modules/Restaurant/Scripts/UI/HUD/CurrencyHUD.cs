@@ -41,6 +41,11 @@ namespace LabDiner.Restaurant.UI
             _gemText.transform.parent.DOKill();
         }
 
+        void Start()
+        {
+            _coinRuntimeData.Add(0); // Kích hoạt callback để cập nhật UI
+        }
+
         private void UpdateCoinUI(double newCoinAmount)
         {
             _coinText.text = CurrencyFormatter.Format(newCoinAmount);

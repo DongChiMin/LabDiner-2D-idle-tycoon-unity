@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _workPos: {fileID: 4866547160653113531}
   _occupiedGuest: {fileID: 0}
+  _workCenterY: 1.5
+  _workPosSize: {x: 1.5, y: 2.25, z: 0.1}
 --- !u!1 &4284128271056012721
 GameObject:
   m_ObjectHideFlags: 0
