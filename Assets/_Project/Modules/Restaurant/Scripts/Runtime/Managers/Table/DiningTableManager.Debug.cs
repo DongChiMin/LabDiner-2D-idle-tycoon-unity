@@ -35,9 +35,9 @@ namespace LabDiner.Restaurant.Manager
                 totalSeat += table.Seats.Count;
             }
 
-            if (_levelConfig.maxGuestQuantity > totalSeat)
+            if (_levelConfig.MaxGuestQuantity > totalSeat)
             {
-                Debug.LogError($"Số lượng khách tối đa: {_levelConfig.maxGuestQuantity} vượt quá số ghế có thể mở khóa: {totalSeat}. Cần điều chỉnh lại LevelConfigSO hoặc thêm nhiều bàn hơn!");
+                Debug.LogError($"Số lượng khách tối đa: {_levelConfig.MaxGuestQuantity} vượt quá số ghế có thể mở khóa: {totalSeat}. Cần điều chỉnh lại LevelConfigSO hoặc thêm nhiều bàn hơn!");
             }
         }
     }

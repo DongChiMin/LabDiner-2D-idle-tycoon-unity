@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9781a546e8ce7db41b5ef091387ab3ea, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
+  LevelPrefab: {fileID: 0}
   LevelIndex: 1
   LevelName: 
   AvailableUpgrades:
@@ -34,4 +35,3 @@ MonoBehaviour:
   minVerticalPos: 0
   maxVerticalPos: 0
   _onUpgradeGuestQuantity: {fileID: 11400000, guid: d179a8eceddb55643a63dcdd0989eca1, type: 2}
-  maxGuestQuantity: 3

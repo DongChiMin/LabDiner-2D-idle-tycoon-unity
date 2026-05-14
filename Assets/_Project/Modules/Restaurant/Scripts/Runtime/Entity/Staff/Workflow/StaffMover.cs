@@ -22,6 +22,7 @@ namespace LabDiner.Restaurant.Workflow
         // Hàm này giúp Coroutine bên ngoài có thể "đợi" cho đến khi đến đích
         public IEnumerator MoveTo(Vector3 destination)
         {
+            _agent.enabled = true;
             _agent.SetDestination(destination);
 
             yield return null;

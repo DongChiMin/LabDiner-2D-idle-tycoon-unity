@@ -1,11 +1,13 @@
+using LabDiner.Restaurant.Interface;
 using LabDiner.Restaurant.SO;
+using LabDiner.Shared.DesignPattern;
 using LabDiner.Shared.Input;
 using LabDiner.Shared.UI;
 using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
-    public class CameraController : MonoBehaviour
+    public class CameraController : Singleton<CameraController>, ILevelInitializable
     {
         [Header("Settings")]
         [SerializeField] private float _dragSensitivity = 0.01f;

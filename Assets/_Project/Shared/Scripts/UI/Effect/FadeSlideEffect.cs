@@ -44,8 +44,8 @@ namespace LabDiner.Shared.UI
             _canvasGroup.alpha = 0f;
             _rectTransform.anchoredPosition = GetOffsetPosition();
 
-            DOTween.To(() => _canvasGroup.alpha, x => _canvasGroup.alpha = x, 1f, _duration).SetTarget(_canvasGroup).SetUpdate(true);
-            DOTween.To(() => _rectTransform.anchoredPosition, x => _rectTransform.anchoredPosition = x, _originalPosition, _duration).SetTarget(_rectTransform).SetEase(_showEase).SetUpdate(true);
+            DOTween.To(() => _canvasGroup.alpha, x => _canvasGroup.alpha = x, 1f, _duration).SetTarget(_canvasGroup).SetUpdate(true).SetLink(gameObject);
+            DOTween.To(() => _rectTransform.anchoredPosition, x => _rectTransform.anchoredPosition = x, _originalPosition, _duration).SetTarget(_rectTransform).SetEase(_showEase).SetUpdate(true).SetLink(gameObject);
         }
 
         public override void Hide(Action onComplete = null)
@@ -55,12 +55,12 @@ namespace LabDiner.Shared.UI
 
             Vector2 targetPos = GetOffsetPosition();
 
-            DOTween.To(() => _canvasGroup.alpha, x => _canvasGroup.alpha = x, 0f, _duration).SetTarget(_canvasGroup).SetUpdate(true);
+            DOTween.To(() => _canvasGroup.alpha, x => _canvasGroup.alpha = x, 0f, _duration).SetTarget(_canvasGroup).SetUpdate(true).SetLink(gameObject);
             DOTween.To(() => _rectTransform.anchoredPosition, x => _rectTransform.anchoredPosition = x, targetPos, _duration)
                 .SetTarget(_rectTransform)
                 .SetEase(_hideEase)
                 .SetUpdate(true)
-                .OnComplete(() => onComplete?.Invoke());
+                .OnComplete(() => onComplete?.Invoke()).SetLink(gameObject);;
         }
 
         private Vector2 GetOffsetPosition()

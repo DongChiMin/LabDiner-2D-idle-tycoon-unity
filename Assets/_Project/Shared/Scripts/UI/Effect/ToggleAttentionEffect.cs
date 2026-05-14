@@ -59,7 +59,7 @@ namespace LabDiner.Shared.UI
             KillCurrent();
             
             // Đưa về trạng thái mặc định mượt mà ngay khi tắt
-            transform.DOScale(_originalScale, 0.2f).SetUpdate(true);
+            transform.DOScale(_originalScale, 0.2f).SetUpdate(true).SetLink(gameObject);
         }
 
         private void KillCurrent()

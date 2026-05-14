@@ -16,6 +16,7 @@ namespace LabDiner.Restaurant.UI
         [Header("Data")]
         [SerializeField] private DoubleRuntimeSO _coinData;
         [Header("Events")]
+        [SerializeField] private LevelConfigEvent _onLevelInit;
         [SerializeField] private BoolEvent _onLevelUpgradable;
         [SerializeField] private UIPopupEvent _onPopupShow;
 
@@ -29,7 +30,7 @@ namespace LabDiner.Restaurant.UI
         void OnEnable()
         {
             _panel.CloseButton.onClick.AddListener(HandlePopupHide);
-
+            _onLevelInit.Register(Init);
             _onPopupShow.Register(HandlePopupShow);
             _coinData.OnValueChanged += HandleCoinUpdated;
         }
@@ -37,7 +38,7 @@ namespace LabDiner.Restaurant.UI
         void OnDisable()
         {
             _panel.CloseButton.onClick.RemoveListener(HandlePopupHide);
-
+            _onLevelInit.Unregister(Init);
             _onPopupShow.Unregister(HandlePopupShow);
             _coinData.OnValueChanged -= HandleCoinUpdated;
         }

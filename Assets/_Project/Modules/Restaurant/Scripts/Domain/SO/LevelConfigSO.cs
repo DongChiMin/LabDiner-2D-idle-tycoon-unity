@@ -9,6 +9,7 @@ namespace LabDiner.Restaurant.SO
     public class LevelConfigSO : ScriptableObject
     {
         [Header("Level Info")]
+        public GameObject LevelPrefab;
         public int LevelIndex;
         public string LevelName;
         public List<BaseUpgradeSO> AvailableUpgrades;
@@ -32,21 +33,28 @@ namespace LabDiner.Restaurant.SO
 
         [Header("Summary")]
         [SerializeField] private LevelUpgradeEvent _onUpgradeGuestQuantity;
-        [ReadOnly] public int maxGuestQuantity;
+        [ReadOnly] public int MaxGuestQuantity => FetchGuestQuantity();
+        public 
 
         void OnValidate()
         {
-            maxGuestQuantity = 1;
+            FetchGuestQuantity();
+        }
+
+        private int FetchGuestQuantity()
+        {
+            int quantity = 1;
             foreach(BaseUpgradeSO upgrade in AvailableUpgrades)
             {
                 if (upgrade is LevelUpgradeSO levelUpgrade)
                 {
                     if (levelUpgrade.OnUpgradeRaised == _onUpgradeGuestQuantity)
                     {
-                        maxGuestQuantity += Mathf.RoundToInt(levelUpgrade.UpgradeValue);
+                        quantity += Mathf.RoundToInt(levelUpgrade.UpgradeValue);
                     }
                 }
             }
+            return quantity;
         }
     }
 }

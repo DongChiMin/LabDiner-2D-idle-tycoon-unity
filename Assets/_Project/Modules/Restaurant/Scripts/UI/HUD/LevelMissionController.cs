@@ -15,6 +15,7 @@ namespace LabDiner.Restaurant.UI
         [Header("Events")]
         [SerializeField] private IntEvent _onLevelComplete;
         [SerializeField] private CoreStationEvent _onCoreStationLevelUpgraded;
+        [SerializeField] private LevelConfigEvent _onLevelInit;
 
         [Header("Item References")]
         [SerializeField] private LevelMissionHUD _missionHUD;
@@ -26,14 +27,18 @@ namespace LabDiner.Restaurant.UI
         [SerializeField] BaseGemMissionSO _currentMission;
         [SerializeField] private BaseGemMissionSO _finalMission;
 
+        private int _currentLevel = -1;
+
         void OnEnable()
         {
+            _onLevelInit.Register(Init);
             _onCoreStationLevelUpgraded.Register(HandleProgressUpdate);
             _missionHUD.OnRewardClaimed += HandleRewardClaim;
         }
 
         void OnDisable()
         {
+            _onLevelInit.Unregister(Init);
             _onCoreStationLevelUpgraded.Unregister(HandleProgressUpdate);
             _missionHUD.OnRewardClaimed -= HandleRewardClaim;
         }
@@ -42,6 +47,7 @@ namespace LabDiner.Restaurant.UI
         {
             _remainingMissions = new List<BaseGemMissionSO>(config.AvailableMissions);
             _finalMission = config.FinalMission;
+            _currentLevel = config.LevelIndex;
 
             //Khởi động nhiệm vụ đầu tiên
             ActivateNextMission();
@@ -130,7 +136,7 @@ namespace LabDiner.Restaurant.UI
                 _remainingMissions.RemoveAt(0);
             }
 
-            _onLevelComplete.Raise(0);
+            _onLevelComplete.Raise(_currentLevel);
             _missionHUD.gameObject.SetActive(false);
         }
         #endregion

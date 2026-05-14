@@ -5,6 +5,7 @@ using LabDiner.Restaurant.Manager;
 using LabDiner.Restaurant.SO;
 using LabDiner.Shared.Event;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace LabDiner.Restaurant.UI
@@ -47,6 +48,8 @@ namespace LabDiner.Restaurant.UI
         {
             _panel.Hide();
             // LevelManagerContext.Instance.LoadNextLevel();
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(currentSceneIndex);
         }
     }
 }

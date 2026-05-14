@@ -24,7 +24,7 @@ namespace LabDiner.Shared.UI
                      .OnComplete(() =>
                     {
                         onComplete?.Invoke();
-                    });
+                    }).SetLink(gameObject);
         }
 
         public override void Hide(Action onComplete = null)
@@ -37,7 +37,7 @@ namespace LabDiner.Shared.UI
                      .OnComplete(() =>
                      {
                          onComplete?.Invoke();
-                     });
+                     }).SetLink(gameObject);
         }
     }
 }

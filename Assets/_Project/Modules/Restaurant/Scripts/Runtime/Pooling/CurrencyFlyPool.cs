@@ -65,20 +65,20 @@ namespace LabDiner.Restaurant.Pooling
 
             // --- GIAI ĐOẠN 1: BÙNG NỔ (SCATTER) ---
             // Scale từ 0 lên 1 tạo cảm giác pop up
-            sequence.Append(gem.transform.DOScale(Vector3.one, _scatterDuration).SetEase(Ease.OutBack));
+            sequence.Append(gem.transform.DOScale(Vector3.one, _scatterDuration).SetEase(Ease.OutBack).SetLink(gameObject));
             // Cùng lúc đó, di chuyển tới vị trí tỏa ra và xoay
-            sequence.Join(gem.transform.DOMove(scatterPos, _scatterDuration).SetEase(Ease.OutCubic));
-            sequence.Join(gem.transform.DORotate(randomRotation, _scatterDuration).SetEase(Ease.OutCubic));
+            sequence.Join(gem.transform.DOMove(scatterPos, _scatterDuration).SetEase(Ease.OutCubic).SetLink(gameObject));
+            sequence.Join(gem.transform.DORotate(randomRotation, _scatterDuration).SetEase(Ease.OutCubic).SetLink(gameObject));
 
             // Dừng lại trên không một khoảng thời gian cực ngắn để tạo cảm giác "treo lơ lửng" (hang time)
             sequence.AppendInterval(0.05f);
 
             // --- GIAI ĐOẠN 2: HỘI TỤ VỀ ĐÍCH (FLY TO TARGET) ---
             // Sử dụng InBack để đồng tiền hơi lùi lại một chút tạo đà, rồi lao vút đi
-            sequence.Append(gem.transform.DOMove(targetPos, _flyDuration).SetEase(Ease.InBack));
+            sequence.Append(gem.transform.DOMove(targetPos, _flyDuration).SetEase(Ease.InBack).SetLink(gameObject));
             // Thu nhỏ lại một chút và trả góc xoay về 0 khi bay gần tới đích
-            sequence.Join(gem.transform.DOScale(Vector3.one * 0.8f, _flyDuration));
-            sequence.Join(gem.transform.DORotate(Vector3.zero, _flyDuration));
+            sequence.Join(gem.transform.DOScale(Vector3.one * 0.8f, _flyDuration).SetLink(gameObject));
+            sequence.Join(gem.transform.DORotate(Vector3.zero, _flyDuration).SetLink(gameObject));
 
             // --- GIAI ĐOẠN 3: KẾT THÚC ---
             sequence.OnComplete(() =>

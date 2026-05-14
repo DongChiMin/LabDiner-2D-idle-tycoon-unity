@@ -54,7 +54,7 @@ namespace LabDiner.Shared.UI
                 return;
             }
 
-            DOTween.To(() => _backgroundCanvas.alpha, x => _backgroundCanvas.alpha = x, 0f, _contentEffect.Duration).SetUpdate(true);
+            DOTween.To(() => _backgroundCanvas.alpha, x => _backgroundCanvas.alpha = x, 0f, _contentEffect.Duration).SetUpdate(true).SetLink(gameObject);
             // Kêu Content ẩn đi, khi ẩn xong thì tắt GameObject cha
             _contentEffect.Hide(() =>
             {
