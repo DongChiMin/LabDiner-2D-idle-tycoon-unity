@@ -44,8 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4091dd77cf79d840a91a2432ae63974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onAllDishProfitUpgrade: {fileID: 11400000, guid: f3d6527a341d0a44c86092d0f3e2d9d9, type: 2}
-  _onDishProfitUpgrade: {fileID: 11400000, guid: 431fb2be558bb9b469e67104c4707077, type: 2}
-  _onDishProcessTimeUpgrade: {fileID: 11400000, guid: abc407313e8e6ba438feb42039a8724d, type: 2}
+  _onStationUpgrade: {fileID: 11400000, guid: 3d0d7d492590bf040ae4badd8ecbeb2d, type: 2}
   coreStationRuntimeSO: {fileID: 11400000, guid: 014d0306fd640c34d825b497c1c9b9f8, type: 2}
   coreStations: []

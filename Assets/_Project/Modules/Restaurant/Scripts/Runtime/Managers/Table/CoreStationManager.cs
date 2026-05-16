@@ -12,9 +12,7 @@ namespace LabDiner.Restaurant.Manager
         public List<CoreStation> CoreStations => coreStations;
 
         [Header("Events")]
-        [SerializeField] private LevelUpgradeEvent _onAllDishProfitUpgrade;
-        [SerializeField] private DishUpgradeEvent _onDishProfitUpgrade;
-        [SerializeField] private DishUpgradeEvent _onDishProcessTimeUpgrade;
+        [SerializeField] private StationUpgradeEvent _onStationUpgrade;
 
         [Header("Core Stations")]
         [SerializeField] private CoreStationRuntimeSO coreStationRuntimeSO;
@@ -24,16 +22,12 @@ namespace LabDiner.Restaurant.Manager
 
         void OnEnable()
         {
-            _onAllDishProfitUpgrade.Register(HandleAllDishProfitUpgrade);
-            _onDishProfitUpgrade.Register(HandleDishProfitUpgrade);
-            _onDishProcessTimeUpgrade.Register(HandleDishProcessTimeUpgrade);
+            _onStationUpgrade.Register(HandleStationUpgrade);
         }
 
         void OnDisable()
         {
-            _onAllDishProfitUpgrade.Unregister(HandleAllDishProfitUpgrade);
-            _onDishProfitUpgrade.Unregister(HandleDishProfitUpgrade);
-            _onDishProcessTimeUpgrade.Unregister(HandleDishProcessTimeUpgrade);
+            _onStationUpgrade.Unregister(HandleStationUpgrade);
         }
 
 
@@ -96,44 +90,59 @@ namespace LabDiner.Restaurant.Manager
 
         #region Private Methods
 
-        /// <summary>
-        /// Xử lý khi có một nâng cấp lợi nhuận áp dụng cho tất cả các món ăn.
-        /// </summary>
-        /// <param name="upgradeSO"></param>
-        private void HandleAllDishProfitUpgrade(LevelUpgradeSO upgradeSO)
+        private void HandleStationUpgrade(StationUpgradeSO upgradeSO)
         {
-            float profitBuffValue = upgradeSO.UpgradeValue;
-            foreach (var station in coreStations)
+            switch (upgradeSO.UpgradeType)
             {
-                station.UpgradeProfit(profitBuffValue);
+                case StationUpgradeType.Profit:
+                    UpgradeProfit(upgradeSO);
+                    break;
+                case StationUpgradeType.CookingSpeed:
+                    UpgradeProcessTime(upgradeSO);
+                    break;
             }
         }
 
         /// <summary>
-        /// Xử lý khi có một món ăn cụ thể được nâng cấp lợi nhuận.
+        /// Xử lý khi có một nâng cấp lợi nhuận áp dụng cho tất cả các món ăn.
+        /// </summary>
         /// <param name="upgradeSO"></param>
-        private void HandleDishProfitUpgrade(DishUpgradeSO upgradeSO)
+        private void UpgradeProfit(StationUpgradeSO upgradeSO)
         {
-            float profitBuffValue = upgradeSO.UpgradeValue;
-            foreach (var station in coreStations)
+            DishSO targetDish = upgradeSO.TargetDish;
+            //Nâng profit cho toàn bộ máy
+            if(targetDish == null)
             {
-                if(station.VerifyData(upgradeSO.Dish))
+                float profitBuffValue = upgradeSO.UpgradeValue;
+                foreach (var station in coreStations)
                 {
                     station.UpgradeProfit(profitBuffValue);
                 }
             }
+            //Nâng profit cho một món ăn cụ thể
+            else
+            {
+                float profitBuffValue = upgradeSO.UpgradeValue;
+                foreach (var station in coreStations)
+                {
+                    if(station.VerifyData(upgradeSO.TargetDish))
+                    {
+                        station.UpgradeProfit(profitBuffValue);
+                    }
+                }
+            }            
         }
 
         /// <summary>
         /// Xử lý khi có một món ăn cụ thể được nâng cấp thời gian chế biến.
         /// </summary>
         /// <param name="upgradeSO"></param>
-        private void HandleDishProcessTimeUpgrade(DishUpgradeSO upgradeSO)
+        private void UpgradeProcessTime(StationUpgradeSO upgradeSO)
         {
             float processTimeBuffValue = upgradeSO.UpgradeValue;
             foreach (var station in coreStations)
             {
-                if(station.VerifyData(upgradeSO.Dish))
+                if(station.VerifyData(upgradeSO.TargetDish))
                 {
                     station.UpgradeProcessTime(processTimeBuffValue);
                 }

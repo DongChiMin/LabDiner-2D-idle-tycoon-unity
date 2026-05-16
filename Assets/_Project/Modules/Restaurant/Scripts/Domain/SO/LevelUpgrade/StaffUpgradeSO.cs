@@ -7,15 +7,23 @@ using UnityEngine;
 namespace LabDiner.Restaurant.SO
 {
     
-    // Nhóm 2: Nâng cấp dành riêng cho nhân viên
-    //- Tăng profit
-    //- Giảm thời gian làm việc
-    [CreateAssetMenu(fileName = "New Staff Quantity Upgrade", menuName = "Game/Upgrades/Staff Quantity Upgrade")]
-    public class StaffQuantityUpgradeSO : BaseUpgradeSO 
+     public enum StaffUpgradeType
     {
-        [Header("Events")]
-        public StaffQuantityUpgradeEvent OnUpgradeRaised;
-        public Staff staffPrefab;
+        CookingSpeed,      // Nấu nhanh hơn
+        MoveSpeed,    // Nhân viên chạy nhanh
+        Quantity       // Tăng số lượng nhân viên có thể thuê
+    }
+
+
+    [CreateAssetMenu(fileName = "New Staff Upgrade", menuName = "Game/Upgrades/Staff Upgrade")]
+    public class StaffUpgradeSO : BaseUpgradeSO 
+    {
+        [Header("Staff Upgrade")]
+        public StaffUpgradeType UpgradeType;
+        public StaffType Target;
+
+        [Header("Static")]
+        public StaffUpgradeEvent OnUpgradeRaised;
 
         public override void ApplyUpgrade()
         {

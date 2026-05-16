@@ -7,6 +7,14 @@ using System.Collections.Generic;
 
 namespace LabDiner.Restaurant.Workflow
 {
+    public enum StaffType
+    {
+        All, // Áp dụng cho tất cả nhân viên
+        Chef,
+        Waiter,
+        MultitaskChef
+    }
+
     public class Staff : MonoBehaviour
     {
         public Transform RestPosition
@@ -15,7 +23,12 @@ namespace LabDiner.Restaurant.Workflow
             set => _currentRestPos = value;
         }
 
+        public StaffType StaffType => _staffType;
+
+        [SerializeField] private StaffMover _mover;
+
         [Header("Config")]
+        [SerializeField] private StaffType _staffType;
         [SerializeField] private List<StaffSkill> _mySkills; // Ví dụ: [Cleaning, Serving]
         [SerializeField] private TaskRuntimeSO _taskRegistry;
 
@@ -38,6 +51,11 @@ namespace LabDiner.Restaurant.Workflow
         void Awake()
         {
             _mySkills.Sort((a, b) => b.Priority.CompareTo(a.Priority)); // Sắp xếp kỹ năng theo độ ưu tiên
+        }
+
+        public void UpgradeMoveSpeed(float speedBuffValue)
+        {
+            _mover.UpgradeMoveSpeed(speedBuffValue);
         }
 
         private void HandleTasksUpdated()

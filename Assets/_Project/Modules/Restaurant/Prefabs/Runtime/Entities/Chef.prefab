@@ -159,6 +159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fcac87215d6fc48ae340d6f89be3bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mover: {fileID: 9212734083614468492}
+  _staffType: 1
   _mySkills:
   - {fileID: 5213461337745500176}
   _taskRegistry: {fileID: 11400000, guid: 728242de5e1b9534e96d49351d7255cc, type: 2}
@@ -204,13 +206,13 @@ MonoBehaviour:
     _stationTarget: {fileID: 0}
     _profit: 0
   _mover: {fileID: 9212734083614468492}
-  cookMultiplier: 1
+  cookMultiplier: 0
   _giveFoodDuration: 0
   placeOnPassTableDuration: 0
   _progressPieUI: {fileID: 2197426517539943849}
   _carryDishUI: {fileID: 9155178908600232252}
   _passTableRuntimeSO: {fileID: 11400000, guid: 9471fea5369dd2b40a37efd6fcf47f7b, type: 2}
-  _onCoinAdded: {fileID: 11400000, guid: 762700b435a5f8341a777a47398735eb, type: 2}
+  _coinData: {fileID: 11400000, guid: dfffcaeb65047244ba51b6f65e6fbaf8, type: 2}
 --- !u!1001 &6412301053611503157
 PrefabInstance:
   m_ObjectHideFlags: 0

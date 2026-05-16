@@ -72,6 +72,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fcac87215d6fc48ae340d6f89be3bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mover: {fileID: 8327386003141929690}
+  _staffType: 2
   _mySkills:
   - {fileID: 8676326482811089310}
   _taskRegistry: {fileID: 11400000, guid: 728242de5e1b9534e96d49351d7255cc, type: 2}

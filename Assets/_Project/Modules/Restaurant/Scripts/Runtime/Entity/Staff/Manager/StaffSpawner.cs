@@ -11,61 +11,126 @@ namespace LabDiner.Restaurant.Manager
     public partial class StaffSpawner : MonoBehaviour, IStaffUnboxer, ILevelInitializable
     {
         [Header("Events")]
-        [SerializeField] private LevelUpgradeEvent _onUpgradeAllStaffMoveSpeed;
+        [SerializeField] private StaffUpgradeEvent _onUpgradeStaff;
 
         [Header("Base Settings")]
-        [SerializeField] protected StaffQuantityUpgradeEvent _onUpgradeStaffQuantity;
-        [SerializeField] protected List<Staff> _initialStaffs;
+        [SerializeField] private List<Staff> _prefabRepository; // Danh sách prefab nhân viên có thể spawn
         [SerializeField] private Transform _spawnParent;
 
-        [SerializeField] protected List<Transform> _restPositions;
-        [SerializeField] protected bool _spawnInBox = true;
+        [SerializeField] private List<Transform> _restPositions;
+        [SerializeField] private bool _spawnInBox = true;
 
         [Header("[Runtime]")]
 
-        [SerializeField] protected List<Staff> _spawnedStaffs = new List<Staff>();
+        [SerializeField] private List<Staff> _spawnedStaffs = new List<Staff>();
 
         void OnEnable()
         {
-            _onUpgradeStaffQuantity.Register(HandleUpgradeQUantity);
-            _onUpgradeAllStaffMoveSpeed.Register(HandleUpgradeAllStaffMoveSpeed);
+            _onUpgradeStaff.Register(HandleUpgradeStaff);
 
         }
         void OnDisable()
         {
-            _onUpgradeStaffQuantity.Unregister(HandleUpgradeQUantity);
-            _onUpgradeAllStaffMoveSpeed.Unregister(HandleUpgradeAllStaffMoveSpeed);
+            _onUpgradeStaff.Unregister(HandleUpgradeStaff);
         }
 
         public void Init(LevelConfigSO config)
         {
-            _initialStaffs = config.InitialStaffs;
-            foreach (Staff staffPrefab in _initialStaffs)
+            foreach (Staff staffPrefab in config.InitialStaffs)
             {
                 Staff staff = CreateInstance(staffPrefab);
                 staff.gameObject.SetActive(true);
-            }   
+            }
         }
 
-        private void HandleUpgradeQUantity(StaffQuantityUpgradeSO upgradeSO)
+        private void HandleUpgradeStaff(StaffUpgradeSO upgradeSO)
+        {
+            switch (upgradeSO.UpgradeType)
+            {
+                case StaffUpgradeType.Quantity:
+                    UpgradeQUantity(upgradeSO);
+                    break;
+                case StaffUpgradeType.MoveSpeed:
+                    UpgradeMoveSpeed(upgradeSO);
+                    break;
+                default:
+                    Debug.LogWarning($"Unhandled staff upgrade type: {upgradeSO.UpgradeType}");
+                    break;
+            }
+        }
+
+        private void UpgradeQUantity(StaffUpgradeSO upgradeSO)
         {
             int quantity = Mathf.RoundToInt(upgradeSO.UpgradeValue);
-            
-            for (int i = 0; i < quantity; i++)
-            {
-                Staff staff = CreateInstance(upgradeSO.staffPrefab);
+            StaffType target = upgradeSO.Target;
+            List<Staff> staffToSpawn = new List<Staff>();
 
-                if (_spawnInBox)
+            //Sinh ra số lượng nhân viên mới dựa trên quantity và targetTypes
+
+                if (target == StaffType.All)
                 {
-                    staff.gameObject.SetActive(false);
-                    var box = PoolContext.Instance.StaffBoxPool.Get(staff.RestPosition.position, Quaternion.identity);
-                    box.Setup(staff, this);
+                    //Nếu target là All, sinh ra nhân viên cho tất cả các loại trạm
+                    foreach (Staff prefab in _prefabRepository)
+                    {
+                        List<Staff> staff = CreateInstance(prefab, quantity);
+                        staffToSpawn.AddRange(staff);
+                    }
                 }
                 else
                 {
-                    UnboxStaff(staff);
+                    Staff prefab = _prefabRepository.Find(p => p.StaffType == target);
+                    if (prefab != null && prefab.StaffType != StaffType.All)
+                    {
+                        List<Staff> staff = CreateInstance(prefab, quantity);
+                        staffToSpawn.AddRange(staff);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"No prefab found for staff type: {target}");
+                    }
+                }
+
+                //Nếu có nhân viên mới được sinh ra, kiểm tra xem có spawn trong hộp hay không
+                if (_spawnInBox)
+                {
+                    foreach (var staff in staffToSpawn)
+                    {
+                        staff.gameObject.SetActive(false);
+                        var box = PoolContext.Instance.StaffBoxPool.Get(staff.RestPosition.position, Quaternion.identity);
+                        box.Setup(staff, this);
+                    }
+                }
+                else
+                {
+                    foreach (var staff in staffToSpawn)
+                    {
+                        UnboxStaff(staff);
+                    }
+                }
+            
+        }
+
+        private void UpgradeMoveSpeed(StaffUpgradeSO upgradeSO)
+        {
+            StaffType target = upgradeSO.Target;
+            foreach (Staff staff in _spawnedStaffs)
+            {
+                if (target == staff.StaffType || target == StaffType.All)
+                {
+                    staff.UpgradeMoveSpeed(upgradeSO.UpgradeValue);
                 }
             }
+        }
+
+        private List<Staff> CreateInstance(Staff prefab, int quantity)
+        {
+            List<Staff> createdStaffs = new List<Staff>();
+            for (int i = 0; i < quantity; i++)
+            {
+                Staff staff = CreateInstance(prefab);
+                createdStaffs.Add(staff);
+            }
+            return createdStaffs;
         }
 
         protected Staff CreateInstance(Staff prefab)
@@ -87,14 +152,6 @@ namespace LabDiner.Restaurant.Manager
             if (staff is Staff concreteStaff)
             {
                 concreteStaff.gameObject.SetActive(true);
-            }
-        }
-
-        private void HandleUpgradeAllStaffMoveSpeed(BaseUpgradeSO upgradeSO)
-        {
-            foreach (IStaff staff in _spawnedStaffs)
-            {
-                staff.UpgradeMoveSpeed(upgradeSO.UpgradeValue);
             }
         }
     }

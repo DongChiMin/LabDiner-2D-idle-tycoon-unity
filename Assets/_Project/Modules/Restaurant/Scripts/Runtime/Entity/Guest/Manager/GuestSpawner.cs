@@ -17,7 +17,7 @@ namespace LabDiner.Restaurant.Manager
     {
         [SerializeField] private CoreStationRuntimeSO _coreStationRuntime;
         [Header("Upgrade Events")]
-        [SerializeField] private LevelUpgradeEvent _onUpgradeGuestQuantity;
+        [SerializeField] private GuestUpgradeEvent _onGuestUpgrade;
 
         [Header("Spawn Settings")]
         [SerializeField] private GuestAI _guestPrefab;
@@ -37,21 +37,24 @@ namespace LabDiner.Restaurant.Manager
         [SerializeField] private int _maxUniqueStations = 2;
         [SerializeField] private int _maxTotalQty = 3;
 
+        private float _currentSpawntimeBuff = 0;
+
         void OnEnable()
         {
             _onGuestLeft.Register(RemoveGuest);
-            _onUpgradeGuestQuantity.Register(HandleUpgradeGuestQuantity);
+            _onGuestUpgrade.Register(HandleUpgradeGuest);
         }
 
         void OnDisable()
         {
             _onGuestLeft.Unregister(RemoveGuest);
-            _onUpgradeGuestQuantity.Unregister(HandleUpgradeGuestQuantity);
+            _onGuestUpgrade.Unregister(HandleUpgradeGuest);
         }
 
         public void Init(LevelConfigSO levelConfigSO)
         {
             _maxUniqueStations = levelConfigSO.MaxUniqueStations;
+            _currentMaxGuests = levelConfigSO.InitialGuestQuantity;
             _maxTotalQty = levelConfigSO.MaxTotalQtyPerOrder;
 
             StartCoroutine(SpawnLoop());
@@ -87,10 +90,17 @@ namespace LabDiner.Restaurant.Manager
             }
         }
 
-        private void HandleUpgradeGuestQuantity(LevelUpgradeSO upgradeSO)
+        private void HandleUpgradeGuest(GuestUpgradeSO upgradeSO)
         {
-            _currentMaxGuests = _currentMaxGuests + Mathf.RoundToInt(upgradeSO.UpgradeValue);
-            _onGuestQuantityChanged.Raise(_currentMaxGuests);
+            if (upgradeSO.UpgradeType == GuestUpgradeType.Quantity)
+            {
+                _currentMaxGuests = _currentMaxGuests + Mathf.RoundToInt(upgradeSO.UpgradeValue);
+                _onGuestQuantityChanged.Raise(_currentMaxGuests);
+            }
+            else if (upgradeSO.UpgradeType == GuestUpgradeType.SpawnTime)
+            {
+                _spawnInterval = _spawnInterval / (1 + _currentSpawntimeBuff);
+            }
         }
 
         #region Debug

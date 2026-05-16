@@ -21,6 +21,8 @@ namespace LabDiner.Restaurant.SO
         [Header("Feature Settings")]
         public bool WaitingLine;
         public List<Staff> InitialStaffs;
+        public double InitialMoney = 10;
+        public int InitialGuestQuantity = 2;
         
         [Header("Core Station Settings")]
         public List<CoreStationSO> CoreStations;   // Danh sách các trạm chính có trong level, dùng để tính toán tiến độ level dựa trên level max của các trạm chính này
@@ -34,7 +36,6 @@ namespace LabDiner.Restaurant.SO
         public float maxVerticalPos; // Điểm cao nhất camera có thể lên (tùy độ dài nhà hàng)
 
         [Header("Summary")]
-        [SerializeField] private LevelUpgradeEvent _onUpgradeGuestQuantity;
         [ReadOnly] public int MaxGuestQuantity => FetchGuestQuantity();
         public 
 
@@ -45,14 +46,14 @@ namespace LabDiner.Restaurant.SO
 
         private int FetchGuestQuantity()
         {
-            int quantity = 1;
+            int quantity = InitialGuestQuantity;
             foreach(BaseUpgradeSO upgrade in AvailableUpgrades)
             {
-                if (upgrade is LevelUpgradeSO levelUpgrade)
+                if (upgrade is GuestUpgradeSO guestUpgrade)
                 {
-                    if (levelUpgrade.OnUpgradeRaised == _onUpgradeGuestQuantity)
+                    if (guestUpgrade.UpgradeType == GuestUpgradeType.Quantity)
                     {
-                        quantity += Mathf.RoundToInt(levelUpgrade.UpgradeValue);
+                        quantity += Mathf.RoundToInt(guestUpgrade.UpgradeValue);
                     }
                 }
             }

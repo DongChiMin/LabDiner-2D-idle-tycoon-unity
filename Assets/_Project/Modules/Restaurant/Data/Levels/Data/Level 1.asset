@@ -16,24 +16,20 @@ MonoBehaviour:
   LevelIndex: 1
   LevelName: 
   AvailableUpgrades:
-  - {fileID: 11400000, guid: 20ff4517c92c0a444832b6c225f299bc, type: 2}
-  - {fileID: 11400000, guid: 20ff4517c92c0a444832b6c225f299bc, type: 2}
-  - {fileID: 11400000, guid: 4b087ebbf9db3e74ea4b43dc27acf698, type: 2}
-  - {fileID: 11400000, guid: 4b087ebbf9db3e74ea4b43dc27acf698, type: 2}
-  - {fileID: 11400000, guid: a1a17c27bb459db4f844ac8f93a8d464, type: 2}
-  - {fileID: 11400000, guid: e9dd54bc9d3e0d242ac43c6b0cfb500c, type: 2}
-  - {fileID: 11400000, guid: 50d136f6f947e8b42b725b77255cbccd, type: 2}
-  - {fileID: 11400000, guid: 064dbe78d1376444a84c8f5ae3bd5a1f, type: 2}
-  - {fileID: 11400000, guid: 064dbe78d1376444a84c8f5ae3bd5a1f, type: 2}
+  - {fileID: 11400000, guid: 39d9c934703c43e4b8eddf932f83e6f0, type: 2}
+  - {fileID: 11400000, guid: 82b4ca4b1a76d464493f5936b1427edc, type: 2}
+  - {fileID: 11400000, guid: 5e74207989c443c4097488e7925767ad, type: 2}
+  - {fileID: 11400000, guid: bf3b90d994c7cff438a7615474cb9059, type: 2}
   AvailableMissions:
   - {fileID: 11400000, guid: e967c9511b0683845a43d323a6ce6e6d, type: 2}
   FinalMission: {fileID: 11400000, guid: 7f08af7674856d44fa9c0e79e39a4986, type: 2}
   WaitingLine: 0
   InitialStaffs:
   - {fileID: 3054657543311258127, guid: ec12fb9c391ef4947ab78fce0c04351c, type: 3}
+  InitialMoney: 10
+  InitialGuestQuantity: 2
   CoreStations: []
   MaxUniqueStations: 2
   MaxTotalQtyPerOrder: 5
   minVerticalPos: 0
   maxVerticalPos: 0
-  _onUpgradeGuestQuantity: {fileID: 11400000, guid: d179a8eceddb55643a63dcdd0989eca1, type: 2}

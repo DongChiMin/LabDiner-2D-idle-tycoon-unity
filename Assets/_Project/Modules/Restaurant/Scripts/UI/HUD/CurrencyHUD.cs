@@ -6,10 +6,12 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 using LabDiner.Shared.SO;
+using LabDiner.Restaurant.Interface;
+using LabDiner.Restaurant.SO;
 
 namespace LabDiner.Restaurant.UI
 {
-    public class CurrencyHUD : MonoBehaviour
+    public class CurrencyHUD : MonoBehaviour, ILevelInitializable
     {
         [SerializeField] private TextMeshProUGUI _coinText;
         [SerializeField] private TextMeshProUGUI _gemText;
@@ -41,9 +43,11 @@ namespace LabDiner.Restaurant.UI
             _gemText.transform.parent.DOKill();
         }
 
-        void Start()
+        public void Init(LevelConfigSO levelConfigSO)
         {
+            _coinRuntimeData.SetValue(levelConfigSO.InitialMoney);
             _coinRuntimeData.Add(0); // Kích hoạt callback để cập nhật UI
+            _gemRuntimeData.Add(0);
         }
 
         private void UpdateCoinUI(double newCoinAmount)

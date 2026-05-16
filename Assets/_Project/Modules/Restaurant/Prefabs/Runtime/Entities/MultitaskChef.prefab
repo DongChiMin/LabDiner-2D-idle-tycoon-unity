@@ -73,6 +73,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fcac87215d6fc48ae340d6f89be3bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mover: {fileID: 3484565846713683997}
+  _staffType: 3
   _mySkills:
   - {fileID: 8730692302361930692}
   - {fileID: 2333676677103525307}
@@ -119,7 +121,7 @@ MonoBehaviour:
     _stationTarget: {fileID: 0}
     _profit: 0
   _mover: {fileID: 3484565846713683997}
-  cookMultiplier: 1
+  cookMultiplier: 0
   _giveFoodDuration: 0
   placeOnPassTableDuration: 0
   _progressPieUI: {fileID: 2192753701787223607}

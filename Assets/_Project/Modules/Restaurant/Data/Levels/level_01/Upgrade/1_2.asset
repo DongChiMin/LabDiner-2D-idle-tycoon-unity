@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78bd421c7ac59f7459a0ce4dd13f523a, type: 3}
+  m_Name: 1_2
+  m_EditorClassIdentifier: 
+  Title: Invite Friends
+  Description: Customer Spawn faster
+  Icon: {fileID: 0}
+  UpgradeTypeSprite: {fileID: 0}
+  UpgradeCost: 1000
+  UpgradeValue: 1
+  OnUpgradeRaised: {fileID: 11400000, guid: 27a6a35ae2a54ce489278fe22e512cf6, type: 2}
+  UpgradeType: 1

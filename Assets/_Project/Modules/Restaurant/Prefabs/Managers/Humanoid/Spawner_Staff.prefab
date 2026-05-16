@@ -173,9 +173,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e371ae3b66aa8f449b96cc050a1144a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onUpgradeAllStaffMoveSpeed: {fileID: 11400000, guid: 15e86ca88a5d7634497e8064c2023ba7, type: 2}
-  _onUpgradeStaffQuantity: {fileID: 11400000, guid: e9178ecd434034545a95062ecb37c76c, type: 2}
-  _initialStaffs: []
+  _onUpgradeStaff: {fileID: 11400000, guid: 8594b9a565217f748a4b682fae331de3, type: 2}
+  _prefabRepository:
+  - {fileID: 695742487319327825, guid: 0a4ae17815a80e54fa0465e3785c0777, type: 3}
+  - {fileID: 3054657543311258127, guid: ec12fb9c391ef4947ab78fce0c04351c, type: 3}
+  - {fileID: 4107475475481364124, guid: f7f5e114a04c6a048b608289fc6a5eda, type: 3}
   _spawnParent: {fileID: 1940608915781311212}
   _restPositions:
   - {fileID: 4375082261723893911}

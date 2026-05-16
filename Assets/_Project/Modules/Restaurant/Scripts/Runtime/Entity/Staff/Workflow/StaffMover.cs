@@ -44,7 +44,8 @@ namespace LabDiner.Restaurant.Workflow
 
         public void UpgradeMoveSpeed(float speedBuffValue)
         {
-            _agent.speed += speedBuffValue;
+            _speed += speedBuffValue;
+            _agent.speed += _speed;
         }
     }
 }
