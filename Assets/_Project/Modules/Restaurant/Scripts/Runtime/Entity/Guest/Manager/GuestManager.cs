@@ -15,7 +15,7 @@ namespace LabDiner.Restaurant.Runtime
         [SerializeField] private GuestSpawner _guestSpawner;
 
         [Header("References")]
-        [SerializeField] private DiningSeatRuntimeSetSO _diningSeatRuntimeSet;
+        [SerializeField] private DiningSeatRuntimeSO _diningSeatRuntimeSet;
         [SerializeField] private CoreStationRuntimeSO _coreStationRuntimeSO;
 
         [Header("Policy (Optional)")]

@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16ddfe5cdcbab884793164dfb8ae9c68, type: 3}
-  m_Name: AllDishMaxLevel
+  m_Name: 1_final
   m_EditorClassIdentifier: 
-  Title: All Dish Max Level
-  MissionIcon: {fileID: 0}
+  Title: Reach max level with apple machine
+  MissionIcon: {fileID: -4197890398980553806, guid: 7688d0565f7160e40b7315a1519d762b, type: 3}
   TargetValue: 1
-  RewardIcon: {fileID: 1714103667931503152, guid: 209be6344ed8bc94889134e171412db6, type: 3}
-  RewardValue: 50
-  OnGemFlyAdded: {fileID: 11400000, guid: 7544e3ce532a74a448d1f45265ea3c60, type: 2}
+  Reward: {fileID: 11400000, guid: ffb41465a61665b4eaa5aa0ed4bdf7bd, type: 2}
+  RewardValue: 99
   MissionType: 0
   _coreStationRuntimeSO: {fileID: 11400000, guid: 014d0306fd640c34d825b497c1c9b9f8, type: 2}

@@ -17,19 +17,26 @@ namespace LabDiner.Restaurant.SO
     /// Value của nhiệm vụ theo dạng %
     /// </summary>
     [CreateAssetMenu(fileName = "New Final Level Mission", menuName = "Game/Missions/Final Level Mission")]
-    public class FinalLevelMissionSO : BaseGemMissionSO
+    public class FinalLevelMissionSO : BaseMissionSO
     {
         [Header("Target")]
         public FinalMissionType MissionType;
         [SerializeField] private CoreStationRuntimeSO _coreStationRuntimeSO;
         public override float GetCurrentValue()
         {
-            List<CoreStation> coreStations = _coreStationRuntimeSO.CoreStations;
+            switch (MissionType)
+            {
+                case FinalMissionType.AllCoreStationLevel:
+                    List<CoreStation> coreStations = _coreStationRuntimeSO.CoreStations;
 
-            int totalCoreStationCurrentLevel = coreStations.Sum(s => s.CurrentLevel);
-            int totalCoreStationMaxLevel = coreStations.Sum(s => s.CoreStationSO.LevelPerStar * s.CoreStationSO.StationStars.Count);
+                    int totalCoreStationCurrentLevel = coreStations.Sum(s => s.CurrentLevel);
+                    int totalCoreStationMaxLevel = coreStations.Sum(s => s.CoreStationSO.LevelPerStar * s.CoreStationSO.StationStars.Count);
 
-            return totalCoreStationCurrentLevel/(float) totalCoreStationMaxLevel;
+                    return totalCoreStationCurrentLevel/(float) totalCoreStationMaxLevel;
+                default:
+                    Debug.LogError("Unsupported Mission Type");
+                    return 0;
+            }
         }
 
         //Mặc định khi tạo SO sẽ để TargetValue là 1 (tức là 100%)

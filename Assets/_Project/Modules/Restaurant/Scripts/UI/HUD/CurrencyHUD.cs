@@ -8,6 +8,7 @@ using DG.Tweening;
 using LabDiner.Shared.SO;
 using LabDiner.Restaurant.Interface;
 using LabDiner.Restaurant.SO;
+using LabDiner.Restaurant.Event;
 
 namespace LabDiner.Restaurant.UI
 {
@@ -19,11 +20,14 @@ namespace LabDiner.Restaurant.UI
         [SerializeField] private IntRuntimeSO _gemRuntimeData;
 
         [Header("Events")]
+        [SerializeField] private LevelConfigEvent _onLevelInit;
         [SerializeField] private LevelCoinFlyEvent _onCoinFlyAdded;
         [SerializeField] private LevelGemFlyEvent _onGemFlyAdded;
 
         void OnEnable()
         {
+            _onLevelInit.Register(Init);
+
             _coinRuntimeData.OnValueChanged += UpdateCoinUI;
             _onCoinFlyAdded.Register(HandleCoinFlyAdded);
 
@@ -33,6 +37,8 @@ namespace LabDiner.Restaurant.UI
 
         void OnDisable()
         {
+            _onLevelInit.Unregister(Init);
+
             _coinRuntimeData.OnValueChanged -= UpdateCoinUI;
             _onCoinFlyAdded.Unregister(HandleCoinFlyAdded);
 

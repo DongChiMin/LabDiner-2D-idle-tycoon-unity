@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.SO
 {
-    [CreateAssetMenu(fileName = "DiningSeatRuntimeSet", menuName = "SO/Runtime//DiningSeat")]
-    public class DiningSeatRuntimeSetSO : ScriptableObject
+    [CreateAssetMenu(fileName = "DiningSeatRuntimeSet", menuName = "SO/Runtime/DiningSeat")]
+    public class DiningSeatRuntimeSO : ScriptableObject
     {
         // Danh sách tất cả các ghế đã được spawn, được quản lý bởi DiningTableManager
         public List<DiningSeat> ActiveSeats = new List<DiningSeat>();

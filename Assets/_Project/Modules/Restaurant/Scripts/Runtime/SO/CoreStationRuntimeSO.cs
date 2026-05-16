@@ -1,5 +1,6 @@
 
 
+using System;
 using System.Collections.Generic;
 using LabDiner.Restaurant.Enum;
 using LabDiner.Restaurant.Environment;
@@ -8,9 +9,12 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.SO
 {
-    [CreateAssetMenu(fileName = "CoreStationRuntimeSet", menuName = "SO/Runtime//CoreStation")]
+    [CreateAssetMenu(fileName = "CoreStationRuntimeSet", menuName = "SO/Runtime/CoreStation")]
     public class CoreStationRuntimeSO : ScriptableObject
     {
+        //Được gọi khi có trạm bất kỳ được cập nhật
+        public Action OnValueChanged;
+
         // Danh sách CoreStation có trên level, được quản lý bởi CoreStationManager
         public List<CoreStation> CoreStations => coreStations;
         [SerializeField] private List<CoreStation> coreStations = new List<CoreStation>();

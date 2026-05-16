@@ -14,7 +14,6 @@ namespace LabDiner.Restaurant.UI
     {
         [Header("Events")]
         [SerializeField] private IntEvent _onLevelComplete;
-        [SerializeField] private CoreStationEvent _onCoreStationLevelUpgraded;
         [SerializeField] private LevelConfigEvent _onLevelInit;
 
         [Header("Item References")]
@@ -23,30 +22,32 @@ namespace LabDiner.Restaurant.UI
         [SerializeField] private Transform _rewardStartPos;
 
         [Header("[Runtime]")]
-        [SerializeField] private List<BaseGemMissionSO> _remainingMissions = new List<BaseGemMissionSO>();
-        [SerializeField] BaseGemMissionSO _currentMission;
-        [SerializeField] private BaseGemMissionSO _finalMission;
+        [SerializeField] private List<BaseMissionSO> _remainingMissions = new List<BaseMissionSO>();
+        [SerializeField] BaseMissionSO _currentMission;
 
         private int _currentLevel = -1;
+        private bool _isFinalMission = false;
 
         void OnEnable()
         {
             _onLevelInit.Register(Init);
-            _onCoreStationLevelUpgraded.Register(HandleProgressUpdate);
             _missionHUD.OnRewardClaimed += HandleRewardClaim;
+            if(_currentMission != null) _currentMission.OnValueChanged += HandleProgressUpdate;
         }
 
         void OnDisable()
         {
             _onLevelInit.Unregister(Init);
-            _onCoreStationLevelUpgraded.Unregister(HandleProgressUpdate);
             _missionHUD.OnRewardClaimed -= HandleRewardClaim;
+            if(_currentMission != null) _currentMission.OnValueChanged -= HandleProgressUpdate;
         }
 
         public void Init(LevelConfigSO config)
         {
-            _remainingMissions = new List<BaseGemMissionSO>(config.AvailableMissions);
-            _finalMission = config.FinalMission;
+            _isFinalMission = false;
+            if(_currentMission != null) _currentMission.OnValueChanged -= HandleProgressUpdate;
+            _currentMission = null;
+            _remainingMissions = new List<BaseMissionSO>(config.AvailableMissions);
             _currentLevel = config.LevelIndex;
 
             //Khởi động nhiệm vụ đầu tiên
@@ -62,14 +63,18 @@ namespace LabDiner.Restaurant.UI
 
             if (_remainingMissions.Count > 0)
             {
+                if(_currentMission != null) _currentMission.OnValueChanged -= HandleProgressUpdate;
                 _currentMission = _remainingMissions[0];
+                _currentMission.OnValueChanged += HandleProgressUpdate;
                 _remainingMissions.RemoveAt(0);
                 _missionHUD.ToggleProgressText(true);
             }
-            else
+
+            //Nếu là nhiệm vụ cuối cùng
+            if(_remainingMissions.Count == 0)
             {
-                _currentMission = _finalMission;
                 _missionHUD.ToggleProgressText(false);
+                _isFinalMission = true;
             }
 
             UpdateMissionUI();
@@ -79,55 +84,45 @@ namespace LabDiner.Restaurant.UI
         {
             if (_currentMission == null) return;
             
-            float val = _currentMission.GetCurrentValue();
             _missionHUD.Setup(_currentMission, () => _attentionEffect.ToggleAttention(true));
         }
 
-        private void HandleProgressUpdate(CoreStation station)
+        private void HandleProgressUpdate()
         {
             if (_currentMission == null) return;
 
-            // Update UI cho nhiệm vụ hiện tại
-            _missionHUD.UpdateProgress(() => _attentionEffect.ToggleAttention(true));
-
             // Logic tracking nhiệm vụ cuối (nếu là dạng AllCoreStation)
-            CheckFinalMissionProgress();
-        }
-
-        private void CheckFinalMissionProgress()
-        {
-            if (_finalMission == null)
+            if (_isFinalMission && _currentMission.IsCompleted())
             {
-                Debug.LogError("[LevelMissionController] Nhiệm vụ cuối đang bị thiếu trong config của level này, vui lòng kiểm tra lại để tránh lỗi khi chạy game!");
+                _missionHUD.UpdateProgress();
+                CompleteLevel();
                 return;
             }
 
-            if (_finalMission.IsCompleted())
-            {
-                CompleteLevel();
-            }
+             // Update UI cho nhiệm vụ hiện tại
+            _missionHUD.UpdateProgress(() => _attentionEffect.ToggleAttention(true));
         }
 
         private void HandleRewardClaim()
         {
             if (_currentMission == null) return;
-
-            _currentMission.ApplyReward(_rewardStartPos.position);
             
-            if (_currentMission == _finalMission)
+            if (_isFinalMission)
             {
                 CompleteLevel();
             }
             else
             {
+                _currentMission.ApplyReward(_rewardStartPos.position);
                 ActivateNextMission();
             }   
         }
 
         private void CompleteLevel()
         {
+            if (_currentMission != null) _currentMission.OnValueChanged -= HandleProgressUpdate;
             //Nhận thưởng cho nhiệm vụ cuối
-            _finalMission.ApplyReward(_rewardStartPos.position);
+            _currentMission.ApplyReward(_rewardStartPos.position);
 
             // Tự động nhận hết phần thưởng còn lại trong queue nếu có
             while (_remainingMissions.Count > 0)

@@ -21,9 +21,9 @@ namespace LabDiner.Restaurant.UI
         {
             List<CoreStation> coreStations = _coreStationRuntime.CoreStations;
 
-            foreach(BaseGemMissionSO mission in _remainingMissions)
+            foreach(BaseMissionSO mission in _remainingMissions)
             {
-                if (mission is CoreStationLevelMissionSO coreStationMission)
+                if (mission is CoreStationMissionSO coreStationMission)
                 {
                     CoreStationSO targetCoreStation = coreStationMission.TargetCoreStation;
                     var targetStation = coreStations.FirstOrDefault(s => s.CoreStationSO == targetCoreStation);

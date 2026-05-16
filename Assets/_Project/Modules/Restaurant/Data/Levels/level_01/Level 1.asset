@@ -21,14 +21,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5e74207989c443c4097488e7925767ad, type: 2}
   - {fileID: 11400000, guid: bf3b90d994c7cff438a7615474cb9059, type: 2}
   AvailableMissions:
-  - {fileID: 11400000, guid: e967c9511b0683845a43d323a6ce6e6d, type: 2}
-  FinalMission: {fileID: 11400000, guid: 7f08af7674856d44fa9c0e79e39a4986, type: 2}
+  - {fileID: 11400000, guid: 92bbddd981cb49c4489e7ede1876fc78, type: 2}
+  - {fileID: 11400000, guid: dff2e27331416de44a0896abc1dfef06, type: 2}
+  - {fileID: 11400000, guid: e3279ad52b9662c4c96e3e88396a9128, type: 2}
   WaitingLine: 0
   InitialStaffs:
   - {fileID: 3054657543311258127, guid: ec12fb9c391ef4947ab78fce0c04351c, type: 3}
-  InitialMoney: 10
+  InitialMoney: 15
   InitialGuestQuantity: 2
-  CoreStations: []
+  CoreStations:
+  - {fileID: 11400000, guid: 71de0ce8923041146bf74047af20e4dd, type: 2}
   MaxUniqueStations: 2
   MaxTotalQtyPerOrder: 5
   minVerticalPos: 0

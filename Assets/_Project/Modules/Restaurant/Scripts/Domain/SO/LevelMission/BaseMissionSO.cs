@@ -1,3 +1,4 @@
+using System;
 using LabDiner.Shared.Event;
 using UnityEngine;
 
@@ -13,17 +14,18 @@ namespace LabDiner.Restaurant.SO
     //     BuyUpgrades,       // Mua a lần nâng cấp (có thể là bất kỳ nâng cấp nào, miễn là mua thành công)
     // }
 
-    public abstract class BaseGemMissionSO : ScriptableObject
+    public abstract class BaseMissionSO : ScriptableObject
     {
+        public Action OnValueChanged;
+
         [Header("Mission Info")]
         public string Title;
         public Sprite MissionIcon;
         public float TargetValue;
 
-        [Header("Reward Info")]
-        public Sprite RewardIcon;
-        public float RewardValue;
-        public LevelGemFlyEvent OnGemFlyAdded;
+        [Header("Reward")]
+        public BaseRewardSO Reward;
+        public double RewardValue;
 
         // Hàm abstract để mỗi loại mission tự định nghĩa cách lấy giá trị hiện tại
         public abstract float GetCurrentValue();
@@ -38,13 +40,8 @@ namespace LabDiner.Restaurant.SO
         public void ApplyReward(Vector3 startPos)
         {
             // Gửi chính Asset này đi qua Event
-            if (OnGemFlyAdded != null)
-                OnGemFlyAdded.Raise(
-                    new GemRewardData
-                    {
-                        startPos = startPos,
-                        RewardValue = Mathf.RoundToInt(RewardValue)
-                    });
+            if (Reward != null)
+                Reward.ApplyReward(startPos, RewardValue);
         }
     }
 }

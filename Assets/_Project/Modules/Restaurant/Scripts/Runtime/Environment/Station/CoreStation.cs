@@ -36,12 +36,10 @@ namespace LabDiner.Restaurant.Environment
         [SerializeField] private PopScaleEffect _upgradeSprite;
         [SerializeField] private Transform gemRewardStartPos;   // Điểm xuất hiện hiệu ứng gem khi nhận thưởng từ star upgrade
 
-        [Header("Events")]
-        [SerializeField] private CoreStationEvent _onCoreStationLevelUpgraded;
-
         [Header("Data")]
         [SerializeField] private CoreStationSO _coreStationSO;
         [SerializeField] private DoubleRuntimeSO _coinRuntimeData;
+        [SerializeField] private CoreStationRuntimeSO _coreStationRuntimeSO;
 
         [Header("[DEBUG] Static Attributes")]
         [SerializeField] private string _name = "New CoreStation";
@@ -170,13 +168,13 @@ namespace LabDiner.Restaurant.Environment
             if(_currentLevel >= maxLevel)
             {
                 OnMaxLevel?.Invoke(_maxStar);
-                _onCoreStationLevelUpgraded.Raise(this);
+                _coreStationRuntimeSO.OnValueChanged?.Invoke();
                 return;
             }
 
             // Sau khi cập nhật cost, cập nhật lại coin để xem có toggle attention upgrade hay không
             _coinRuntimeData.Add(0);
-            _onCoreStationLevelUpgraded.Raise(this);
+            _coreStationRuntimeSO.OnValueChanged?.Invoke();
 
             OnDataChanged?.Invoke();
         }

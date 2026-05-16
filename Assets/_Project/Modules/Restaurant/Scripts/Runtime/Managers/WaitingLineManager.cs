@@ -13,7 +13,7 @@ namespace LabDiner.Restaurant.Manager
     {
         public bool HasWaitingGuest => _waitingGuests.Count > 0;
 
-        [SerializeField] private DiningSeatRuntimeSetSO _diningSeatRuntimeSet;
+        [SerializeField] private DiningSeatRuntimeSO _diningSeatRuntimeSet;
 
         [Header("Spawn Settings")]
         [SerializeField] private Transform _startPoint;

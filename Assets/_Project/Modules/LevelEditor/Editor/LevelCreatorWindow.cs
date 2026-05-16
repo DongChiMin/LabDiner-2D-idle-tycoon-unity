@@ -14,13 +14,11 @@ public class LevelCreatorWindow : EditorWindow
     private GameObject levelPrefab;
     private int levelIndex;
     private string levelDisplayName;
-    private LevelUpgradeEvent guestQuantityEvent;
 
     // --- Lists ---
     private List<BaseUpgradeSO> upgrades = new List<BaseUpgradeSO>();
-    private List<BaseGemMissionSO> missions = new List<BaseGemMissionSO>();
+    private List<BaseMissionSO> missions = new List<BaseMissionSO>();
     private List<CoreStationSO> coreStations = new List<CoreStationSO>();
-    private BaseGemMissionSO finalMission;
 
     // --- Settings ---
     private bool waitingLine;
@@ -47,7 +45,6 @@ public class LevelCreatorWindow : EditorWindow
         levelDisplayName = EditorGUILayout.TextField("Display Name", levelDisplayName);
         levelIndex = EditorGUILayout.IntField("Level Index", levelIndex);
         levelPrefab = (GameObject)EditorGUILayout.ObjectField("Level Prefab", levelPrefab, typeof(GameObject), false);
-        guestQuantityEvent = (LevelUpgradeEvent)EditorGUILayout.ObjectField("Guest Qty Event", guestQuantityEvent, typeof(LevelUpgradeEvent), false);
         EditorGUILayout.EndVertical();
 
         // --- SECTION 2: CORE STATIONS ---
@@ -72,7 +69,6 @@ public class LevelCreatorWindow : EditorWindow
         DrawSOList(upgrades, "Upgrade");
         EditorGUILayout.Space(5);
         DrawSOList(missions, "Mission");
-        finalMission = (BaseGemMissionSO)EditorGUILayout.ObjectField("Final Mission", finalMission, typeof(BaseGemMissionSO), false);
         EditorGUILayout.EndVertical();
 
         // --- SECTION 4: CONFIG & CAMERA ---
@@ -133,8 +129,7 @@ public class LevelCreatorWindow : EditorWindow
         config.LevelIndex = levelIndex;
         config.LevelName = levelDisplayName;
         config.AvailableUpgrades = new List<BaseUpgradeSO>(upgrades);
-        config.AvailableMissions = new List<BaseGemMissionSO>(missions);
-        config.FinalMission = finalMission;
+        config.AvailableMissions = new List<BaseMissionSO>(missions);
         config.CoreStations = new List<CoreStationSO>(coreStations);
         config.WaitingLine = waitingLine;
         config.MaxUniqueStations = maxUniqueStations;

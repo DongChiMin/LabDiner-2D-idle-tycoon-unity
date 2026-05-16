@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.SO
 {
-    [CreateAssetMenu(fileName = "PassTableRuntimeSet", menuName = "SO/Runtime//PassTable")]
+    [CreateAssetMenu(fileName = "PassTableRuntimeSet", menuName = "SO/Runtime/PassTable")]
     public class PassTableRuntimeSO : ScriptableObject
     {
         // Danh sách PassTable có trên level, được quản lý bởi PassTableManager

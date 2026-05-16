@@ -28,7 +28,7 @@ namespace LabDiner.Restaurant.UI
         [SerializeField] private Image _rewardIcon;
         [SerializeField] private TextMeshProUGUI _rewardValueText;
 
-        private BaseGemMissionSO _currentMission;
+        private BaseMissionSO _currentMission;
         private bool _isRewardable = false;
 
         void Awake()
@@ -37,10 +37,11 @@ namespace LabDiner.Restaurant.UI
         }
 
         #region API
-        public void Setup(BaseGemMissionSO mission, Action onCompleted = null)
+        public void Setup(BaseMissionSO mission, Action onCompleted = null)
         {
-            _currentMission = mission;
+            float currentValue = mission.GetCurrentValue();
 
+            _currentMission = mission;
             _isRewardable = false;
             
             //Common UI Setup
@@ -49,13 +50,13 @@ namespace LabDiner.Restaurant.UI
             //Upgradable UI Setup
             _missionUI.SetActive(true);
             _missionText.text = mission.Title;
-            _rewardMissionIcon.sprite = mission.RewardIcon;
-            _progressText.text = $"{mission.GetCurrentValue():F0}/{mission.TargetValue:F0}";
-            _progressSlider.value = (float)mission.GetCurrentValue() / mission.TargetValue;
+            _rewardMissionIcon.sprite = mission.Reward.Icon;
+            _progressText.text = $"{currentValue:F0}/{mission.TargetValue:F0}";
+            _progressSlider.value = (float)currentValue / mission.TargetValue;
 
             //Reward UI Setup
             _rewardUI.SetActive(false);
-            _rewardIcon.sprite = mission.RewardIcon;
+            _rewardIcon.sprite = mission.Reward.Icon;
             _rewardValueText.text = mission.RewardValue.ToString();
 
             FetchCompleteStatus(onCompleted);
@@ -65,8 +66,9 @@ namespace LabDiner.Restaurant.UI
         {
             if(_isRewardable) return; // Nếu đã hoàn thành nhiệm vụ, không cập nhật tiến độ nữa
 
-            _progressText.text = $"{_currentMission.GetCurrentValue():F0}/{_currentMission.TargetValue:F0}";
-            _progressSlider.value = (float)_currentMission.GetCurrentValue() / _currentMission.TargetValue;
+            float currentValue = _currentMission.GetCurrentValue();
+            _progressText.text = $"{currentValue:F0}/{_currentMission.TargetValue:F0}";
+            _progressSlider.value = (float)currentValue / _currentMission.TargetValue;
 
             FetchCompleteStatus(onCompleted);
         }

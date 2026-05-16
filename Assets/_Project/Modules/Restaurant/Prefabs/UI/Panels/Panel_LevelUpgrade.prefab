@@ -658,6 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coinData: {fileID: 11400000, guid: dfffcaeb65047244ba51b6f65e6fbaf8, type: 2}
+  _levelUpgradeRuntimeSO: {fileID: 11400000, guid: 9bbfc1a560b78dc4896ce13ad079b091, type: 2}
   _onLevelInit: {fileID: 11400000, guid: 15e61c252f3eb7c439540b5b66730d1e, type: 2}
   _onLevelUpgradable: {fileID: 11400000, guid: 34722071582e5b34ab6fd18840e3b9b4, type: 2}
   _onPopupShow: {fileID: 11400000, guid: 51ecddcc7ce82c8429b16bd9ecf7f6a9, type: 2}

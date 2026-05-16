@@ -543,6 +543,7 @@ MonoBehaviour:
   _gemText: {fileID: 2750415005664935306}
   _coinRuntimeData: {fileID: 11400000, guid: dfffcaeb65047244ba51b6f65e6fbaf8, type: 2}
   _gemRuntimeData: {fileID: 11400000, guid: f2ecb90ebfd0c174285f15f613947534, type: 2}
+  _onLevelInit: {fileID: 11400000, guid: 15e61c252f3eb7c439540b5b66730d1e, type: 2}
   _onCoinFlyAdded: {fileID: 11400000, guid: 100c159d769f6404c861d1d8450599f1, type: 2}
   _onGemFlyAdded: {fileID: 11400000, guid: 7544e3ce532a74a448d1f45265ea3c60, type: 2}
 --- !u!1 &5915528689400542662

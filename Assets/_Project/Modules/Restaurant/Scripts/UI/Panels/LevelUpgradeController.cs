@@ -15,6 +15,8 @@ namespace LabDiner.Restaurant.UI
     {
         [Header("Data")]
         [SerializeField] private DoubleRuntimeSO _coinData;
+        [SerializeField] private LevelUpgradeRuntimeSO _levelUpgradeRuntimeSO;
+
         [Header("Events")]
         [SerializeField] private LevelConfigEvent _onLevelInit;
         [SerializeField] private BoolEvent _onLevelUpgradable;
@@ -47,6 +49,7 @@ namespace LabDiner.Restaurant.UI
 
         public void Init(LevelConfigSO levelConfigSO)
         {
+            _levelUpgradeRuntimeSO.Clear();
             List<BaseUpgradeSO> baseUpgradeSOs = levelConfigSO.AvailableUpgrades;
             double levelCoin = _coinData.Value;
 
@@ -68,9 +71,11 @@ namespace LabDiner.Restaurant.UI
                     _coinData.Add(-data.UpgradeCost);
                     data.ApplyUpgrade();
                     item.gameObject.SetActive(false);
+                    _levelUpgradeRuntimeSO.Complete(data);
                 });
 
                 upgradeItems.Add(item);
+                _levelUpgradeRuntimeSO.Add(data);
             }
         }
 

@@ -16,7 +16,7 @@ namespace LabDiner.Restaurant.Manager
         [SerializeField] private DiningSeatEvent _onTableDirty;
 
         [Header("References")]
-        [SerializeField] private DiningSeatRuntimeSetSO _diningSeatRuntimeSet;
+        [SerializeField] private DiningSeatRuntimeSO _diningSeatRuntimeSet;
 
         [Header("[Runtime]")]
         [SerializeField] private List<DiningTable> _tables = new List<DiningTable>();
