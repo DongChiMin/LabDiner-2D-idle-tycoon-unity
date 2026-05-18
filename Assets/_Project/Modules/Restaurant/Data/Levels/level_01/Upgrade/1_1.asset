@@ -17,7 +17,7 @@ MonoBehaviour:
   Icon: {fileID: 0}
   UpgradeTypeSprite: {fileID: 0}
   UpgradeCost: 500
-  UpgradeValue: 2
-  OnUpgradeRaised: {fileID: 11400000, guid: 3d0d7d492590bf040ae4badd8ecbeb2d, type: 2}
+  UpgradeValue: 1
   UpgradeType: 0
   TargetDish: {fileID: 11400000, guid: 5fb6c1ff8a5604143820488853beb000, type: 2}
+  OnUpgradeRaised: {fileID: 11400000, guid: 3d0d7d492590bf040ae4badd8ecbeb2d, type: 2}

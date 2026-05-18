@@ -19,7 +19,7 @@ namespace LabDiner.Restaurant.Environment
         [SerializeField] private GuestContext _occupiedGuest;
 
         [Header("Gizmos Settings")]
-        [SerializeField] private float _workCenterY = 1.5f;
+        [SerializeField] private float _workCenterY = 0f;
         [SerializeField] private Vector3 _workPosSize = new Vector3(1.5f, 2.25f, 0.1f);
 
         public void Occupy(GuestContext guest)

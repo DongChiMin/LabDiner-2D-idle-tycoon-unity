@@ -9,6 +9,7 @@ namespace LabDiner.Restaurant.Manager
         [Header("[DEBUG]")]
         [SerializeField] private bool _showGizmos = true;
         [SerializeField] private Color _gizmoColor = Color.cyan;
+        [SerializeField] private float _workGizmoCenterY = 0f;
         [SerializeField] private Vector3 _restPointDimensions = new Vector3(0.6f, 1.2f, 0.1f); // Hình vuông cao cao
 
         protected virtual void OnDrawGizmos()
@@ -25,7 +26,7 @@ namespace LabDiner.Restaurant.Manager
 
                 // Vẽ hình hộp đứng (đại diện cho vị trí nhân viên đứng nghỉ)
                 // Center được offset lên một nửa chiều cao để hình nằm trên mặt sàn
-                Vector3 center = pos + Vector3.up * (_restPointDimensions.y * 0.5f);
+                Vector3 center = pos + Vector3.up * _workGizmoCenterY;;
                 Gizmos.DrawWireCube(center, _restPointDimensions);
 
                 // Reset lại màu chính cho vòng lặp sau
