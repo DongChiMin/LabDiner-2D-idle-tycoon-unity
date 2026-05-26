@@ -89,8 +89,10 @@ namespace LabDiner.Restaurant.Humanoid
 
         public IEnumerator Eat()
         {
+            // _ctx.OrderCanvas.Setup(_eatDuration);
             // TODO: có thể điều chỉnh thời gian ăn dựa trên số lượng món ăn trong order hoặc các yếu tố khác
             yield return new WaitForSeconds(_eatDuration);
+            // _ctx.OrderCanvas.gameObject.SetActive(false);
             _onGuestHappy.Raise(_ctx);
         }
 

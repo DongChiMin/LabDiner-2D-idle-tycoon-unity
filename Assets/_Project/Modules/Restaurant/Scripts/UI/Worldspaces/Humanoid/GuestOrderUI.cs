@@ -1,7 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using LabDiner.Restaurant.Environment;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LabDiner.Restaurant.UI
 {
@@ -11,6 +13,8 @@ namespace LabDiner.Restaurant.UI
         [SerializeField] private TextMeshProUGUI _debugOrderText;
         [SerializeField] private GuestOrderItem _orderItemPrefab;
         [SerializeField] private Transform _orderItemContainer;
+        [SerializeField] private Image _progressPie;
+        [SerializeField] private GameObject _progressPieParent;
 
         private Dictionary<CoreStation, GuestOrderItem> _currentOrder = new Dictionary<CoreStation, GuestOrderItem>();
 
@@ -19,13 +23,28 @@ namespace LabDiner.Restaurant.UI
             gameObject.SetActive(false);
         }
 
+        public void Setup(float eatingDuration)
+        {
+            // Xóa các item cũ
+            foreach (Transform child in _orderItemContainer)
+            {
+                if(child.gameObject != _progressPieParent)
+                child.gameObject.SetActive(false);
+            }
+
+            gameObject.SetActive(true);
+            StartCoroutine(FillProgressPie(eatingDuration));
+        }
+
         public void Setup(Dictionary<CoreStation, int> remainingDishes)
         {
             _currentOrder.Clear();
+            _progressPieParent.gameObject.SetActive(false);
 
             // Xóa các item cũ
             foreach (Transform child in _orderItemContainer)
             {
+                if(child.gameObject != _progressPieParent)
                 Destroy(child.gameObject);
             }
 
@@ -70,6 +89,19 @@ namespace LabDiner.Restaurant.UI
             }
 
 
+        }
+
+        private IEnumerator FillProgressPie(float duration)
+        {
+            _progressPieParent.gameObject.SetActive(true);
+            float elapsed = 0;
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                _progressPie.fillAmount = Mathf.Clamp01(elapsed / duration);
+                yield return null;
+            }
+            _progressPieParent.gameObject.SetActive(false);
         }
     }
 }
