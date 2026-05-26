@@ -33,6 +33,7 @@ Transform:
   - {fileID: 4480822461445928125}
   - {fileID: 4866547160653113531}
   - {fileID: 1611938600071350114}
+  - {fileID: 8306912352861007768}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5049691504541858056
@@ -49,9 +50,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _workPos: {fileID: 4866547160653113531}
   _sitPos: {fileID: 1611938600071350114}
+  _tipPos: {fileID: 8306912352861007768}
   _occupiedGuest: {fileID: 0}
   _workPosSize: {x: 1.5, y: 2.25, z: 0.1}
   _sitPosSize: {x: 1.5, y: 2.25, z: 0.1}
+  _tipPosSize: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!1 &4284128271056012721
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +199,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 576389216456677995}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7556960591782105295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8306912352861007768}
+  m_Layer: 0
+  m_Name: TipPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8306912352861007768
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7556960591782105295}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -9,6 +9,7 @@ namespace LabDiner.Restaurant.Humanoid
     {
         private GuestContext _ctx;
         private Dictionary<CoreStation, int> _remainingDishes = new Dictionary<CoreStation, int>();
+        private Order _order;
 
         void Awake()
         {
@@ -19,6 +20,7 @@ namespace LabDiner.Restaurant.Humanoid
 
         public void SetOrder(Order order)
         {
+            _order = order;
             _remainingDishes = order.OrderDict;
             _ctx.OrderCanvas.Setup(_remainingDishes);
         }
@@ -29,6 +31,7 @@ namespace LabDiner.Restaurant.Humanoid
             if(_remainingDishes.ContainsKey(receivedDish))
             {
                 _remainingDishes[receivedDish]--;
+                _order.Profit += cookingTask.Profit;
                 if(_remainingDishes[receivedDish] <= 0)
                 {
                     _remainingDishes.Remove(receivedDish);

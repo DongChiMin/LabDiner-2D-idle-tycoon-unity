@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2609793505706396909}
   - component: {fileID: 4647749071178088108}
-  - component: {fileID: 4869369995518955733}
+  - component: {fileID: 4250858781421920596}
   m_Layer: 10
   m_Name: Station
   m_TagString: Untagged
@@ -82,7 +82,7 @@ MonoBehaviour:
   _stationSprite: {fileID: 583041343674674830}
   _workPos: {fileID: 7623063786277498806}
   _isAvailable: 1
---- !u!61 &4869369995518955733
+--- !u!61 &4250858781421920596
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,7 +126,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.25, y: 1.25}
   m_EdgeRadius: 0
 --- !u!1 &5971610206051164741
 GameObject:

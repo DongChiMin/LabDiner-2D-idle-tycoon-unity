@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6163357533459329835}
   - component: {fileID: 8683965332886821494}
   - component: {fileID: 8986557497912968632}
-  - component: {fileID: 2124686196841978405}
+  - component: {fileID: 7231663312463796330}
   m_Layer: 10
   m_Name: StaffBox
   m_TagString: Untagged
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f84d30efef98b45a1af043a1337d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &2124686196841978405
+--- !u!61 &7231663312463796330
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,5 +145,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.2, y: 4}
   m_EdgeRadius: 0

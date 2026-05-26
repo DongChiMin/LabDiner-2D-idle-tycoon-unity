@@ -11,6 +11,10 @@ namespace LabDiner.Restaurant.Humanoid
     /// </summary>
     public class GuestContext : MonoBehaviour
     {
+        //TODO: Thêm thuộc tính cho khách hàng
+        public float TipChance => 0.5f;
+        public float TipMultiplier => 0.5f;
+
         public GuestAI CtxAI => _guestAI;
         public GuestBehavior CtxBehavior => _guestBehavior;
         public GuestMover CtxMover => _guestMover;

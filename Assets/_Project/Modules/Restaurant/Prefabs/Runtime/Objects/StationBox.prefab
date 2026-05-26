@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2740946088730518662}
   - component: {fileID: 8614200406942148530}
-  - component: {fileID: 2842303402118398174}
   - component: {fileID: 4236152059114243910}
+  - component: {fileID: 7608901426050103845}
   m_Layer: 10
   m_Name: StationBox
   m_TagString: Untagged
@@ -89,7 +89,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2842303402118398174
+--- !u!114 &4236152059114243910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904557145379155134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a1b6428401d5f4897fefe3a04bb677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &7608901426050103845
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,17 +145,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.2, y: 4}
   m_EdgeRadius: 0
---- !u!114 &4236152059114243910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7904557145379155134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49a1b6428401d5f4897fefe3a04bb677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using LabDiner.Restaurant.Environment;
 using LabDiner.Restaurant.Event;
 using LabDiner.Restaurant.Model;
+using LabDiner.Restaurant.Pooling;
 using LabDiner.Restaurant.SO;
 using LabDiner.Restaurant.Workflow;
 using UnityEngine;
@@ -94,6 +95,12 @@ namespace LabDiner.Restaurant.Humanoid
             yield return new WaitForSeconds(_eatDuration);
             // _ctx.OrderCanvas.gameObject.SetActive(false);
             _onGuestHappy.Raise(_ctx);
+                if(UnityEngine.Random.value <= _ctx.TipChance)
+                {
+                    CoinTip coinTip = PoolContext.Instance.CoinTipPool.Get(_ctx.DiningSeat.TipPos.position, Quaternion.identity);
+                    coinTip.transform.SetParent(_ctx.DiningSeat.transform);
+                    coinTip.SetTipAmount(_order.Profit * _ctx.TipMultiplier);
+                }
         }
 
         public IEnumerator Pay()
