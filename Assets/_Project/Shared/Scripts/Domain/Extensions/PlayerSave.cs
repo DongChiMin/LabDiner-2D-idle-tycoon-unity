@@ -1,11 +1,11 @@
 using System;
 
-namespace LabDiner.LevelSystem.Domain
+namespace LabDiner.Shared
 {
     [Serializable]
-    public class PlayerProgress
+    public class PlayerSave
     {
-        public PlayerProgress()
+        public PlayerSave()
         {
             currentLevelIndex = 1;
             hasSeenIntro = false;

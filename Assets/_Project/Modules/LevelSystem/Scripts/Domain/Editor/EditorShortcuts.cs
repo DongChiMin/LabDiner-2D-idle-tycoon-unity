@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using System.IO;
+using LabDiner.Shared;
 
 namespace LabDiner.LevelSystem
 {
@@ -15,7 +16,7 @@ namespace LabDiner.LevelSystem
         [MenuItem("LabDiner/Shortcuts/Clear Save Data (Reset)")]
         public static void ClearSaveData()
         {
-            string path = Path.Combine(Application.persistentDataPath, ProgressRepository.PROGRESS_FILE_NAME); // Tên file của cậu
+            string path = Path.Combine(Application.persistentDataPath, PlayerSaveFile.PROGRESS_FILE_NAME); // Tên file của cậu
             if (File.Exists(path))
             {
                 File.Delete(path);

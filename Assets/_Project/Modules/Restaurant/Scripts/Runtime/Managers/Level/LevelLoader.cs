@@ -6,11 +6,11 @@ using LabDiner.Restaurant.Interface;
 using LabDiner.Restaurant.Event;
 using LabDiner.Shared;
 
-namespace LabDiner.LevelSystem.Runtime
+namespace LabDiner.Restaurant.Managers
 {
     public class LevelLoader : MonoBehaviour
     {
-        private const string PROGRESS_FILE_NAME = ProgressRepository.PROGRESS_FILE_NAME;
+        private const string PROGRESS_FILE_NAME = PlayerSaveFile.PROGRESS_FILE_NAME;
 
         [SerializeField] private LevelConfigEvent _onLevelInit;
 
@@ -33,7 +33,7 @@ namespace LabDiner.LevelSystem.Runtime
 
         private void SaveLevel(int levelCompleted)
         {
-            JSONExecutor.WriteToFile(new PlayerProgress
+            JSONExecutor.WriteToFile(new PlayerSave
             {
                 currentLevelIndex = levelCompleted + 1,
                 hasSeenIntro = false

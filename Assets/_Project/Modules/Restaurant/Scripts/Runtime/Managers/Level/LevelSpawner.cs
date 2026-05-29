@@ -6,7 +6,7 @@ using LabDiner.Restaurant.Interface;
 using LabDiner.Restaurant.Event;
 using LabDiner.Shared;
 
-namespace LabDiner.LevelSystem.Runtime
+namespace LabDiner.Restaurant.Managers
 {
     public class LevelSpawner : MonoBehaviour
     {
@@ -28,7 +28,7 @@ namespace LabDiner.LevelSystem.Runtime
         private LevelConfigSO LoadConfigFromFile()
         {
             // 1. Load tiến độ hiện tại
-            PlayerProgress progress = ProgressRepository.LoadProgress();
+            PlayerSave progress = PlayerSaveFile.LoadProgress();
 
             // 2. Lấy Config (Check Null ngay tại đây!)
             LevelConfigSO config = _levelRegistry.GetConfigByLevel(progress.currentLevelIndex);
