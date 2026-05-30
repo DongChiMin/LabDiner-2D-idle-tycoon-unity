@@ -1,0 +1,17 @@
+{
+    "name": "LabDiner.LevelMap",
+    "rootNamespace": "",
+    "references": [
+        "GUID:dc8c4b79b0dc7eb4395d971eb29c18a7",
+        "GUID:468760ffe08ad204d96e42e8d0acaf4a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace LabDiner.Restaurant.UI
+namespace LabDiner.LevelMap.UI
 {
     public class LevelCompleteController : MonoBehaviour, ILevelInitializable   {
         

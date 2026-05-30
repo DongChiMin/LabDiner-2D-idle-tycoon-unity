@@ -2,7 +2,7 @@ using LabDiner.Shared.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LabDiner.Restaurant.UI
+namespace LabDiner.LevelMap.UI
 {
     public class LevelCompletePanel : BasePanel
     {
