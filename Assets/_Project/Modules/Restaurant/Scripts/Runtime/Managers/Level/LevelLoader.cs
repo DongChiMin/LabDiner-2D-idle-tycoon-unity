@@ -13,6 +13,7 @@ namespace LabDiner.Restaurant.Managers
         private const string PROGRESS_FILE_NAME = PlayerSaveFile.PROGRESS_FILE_NAME;
 
         [SerializeField] private LevelConfigEvent _onLevelInit;
+        [SerializeField] private LevelConfigEvent _onLevelIntroStart;
 
         [Header("Level Load")]
         [SerializeField] private IntEvent _onLevelComplete;
@@ -50,7 +51,7 @@ namespace LabDiner.Restaurant.Managers
             ExecutePhase2_InitLogic(configSO);
 
             // Phase 3: Khôi phục tiến độ (Mồi cho cậu triển khai sau)
-            // ExecutePhase3_RestoreProgress();
+            ExecutePhase3_RestoreProgress(configSO);
         }
 
         private void ExecutePhase1_SetupLayout()
@@ -79,6 +80,23 @@ namespace LabDiner.Restaurant.Managers
 
             //Cuối cùng thì mới Init các object ko cần thứ tự
             _onLevelInit.Raise(configSO);
+        }
+
+        private void ExecutePhase3_RestoreProgress(LevelConfigSO configSO)
+        {
+            PlayerSave progress = PlayerSaveFile.LoadProgress();
+            bool hasSeenIntro = progress.hasSeenIntro;
+
+            if(!hasSeenIntro)
+            {
+                _onLevelIntroStart.Raise(configSO);
+                progress.hasSeenIntro = true;
+                PlayerSaveFile.SaveProgress(progress);
+            }
+            else
+            {
+                Debug.Log("Đã xem intro, bỏ qua intro...");
+            }
         }
     }
 }

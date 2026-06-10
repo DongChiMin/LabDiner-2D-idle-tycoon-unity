@@ -1161,6 +1161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onLevelInit: {fileID: 11400000, guid: 15e61c252f3eb7c439540b5b66730d1e, type: 2}
+  _onLevelIntroStart: {fileID: 11400000, guid: 1360d540e7268034b96c8986ec88e816, type: 2}
   _onLevelComplete: {fileID: 11400000, guid: fc08566a8a8ee194fbd3e161ea890bf6, type: 2}
   _initRoots:
   - {fileID: 3201200233848494847}

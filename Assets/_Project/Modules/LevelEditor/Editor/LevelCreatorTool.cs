@@ -75,6 +75,21 @@ namespace LabDiner.Restaurant.Editor
                 _selectedTestIndex = EditorGUILayout.Popup("Chọn Level Muốn Test:", _selectedTestIndex, _levelOptions);
 
                 GUILayout.Space(10);
+
+                // --- BẮT ĐẦU THÊM NÚT XÓA FILE SAVE TẠI ĐÂY ---
+                GUI.backgroundColor = new Color(0.9f, 0.3f, 0.3f); // Màu đỏ cảnh báo
+                if (GUILayout.Button("🔥 XÓA DỮ LIỆU LƯU TRỮ (CLEAR SAVE)", GUILayout.Height(25)))
+                {
+                    // Hiển thị hộp thoại xác nhận để tránh bấm nhầm
+                    if (EditorUtility.DisplayDialog("Xác nhận xóa", "Bạn có chắc chắn muốn xóa toàn bộ file save hiện tại không?", "Xóa ngay", "Hủy"))
+                    {
+                        ClearSaveData();
+                    }
+                }
+                GUI.backgroundColor = Color.white;
+                GUILayout.Space(5);
+                // --- KẾT THÚC THÊM NÚT ---
+
                 GUI.backgroundColor = new Color(0.4f, 0.8f, 0.4f); // Màu xanh lá cây nổi bật cho nút Play
                 if (GUILayout.Button("▶️ LƯU PROGRESS & CHẠY THỬ", GUILayout.Height(40)))
                 {
@@ -152,7 +167,9 @@ namespace LabDiner.Restaurant.Editor
             try 
             {
                 // Thay thế đúng đường dẫn namespace class của bạn tại đây nếu bị báo đỏ lỗi biên dịch
-                PlayerSaveFile.SaveProgress(levelIndex);
+                PlayerSave progress = PlayerSaveFile.LoadProgress();
+                progress.currentLevelIndex = levelIndex;
+                PlayerSaveFile.SaveProgress(progress);
                 Debug.Log($"<color=cyan>[Playtest]</color> Đã nạp thành công dữ liệu Level Index [<b>{levelIndex}</b>] vào hệ thống lưu trữ!");
             }
             catch (System.Exception e)
@@ -339,6 +356,27 @@ namespace LabDiner.Restaurant.Editor
             else
             {
                 Debug.LogError("[Scaffolder] Không tìm thấy biến List tên là 'registry' trong file LevelRegistrySO!");
+            }
+        }
+
+        /// <summary>
+        /// Xóa sạch dữ liệu tiến trình cũ, đưa về trạng thái ban đầu
+        /// </summary>
+        private void ClearSaveData()
+        {
+            try
+            {
+                // Cách 1: Khởi tạo một save mới tinh và ghi đè lên file cũ
+                PlayerSave emptySave = new PlayerSave();
+                
+                // Bạn có thể set mặc định nếu cần (Ví dụ: level đầu tiên = 1)
+                emptySave.currentLevelIndex = 1; 
+                
+                PlayerSaveFile.SaveProgress(emptySave);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"[Playtest] Lỗi khi xóa dữ liệu save: {e.Message}");
             }
         }
     }

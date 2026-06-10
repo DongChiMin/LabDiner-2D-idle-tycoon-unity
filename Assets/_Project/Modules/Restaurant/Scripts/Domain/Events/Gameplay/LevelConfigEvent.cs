@@ -5,6 +5,6 @@ using LabDiner.Restaurant.SO;
 
 namespace LabDiner.Restaurant.Event
 {
-    [CreateAssetMenu(fileName = "OnLevelInit", menuName = "Events/GamePlay/LevelInit Event")]
+    [CreateAssetMenu(fileName = "LevelConfigEvent", menuName = "Events/GamePlay/LevelConfig Event")]
     public class LevelConfigEvent : GameEvent<LevelConfigSO> { }
 }

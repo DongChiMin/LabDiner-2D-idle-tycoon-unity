@@ -13,9 +13,8 @@ namespace LabDiner.Shared
             return JsonUtility.FromJson<PlayerSave>(json);
         }
 
-        public static void SaveProgress(int nextLevel) 
+        public static void SaveProgress(PlayerSave progress) 
         {
-            var progress = new PlayerSave { currentLevelIndex = nextLevel };
             JSONExecutor.WriteToFile(progress.ToJson(), PROGRESS_FILE_NAME, true);
         }
     }

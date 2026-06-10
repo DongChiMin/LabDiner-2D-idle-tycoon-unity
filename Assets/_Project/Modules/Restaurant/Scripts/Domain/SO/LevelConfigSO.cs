@@ -13,6 +13,8 @@ namespace LabDiner.Restaurant.SO
         public GameObject LevelPrefab;
         public int LevelIndex;
         public string LevelName;
+        public string LevelDescription;
+        public Sprite LevelIcon;
         public List<BaseUpgradeSO> AvailableUpgrades;
         public List<BaseMissionSO> AvailableMissions;
         public Action OnLevelComplete;
