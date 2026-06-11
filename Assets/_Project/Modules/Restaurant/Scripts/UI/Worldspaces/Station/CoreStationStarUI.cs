@@ -21,9 +21,15 @@ namespace LabDiner.Restaurant.UI
 
         private List<Image> _spawnedStars = new List<Image>();
         private List<Image> _spawnedRewards = new List<Image>();
+        private bool _isMaxLevel = false;
 
         public void Setup(CoreStationUIData data)
         {
+            if(_isMaxLevel)
+            {
+                return;
+            }
+
             int currentStars = data.StarQuantity;
             int maxStars = data.MaxStar;
             _starProgressFill.value = data.StarProgress;
@@ -39,6 +45,7 @@ namespace LabDiner.Restaurant.UI
 
         public void MaxLevelReached(int maxStar)
         {
+            _isMaxLevel = true;
             UpdateRating(maxStar);
             _starProgressFill.value = 1f;
         }
