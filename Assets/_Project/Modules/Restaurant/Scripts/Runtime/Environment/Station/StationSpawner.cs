@@ -31,7 +31,7 @@ namespace LabDiner.Restaurant.Environment
 
         #region API
 
-        public Station RequestSpawn()
+        public Station RequestSpawn(bool isFromLoadProgress = false)
         {
             int nextIndex = _spawnedStations.Count;
 
@@ -43,7 +43,7 @@ namespace LabDiner.Restaurant.Environment
                 newStation.SetStatus(false);
                 _spawnedStations.Add(newStation);
 
-                if (_spawnInBox)
+                if (_spawnInBox && !isFromLoadProgress)
                 {
                     newStation.gameObject.SetActive(false);
                     var box = PoolContext.Instance.StationBoxPool.Get(newStation.transform.position, Quaternion.identity);

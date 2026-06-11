@@ -63,6 +63,36 @@ namespace LabDiner.Shared
         public bool hasSeenIntro;
         public bool isDirty;
 
+        public void UpdateCoreStationLevel(string stationID, int level)
+        {
+            isDirty = true;
+
+            bool isExist = false;
+            for (int i = 0; i < coreStationLevels.Count; i++)
+            {
+                if (coreStationLevels[i].CoreStationID == stationID)
+                {
+                    coreStationLevels[i] = new CoreStationLevel
+                    {
+                        CoreStationID = stationID,
+                        level = level
+                    };
+                    isExist = true;
+                    break;
+                }
+            }
+
+            // ✨ NẾU CHƯA CÓ TRONG LIST THÌ PHẢI ADD MỚI
+            if (!isExist)
+            {
+                coreStationLevels.Add(new CoreStationLevel
+                {
+                    CoreStationID = stationID,
+                    level = level
+                });
+            }
+        }
+
         public void UpdateLevelMission(string missionID, bool isCollected)
         {
             isDirty = true;

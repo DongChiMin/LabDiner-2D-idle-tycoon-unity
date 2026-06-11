@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using LabDiner.Restaurant.Enum;
 using LabDiner.Restaurant.Event;
+using LabDiner.Restaurant.Interface;
 using LabDiner.Restaurant.Manager;
 using LabDiner.Restaurant.SO;
 using LabDiner.Restaurant.UI;
+using LabDiner.Shared;
 using LabDiner.Shared.Event;
 using LabDiner.Shared.SO;
 using LabDiner.Shared.UI;
@@ -13,7 +15,7 @@ using UnityEngine;
 namespace LabDiner.Restaurant.Environment
 {
     [System.Serializable]
-    public class CoreStation : MonoBehaviour
+    public class CoreStation : MonoBehaviour, ILevelProgress
     {
         // API
         public CoreStationSO CoreStationSO => _coreStationSO;
@@ -40,6 +42,7 @@ namespace LabDiner.Restaurant.Environment
         [SerializeField] private CoreStationSO _coreStationSO;
         [SerializeField] private DoubleRuntimeSO _coinRuntimeData;
         [SerializeField] private CoreStationRuntimeSO _coreStationRuntimeSO;
+        [SerializeField] private ProgressRuntimeSO _progressRuntimeSO;
 
         [Header("[DEBUG] Static Attributes")]
         [SerializeField] private string _name = "New CoreStation";
@@ -69,6 +72,7 @@ namespace LabDiner.Restaurant.Environment
             {
                 station.OnClickStation += HandleStationClick;
             }
+            _progressRuntimeSO.OnProgressInject += LoadProgress;
         }
 
         void OnDisable()
@@ -78,11 +82,16 @@ namespace LabDiner.Restaurant.Environment
             {
                 station.OnClickStation -= HandleStationClick;
             }
+            _progressRuntimeSO.OnProgressInject -= LoadProgress;
+        }
+
+        void Awake()
+        {
+            Initialize();
         }
 
         void Start()
         {
-            Initialize();
             OnDataChanged?.Invoke();
             
             #if UNITY_EDITOR
@@ -125,12 +134,15 @@ namespace LabDiner.Restaurant.Environment
         /// - Tính toán lại số sao hiện tại dựa trên công thức: số sao hiện tại = cấp độ hiện tại / cấp độ mỗi sao, và giới hạn tối đa bằng số sao tối đa. Ví dụ: nếu cấp độ hiện tại là 3, cấp độ mỗi sao là 2, và số sao tối đa là 5, thì số sao hiện tại sẽ là min(3 / 2, 5) = min(1.5, 5) = 1.
         /// - Nếu cấp độ hiện tại đạt đến cấp độ tối đa, hiển thị thông báo "Max Level Reached" trên UI và thiết lập UI sao với số sao tối đa.
         /// </summary>
-        public void Upgrade()
+        public void Upgrade(bool isFromLoadProgress = false)
         {
             //Sau khi tính toán giá trị mới thì mới trừ tiền để đảm bảo giá trị hiển thị trên UI là chính xác nhất
-            _coinRuntimeData.Add(-_currentCost);
+            if(!isFromLoadProgress) _coinRuntimeData.Add(-_currentCost);
 
             _currentLevel++;
+
+            // Cập nhật tiến trình lên progress
+            if(!isFromLoadProgress) UpdateProgress();
 
             // Tính toán lại profit tiếp theo
             double rawProfit = _baseProfit * (_currentProfitBuff + 1) * Mathf.Pow(_profitMultiplier, _currentLevel - 1);
@@ -148,7 +160,7 @@ namespace LabDiner.Restaurant.Environment
             // Kiểm tra nếu là level 1: spawn station
             if(_currentLevel == 1)
             {
-                CreateNewStation(1);
+                CreateNewStation(1, isFromLoadProgress);
             }
             
             //Nếu đã qua sao mới
@@ -156,7 +168,7 @@ namespace LabDiner.Restaurant.Environment
             // - chạy effect (effect x2 profit, effect tạo station mới, ...)
             if(isNewStar && _currentStar <= _maxStar)
             {
-                ProcessStarUpgrade(newStar);
+                ProcessStarUpgrade(newStar, isFromLoadProgress);
                 // Sau khi có Buff mới từ Star, tính lại Profit một lần nữa để UI nhận số mới nhất
                 _currentProfit = Math.Floor(rawProfit * (1 + _currentProfitBuff));
             }
@@ -170,11 +182,14 @@ namespace LabDiner.Restaurant.Environment
                 return;
             }
 
-            // Sau khi cập nhật cost, cập nhật lại coin để xem có toggle attention upgrade hay không
-            _coinRuntimeData.Add(0);
-            _coreStationRuntimeSO.OnValueChanged?.Invoke();
-
-            OnDataChanged?.Invoke();
+            // Chỉ khi người chơi chủ động bấm nút nâng cấp trong game 
+            // thì mới check và cập nhật hiệu ứng UI ngay lập tức
+            if (!isFromLoadProgress)
+            {
+                _coinRuntimeData.Add(0);
+                _coreStationRuntimeSO.OnValueChanged?.Invoke();
+                OnDataChanged?.Invoke();
+            }
         }
 
         public CoreStationUIData GetUIData()
@@ -267,11 +282,11 @@ namespace LabDiner.Restaurant.Environment
             _currentLevel = 0;
         }
 
-        private void CreateNewStation(float quantity)
+        private void CreateNewStation(float quantity, bool isFromLoadProgress = false)
         {
             for(int i = 0; i < quantity; i++)
             {
-                Station newStation = _stationSpawner.RequestSpawn();
+                Station newStation = _stationSpawner.RequestSpawn(isFromLoadProgress);
                 _stations.Add(newStation);
                 newStation.OnClickStation += HandleStationClick;
             }
@@ -302,13 +317,13 @@ namespace LabDiner.Restaurant.Environment
              _CoreStationUIController.OnInteract();
          }
 
-         private void ProcessStarUpgrade(int newStar)
+         private void ProcessStarUpgrade(int newStar, bool isFromLoadProgress = false)
          {
             StationStarSO starData = _coreStationSO.StationStars[Mathf.Min(newStar - 1, _coreStationSO.StationStars.Count - 1)];
             Vector3 screenPoint = Camera.main.WorldToScreenPoint(gemRewardStartPos.position);
             screenPoint.z = 0;
             Vector3 startPos = screenPoint;
-            starData.GiveRewards(startPos);
+            if(!isFromLoadProgress) starData.GiveRewards(startPos);
 
             foreach(var buff in starData.Buffs)
             {
@@ -316,15 +331,39 @@ namespace LabDiner.Restaurant.Environment
                 {
                     case StationStarBuffType.MultiplyProfit:
                         _currentProfitBuff += buff.Value; 
-                        _CoreStationUIController.ShowUpgradeEffect($"Profit x{buff.Value:F1}");
+                        if(!isFromLoadProgress) _CoreStationUIController.ShowUpgradeEffect($"Profit x{buff.Value:F1}");
                         break;
                     case StationStarBuffType.CreateNewStation:
-                        CreateNewStation(buff.Value);
-                        _CoreStationUIController.ShowUpgradeEffect($"New Station(s)!");
+                        CreateNewStation(buff.Value, isFromLoadProgress);
+                        if(!isFromLoadProgress) _CoreStationUIController.ShowUpgradeEffect($"New Station(s)!");
                         break;
                 }
             }
          }
+
+        public void LoadProgress()
+        {
+            List<CoreStationLevel> levelPairs = _progressRuntimeSO.LevelProgressSave.coreStationLevels;
+            CoreStationLevel stationLevel = levelPairs.Find(pair => pair.CoreStationID == _coreStationSO.Id);
+            if(!string.IsNullOrEmpty(stationLevel.CoreStationID))
+            {
+                int targetLevel = stationLevel.level;
+                while(_currentLevel < targetLevel)
+                {
+                    Upgrade(true);
+                }
+            }
+
+            // Sau khi load xong xuôi toàn bộ level thực tế:
+            _coreStationRuntimeSO.OnValueChanged?.Invoke();
+            OnDataChanged?.Invoke();
+        }
+
+        public void UpdateProgress()
+        {
+            _progressRuntimeSO.LevelProgressSave.UpdateCoreStationLevel(_coreStationSO.Id, _currentLevel);
+        }
+
         #endregion
 
 
@@ -372,7 +411,9 @@ namespace LabDiner.Restaurant.Environment
                 Debug.LogError($"CoreStation '{_name}' cần {maxStationQuantity} điểm spawn, nhưng chỉ có {spawnPointCount} điểm spawn khả dụng trong StationSpawner.");
             }
         }
-        #endif
-        #endregion        
+
+
+#endif
+        #endregion
     }
 }
