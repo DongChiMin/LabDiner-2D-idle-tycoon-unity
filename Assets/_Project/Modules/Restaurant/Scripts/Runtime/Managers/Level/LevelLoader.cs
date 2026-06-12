@@ -44,9 +44,9 @@ namespace LabDiner.Restaurant.Managers
 
         void Awake()
         {
-            BootstrapManager.Instance.RegisterLoadPhases(PHASE_1_NAME, 30f);
-            BootstrapManager.Instance.RegisterLoadPhases(PHASE_2_NAME, 20f);
-            BootstrapManager.Instance.RegisterLoadPhases(PHASE_3_NAME, 20f);
+            BootstrapManager.Instance?.RegisterLoadPhases(PHASE_1_NAME, 30f);
+            BootstrapManager.Instance?.RegisterLoadPhases(PHASE_2_NAME, 20f);
+            BootstrapManager.Instance?.RegisterLoadPhases(PHASE_3_NAME, 20f);
         }
 
         public void LoadLevel(LevelConfigSO configSO)
@@ -61,15 +61,15 @@ namespace LabDiner.Restaurant.Managers
         {
             // Phase 1: Sinh ra thực thể/Sắp xếp thực thể vào list
             yield return StartCoroutine(ExecutePhase1_SetupLayout());
-            BootstrapManager.Instance.CompletePhase(PHASE_1_NAME);
+            BootstrapManager.Instance?.CompletePhase(PHASE_1_NAME);
 
             // Phase 2: Bơm dữ liệu cấu hình
             yield return StartCoroutine(ExecutePhase2_InitLogic(configSO));
-            BootstrapManager.Instance.CompletePhase(PHASE_2_NAME);
+            BootstrapManager.Instance?.CompletePhase(PHASE_2_NAME);
 
             // Phase 3: Khôi phục tiến độ (Mồi cho cậu triển khai sau)
             yield return StartCoroutine(ExecutePhase3_RestoreProgress(configSO));
-            BootstrapManager.Instance.CompletePhase(PHASE_3_NAME);
+            BootstrapManager.Instance?.CompletePhase(PHASE_3_NAME);
         }
 
         private IEnumerator ExecutePhase1_SetupLayout()
@@ -120,7 +120,6 @@ namespace LabDiner.Restaurant.Managers
 
         private IEnumerator ExecutePhase3_RestoreProgress(LevelConfigSO configSO)
         {
-            _progressRuntimeSO.Init();
             LevelProgressSave progress = _progressRuntimeSO.LevelProgressSave;
 
             //Nếu chưa xem intro == bắt đầu chơi mới level này

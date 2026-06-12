@@ -35,7 +35,7 @@ namespace LabDiner.Restaurant.UI
             _coinRuntimeData.OnValueChanged += UpdateCoin;
             _onCoinFlyAdded.Register(HandleCoinFlyAdded);
 
-            _gemRuntimeData.OnValueChanged += UpdateGemUI;
+            _gemRuntimeData.OnValueChanged += UpdateGem;
             _onGemFlyAdded.Register(HandleGemFlyAdded);
 
             //Progress
@@ -49,7 +49,7 @@ namespace LabDiner.Restaurant.UI
             _coinRuntimeData.OnValueChanged -= UpdateCoin;
             _onCoinFlyAdded.Unregister(HandleCoinFlyAdded);
 
-            _gemRuntimeData.OnValueChanged -= UpdateGemUI;
+            _gemRuntimeData.OnValueChanged -= UpdateGem;
             _onGemFlyAdded.Unregister(HandleGemFlyAdded);
             
             // Dừng các hiệu ứng scale nếu đang chạy
@@ -61,7 +61,6 @@ namespace LabDiner.Restaurant.UI
 
         public void Init(LevelConfigSO levelConfigSO)
         {
-            _coinRuntimeData.SetValue(levelConfigSO.InitialMoney);
             _coinRuntimeData.Add(0); // Kích hoạt callback để cập nhật UI
             _gemRuntimeData.Add(0);
         }
@@ -69,12 +68,19 @@ namespace LabDiner.Restaurant.UI
         private void UpdateCoin(double newCoinAmount)
         {
             UpdateCoinUI(newCoinAmount);
-            UpdateProgress();
+            UpdateCoinProgress();
         }
 
         private void UpdateCoinUI(double newCoinAmount)
         {
             _coinText.text = CurrencyFormatter.Format(newCoinAmount);
+        }
+
+
+        private void UpdateGem(int newGemAmount)
+        {
+            UpdateGemUI(newGemAmount);
+            UpdateGemProgress();
         }
 
         private void UpdateGemUI(int newGemAmount)
@@ -133,12 +139,24 @@ namespace LabDiner.Restaurant.UI
         public void LoadProgress()
         {
             double levelCoin = _progressRuntimeSO.LevelProgressSave.levelCoin;
+            int levelGem = _progressRuntimeSO.PlayerSave.Gem;
             _coinRuntimeData.SetValue(levelCoin);
+            _gemRuntimeData.SetValue(levelGem);
         }
 
         public void UpdateProgress()
         {
+            throw new System.NotImplementedException();
+        }
+
+        public void UpdateCoinProgress()
+        {
             _progressRuntimeSO.LevelProgressSave.UpdateLevelCoin(_coinRuntimeData.Value);
+        }
+
+        public void UpdateGemProgress()
+        {
+            _progressRuntimeSO.PlayerSave.UpdateGem(_gemRuntimeData.Value);
         }
     }
 }

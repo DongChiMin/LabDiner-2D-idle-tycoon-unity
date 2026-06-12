@@ -12,9 +12,11 @@ namespace LabDiner.Restaurant.Managers
     {
         [Header("Level Load")]
         [SerializeField] private LevelRegistrySO _levelRegistry;
+        [SerializeField] private ProgressSaveRuntimeSO _progressRuntimeSO;
 
         void Start()
         {
+            _progressRuntimeSO.Init();
             LevelConfigSO currentLevel = LoadConfigFromFile();
             foreach (Transform child in transform)
             {
@@ -28,7 +30,7 @@ namespace LabDiner.Restaurant.Managers
         private LevelConfigSO LoadConfigFromFile()
         {
             // 1. Load tiến độ hiện tại
-            PlayerSave progress = PlayerSaveFile.LoadFromFile();
+            PlayerSave progress = _progressRuntimeSO.PlayerSave;
 
             // 2. Lấy Config (Check Null ngay tại đây!)
             LevelConfigSO config = _levelRegistry.GetConfigByLevel(progress.currentLevelIndex);

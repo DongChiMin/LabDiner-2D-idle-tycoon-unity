@@ -2522,6 +2522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelRegistry: {fileID: 11400000, guid: 2fff2c6c274bbab4a878ae5b92ae69cc, type: 2}
+  _progressRuntimeSO: {fileID: 11400000, guid: f9113ef675523464f98c06acecccb4f8, type: 2}
 --- !u!1 &1567788292
 GameObject:
   m_ObjectHideFlags: 0
