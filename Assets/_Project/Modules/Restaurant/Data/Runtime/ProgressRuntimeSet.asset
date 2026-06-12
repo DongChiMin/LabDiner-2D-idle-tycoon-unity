@@ -12,3 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1bbc4b5cf67bb2498eb983bd8f9d8b4, type: 3}
   m_Name: ProgressRuntimeSet
   m_EditorClassIdentifier: 
+  _levelProgressSave:
+    coreStationLevels:
+    - CoreStationID: Apple
+      level: 21
+    levelMissionProgresses:
+    - MissionID: 1_1
+      isCollected: 1
+    - MissionID: 1_2
+      isCollected: 0
+    - MissionID: 1_final
+      isCollected: 0
+    levelUpgradeProgresses:
+    - UpgradeID: 1_1
+      isPurchased: 0
+    - UpgradeID: 1_2
+      isPurchased: 0
+    - UpgradeID: 1_3
+      isPurchased: 1
+    - UpgradeID: 1_4
+      isPurchased: 0
+    levelCoin: -1985
+    hasSeenIntro: 1
+    isDirty: 0
+  _playerSave:
+    currentLevelIndex: 1
+    isDirty: 0

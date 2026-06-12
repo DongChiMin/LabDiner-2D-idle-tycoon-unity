@@ -1,18 +1,16 @@
 {
-    "name": "LabDiner.Restaurant",
-    "rootNamespace": "LabDiner.Restaurant",
+    "name": "LabDiner.Bootstrap",
+    "rootNamespace": "",
     "references": [
-        "GUID:dc8c4b79b0dc7eb4395d971eb29c18a7",
         "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:299beb10465c46f41abeaf10478b4727",
-        "GUID:205db2aa8bccdf14b9fc2d0d4763cdcc"
+        "GUID:dc8c4b79b0dc7eb4395d971eb29c18a7"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

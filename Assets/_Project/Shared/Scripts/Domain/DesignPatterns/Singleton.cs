@@ -18,11 +18,11 @@ namespace LabDiner.Shared.DesignPattern
             }
 
             instance = this as T;
-            transform.SetParent(null);
 
             if (dontDestroyOnLoad)
             {
                 DontDestroyOnLoad(gameObject);
+                transform.SetParent(null);
             }
         }
     }

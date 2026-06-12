@@ -5,11 +5,15 @@ using LabDiner.Restaurant.SO;
 using LabDiner.Restaurant.Interface;
 using LabDiner.Restaurant.Event;
 using LabDiner.Shared;
+using System.Collections;
 
 namespace LabDiner.Restaurant.Managers
 {
     public class LevelLoader : MonoBehaviour
     {
+        private string PHASE_1_NAME = "ExecutePhase1_SetupLayout";
+        private string PHASE_2_NAME = "ExecutePhase2_InitLogic";
+        private string PHASE_3_NAME = "ExecutePhase3_RestoreProgress";
         [SerializeField] private LevelConfigEvent _onLevelInit;
         [SerializeField] private LevelConfigEvent _onLevelIntroStart;
 
@@ -38,34 +42,61 @@ namespace LabDiner.Restaurant.Managers
             _progressRuntimeSO.PlayerSave.SetCurrentLevelIndex(levelCompleted + 1); 
         }
 
-        public void LoadLevel(LevelConfigSO configSO)
+        void Awake()
         {
-            StopAllCoroutines();
-            // Phase 1: Sinh ra thực thể/Sắp xếp thực thể vào list
-            ExecutePhase1_SetupLayout();
-
-            // Phase 2: Bơm dữ liệu cấu hình
-            ExecutePhase2_InitLogic(configSO);
-
-            // Phase 3: Khôi phục tiến độ (Mồi cho cậu triển khai sau)
-            ExecutePhase3_RestoreProgress(configSO);
+            BootstrapManager.Instance.RegisterLoadPhases(PHASE_1_NAME, 30f);
+            BootstrapManager.Instance.RegisterLoadPhases(PHASE_2_NAME, 20f);
+            BootstrapManager.Instance.RegisterLoadPhases(PHASE_3_NAME, 20f);
         }
 
-        private void ExecutePhase1_SetupLayout()
+        public void LoadLevel(LevelConfigSO configSO)
+        {            
+            StopAllCoroutines();
+            StartCoroutine(LoadLevelRoutine(configSO));
+
+            
+        }
+
+        private IEnumerator LoadLevelRoutine(LevelConfigSO configSO)
         {
+            // Phase 1: Sinh ra thực thể/Sắp xếp thực thể vào list
+            yield return StartCoroutine(ExecutePhase1_SetupLayout());
+            BootstrapManager.Instance.CompletePhase(PHASE_1_NAME);
+
+            // Phase 2: Bơm dữ liệu cấu hình
+            yield return StartCoroutine(ExecutePhase2_InitLogic(configSO));
+            BootstrapManager.Instance.CompletePhase(PHASE_2_NAME);
+
+            // Phase 3: Khôi phục tiến độ (Mồi cho cậu triển khai sau)
+            yield return StartCoroutine(ExecutePhase3_RestoreProgress(configSO));
+            BootstrapManager.Instance.CompletePhase(PHASE_3_NAME);
+        }
+
+        private IEnumerator ExecutePhase1_SetupLayout()
+        {
+            int count = 0;
             foreach (var root in _initRoots)
             {
                 ILevelRebuildable[] initializables = root.GetComponentsInChildren<ILevelRebuildable>();
                 foreach (var init in initializables)
                 {
                     init.Rebuild();
+                
+                    //xử lý bất đồng bộ: mỗi khi rebuild xong 5 root thì đợi sang frame sau
+                    //nhường cho UI
+                    count++;
+                    if(count % 5 == 0)
+                    {
+                        yield return null;
+                    }
                 }
             }
         }
 
-        private void ExecutePhase2_InitLogic(LevelConfigSO configSO)
+        private IEnumerator ExecutePhase2_InitLogic(LevelConfigSO configSO)
         {
             //Init theo thứ tự
+            int count = 0;
             foreach (var root in _initRoots)
             {
                 ILevelInitializable[] initializables = root.GetComponentsInChildren<ILevelInitializable>();
@@ -73,13 +104,21 @@ namespace LabDiner.Restaurant.Managers
                 {
                     init.Init(configSO);
                 }
+
+                //xử lý bất đồng bộ: mỗi khi init xong 5 root thì đợi sang frame sau
+                //nhường cho UI
+                count++;
+                if(count % 5 == 0)
+                {
+                    yield return null;
+                }
             }
 
             //Cuối cùng thì mới Init các object ko cần thứ tự
             _onLevelInit.Raise(configSO);
         }
 
-        private void ExecutePhase3_RestoreProgress(LevelConfigSO configSO)
+        private IEnumerator ExecutePhase3_RestoreProgress(LevelConfigSO configSO)
         {
             _progressRuntimeSO.Init();
             LevelProgressSave progress = _progressRuntimeSO.LevelProgressSave;
@@ -101,6 +140,7 @@ namespace LabDiner.Restaurant.Managers
             {
                 _progressRuntimeSO.OnProgressInject?.Invoke();
             }
+            yield return null;
         }
 
         
