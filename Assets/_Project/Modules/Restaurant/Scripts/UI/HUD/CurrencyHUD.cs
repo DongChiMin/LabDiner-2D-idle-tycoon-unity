@@ -13,7 +13,7 @@ using LabDiner.Shared;
 
 namespace LabDiner.Restaurant.UI
 {
-    public class CurrencyHUD : MonoBehaviour, ILevelInitializable, ILevelProgress
+    public class CurrencyHUD : MonoBehaviour, ILevelProgress
     {
         [SerializeField] private TextMeshProUGUI _coinText;
         [SerializeField] private TextMeshProUGUI _gemText;
@@ -30,7 +30,7 @@ namespace LabDiner.Restaurant.UI
  
         void OnEnable()
         {
-            _onLevelInit.Register(Init);
+            // _onLevelInit.Register(Init);
 
             _coinRuntimeData.OnValueChanged += UpdateCoin;
             _onCoinFlyAdded.Register(HandleCoinFlyAdded);
@@ -44,7 +44,7 @@ namespace LabDiner.Restaurant.UI
 
         void OnDisable()
         {
-            _onLevelInit.Unregister(Init);
+            // _onLevelInit.Unregister(Init);
 
             _coinRuntimeData.OnValueChanged -= UpdateCoin;
             _onCoinFlyAdded.Unregister(HandleCoinFlyAdded);
@@ -59,11 +59,11 @@ namespace LabDiner.Restaurant.UI
             _progressRuntimeSO.OnProgressInject -= LoadProgress;
         }
 
-        public void Init(LevelConfigSO levelConfigSO)
-        {
-            _coinRuntimeData.Add(0); // Kích hoạt callback để cập nhật UI
-            _gemRuntimeData.Add(0);
-        }
+        // public void Init(LevelConfigSO levelConfigSO)
+        // {
+        //     _coinRuntimeData.Add(0); // Kích hoạt callback để cập nhật UI
+        //     _gemRuntimeData.Add(0);
+        // }
 
         private void UpdateCoin(double newCoinAmount)
         {
