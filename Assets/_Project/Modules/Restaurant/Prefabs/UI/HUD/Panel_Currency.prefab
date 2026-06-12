@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 2647201803069012419}
   - component: {fileID: 141469592219813858}
   - component: {fileID: 8410021370563831572}
+  - component: {fileID: 7172882488371154355}
   m_Layer: 0
   m_Name: Panel_Currency
   m_TagString: Untagged
@@ -539,14 +540,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43fe6c4accf8ca4a90a9403a653cd35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinText: {fileID: 5546005324169306072}
-  _gemText: {fileID: 2750415005664935306}
   _coinRuntimeData: {fileID: 11400000, guid: dfffcaeb65047244ba51b6f65e6fbaf8, type: 2}
   _gemRuntimeData: {fileID: 11400000, guid: f2ecb90ebfd0c174285f15f613947534, type: 2}
+  _coinText: {fileID: 5546005324169306072}
+  _gemText: {fileID: 2750415005664935306}
+--- !u!114 &7172882488371154355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5238081933526983957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f99499d547987f47a0ad5948fc3333c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinRuntimeData: {fileID: 11400000, guid: dfffcaeb65047244ba51b6f65e6fbaf8, type: 2}
+  _gemRuntimeData: {fileID: 11400000, guid: f2ecb90ebfd0c174285f15f613947534, type: 2}
+  _progressRuntimeSO: {fileID: 11400000, guid: f9113ef675523464f98c06acecccb4f8, type: 2}
   _onLevelInit: {fileID: 11400000, guid: 15e61c252f3eb7c439540b5b66730d1e, type: 2}
   _onCoinFlyAdded: {fileID: 11400000, guid: 100c159d769f6404c861d1d8450599f1, type: 2}
   _onGemFlyAdded: {fileID: 11400000, guid: 7544e3ce532a74a448d1f45265ea3c60, type: 2}
-  _progressRuntimeSO: {fileID: 11400000, guid: f9113ef675523464f98c06acecccb4f8, type: 2}
+  _currencyHUD: {fileID: 8410021370563831572}
 --- !u!1 &5915528689400542662
 GameObject:
   m_ObjectHideFlags: 0

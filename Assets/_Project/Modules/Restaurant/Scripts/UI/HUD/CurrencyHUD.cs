@@ -6,104 +6,51 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 using LabDiner.Shared.SO;
-using LabDiner.Restaurant.Interface;
-using LabDiner.Restaurant.SO;
-using LabDiner.Restaurant.Event;
-using LabDiner.Shared;
 
 namespace LabDiner.Restaurant.UI
 {
-    public class CurrencyHUD : MonoBehaviour, ILevelProgress
+    public class CurrencyHUD : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _coinText;
-        [SerializeField] private TextMeshProUGUI _gemText;
         [SerializeField] private DoubleRuntimeSO _coinRuntimeData;
         [SerializeField] private IntRuntimeSO _gemRuntimeData;
-
-        [Header("Events")]
-        [SerializeField] private LevelConfigEvent _onLevelInit;
-        [SerializeField] private LevelCoinFlyEvent _onCoinFlyAdded;
-        [SerializeField] private LevelGemFlyEvent _onGemFlyAdded;
-
-        [Header("Progress")]
-        [SerializeField] private ProgressSaveRuntimeSO _progressRuntimeSO;
- 
-        void OnEnable()
-        {
-            // _onLevelInit.Register(Init);
-
-            _coinRuntimeData.OnValueChanged += UpdateCoin;
-            _onCoinFlyAdded.Register(HandleCoinFlyAdded);
-
-            _gemRuntimeData.OnValueChanged += UpdateGem;
-            _onGemFlyAdded.Register(HandleGemFlyAdded);
-
-            //Progress
-            _progressRuntimeSO.OnProgressInject += LoadProgress;
-        }
+        [SerializeField] private TextMeshProUGUI _coinText;
+        [SerializeField] private TextMeshProUGUI _gemText;
 
         void OnDisable()
         {
-            // _onLevelInit.Unregister(Init);
-
-            _coinRuntimeData.OnValueChanged -= UpdateCoin;
-            _onCoinFlyAdded.Unregister(HandleCoinFlyAdded);
-
-            _gemRuntimeData.OnValueChanged -= UpdateGem;
-            _onGemFlyAdded.Unregister(HandleGemFlyAdded);
-            
             // Dừng các hiệu ứng scale nếu đang chạy
             _gemText.transform.parent.DOKill();
-
-            //Progress
-            _progressRuntimeSO.OnProgressInject -= LoadProgress;
         }
 
-        // public void Init(LevelConfigSO levelConfigSO)
-        // {
-        //     _coinRuntimeData.Add(0); // Kích hoạt callback để cập nhật UI
-        //     _gemRuntimeData.Add(0);
-        // }
+        //biến kiểm tra đã chạy xong animation bay chưa
+        bool hasUpdatedCoinText = true;
+        bool hasUpdatedGemText = true;
 
-        private void UpdateCoin(double newCoinAmount)
+        public void RequestSetCoinText(double newCoinValue)
         {
-            UpdateCoinUI(newCoinAmount);
-            UpdateCoinProgress();
+            if(hasUpdatedCoinText) _coinText.text = CurrencyFormatter.Format(newCoinValue);
         }
 
-        private void UpdateCoinUI(double newCoinAmount)
+        public void RequestSetGemText(int newGemValue)
         {
-            _coinText.text = CurrencyFormatter.Format(newCoinAmount);
+            if(hasUpdatedGemText) _gemText.text = CurrencyFormatter.Format(newGemValue);
         }
 
-
-        private void UpdateGem(int newGemAmount)
-        {
-            UpdateGemUI(newGemAmount);
-            UpdateGemProgress();
-        }
-
-        private void UpdateGemUI(int newGemAmount)
-        {
-            _gemText.text = _gemRuntimeData.Value.ToString();
-        }
-
-        private void HandleCoinFlyAdded(CoinRewardData data)
+        public void PlayCoinFlyAnimation(CoinRewardData data)
         {
             Vector3 startPos = data.startPos;
             Vector3 endPos = _coinText.transform.position; 
             
             // Biến flag để chỉ cập nhật text 1 lần duy nhất khi viên coin đầu tiên chạm đích
-            bool hasUpdatedText = false;
+            hasUpdatedCoinText = false;
 
             PoolContext.Instance.CurrencyFlyPool.SpawnFlyEffect(CurrencyType.Coin, startPos, endPos, data.RewardValue, () =>
             {
                 // Khi viên coin đầu tiên chạm đích, cập nhật text ngay lập tức
-                if (!hasUpdatedText)
+                if (!hasUpdatedCoinText)
                 {
-                    _coinRuntimeData.Add(data.RewardValue);
                     _coinText.text = CurrencyFormatter.Format(_coinRuntimeData.Value);
-                    hasUpdatedText = true;
+                    hasUpdatedCoinText = true;
                 }
 
                 // Hiệu ứng "nảy" nhẹ HUD để tạo cảm giác phản hồi (Feedback)
@@ -112,51 +59,27 @@ namespace LabDiner.Restaurant.UI
             });
         }
 
-        private void HandleGemFlyAdded(GemRewardData data)
+        public void PlayGemFlyAnimation(GemRewardData data)
         {
             Vector3 startPos = data.startPos;
             Vector3 endPos = _gemText.transform.position; 
-            
+
             // Biến flag để chỉ cập nhật text 1 lần duy nhất khi viên gem đầu tiên chạm đích
-            bool hasUpdatedText = false;
+            hasUpdatedGemText = false;
 
             PoolContext.Instance.CurrencyFlyPool.SpawnFlyEffect(CurrencyType.Gem, startPos, endPos, data.RewardValue, () =>
             {
                 // Khi viên gem đầu tiên chạm đích, cập nhật text ngay lập tức
-                if (!hasUpdatedText)
+                if (!hasUpdatedGemText)
                 {
-                    _gemRuntimeData.Add(data.RewardValue);
                     _gemText.text = CurrencyFormatter.Format(_gemRuntimeData.Value);
-                    hasUpdatedText = true;
+                    hasUpdatedGemText = true;
                 }
 
                 // Hiệu ứng "nảy" nhẹ HUD để tạo cảm giác phản hồi (Feedback)
                 _gemText.transform.parent.DOKill(true);
                 _gemText.transform.parent.DOPunchScale(Vector3.one * 0.1f, 0.1f);
             });
-        }
-    
-        public void LoadProgress()
-        {
-            double levelCoin = _progressRuntimeSO.LevelProgressSave.levelCoin;
-            int levelGem = _progressRuntimeSO.PlayerSave.Gem;
-            _coinRuntimeData.SetValue(levelCoin);
-            _gemRuntimeData.SetValue(levelGem);
-        }
-
-        public void UpdateProgress()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void UpdateCoinProgress()
-        {
-            _progressRuntimeSO.LevelProgressSave.UpdateLevelCoin(_coinRuntimeData.Value);
-        }
-
-        public void UpdateGemProgress()
-        {
-            _progressRuntimeSO.PlayerSave.UpdateGem(_gemRuntimeData.Value);
         }
     }
 }

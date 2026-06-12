@@ -63,5 +63,12 @@ namespace LabDiner.Restaurant.SO
         //     _levelProgressSave = null;
         //     OnValueChanged?.Invoke();
         // }
+
+        [ContextMenu("Force Save Progress")]
+        private void SaveProgress()
+        {
+            LevelProgressSaveFile.SaveToFile(_levelProgressSave);
+            PlayerSaveFile.SaveToFile(_playerSave);
+        }
     }
 }
