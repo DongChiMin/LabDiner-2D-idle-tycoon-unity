@@ -159,6 +159,6 @@ namespace LabDiner.Restaurant.UI
         }
         #endregion
 
-        private partial void Debug_ValidateData();
+        partial void Debug_ValidateData();
     }
 }

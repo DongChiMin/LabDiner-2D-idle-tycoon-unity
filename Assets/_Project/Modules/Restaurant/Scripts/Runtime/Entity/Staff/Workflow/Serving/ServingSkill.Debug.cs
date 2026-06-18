@@ -14,7 +14,7 @@ namespace LabDiner.Restaurant.Workflow
     {
         [Header("[DEBUG]")]
         [SerializeField] private ServingTask _debugTask;
-        private partial void Debug_FetchData(ServingTask servingTask)
+        partial void Debug_FetchData(ServingTask servingTask)
         {
             _debugTask = servingTask;
         }

@@ -26,9 +26,12 @@ namespace LabDiner.Restaurant.SO
         public float ProfitMultiplier = 1.15f;
 
         [Header("[DEBUG]")]
-        [ReadOnly] public int MaxLevel;
-        [ReadOnly] public int MaxStar;
-        [ReadOnly] public int MaxQuantity;
+        [Tooltip("ReadOnly")]
+        public int MaxLevel;
+        [Tooltip("ReadOnly")]
+        public int MaxStar;
+        [Tooltip("ReadOnly")]
+        public int MaxQuantity;
 
         private void OnValidate()
         {

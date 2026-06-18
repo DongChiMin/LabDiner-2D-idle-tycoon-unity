@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using System.IO;
@@ -382,3 +383,4 @@ namespace LabDiner.Restaurant.Editor
         }
     }
 }
+#endif

@@ -17,7 +17,7 @@ namespace LabDiner.Restaurant.UI
 
         #region EDITOR ONLY
         #if UNITY_EDITOR
-        private partial void Debug_ValidateData()
+        partial void Debug_ValidateData()
         {
             List<CoreStation> coreStations = _coreStationRuntime.CoreStations;
 

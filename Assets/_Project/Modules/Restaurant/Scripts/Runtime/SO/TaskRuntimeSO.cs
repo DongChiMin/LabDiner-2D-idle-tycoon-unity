@@ -53,6 +53,6 @@ namespace LabDiner.Restaurant.SO
             return null;
         }
 
-        private partial void Debug_FetchData();
+        partial void Debug_FetchData();
     }
 }

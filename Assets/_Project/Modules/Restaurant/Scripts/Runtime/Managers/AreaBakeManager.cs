@@ -1,7 +1,6 @@
 using LabDiner.Restaurant.Interface;
 using LabDiner.Restaurant.SO;
 using NavMeshPlus.Components;
-using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 
 namespace LabDiner.Restaurant

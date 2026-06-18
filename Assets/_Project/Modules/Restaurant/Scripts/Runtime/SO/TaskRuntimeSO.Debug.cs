@@ -12,7 +12,7 @@ namespace LabDiner.Restaurant.SO
         [SerializeField] private TaskType _filterType; // Chọn loại muốn soi
         [SerializeReference] private List<BaseTask> _viewingTasks = new();
 
-        private partial void Debug_FetchData()
+        partial void Debug_FetchData()
         {
             _viewingTasks.Clear();
             if (_taskQueues.TryGetValue(_filterType, out var queue))

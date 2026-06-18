@@ -34,8 +34,8 @@ namespace LabDiner.Restaurant.SO
         public float maxVerticalPos; // Điểm cao nhất camera có thể lên (tùy độ dài nhà hàng)
 
         [Header("Summary")]
-        [ReadOnly] public int MaxGuestQuantity => FetchGuestQuantity();
-        public 
+        [Tooltip("ReadOnly")]
+        public int MaxGuestQuantity => FetchGuestQuantity(); 
 
         void OnValidate()
         {

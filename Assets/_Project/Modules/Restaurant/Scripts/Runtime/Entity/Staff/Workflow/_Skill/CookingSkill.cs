@@ -91,6 +91,6 @@ namespace LabDiner.Restaurant.Workflow
             }
         }
 
-        private partial void Debug_FetchData(CookingTask cookingTask);
+        partial void Debug_FetchData(CookingTask cookingTask);
     }
 }

@@ -80,6 +80,6 @@ namespace LabDiner.Restaurant.Workflow
         }
         #endregion
 
-        private partial void Debug_FetchData(ServingTask servingTask);
+        partial void Debug_FetchData(ServingTask servingTask);
     }
 }

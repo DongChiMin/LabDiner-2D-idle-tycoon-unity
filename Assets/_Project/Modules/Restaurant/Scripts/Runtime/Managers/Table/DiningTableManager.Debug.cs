@@ -16,7 +16,7 @@ namespace LabDiner.Restaurant.Manager
         [SerializeField] private List<DiningTable> _spawnedTables = new List<DiningTable>();
         private LevelConfigSO _levelConfig;
 
-        private partial void Debug_FetchData(){
+        partial void Debug_FetchData(){
             _spawnedSeats.Clear();
             _spawnedTables.Clear();
             foreach(DiningTable table in _tables)
@@ -26,7 +26,7 @@ namespace LabDiner.Restaurant.Manager
             }
         }
 
-        private void Debug_ValidateData(LevelConfigSO config)
+        partial void Debug_ValidateData(LevelConfigSO config)
         {
             _levelConfig = config;
             int totalSeat = 0;

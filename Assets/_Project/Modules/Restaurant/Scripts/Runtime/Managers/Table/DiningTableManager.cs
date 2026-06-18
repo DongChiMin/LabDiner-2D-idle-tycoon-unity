@@ -103,6 +103,7 @@ namespace LabDiner.Restaurant.Manager
 
         #endregion
 
-        private partial void Debug_FetchData();
+        partial void Debug_FetchData();
+        partial void Debug_ValidateData(LevelConfigSO config);
     }
 }
