@@ -1,6 +1,6 @@
-# LabDiner
+# LabDiner (In Progress)
 
-LabDiner is a modular Unity restaurant-management game built around data-driven progression, reusable gameplay systems, and editor tooling for fast content production.
+LabDiner is a modular Unity restaurant-management idle tycoon game built around data-driven progression, reusable gameplay systems, and editor tooling for fast content production.
 
 ## Overview
 
