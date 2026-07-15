@@ -39,3 +39,6 @@ UI is organized around a base panel abstraction, a centralized UI manager, and r
 ### Editor Tooling
 
 Custom editor windows support authoring stations, missions, upgrades, and level configurations. The tools also work with a level registry to help keep generated content consistent and easy to browse.
+
+## Prototype Screenshot
+<img width="412" height="818" alt="Image" src="https://github.com/user-attachments/assets/86fd2739-cc1a-4b7d-8ef8-8411118e0689" />
