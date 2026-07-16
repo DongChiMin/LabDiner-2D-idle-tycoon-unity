@@ -6,6 +6,9 @@ namespace LabDiner.LevelMap.UI
 {
     public class LevelStartController : MonoBehaviour
     {
+        [Header("Runtimes")]
+        [SerializeField] private TutorialRuntimeSO _tutorialRuntimeSO;
+
         [Header("Item References")]
         [SerializeField] private LevelConfigEvent _onLevelIntroStart;
         [SerializeField] private LevelStartPanel _panel;
@@ -25,6 +28,7 @@ namespace LabDiner.LevelMap.UI
         private void HandleGameStart()
         {
             _panel.Hide();
+            _tutorialRuntimeSO.OnLevelStarted?.Invoke();
         }
 
         private void HandleLevelIntroStart(LevelConfigSO levelConfigSO)

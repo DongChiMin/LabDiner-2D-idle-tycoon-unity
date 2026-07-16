@@ -1,6 +1,8 @@
 using UnityEngine;
 using LabDiner.Shared.Input;
 using System;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 namespace LabDiner.Shared.UI
 {
@@ -34,11 +36,26 @@ namespace LabDiner.Shared.UI
 
             Camera eventCamera = (_canvas.renderMode == RenderMode.ScreenSpaceOverlay) ? null : Camera.main;
 
-            if (!RectTransformUtility.RectangleContainsScreenPoint(_rectTransform, mousePos, eventCamera))
+            //Nếu click ra ngoài RectTransform của object này && click không vào bất kì UI nào
+            if (!RectTransformUtility.RectangleContainsScreenPoint(_rectTransform, mousePos, eventCamera) && !IsPointerOverUI(mousePos))
             {
                 // Cảm biến phát hiện click ra ngoài -> Hét lên cho ai quan tâm thì nghe!
                 OnClickOutside?.Invoke();
             }
         }
+
+        // Hàm phụ trợ để kiểm tra xem tọa độ mousePos hiện tại có đè lên UI nào không
+        private bool IsPointerOverUI(Vector2 mousePos)
+        {
+            if (EventSystem.current == null) return false;
+
+            PointerEventData eventData = new PointerEventData(EventSystem.current);
+            eventData.position = mousePos;
+
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+
+            return results.Count > 0;
+        }       
     }
 }

@@ -357,7 +357,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2575300477019984460}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -383,6 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a67b97f53930d4097a30b5d744f9eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tutorialRuntimeSO: {fileID: 11400000, guid: b0e6129745ecbeb4b801745a31f3c723, type: 2}
   _onLevelIntroStart: {fileID: 11400000, guid: 1360d540e7268034b96c8986ec88e816, type: 2}
   _panel: {fileID: 2299556243449692249}
 --- !u!114 &2299556243449692249

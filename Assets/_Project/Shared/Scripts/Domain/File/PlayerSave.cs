@@ -1,8 +1,28 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LabDiner.Shared
 {
+    [Serializable]
+    public class TutorialData
+    {
+        public List<string> CompletedTutorials = new List<string>();
+
+        public bool IsTutorialCompleted(string tutorialId)
+        {
+            return CompletedTutorials.Contains(tutorialId);
+        }
+
+        public void MarkTutorialCompleted(string tutorialId)
+        {
+            if (!CompletedTutorials.Contains(tutorialId))
+            {
+                CompletedTutorials.Add(tutorialId);
+            }
+        }
+    }
+
     [Serializable]
     public class PlayerSave
     {
@@ -12,6 +32,7 @@ namespace LabDiner.Shared
             Gem = 0;
         }
 
+        public TutorialData tutorialData = new TutorialData();
         public int currentLevelIndex = 1;
         public bool isDirty = false;
         public int Gem;

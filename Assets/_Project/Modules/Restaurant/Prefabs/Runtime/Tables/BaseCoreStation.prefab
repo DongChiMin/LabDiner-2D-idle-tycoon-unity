@@ -1345,6 +1345,7 @@ MonoBehaviour:
   _coinRuntimeData: {fileID: 11400000, guid: dfffcaeb65047244ba51b6f65e6fbaf8, type: 2}
   _coreStationRuntimeSO: {fileID: 11400000, guid: 014d0306fd640c34d825b497c1c9b9f8, type: 2}
   _progressRuntimeSO: {fileID: 11400000, guid: f9113ef675523464f98c06acecccb4f8, type: 2}
+  _tutorialRuntimeSO: {fileID: 11400000, guid: b0e6129745ecbeb4b801745a31f3c723, type: 2}
   _name: Apple
   _maxStar: 3
   _levelPerStar: 10

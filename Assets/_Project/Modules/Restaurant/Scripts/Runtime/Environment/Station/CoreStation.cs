@@ -43,6 +43,7 @@ namespace LabDiner.Restaurant.Environment
         [SerializeField] private DoubleRuntimeSO _coinRuntimeData;
         [SerializeField] private CoreStationRuntimeSO _coreStationRuntimeSO;
         [SerializeField] private ProgressSaveRuntimeSO _progressRuntimeSO;
+        [SerializeField] private TutorialRuntimeSO _tutorialRuntimeSO;
 
         [Header("[DEBUG] Static Attributes")]
         [SerializeField] private string _name = "New CoreStation";
@@ -73,6 +74,7 @@ namespace LabDiner.Restaurant.Environment
                 station.OnClickStation += HandleStationClick;
             }
             _progressRuntimeSO.OnProgressInject += LoadProgress;
+            _tutorialRuntimeSO.OnLevelStarted += HandleLevelStarted;
         }
 
         void OnDisable()
@@ -83,6 +85,7 @@ namespace LabDiner.Restaurant.Environment
                 station.OnClickStation -= HandleStationClick;
             }
             _progressRuntimeSO.OnProgressInject -= LoadProgress;
+            _tutorialRuntimeSO.OnLevelStarted -= HandleLevelStarted;
         }
 
         void Awake()
@@ -362,6 +365,11 @@ namespace LabDiner.Restaurant.Environment
         public void UpdateProgress()
         {
             _progressRuntimeSO.LevelProgressSave.UpdateCoreStationLevel(_coreStationSO.Id, _currentLevel);
+        }
+
+        private void HandleLevelStarted()
+        {
+            _tutorialRuntimeSO.OnCoreStationStartRun?.Invoke(transform.position);
         }
 
         #endregion
