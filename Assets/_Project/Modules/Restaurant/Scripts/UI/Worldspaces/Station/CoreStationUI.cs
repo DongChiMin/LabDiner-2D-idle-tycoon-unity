@@ -26,6 +26,7 @@ namespace LabDiner.Restaurant.UI
     }
     public class CoreStationUI : MonoBehaviour
     {
+        public Action OnUpgradeUIShow;
         public Action OnUpgradeButtonClicked;
 
         [Header("UI References")]
@@ -97,6 +98,7 @@ namespace LabDiner.Restaurant.UI
 
             gameObject.SetActive(true);
             _popScaleEffect.Show();
+            OnUpgradeUIShow?.Invoke();
         }
 
         public void Hide(Action onComplete = null)

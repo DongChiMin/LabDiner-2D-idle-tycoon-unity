@@ -647,9 +647,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 484140095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 179, y: -124}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 623, y: 836}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &232321080
@@ -689,8 +689,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -556663896244417668, guid: 190eebff6003a324d8345748a15f1d16, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: -8651255196318234504, guid: 9737a796a25ec604983290de6ae2de1f, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1069,7 +1069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &484140095
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1091,7 +1091,7 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &484140096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1839,11 +1839,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 484140095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 178.99998, y: -854}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 673, y: 966}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &876331908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4324,9 +4324,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d895cec156e03c848bcdfefbcf30c6fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tutorialRuntimeSO: {fileID: 11400000, guid: b0e6129745ecbeb4b801745a31f3c723, type: 2}
-  _progressRuntimeSO: {fileID: 11400000, guid: f9113ef675523464f98c06acecccb4f8, type: 2}
-  _tutorialPanel: {fileID: 8916452281733574138}
+  dontDestroyOnLoad: 0
+  _tutorialRepository: {fileID: 11400000, guid: 24a35def7bb24c44b8cd04651ed30e5b, type: 2}
+  _levelTutorialPanel: {fileID: 8916452281733574138}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

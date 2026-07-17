@@ -10,9 +10,15 @@ namespace LabDiner.Shared.UI
         [SerializeField] private float _swingDistance = 30f; // Khoảng cách bay lên/xuống (pixels)
         [SerializeField] private Ease _swingEase = Ease.InOutQuad; // Nên dùng InOutQuad cho mượt
 
+        private Vector3 _startLocalScale;
         private Vector3 _startLocalPosition;
         private Tweener _swingTween;
         private bool _isHiding = false;
+
+        void Awake()
+        {
+            _startLocalScale = transform.localScale;
+        }
 
         public override void Show(Action onComplete = null)
         {
@@ -53,7 +59,7 @@ namespace LabDiner.Shared.UI
                      {
                          _isHiding = false;
                          // Trả lại scale mặc định để lần sau Show lên không bị mất tích
-                         transform.localScale = Vector3.one; 
+                         transform.localScale = _startLocalScale;
                          transform.localPosition = _startLocalPosition;
                          
                          onComplete?.Invoke();

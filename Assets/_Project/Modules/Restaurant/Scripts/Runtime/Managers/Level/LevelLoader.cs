@@ -17,8 +17,6 @@ namespace LabDiner.Restaurant.Managers
         [SerializeField] private LevelConfigEvent _onLevelInit;
         [SerializeField] private LevelConfigEvent _onLevelIntroStart;
 
-        [SerializeField] private TutorialRuntimeSO _tutorialRuntimeSO;
-
         [Header("Level Load")]
         [SerializeField] private IntEvent _onLevelComplete;
 
@@ -141,7 +139,6 @@ namespace LabDiner.Restaurant.Managers
             else
             {
                 _progressRuntimeSO.OnProgressInject?.Invoke();
-                _tutorialRuntimeSO.OnLevelStarted?.Invoke();
             }
             yield return null;
         }

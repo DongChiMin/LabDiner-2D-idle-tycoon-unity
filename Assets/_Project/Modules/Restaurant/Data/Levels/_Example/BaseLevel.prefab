@@ -1162,7 +1162,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onLevelInit: {fileID: 11400000, guid: 15e61c252f3eb7c439540b5b66730d1e, type: 2}
   _onLevelIntroStart: {fileID: 11400000, guid: 1360d540e7268034b96c8986ec88e816, type: 2}
-  _tutorialRuntimeSO: {fileID: 11400000, guid: b0e6129745ecbeb4b801745a31f3c723, type: 2}
   _onLevelComplete: {fileID: 11400000, guid: fc08566a8a8ee194fbd3e161ea890bf6, type: 2}
   _initRoots:
   - {fileID: 3201200233848494847}
@@ -1431,7 +1430,8 @@ PrefabInstance:
       propertyPath: _workGizmoCenterY
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6866545355512787689, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
