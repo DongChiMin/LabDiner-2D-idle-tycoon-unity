@@ -1430,7 +1430,8 @@ PrefabInstance:
       propertyPath: _workGizmoCenterY
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6866545355512787689, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

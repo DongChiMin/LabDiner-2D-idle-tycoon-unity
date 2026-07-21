@@ -17,6 +17,12 @@ namespace LabDiner.Restaurant.Environment
     [System.Serializable]
     public class CoreStation : MonoBehaviour, ILevelProgress
     {
+        //Action
+        public Action OnCoreStationClicked;
+        public Action OnCoreStationUnlocked;
+        public Action OnCoreStationUpgradable;
+        public Action OnStationUpgraded;
+
         // API
         public CoreStationSO CoreStationSO => _coreStationSO;
         public int CurrentLevel => _currentLevel;
@@ -27,6 +33,7 @@ namespace LabDiner.Restaurant.Environment
         public Sprite DishIcon => _coreStationSO.Dish.DishIcon;
         public double CurrentProfit => _currentProfit;
         public bool IsMaxLevel => _currentLevel >= _maxStar * _levelPerStar;
+        public bool CanUpgrade => _canUpgrade;
 
         // Events
         public Action OnDataChanged;
@@ -64,6 +71,7 @@ namespace LabDiner.Restaurant.Environment
         [SerializeField] private float _currentProcessTimeBuff = 0;
         [SerializeField] private int _currentStar = 0;
         [SerializeField] private int _currentLevel = 0;
+        [SerializeField] private bool _canUpgrade = false;
 
         void OnEnable()
         {
@@ -136,6 +144,8 @@ namespace LabDiner.Restaurant.Environment
         /// </summary>
         public void Upgrade(bool isFromLoadProgress = false)
         {
+            OnStationUpgraded?.Invoke();
+
             //Sau khi tính toán giá trị mới thì mới trừ tiền để đảm bảo giá trị hiển thị trên UI là chính xác nhất
             if(!isFromLoadProgress) _coinRuntimeData.Add(-_currentCost);
 
@@ -160,6 +170,7 @@ namespace LabDiner.Restaurant.Environment
             // Kiểm tra nếu là level 1: spawn station
             if(_currentLevel == 1)
             {
+                OnCoreStationUnlocked?.Invoke();
                 CreateNewStation(1, isFromLoadProgress);
             }
             
@@ -300,9 +311,12 @@ namespace LabDiner.Restaurant.Environment
             {
                 _upgradeSprite.gameObject.SetActive(true);
                 _upgradeSprite.Show();
+                _canUpgrade = true;
+                OnCoreStationUpgradable?.Invoke();
             }
             else if(!canUpgrade && _upgradeSprite.gameObject.activeSelf)
             {
+                _canUpgrade = false;
                 _upgradeSprite.Hide(() => _upgradeSprite.gameObject.SetActive(false));
             }
         }
@@ -314,6 +328,7 @@ namespace LabDiner.Restaurant.Environment
                  return;
              }
 
+            OnCoreStationClicked?.Invoke();
              _CoreStationUIController.OnInteract();
          }
 

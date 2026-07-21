@@ -130,6 +130,7 @@ namespace LabDiner.Restaurant.Managers
             {
                 _progressRuntimeSO.InitializeProgress(configSO);
                 _progressRuntimeSO.LevelProgressSave.UpdateHasSeenIntro(true);
+                _progressRuntimeSO.OnProgressInject?.Invoke();
                 _onLevelIntroStart.Raise(configSO);
             }
 

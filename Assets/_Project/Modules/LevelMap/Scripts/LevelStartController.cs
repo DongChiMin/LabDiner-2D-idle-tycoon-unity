@@ -6,6 +6,7 @@ namespace LabDiner.LevelMap.UI
 {
     public class LevelStartController : MonoBehaviour
     {
+
         [Header("Item References")]
         [SerializeField] private LevelConfigEvent _onLevelIntroStart;
         [SerializeField] private LevelStartPanel _panel;
