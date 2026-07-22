@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 406c5ce45c5f950488f4aa3f3dfc7e5b, type: 3}
-  m_Name: MapPopup
+  m_Name: LevelMapPopup
   m_EditorClassIdentifier: 

@@ -1,16 +1,53 @@
+using LabDiner.Restaurant.Interface;
+using LabDiner.Restaurant.SO;
+using LabDiner.Shared;
+using LabDiner.Shared.Event;
 using UnityEngine;
-
-public class LevelMapController : MonoBehaviour
+namespace LabDiner.LevelMap.UI
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class LevelMapController : MonoBehaviour, ILevelInitializable, ILevelProgress
     {
-        
-    }
+        [Header("Item References")]
+        [SerializeField] private ProgressSaveRuntimeSO _progressRuntimeSO;
+        [SerializeField] private UIPopupEvent _onPopupShow;
+        [SerializeField] private LevelMapPanel _panel;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private LevelProgressSave _progress => _progressRuntimeSO.LevelProgressSave;
+
+        void OnEnable()
+        {
+            _onPopupShow.Register(HandlePopupShow);
+            _panel.CloseButton.onClick.AddListener(HandlePopupHide);
+        }
+
+        void OnDisable()
+        {
+            _onPopupShow.Unregister(HandlePopupShow);
+            _panel.CloseButton.onClick.RemoveListener(HandlePopupHide);
+        }
+
+        private void HandlePopupShow()
+        {
+            _panel.Show();
+        }
+
+        private void HandlePopupHide()
+        {
+            _panel.Hide();
+        }
+
+        public void Init(LevelConfigSO config)
+        {
+            int currentLevelIndex = config.LevelIndex;
+        }
+
+        public void LoadProgress()
+        {
+        }
+
+        public void UpdateProgress()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

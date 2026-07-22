@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace LabDiner.LevelMap.UI
+{
 public class LevelMapItem : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -13,4 +15,5 @@ public class LevelMapItem : MonoBehaviour
     {
         
     }
+}
 }

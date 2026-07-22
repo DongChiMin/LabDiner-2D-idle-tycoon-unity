@@ -33,6 +33,7 @@ namespace LabDiner.Shared
             coreStationLevels = new List<CoreStationLevel>();
             levelMissionProgresses = new List<LevelMissionProgress>();
             levelUpgradeProgresses = new List<LevelUpgradeProgress>();
+            levelIndex = 0;
             levelCoin = 0;
             hasSeenIntro = false;
             isDirty = false;
@@ -56,9 +57,16 @@ namespace LabDiner.Shared
             isDirty = true;
         }
 
+        public void SetLevelIndex(int index)
+        {
+            levelIndex = index;
+            isDirty = true;
+        }
+
         public List<CoreStationLevel> coreStationLevels;
         public List<LevelMissionProgress> levelMissionProgresses;
         public List<LevelUpgradeProgress> levelUpgradeProgresses;
+        public int levelIndex;
         public double levelCoin;
         public bool hasSeenIntro;
         public bool isDirty;

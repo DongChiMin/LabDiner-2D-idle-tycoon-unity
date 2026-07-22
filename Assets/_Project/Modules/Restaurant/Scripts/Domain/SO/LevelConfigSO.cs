@@ -10,6 +10,7 @@ namespace LabDiner.Restaurant.SO
     public class LevelConfigSO : ScriptableObject
     {
         [Header("Level Info")]
+        public string ID;
         public GameObject LevelPrefab;
         public int LevelIndex;
         public string LevelName;

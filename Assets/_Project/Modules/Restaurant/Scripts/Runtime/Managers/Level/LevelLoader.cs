@@ -39,7 +39,9 @@ namespace LabDiner.Restaurant.Managers
 
         private void SaveLevel(LevelConfigSO levelCompleted)
         {
-            _progressRuntimeSO.PlayerSave.SetCurrentLevelIndex(levelCompleted.LevelIndex + 1); 
+            int levelIndex = levelCompleted.LevelIndex;
+            string ID = levelCompleted.ID;
+            _progressRuntimeSO.PlayerSave.SetLevelCompleted(levelIndex, ID);
         }
 
         void Awake()
@@ -130,6 +132,7 @@ namespace LabDiner.Restaurant.Managers
             {
                 _progressRuntimeSO.InitializeProgress(configSO);
                 _progressRuntimeSO.LevelProgressSave.UpdateHasSeenIntro(true);
+                _progressRuntimeSO.PlayerSave.StartNewLevel(configSO.LevelIndex, configSO.ID);
                 _progressRuntimeSO.OnProgressInject?.Invoke();
                 _onLevelIntroStart.Raise(configSO);
             }

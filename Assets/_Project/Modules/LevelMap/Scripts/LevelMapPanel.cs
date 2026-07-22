@@ -1,16 +1,12 @@
+using LabDiner.Shared.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class LevelMapPanel : MonoBehaviour
+namespace LabDiner.LevelMap.UI
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+public class LevelMapPanel : BasePanel
+{
+    public Button CloseButton => _closeButton;
+    [SerializeField] private Button _closeButton;
+}
 }

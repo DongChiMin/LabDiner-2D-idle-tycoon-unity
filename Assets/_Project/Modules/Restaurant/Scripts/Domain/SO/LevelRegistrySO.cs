@@ -8,6 +8,7 @@ namespace LabDiner.LevelSystem.Domain
     public class LevelRegistrySO : ScriptableObject
     {
         public List<LevelConfigSO> registry;
+        public List<LevelChapterSO> chapters;
 
         public LevelConfigSO GetConfigByLevel(int levelIndex)
         {
