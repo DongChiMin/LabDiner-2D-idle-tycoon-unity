@@ -33,8 +33,7 @@ namespace LabDiner.Shared
     [Serializable]
     public class PlayedLevel
     {
-        public string ID;
-        public int LevelIndex;
+        public string LevelID;
         public LevelStatus Status;
         public long levelStartedTimestamp;    // Timestamp khi level được bắt đầu, dùng để tính toán thời gian chơi level
         public long levelCompletedTimestamp;    // Timestamp khi level được bắt đầu, dùng để tính toán thời gian chơi level
@@ -47,13 +46,12 @@ namespace LabDiner.Shared
     {
         public PlayerSave()
         {
-            currentLevelIndex = 1;
             Gem = 0;
         }
 
         public TutorialSaveData tutorialData = new TutorialSaveData();
         public List<PlayedLevel> playedLevels = new List<PlayedLevel>();
-        public int currentLevelIndex = 1;
+        public string currentLevelID;
         public bool isDirty = false;
         public int Gem;
 
@@ -65,13 +63,12 @@ namespace LabDiner.Shared
             isDirty = dirty;
         }
 
-        public void StartNewLevel(int index, string ID)
+        public void StartNewLevel(string ID)
         {
-            currentLevelIndex = index;
+            currentLevelID = ID;
             PlayedLevel playedLevel = new PlayedLevel
             {
-                ID = ID,
-                LevelIndex = index,
+                LevelID = ID,
                 Status = LevelStatus.InProgress,
                 levelStartedTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
             };
@@ -79,10 +76,9 @@ namespace LabDiner.Shared
             isDirty = true;
         }
 
-        public void SetLevelCompleted(int index, string ID)
+        public void SetLevelCompleted(string ID)
         {
-            currentLevelIndex = index + 1;
-            PlayedLevel completedLevel = playedLevels.Find(level => level.ID == ID);
+            PlayedLevel completedLevel = playedLevels.Find(level => level.LevelID == ID);
             if (completedLevel != null)
             {
                 completedLevel.Status = LevelStatus.Completed;
@@ -92,6 +88,12 @@ namespace LabDiner.Shared
             {
                 Debug.LogWarning($"[PlayerSave] Level with ID {ID} not found in playedLevels.");
             }
+            isDirty = true;
+        }
+
+        public void UpdateCurrentLevelID(string ID)
+        {
+            currentLevelID = ID;
             isDirty = true;
         }
 

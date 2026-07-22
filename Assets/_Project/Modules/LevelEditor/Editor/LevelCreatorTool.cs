@@ -119,20 +119,17 @@ namespace LabDiner.Restaurant.Editor
             LevelRegistrySO registrySO = AssetDatabase.LoadAssetAtPath<LevelRegistrySO>(RegistryAssetPath);
             if (registrySO == null) return;
 
-            // Sử dụng SerializedObject để đọc data đảm bảo đồng bộ, loại bỏ các phần tử bị null (missing)
-            SerializedObject serializedRegistry = new SerializedObject(registrySO);
-            SerializedProperty registryProperty = serializedRegistry.FindProperty("registry");
-
+            // Cách 1: Đọc trực tiếp qua Property C# (Nhanh, gọn và chính xác nhất)
             List<string> options = new List<string>();
             _levelConfigs.Clear();
 
-            if (registryProperty != null && registryProperty.isArray)
-            {
-                for (int i = 0; i < registryProperty.arraySize; i++)
-                {
-                    SerializedProperty elementProp = registryProperty.GetArrayElementAtIndex(i);
-                    LevelConfigSO elementAsset = elementProp.objectReferenceValue as LevelConfigSO;
+            // Lấy tất cả config từ getter C# của registrySO
+            List<LevelConfigSO> allConfigs = registrySO.Levels; 
 
+            if (allConfigs != null)
+            {
+                foreach (var elementAsset in allConfigs)
+                {
                     if (elementAsset != null)
                     {
                         options.Add($"Level {elementAsset.LevelIndex} ({elementAsset.name})");
@@ -169,9 +166,9 @@ namespace LabDiner.Restaurant.Editor
             {
                 // Thay thế đúng đường dẫn namespace class của bạn tại đây nếu bị báo đỏ lỗi biên dịch
                 PlayerSave progress = PlayerSaveFile.LoadFromFile();
-                progress.StartNewLevel(levelConfig.LevelIndex, levelConfig.ID);
+                progress.StartNewLevel(levelConfig.ID);
                 PlayerSaveFile.SaveToFile(progress);
-                Debug.Log($"<color=cyan>[Playtest]</color> Đã nạp thành công dữ liệu Level Index [<b>{levelConfig.LevelIndex}</b>] vào hệ thống lưu trữ!");
+                Debug.Log($"<color=cyan>[Playtest]</color> Đã nạp thành công dữ liệu Level ID [<b>{levelConfig.ID}</b>] vào hệ thống lưu trữ!");
             }
             catch (System.Exception e)
             {
