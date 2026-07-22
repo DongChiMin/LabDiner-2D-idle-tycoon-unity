@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1e24e26e5ee84409ba3e79769eb3ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onLevelComplete: {fileID: 11400000, guid: fc08566a8a8ee194fbd3e161ea890bf6, type: 2}
+  _onLevelComplete: {fileID: 11400000, guid: 5fe1202cefc1eea44b5a98da78d27358, type: 2}
   _onLevelInit: {fileID: 11400000, guid: 15e61c252f3eb7c439540b5b66730d1e, type: 2}
   _missionHUD: {fileID: 371835419344209168}
   _attentionEffect: {fileID: 398316416054161346}

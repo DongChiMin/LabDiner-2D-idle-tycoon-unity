@@ -13,7 +13,7 @@ namespace LabDiner.LevelMap.UI
     public class LevelCompleteController : MonoBehaviour, ILevelInitializable   {
         
         [Header("Events")]
-        [SerializeField] private IntEvent _onLevelComplete;
+        [SerializeField] private LevelConfigEvent _onLevelComplete;
 
         [Header("Item References")]
         [SerializeField] private LevelCompletePanel _panel;
@@ -39,7 +39,7 @@ namespace LabDiner.LevelMap.UI
 
         #endregion
 
-        private void HandleLevelComplete(int completionTime)
+        private void HandleLevelComplete(LevelConfigSO levelConfigSO)
         {
             _panel.Show();
         }

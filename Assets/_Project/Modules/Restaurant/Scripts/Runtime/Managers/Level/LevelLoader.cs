@@ -18,7 +18,7 @@ namespace LabDiner.Restaurant.Managers
         [SerializeField] private LevelConfigEvent _onLevelIntroStart;
 
         [Header("Level Load")]
-        [SerializeField] private IntEvent _onLevelComplete;
+        [SerializeField] private LevelConfigEvent _onLevelComplete;
 
         [Header("Level Init")]
         [SerializeField] private List<Transform> _initRoots;
@@ -37,9 +37,9 @@ namespace LabDiner.Restaurant.Managers
             _onLevelComplete.Unregister(SaveLevel);
         }
 
-        private void SaveLevel(int levelCompleted)
+        private void SaveLevel(LevelConfigSO levelCompleted)
         {
-            _progressRuntimeSO.PlayerSave.SetCurrentLevelIndex(levelCompleted + 1); 
+            _progressRuntimeSO.PlayerSave.SetCurrentLevelIndex(levelCompleted.LevelIndex + 1); 
         }
 
         void Awake()

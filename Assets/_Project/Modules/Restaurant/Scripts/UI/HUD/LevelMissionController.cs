@@ -14,7 +14,7 @@ namespace LabDiner.Restaurant.UI
     public partial class LevelMissionController : MonoBehaviour, ILevelInitializable, ILevelProgress
     {
         [Header("Events")]
-        [SerializeField] private IntEvent _onLevelComplete;
+        [SerializeField] private LevelConfigEvent _onLevelComplete;
         [SerializeField] private LevelConfigEvent _onLevelInit;
 
         [Header("Item References")]
@@ -27,7 +27,7 @@ namespace LabDiner.Restaurant.UI
         [SerializeField] private List<BaseMissionSO> _remainingMissions = new List<BaseMissionSO>();
         [SerializeField] BaseMissionSO _currentMission;
 
-        private int _currentLevel = -1;
+        private LevelConfigSO _currentLevelConfigSO;
         private bool _isFinalMission = false;
 
         void OnEnable()
@@ -52,7 +52,7 @@ namespace LabDiner.Restaurant.UI
             if(_currentMission != null) _currentMission.OnValueChanged -= HandleProgressUpdate;
             _currentMission = null;
             _remainingMissions = new List<BaseMissionSO>(config.AvailableMissions);
-            _currentLevel = config.LevelIndex;
+            _currentLevelConfigSO = config;
 
             //Khởi động nhiệm vụ đầu tiên
             ActivateNextMission();
@@ -137,7 +137,7 @@ namespace LabDiner.Restaurant.UI
                 _remainingMissions.RemoveAt(0);
             }
 
-            _onLevelComplete.Raise(_currentLevel);
+            _onLevelComplete.Raise(_currentLevelConfigSO);
             _missionHUD.gameObject.SetActive(false);
         }
 
