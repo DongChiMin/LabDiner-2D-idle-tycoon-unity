@@ -19,7 +19,7 @@ namespace LabDiner.Restaurant.Editor
         // Khai báo thêm biến phục vụ tính năng Test Level
         private int _selectedTestIndex = 0;
         private string[] _levelOptions = new string[0];
-        private List<int> _levelIndices = new List<int>();
+        private List<LevelConfigSO> _levelConfigs = new List<LevelConfigSO>();
 
         private const string TemplateFolderPath = "Assets/_Project/Modules/Restaurant/Data/Levels/_Example";
         private const string RootDestinationPath = "Assets/_Project/Modules/Restaurant/Data/Levels";
@@ -94,7 +94,7 @@ namespace LabDiner.Restaurant.Editor
                 GUI.backgroundColor = new Color(0.4f, 0.8f, 0.4f); // Màu xanh lá cây nổi bật cho nút Play
                 if (GUILayout.Button("▶️ LƯU PROGRESS & CHẠY THỬ", GUILayout.Height(40)))
                 {
-                    int levelToTest = _levelIndices[_selectedTestIndex];
+                    LevelConfigSO levelToTest = _levelConfigs[_selectedTestIndex];
                     PlayTestLevel(levelToTest);
                 }
                 GUI.backgroundColor = Color.white;
@@ -124,7 +124,7 @@ namespace LabDiner.Restaurant.Editor
             SerializedProperty registryProperty = serializedRegistry.FindProperty("registry");
 
             List<string> options = new List<string>();
-            _levelIndices.Clear();
+            _levelConfigs.Clear();
 
             if (registryProperty != null && registryProperty.isArray)
             {
@@ -136,7 +136,7 @@ namespace LabDiner.Restaurant.Editor
                     if (elementAsset != null)
                     {
                         options.Add($"Level {elementAsset.LevelIndex} ({elementAsset.name})");
-                        _levelIndices.Add(elementAsset.LevelIndex);
+                        _levelConfigs.Add(elementAsset);
                     }
                 }
             }
@@ -153,7 +153,7 @@ namespace LabDiner.Restaurant.Editor
         /// <summary>
         /// Xử lý logic lưu dữ liệu và đưa Unity vào PlayMode
         /// </summary>
-        private void PlayTestLevel(int levelIndex)
+        private void PlayTestLevel(LevelConfigSO levelConfig)
         {
             // Đảm bảo Editor đang không ở Playmode sẵn
             if (EditorApplication.isPlaying)
@@ -169,9 +169,9 @@ namespace LabDiner.Restaurant.Editor
             {
                 // Thay thế đúng đường dẫn namespace class của bạn tại đây nếu bị báo đỏ lỗi biên dịch
                 PlayerSave progress = PlayerSaveFile.LoadFromFile();
-                progress.SetCurrentLevelIndex(levelIndex);
+                progress.StartNewLevel(levelConfig.LevelIndex, levelConfig.ID);
                 PlayerSaveFile.SaveToFile(progress);
-                Debug.Log($"<color=cyan>[Playtest]</color> Đã nạp thành công dữ liệu Level Index [<b>{levelIndex}</b>] vào hệ thống lưu trữ!");
+                Debug.Log($"<color=cyan>[Playtest]</color> Đã nạp thành công dữ liệu Level Index [<b>{levelConfig.LevelIndex}</b>] vào hệ thống lưu trữ!");
             }
             catch (System.Exception e)
             {
@@ -369,7 +369,6 @@ namespace LabDiner.Restaurant.Editor
             {
                 // 1. Reset file Save của Player về mặc định (Level 1)
                 PlayerSave emptyPlayerSave = new PlayerSave();
-                emptyPlayerSave.SetCurrentLevelIndex(1);
                 PlayerSaveFile.SaveToFile(emptyPlayerSave);
 
                 // 2. Reset file Save Tiến trình Level (level_progress.dat) về mặc định tinh khôi
