@@ -8,7 +8,7 @@ namespace LabDiner.Restaurant.Interface
     /// </summary>
     public interface ILevelProgress
     {
-        public void LoadProgress();
+        public void LoadProgress(ProgressSaveRuntimeSO progressRuntimeSO);
         public void UpdateProgress();
     }
 }

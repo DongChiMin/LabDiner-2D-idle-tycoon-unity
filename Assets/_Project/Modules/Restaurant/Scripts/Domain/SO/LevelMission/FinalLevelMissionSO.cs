@@ -46,9 +46,9 @@ namespace LabDiner.Restaurant.SO
                 case FinalMissionType.AllCoreStationLevel:
                     List<CoreStation> coreStations = _coreStationRuntimeSO.CoreStations;
 
-                    Debug.Log("Calculating Final Mission Progress: Total Core Station Levels / Max Possible Levels");
-                    Debug.Log($"Total Core Station Levels: {coreStations.Sum(s => s.CurrentLevel)}");
-                    Debug.Log($"Max Possible Levels: {coreStations.Sum(s => s.CoreStationSO.LevelPerStar * s.CoreStationSO.StationStars.Count)}");
+                    // Debug.Log("Calculating Final Mission Progress: Total Core Station Levels / Max Possible Levels");
+                    // Debug.Log($"Total Core Station Levels: {coreStations.Sum(s => s.CurrentLevel)}");
+                    // Debug.Log($"Max Possible Levels: {coreStations.Sum(s => s.CoreStationSO.LevelPerStar * s.CoreStationSO.StationStars.Count)}");
 
                     int totalCoreStationCurrentLevel = coreStations.Sum(s => s.CurrentLevel);
                     int totalCoreStationMaxLevel = coreStations.Sum(s => s.CoreStationSO.LevelPerStar * s.CoreStationSO.StationStars.Count);

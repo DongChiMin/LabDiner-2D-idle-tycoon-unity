@@ -34,7 +34,7 @@ namespace LabDiner.Shared
 
         private void SaveProgress()
         {
-            if (_playerSave.isDirty)
+            if (_playerSave.IsDirty)
             {
                 PlayerSaveFile.SaveToFile(_playerSave);
                 _playerSave.SetDirty(false);

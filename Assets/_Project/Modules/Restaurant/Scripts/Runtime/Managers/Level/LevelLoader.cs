@@ -139,7 +139,7 @@ namespace LabDiner.Restaurant.Managers
                 _progressRuntimeSO.InitializeProgress(configSO);
                 _progressRuntimeSO.LevelProgressSave.UpdateHasSeenIntro(true);
                 _progressRuntimeSO.PlayerSave.StartNewLevel(configSO.ID);
-                _progressRuntimeSO.OnProgressInject?.Invoke();
+                _progressRuntimeSO.OnProgressInject?.Invoke(_progressRuntimeSO);
                 _onLevelIntroStart.Raise(configSO);
             }
 
@@ -147,7 +147,7 @@ namespace LabDiner.Restaurant.Managers
             //- Raise event để các thành phần trong game tự lấy tiến độ chơi và cập nhật
             else
             {
-                _progressRuntimeSO.OnProgressInject?.Invoke();
+                _progressRuntimeSO.OnProgressInject?.Invoke(_progressRuntimeSO);
             }
             yield return null;
         }

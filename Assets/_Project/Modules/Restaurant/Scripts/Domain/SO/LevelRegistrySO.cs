@@ -10,6 +10,39 @@ namespace LabDiner.LevelSystem.Domain
         public List<LevelConfigSO> Levels => GetAllConfigs();
         [SerializeField] private List<LevelChapterSO> chapters;
 
+        public LevelConfigSO GetFirstLevelConfigSO()
+        {
+            if (chapters.Count == 0 || chapters[0].Levels.Count == 0)
+            {
+                Debug.LogError("[LevelRegistrySO] No chapters or levels found in the registry!");
+                return null;
+            }
+            return chapters[0].Levels[0];
+        }
+
+        public LevelChapterSO GetChapterByLevelConfig(LevelConfigSO config)
+        {
+            foreach (LevelChapterSO chapter in chapters)
+            {
+                if (chapter.Levels.Contains(config))
+                {
+                    return chapter;
+                }
+            }
+            Debug.LogError($"[LevelRegistrySO] No chapter found for level {config.LevelIndex}!");
+            return null;
+        }
+
+        public List<LevelConfigSO> GetLevelConfigsByChapter(LevelChapterSO chapter)
+        {
+            if (chapter == null)
+            {
+                Debug.LogError("[LevelRegistrySO] Chapter is null!");
+                return new List<LevelConfigSO>();
+            }
+            return chapter.Levels;
+        }
+
         public LevelConfigSO GetConfigByID(string ID)
         {
             foreach(LevelChapterSO chapter in chapters)

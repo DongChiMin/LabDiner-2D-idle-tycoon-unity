@@ -50,10 +50,10 @@ namespace LabDiner.Restaurant.UI
             _progressRuntimeSO.OnProgressInject -= LoadProgress;
         }
 
-        public void LoadProgress()
+        public void LoadProgress(ProgressSaveRuntimeSO progressRuntimeSO)
         {
-            double levelCoin = _progressRuntimeSO.LevelProgressSave.levelCoin;
-            int levelGem = _progressRuntimeSO.PlayerSave.Gem;
+            double levelCoin = progressRuntimeSO.LevelProgressSave.levelCoin;
+            int levelGem = progressRuntimeSO.PlayerSave.Gem;
             _coinRuntimeData.SetValue(levelCoin);
             _gemRuntimeData.SetValue(levelGem);
         }

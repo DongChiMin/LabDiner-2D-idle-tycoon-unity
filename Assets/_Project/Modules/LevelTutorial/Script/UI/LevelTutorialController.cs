@@ -22,7 +22,7 @@ public class LevelTutorialController : Singleton<LevelTutorialController>
     protected override void Awake()
     {
         base.Awake();
-        _tutorialSaveData = PlayerSaveFile.LoadFromFile().tutorialData;
+        _tutorialSaveData = PlayerSaveFile.LoadFromFile().TutorialData;
     }
 
     //Sẽ được gọi ở Awake

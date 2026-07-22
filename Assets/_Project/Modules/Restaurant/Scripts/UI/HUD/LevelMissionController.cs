@@ -141,9 +141,9 @@ namespace LabDiner.Restaurant.UI
             _missionHUD.gameObject.SetActive(false);
         }
 
-        public void LoadProgress()
+        public void LoadProgress(ProgressSaveRuntimeSO progressRuntimeSO)
         {
-            LevelProgressSave progress = _progressRuntimeSO.LevelProgressSave;
+            LevelProgressSave progress = progressRuntimeSO.LevelProgressSave;
             List<LevelMissionProgress> missionProgresses = progress.levelMissionProgresses;
             if (missionProgresses == null || missionProgresses.Count == 0) return;
 

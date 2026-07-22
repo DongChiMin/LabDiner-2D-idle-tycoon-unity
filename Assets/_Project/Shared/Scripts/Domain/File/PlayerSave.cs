@@ -9,6 +9,16 @@ namespace LabDiner.Shared
     {
         public List<string> CompletedTutorials = new List<string>();
 
+        public TutorialSaveData()
+        {
+
+        }
+
+        public TutorialSaveData(TutorialSaveData other)
+        {
+            CompletedTutorials = new List<string>(other.CompletedTutorials);
+        }
+
         public bool IsTutorialCompleted(string tutorialId)
         {
             return CompletedTutorials.Contains(tutorialId);
@@ -46,14 +56,20 @@ namespace LabDiner.Shared
     {
         public PlayerSave()
         {
-            Gem = 0;
+            gem = 0;
         }
 
-        public TutorialSaveData tutorialData = new TutorialSaveData();
-        public List<PlayedLevel> playedLevels = new List<PlayedLevel>();
-        public string currentLevelID;
-        public bool isDirty = false;
-        public int Gem;
+        public bool IsDirty => isDirty;
+        public int Gem => gem;
+        public string CurrentLevelID => currentLevelID;
+        public TutorialSaveData TutorialData => new TutorialSaveData(tutorialData);
+        public List<PlayedLevel> PlayedLevels => new List<PlayedLevel>(playedLevels);
+
+        private TutorialSaveData tutorialData = new TutorialSaveData();
+        private List<PlayedLevel> playedLevels = new List<PlayedLevel>();
+        private string currentLevelID;
+        private bool isDirty = false;
+        private int gem;
 
         // Cậu có thể thêm các thông tin khác sau này như:
         // public int totalMoney;
@@ -99,8 +115,9 @@ namespace LabDiner.Shared
 
         public void UpdateGem(int gemAmount)
         {
-            Gem = gemAmount;
+            gem = gemAmount;
             isDirty = true;
         }
+
     }
 }

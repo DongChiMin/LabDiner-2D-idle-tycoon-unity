@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9781a546e8ce7db41b5ef091387ab3ea, type: 3}
   m_Name: Level 2
   m_EditorClassIdentifier: 
+  ID: level_2
   LevelPrefab: {fileID: 9118704021934944520, guid: 035fe90c66f24614d999c7e57a1d981a, type: 3}
   LevelIndex: 2
-  LevelName: 
+  LevelName: Level 2
+  LevelDescription: This is description for level 2
+  LevelIcon: {fileID: 0}
   AvailableUpgrades: []
   AvailableMissions:
   - {fileID: 11400000, guid: 238a08c43cb85f0419972a828910aae5, type: 2}

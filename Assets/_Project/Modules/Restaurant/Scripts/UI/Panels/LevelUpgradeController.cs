@@ -125,9 +125,9 @@ namespace LabDiner.Restaurant.UI
 
         private BaseUpgradeSO currentUpgradeData;
 
-        public void LoadProgress()
+        public void LoadProgress(ProgressSaveRuntimeSO progressRuntimeSO)
         {
-                LevelProgressSave progress = _progressRuntimeSO.LevelProgressSave;
+                LevelProgressSave progress = progressRuntimeSO.LevelProgressSave;
                 List<LevelUpgradeProgress> upgradeProgresses = progress.levelUpgradeProgresses;
             if (upgradeProgresses == null || upgradeProgresses.Count == 0) return;
 

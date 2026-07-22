@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8267e5177f60ddc46be77806021e3af2, type: 3}
   m_Name: LevelRegistry
   m_EditorClassIdentifier: 
-  registry:
-  - {fileID: 11400000, guid: 7e8b9843fefac3948af00b17fe8c0703, type: 2}
-  - {fileID: 11400000, guid: 66c6016799848be43a5e0a9c7019b7bf, type: 2}
+  chapters:
+  - {fileID: 11400000, guid: ee163ab009730b642ba74ec60bc8f3e2, type: 2}

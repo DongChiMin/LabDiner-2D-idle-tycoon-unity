@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9781a546e8ce7db41b5ef091387ab3ea, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
+  ID: level_1
   LevelPrefab: {fileID: 9118704021934944520, guid: 3edc8ab7bd22cc942b4d4b0d13269354, type: 3}
   LevelIndex: 1
-  LevelName: 
+  LevelName: Level 1
+  LevelDescription: 'This is description for level '
+  LevelIcon: {fileID: 0}
   AvailableUpgrades:
   - {fileID: 11400000, guid: 39d9c934703c43e4b8eddf932f83e6f0, type: 2}
   - {fileID: 11400000, guid: 82b4ca4b1a76d464493f5936b1427edc, type: 2}
@@ -29,8 +32,6 @@ MonoBehaviour:
   - {fileID: 3054657543311258127, guid: ec12fb9c391ef4947ab78fce0c04351c, type: 3}
   InitialMoney: 15
   InitialGuestQuantity: 2
-  CoreStations:
-  - {fileID: 11400000, guid: 71de0ce8923041146bf74047af20e4dd, type: 2}
   MaxUniqueStations: 2
   MaxTotalQtyPerOrder: 5
   minVerticalPos: 0

@@ -32,17 +32,18 @@ namespace LabDiner.Restaurant.Managers
             // 1. Load tiến độ hiện tại
             PlayerSave progress = _progressRuntimeSO.PlayerSave;
 
-            // 2. Lấy Config (Check Null ngay tại đây!)
-            LevelConfigSO config = _levelRegistry.GetConfigByID(progress.currentLevelID);
-
-            if (config == null) 
+            // 2. Lấy Config
+            // 2.1. Nếu mới tạo file save (currentID rỗng) -> lấy level đầu tiên
+            if(string.IsNullOrEmpty(progress.CurrentLevelID))
             {
-                Debug.LogError($"[LevelLoader] Không tìm thấy Config cho Level {progress.currentLevelID}. Kiểm tra lại LevelRegistry!");
-                return null;
+                return _levelRegistry.GetFirstLevelConfigSO();
             }
-
-            // 3. Trả về Config
-            return config;
+            //2.2. Láy level theo ID
+            else 
+            {
+                LevelConfigSO config = _levelRegistry.GetConfigByID(progress.CurrentLevelID);
+                return config;
+            }
         }
     }
 }

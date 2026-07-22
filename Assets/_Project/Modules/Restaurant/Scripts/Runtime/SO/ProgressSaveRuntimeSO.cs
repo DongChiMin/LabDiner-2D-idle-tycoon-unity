@@ -15,7 +15,7 @@ namespace LabDiner.Restaurant.SO
     public class ProgressSaveRuntimeSO : ScriptableObject
     {
         //Được gọi khi có dữ liệu progress được load
-        public Action OnProgressInject;
+        public Action<ProgressSaveRuntimeSO> OnProgressInject;
         public LevelProgressSave LevelProgressSave => _levelProgressSave;
         public PlayerSave PlayerSave => _playerSave;
         

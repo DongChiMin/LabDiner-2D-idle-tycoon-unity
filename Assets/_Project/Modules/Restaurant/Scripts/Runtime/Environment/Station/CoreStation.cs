@@ -356,9 +356,9 @@ namespace LabDiner.Restaurant.Environment
             }
          }
 
-        public void LoadProgress()
+        public void LoadProgress(ProgressSaveRuntimeSO progressRuntimeSO)
         {
-            List<CoreStationLevel> levelPairs = _progressRuntimeSO.LevelProgressSave.coreStationLevels;
+            List<CoreStationLevel> levelPairs = progressRuntimeSO.LevelProgressSave.coreStationLevels;
             CoreStationLevel stationLevel = levelPairs.Find(pair => pair.CoreStationID == _coreStationSO.Id);
             if(!string.IsNullOrEmpty(stationLevel.CoreStationID))
             {
