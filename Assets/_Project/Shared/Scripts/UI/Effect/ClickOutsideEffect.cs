@@ -9,6 +9,7 @@ namespace LabDiner.Shared.UI
     public class ClickOutsideEffect : MonoBehaviour
     {
         [SerializeField] private Canvas _canvas;
+        [SerializeField] private List<GameObject> _ignoredObjects; // Danh sách các object sẽ được bỏ qua khi click ra ngoài
         
         [Header("Events")]
         public Action OnClickOutside; // Hoạt động y hệt Button.onClick
@@ -55,7 +56,28 @@ namespace LabDiner.Shared.UI
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventData, results);
 
+            // Xóa tất cả các UI element trùng với danh sách _ignoredObjects
+            // Hoặc nằm trong cây phân cấp con của các _ignoredObjects đó
+            results.RemoveAll(result => IsIgnored(result.gameObject));
+
             return results.Count > 0;
+        }
+
+        private bool IsIgnored(GameObject hitObject)
+        {
+            if (_ignoredObjects == null) return false;
+
+            foreach (var ignoredObj in _ignoredObjects)
+            {
+                if (ignoredObj == null) continue;
+
+                // Trả về true nếu click vào chính object đó HOẶC con/cháu của object đó
+                if (hitObject == ignoredObj || hitObject.transform.IsChildOf(ignoredObj.transform))
+                {
+                    return true;
+                }
+            }
+            return false;
         }       
     }
 }
