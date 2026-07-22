@@ -147,7 +147,11 @@ namespace LabDiner.Restaurant.UI
             List<LevelMissionProgress> missionProgresses = progress.levelMissionProgresses;
             if (missionProgresses == null || missionProgresses.Count == 0) return;
 
-            while (_currentMission != null && missionProgresses.Any(m => m.MissionID == _currentMission.Id && m.isCollected))
+            // Lọc bỏ tất cả các mission đã collect ra khỏi danh sách chờ trước
+            _remainingMissions.RemoveAll(m => missionProgresses.Any(p => p.MissionID == m.Id && p.isCollected));
+
+            // Sau đó mới kích hoạt mission tiếp theo hợp lệ
+            if (_remainingMissions.Count > 0)
             {
                 ActivateNextMission();
             }

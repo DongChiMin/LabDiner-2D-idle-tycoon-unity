@@ -44,9 +44,13 @@ namespace LabDiner.Restaurant.Managers
             string ID = levelCompleted.ID;
             _progressRuntimeSO.PlayerSave.SetLevelCompleted(ID);
             LevelConfigSO nextLevel = _levelRegistry.GetNextLevelConfigSO(levelCompleted);
-            if (nextLevel != null)
+            if (!string.IsNullOrEmpty(nextLevel.ID))
             {
                 _progressRuntimeSO.PlayerSave.UpdateCurrentLevelID(nextLevel.ID);
+            }
+            else
+            {
+                Debug.LogWarning($"Level {levelCompleted.name} is the last level. No next level found.");
             }
         }
 
