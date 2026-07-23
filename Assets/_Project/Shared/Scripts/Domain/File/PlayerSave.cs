@@ -90,6 +90,7 @@ namespace LabDiner.Shared
             };
             playedLevels.Add(playedLevel);
             isDirty = true;
+            PlayerSaveFile.SaveToFile(this);
         }
 
         public void SetLevelCompleted(string ID)
@@ -105,18 +106,21 @@ namespace LabDiner.Shared
                 Debug.LogWarning($"[PlayerSave] Level with ID {ID} not found in playedLevels.");
             }
             isDirty = true;
+            PlayerSaveFile.SaveToFile(this);
         }
 
         public void UpdateCurrentLevelID(string ID)
         {
             currentLevelID = ID;
             isDirty = true;
+            PlayerSaveFile.SaveToFile(this); // Save immediately after updating current level ID
         }
 
         public void UpdateGem(int gemAmount)
         {
             gem = gemAmount;
             isDirty = true;
+            PlayerSaveFile.SaveToFile(this); // Save immediately after updating gem
         }
 
     }
