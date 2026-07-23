@@ -33,7 +33,7 @@ namespace LabDiner.Shared
             coreStationLevels = new List<CoreStationLevel>();
             levelMissionProgresses = new List<LevelMissionProgress>();
             levelUpgradeProgresses = new List<LevelUpgradeProgress>();
-            levelIndex = 0;
+            levelID = string.Empty;
             levelCoin = 0;
             hasSeenIntro = false;
             isDirty = false;
@@ -43,12 +43,16 @@ namespace LabDiner.Shared
         {
             levelMissionProgresses = missionProgresses;
             isDirty = true;
+
+            LevelProgressSaveFile.SaveToFile(this);
         }
 
         public void SetLevelUpgradeProgress(List<LevelUpgradeProgress> upgradeProgresses)
         {
             levelUpgradeProgresses = upgradeProgresses;
             isDirty = true;
+
+            LevelProgressSaveFile.SaveToFile(this);
         }
 
         public void SetLevelCoin(double coin)
@@ -57,16 +61,18 @@ namespace LabDiner.Shared
             isDirty = true;
         }
 
-        public void SetLevelIndex(int index)
+        public void SetLevelID(string id)
         {
-            levelIndex = index;
+            levelID = id;
             isDirty = true;
+
+            LevelProgressSaveFile.SaveToFile(this);
         }
 
         public List<CoreStationLevel> coreStationLevels;
         public List<LevelMissionProgress> levelMissionProgresses;
         public List<LevelUpgradeProgress> levelUpgradeProgresses;
-        public int levelIndex;
+        public string levelID;
         public double levelCoin;
         public bool hasSeenIntro;
         public bool isDirty;
@@ -99,6 +105,8 @@ namespace LabDiner.Shared
                     level = level
                 });
             }
+
+            LevelProgressSaveFile.SaveToFile(this);
         }
 
         public void UpdateLevelMission(string missionID, bool isCollected)
@@ -130,6 +138,8 @@ namespace LabDiner.Shared
                     isCollected = isCollected
                 });
             }
+
+            LevelProgressSaveFile.SaveToFile(this);
         }
 
         public void UpdateLevelUpgrade(string upgradeID, bool isPurchased)
@@ -161,6 +171,8 @@ namespace LabDiner.Shared
                     isPurchased = isPurchased
                 });
             }
+
+            LevelProgressSaveFile.SaveToFile(this);
         }
 
         public void UpdateLevelCoin(double coin)
@@ -173,6 +185,7 @@ namespace LabDiner.Shared
         {
             hasSeenIntro = hasSeen;
             isDirty = true;
+            LevelProgressSaveFile.SaveToFile(this);
         }
 
         public void SetDirty(bool dirty)
@@ -180,5 +193,17 @@ namespace LabDiner.Shared
             isDirty = dirty;
         }
 
+        public void SetLevelCompleted()
+        {
+            coreStationLevels = new List<CoreStationLevel>();
+            levelMissionProgresses = new List<LevelMissionProgress>();
+            levelUpgradeProgresses = new List<LevelUpgradeProgress>();
+            levelID = string.Empty;
+            levelCoin = 0;
+            hasSeenIntro = false;
+            
+            isDirty = true;
+            LevelProgressSaveFile.SaveToFile(this);
+        }
     }
 }

@@ -51,7 +51,7 @@ namespace LabDiner.Restaurant.SO
                 });
             }
 
-            _levelProgressSave.SetLevelIndex(configSO.LevelIndex);
+            _levelProgressSave.SetLevelID(configSO.ID);
             _levelProgressSave.SetLevelCoin(levelCoin);
             _levelProgressSave.SetLevelMissionProgress(levelMissionProgresses);
             _levelProgressSave.SetLevelUpgradeProgress(levelUpgradeProgresses);

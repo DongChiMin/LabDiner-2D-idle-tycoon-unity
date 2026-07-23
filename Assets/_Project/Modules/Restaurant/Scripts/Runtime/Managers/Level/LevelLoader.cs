@@ -43,8 +43,9 @@ namespace LabDiner.Restaurant.Managers
             int levelIndex = levelCompleted.LevelIndex;
             string ID = levelCompleted.ID;
             _progressRuntimeSO.PlayerSave.SetLevelCompleted(ID);
+            _progressRuntimeSO.LevelProgressSave.SetLevelCompleted();
             LevelConfigSO nextLevel = _levelRegistry.GetNextLevelConfigSO(levelCompleted);
-            if (!string.IsNullOrEmpty(nextLevel.ID))
+            if (nextLevel != null && !string.IsNullOrEmpty(nextLevel.ID))
             {
                 _progressRuntimeSO.PlayerSave.UpdateCurrentLevelID(nextLevel.ID);
             }
