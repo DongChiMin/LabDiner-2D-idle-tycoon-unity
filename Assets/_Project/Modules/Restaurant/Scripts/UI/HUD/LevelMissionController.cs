@@ -55,8 +55,6 @@ namespace LabDiner.Restaurant.UI
             _currentLevelConfigSO = config;
 
             //Khởi động nhiệm vụ đầu tiên
-            ActivateNextMission();
-
             Debug_ValidateData();
         }
 
