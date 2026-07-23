@@ -15,7 +15,7 @@ namespace LabDiner.Shared
 
         public static void SaveToFile(PlayerSave progress) 
         {
-            JSONExecutor.WriteToFile(progress.ToJson(), PROGRESS_FILE_NAME, true);
+            JSONExecutor.WriteToFile(JsonUtility.ToJson(progress, true), PROGRESS_FILE_NAME, true);
         }
     }
 }

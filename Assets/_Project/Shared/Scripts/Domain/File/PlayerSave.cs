@@ -65,11 +65,11 @@ namespace LabDiner.Shared
         public TutorialSaveData TutorialData => new TutorialSaveData(tutorialData);
         public List<PlayedLevel> PlayedLevels => new List<PlayedLevel>(playedLevels);
 
-        private TutorialSaveData tutorialData = new TutorialSaveData();
-        private List<PlayedLevel> playedLevels = new List<PlayedLevel>();
-        private string currentLevelID;
-        private bool isDirty = false;
-        private int gem;
+        public TutorialSaveData tutorialData = new TutorialSaveData();
+        public List<PlayedLevel> playedLevels = new List<PlayedLevel>();
+        public string currentLevelID;
+        public bool isDirty = false;
+        public int gem;
 
         // Cậu có thể thêm các thông tin khác sau này như:
         // public int totalMoney;
