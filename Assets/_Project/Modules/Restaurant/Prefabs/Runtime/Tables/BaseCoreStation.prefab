@@ -697,6 +697,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 1048585406625754323}
+  _blockRaycastLayer:
+    serializedVersion: 2
+    m_Bits: 1048576
 --- !u!114 &2703867867030854180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1360,6 +1363,7 @@ MonoBehaviour:
   _currentProcessTimeBuff: 0
   _currentStar: 0
   _currentLevel: 0
+  _canUpgrade: 0
 --- !u!114 &571652241901407734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4444,6 +4448,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 1048585406625754323}
+  _blockRaycastLayer:
+    serializedVersion: 2
+    m_Bits: 1048576
 --- !u!1 &8506634532838409748
 GameObject:
   m_ObjectHideFlags: 0

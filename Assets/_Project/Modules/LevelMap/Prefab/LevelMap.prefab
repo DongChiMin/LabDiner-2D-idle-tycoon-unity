@@ -13,14 +13,13 @@ GameObject:
   - component: {fileID: 1644711556164960610}
   - component: {fileID: 5547991944417550525}
   - component: {fileID: 7521957612119403175}
-  - component: {fileID: 7081875267793984949}
   m_Layer: 0
   m_Name: Content Wrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8645417062887860338
 RectTransform:
   m_ObjectHideFlags: 0
@@ -109,19 +108,6 @@ MonoBehaviour:
   _direction: 3
   _showEase: 9
   _hideEase: 8
---- !u!114 &7081875267793984949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 464185916533853657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef7682ff09678014c80b2d799c19b389, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canvas: {fileID: 0}
 --- !u!1 &1299599371600180042
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +240,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3340037791260330694}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -280,6 +266,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f6d55707c6959c4bbe3906f32cc6cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelRegistrySO: {fileID: 11400000, guid: 2fff2c6c274bbab4a878ae5b92ae69cc, type: 2}
+  _progressRuntimeSO: {fileID: 11400000, guid: f9113ef675523464f98c06acecccb4f8, type: 2}
+  _onPopupShow: {fileID: 11400000, guid: 28b03f939d5adf944a01d16e01f3633a, type: 2}
+  _onLevelInit: {fileID: 11400000, guid: 15e61c252f3eb7c439540b5b66730d1e, type: 2}
+  _panel: {fileID: 3917898713080674723}
+  _itemPrefab: {fileID: 3891837334885547973, guid: 2b5d0a6af3f10464493e992844d22536, type: 3}
+  _itemContainer: {fileID: 4388230097461669588}
 --- !u!114 &3917898713080674723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +285,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b691ad0377efc1e47b99b84b172ede7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onPanelRegister: {fileID: 11400000, guid: bf61dd964ce08fa45bd40784a3873571, type: 2}
+  _onPanelShow: {fileID: 11400000, guid: cc5009086cf57064199257c8b4da5ea1, type: 2}
+  _onPanelHide: {fileID: 11400000, guid: 2257ae19d9ac5c14597710975203e43f, type: 2}
+  _contentEffect: {fileID: 7521957612119403175}
+  _backgroundCanvas: {fileID: 7427864802451413620}
+  _closeButton: {fileID: 3135304375343371134}
 --- !u!1 &3497872302111086563
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +447,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.00005976983}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 165}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &514014927199348984
 MonoBehaviour:
@@ -508,7 +507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5240559970241995283
 RectTransform:
   m_ObjectHideFlags: 0
@@ -694,7 +693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7074825381869977071, guid: 2b5d0a6af3f10464493e992844d22536, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7074825381869977071, guid: 2b5d0a6af3f10464493e992844d22536, type: 3}
       propertyPath: m_AnchorMin.x
@@ -702,11 +701,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7074825381869977071, guid: 2b5d0a6af3f10464493e992844d22536, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7074825381869977071, guid: 2b5d0a6af3f10464493e992844d22536, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 827.4298
       objectReference: {fileID: 0}
     - target: {fileID: 7074825381869977071, guid: 2b5d0a6af3f10464493e992844d22536, type: 3}
       propertyPath: m_SizeDelta.y

@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 3178541917815796574}
   - component: {fileID: 4343381757784272072}
   - component: {fileID: 6439419152479740408}
-  - component: {fileID: 972681846512191351}
+  - component: {fileID: 547363411362585907}
   m_Layer: 0
   m_Name: Content Wrapper
   m_TagString: Untagged
@@ -505,7 +505,7 @@ MonoBehaviour:
   _direction: 3
   _showEase: 9
   _hideEase: 8
---- !u!114 &972681846512191351
+--- !u!114 &547363411362585907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -518,6 +518,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 0}
+  _blockRaycastLayer:
+    serializedVersion: 2
+    m_Bits: 1048576
 --- !u!1 &4260782378081355883
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,7 +687,7 @@ MonoBehaviour:
   _contentEffect: {fileID: 6439419152479740408}
   _backgroundCanvas: {fileID: 8865410368590006015}
   _closeButton: {fileID: 8216308029424964943}
-  _clickOutsideEffect: {fileID: 972681846512191351}
+  _clickOutsideEffect: {fileID: 547363411362585907}
 --- !u!1 &6353315646512211777
 GameObject:
   m_ObjectHideFlags: 0

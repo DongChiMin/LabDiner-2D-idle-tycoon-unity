@@ -9,8 +9,8 @@ namespace LabDiner.Shared.UI
     public class ClickOutsideEffect : MonoBehaviour
     {
         [SerializeField] private Canvas _canvas;
-        [SerializeField] private List<GameObject> _ignoredObjects; // Danh sách các object sẽ được bỏ qua khi click ra ngoài
-        
+        [SerializeField] private LayerMask _blockRaycastLayer;
+
         [Header("Events")]
         public Action OnClickOutside; // Hoạt động y hệt Button.onClick
 
@@ -37,47 +37,67 @@ namespace LabDiner.Shared.UI
 
             Camera eventCamera = (_canvas.renderMode == RenderMode.ScreenSpaceOverlay) ? null : Camera.main;
 
-            //Nếu click ra ngoài RectTransform của object này && click không vào bất kì UI nào
-            if (!RectTransformUtility.RectangleContainsScreenPoint(_rectTransform, mousePos, eventCamera) && !IsPointerOverUI(mousePos))
+            //Nếu click vào gameObject có layer trong _blockRaycast thì bỏ qua
+            GameObject firstUI = GetFirstUIUnderPointer(mousePos);
+            if(firstUI != null && IsIgnoredLayer(firstUI.layer)) return;
+
+            //Nếu click ra ngoài RectTransform của object này
+            if (!RectTransformUtility.RectangleContainsScreenPoint(_rectTransform, mousePos, eventCamera))
             {
                 // Cảm biến phát hiện click ra ngoài -> Hét lên cho ai quan tâm thì nghe!
                 OnClickOutside?.Invoke();
             }
         }
 
-        // Hàm phụ trợ để kiểm tra xem tọa độ mousePos hiện tại có đè lên UI nào không
-        private bool IsPointerOverUI(Vector2 mousePos)
+        public GameObject GetFirstUIUnderPointer(Vector2 screenPosition)
         {
-            if (EventSystem.current == null) return false;
+            if (EventSystem.current == null) return null;
 
-            PointerEventData eventData = new PointerEventData(EventSystem.current);
-            eventData.position = mousePos;
+            // 1. Khai báo thông tin Pointer tại vị trí truyền vào (vd: Input.mousePosition)
+            PointerEventData eventData = new PointerEventData(EventSystem.current)
+            {
+                position = screenPosition
+            };
 
+            // 2. Bắn Raycast tìm tất cả UI bên dưới
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventData, results);
 
-            // Xóa tất cả các UI element trùng với danh sách _ignoredObjects
-            // Hoặc nằm trong cây phân cấp con của các _ignoredObjects đó
-            results.RemoveAll(result => IsIgnored(result.gameObject));
+            // 3. Kết quả đầu tiên (index 0) chính là UI nằm cao nhất/đầu tiên trúng tia
+            if (results.Count > 0)
+            {
+                return results[0].gameObject;
+            }
 
-            return results.Count > 0;
+            return null; // Không trúng UI nào
         }
 
-        private bool IsIgnored(GameObject hitObject)
+        private bool IsIgnoredLayer(int layer)
         {
-            if (_ignoredObjects == null) return false;
-
-            foreach (var ignoredObj in _ignoredObjects)
-            {
-                if (ignoredObj == null) continue;
-
-                // Trả về true nếu click vào chính object đó HOẶC con/cháu của object đó
-                if (hitObject == ignoredObj || hitObject.transform.IsChildOf(ignoredObj.transform))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return (_blockRaycastLayer.value & (1 << layer)) != 0;
         }       
+
+        #if UNITY_EDITOR
+        // Tự động gán LayerMask khi Add Component hoặc Reset Component trong Inspector
+        private void Reset()
+        {
+            AutoAssignBlockRaycastLayer();
+        }
+
+        private void AutoAssignBlockRaycastLayer()
+        {
+            int layerIndex = LayerMask.NameToLayer("BlockRaycast");
+
+            if (layerIndex != -1)
+            {
+                // Chuyển đổi từ số Layer Index (0-31) sang bitmask của LayerMask
+                _blockRaycastLayer = 1 << layerIndex;
+            }
+            else
+            {
+                Debug.LogWarning("[ClickOutsideEffect] Chưa tạo Layer tên 'BlockRaycast' trong Tags & Layers!", this);
+            }
+        }
+        #endif
     }
 }
