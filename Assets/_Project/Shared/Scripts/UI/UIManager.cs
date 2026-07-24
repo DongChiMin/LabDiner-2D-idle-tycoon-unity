@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using LabDiner.Shared.DesignPattern;
 using LabDiner.Shared.Event;
 using LabDiner.Shared.Input;
 using UnityEngine;
 
 namespace LabDiner.Shared.UI
 {
-    public class UIManager : MonoBehaviour
+    public class UIManager : Singleton<UIManager>
     {
         public static Action<bool> OnUIStateChanged;
         public bool IsAnyPanelOpen => _historyStack.Count > 0;
@@ -111,6 +112,29 @@ namespace LabDiner.Shared.UI
                 // Sau khi hide xong, nếu không còn UI nào -> Mở khóa Camera
                 if (_historyStack.Count == 0) OnUIStateChanged?.Invoke(false);
             });
+        }
+
+        public void CloseAll(bool immediate = false)
+        {
+            if (_historyStack.Count == 0) return;
+
+            while (_historyStack.Count > 0)
+            {
+                var panel = _historyStack.Pop();
+                
+                if (immediate)
+                {
+                    // Tắt thẳng GameObject hoặc gọi Hide trực tiếp không qua Callback
+                    panel.gameObject.SetActive(false); 
+                }
+                else
+                {
+                    panel.Hide();
+                }
+            }
+
+            // Đảm bảo thông báo mở khóa Camera / Input khi đã tắt hết UI
+            OnUIStateChanged?.Invoke(false);
         }
 
         private void HandleBackRequest()

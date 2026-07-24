@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: t2_unlockstation
   m_EditorClassIdentifier: 
   _tutorialID: t2_unlockstation
+  _turnOffAllUI: 0

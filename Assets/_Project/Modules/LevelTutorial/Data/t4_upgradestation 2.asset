@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: t4_upgradestation 2
   m_EditorClassIdentifier: 
   _tutorialID: t4_upgradestation 2
+  _turnOffAllUI: 0

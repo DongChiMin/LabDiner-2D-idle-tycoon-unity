@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using LabDiner.Restaurant.SO;
 using LabDiner.Shared;
 using LabDiner.Shared.DesignPattern;
+using LabDiner.Shared.UI;
 using UnityEngine;
 
 public class LevelTutorialController : Singleton<LevelTutorialController>
@@ -42,6 +43,12 @@ public class LevelTutorialController : Singleton<LevelTutorialController>
         if (_tutorialSaveData.IsTutorialCompleted(anchor.TutorialSO.ID))
         {
             return;
+        }
+
+        //Tắt tất cả UI đang mở nếu TutorialSO yêu cầu
+        if (anchor.TutorialSO.TurnOffAllUI)
+        {
+            UIManager.Instance.CloseAll();
         }
 
         //Hiển thị tutorial sau 1 frame

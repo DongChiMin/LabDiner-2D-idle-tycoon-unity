@@ -121,7 +121,7 @@ MonoBehaviour:
     _stationTarget: {fileID: 0}
     _profit: 0
   _mover: {fileID: 3484565846713683997}
-  cookMultiplier: 0
+  cookMultiplier: 3
   _giveFoodDuration: 0
   placeOnPassTableDuration: 0
   _progressPieUI: {fileID: 2192753701787223607}
@@ -150,7 +150,7 @@ MonoBehaviour:
       Profit: 0
       IsServed: 0
   _taskRuntimeSO: {fileID: 11400000, guid: 728242de5e1b9534e96d49351d7255cc, type: 2}
-  _serveDuration: 3
+  _serveDuration: 1
   _mover: {fileID: 3484565846713683997}
   _progressPieUI: {fileID: 2192753701787223607}
 --- !u!1 &8930665214384260867
