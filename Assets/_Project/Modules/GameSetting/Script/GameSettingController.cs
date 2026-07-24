@@ -47,6 +47,12 @@ namespace LabDiner.GameSetting.UI
             _panel.BtnPrivacyPolicy.onClick.RemoveListener(HandlePrivacyPolicyClick);
         }
 
+        void Start()
+        {
+            ApplyAllSettings();
+            _panel.Setup();
+        }
+
         private void HandlePopupShow()
         {
             _panel.Setup();
@@ -64,27 +70,28 @@ namespace LabDiner.GameSetting.UI
         private void HandleMusicToggle(bool isOn)
         {
             GameSettingVariables.Music = isOn ? 1.0f : 0.0f;
-            //TODO: Thêm logic để bật/tắt nhạc trong game nếu cần
+
+            ApplyMusicChange(isOn);
         }
 
         private void HandleEffectToggle(bool isOn)
         {
             GameSettingVariables.Effect = isOn ? 1.0f : 0.0f;
-            //TODO: Thêm logic để bật/tắt hiệu ứng âm thanh trong game nếu cần
+
+            ApplyEffectChange(isOn);
         }
 
         private void HandleHapticToggle(bool isOn)
         {
             GameSettingVariables.Haptic = isOn ? 1.0f : 0.0f;
 
-            #if UNITY_ANDROID || UNITY_IOS
-            if(isOn) Handheld.Vibrate();
-            #endif
+            ApplyHapticChange(isOn);
         }
 
         private void HandleResetToDefault()
         {
             GameSettingVariables.ResetToDefault();
+            ApplyAllSettings();
             _panel.Setup();
         }
 
@@ -92,6 +99,8 @@ namespace LabDiner.GameSetting.UI
         {
             string selectedLanguage = GetLanguageFromDropdownIndex(index);
             GameSettingVariables.Language = selectedLanguage;
+            
+            ApplyLanguageChange(selectedLanguage);
         }
 
         private void HandleFPSChange(int index)
@@ -99,9 +108,7 @@ namespace LabDiner.GameSetting.UI
             int selectedFPS = GetFPSFromDropdownIndex(index);
             GameSettingVariables.FPS = selectedFPS;
 
-            //Apply
-            QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = selectedFPS;
+            ApplyFPSChange(selectedFPS);
         }
 
         private void HandleTermsOfServiceClick()
@@ -113,6 +120,44 @@ namespace LabDiner.GameSetting.UI
         {
             Application.OpenURL("https://www.example.com/privacy-policy");
         }
+        #endregion
+
+        #region Apply Changes
+        private void ApplyAllSettings()
+        {
+            ApplyMusicChange(GameSettingVariables.Music > 0);
+            ApplyEffectChange(GameSettingVariables.Effect > 0);
+            ApplyHapticChange(GameSettingVariables.Haptic > 0);
+            ApplyLanguageChange(GameSettingVariables.Language);
+            ApplyFPSChange(GameSettingVariables.FPS);
+        }
+
+        private void ApplyMusicChange(bool isOn)
+        {
+            //TODO: Thêm logic để bật/tắt âm nhạc trong game nếu cần
+        }
+
+        private void ApplyEffectChange(bool isOn)
+        {
+            //TODO: Thêm logic để bật/tắt hiệu ứng âm thanh trong game nếu cần
+        }
+
+        private void ApplyHapticChange(bool isOn)
+        {
+            //TODO: Thêm logic để bật/tắt rung điện thoại trong game nếu cần
+        }
+        
+        private void ApplyLanguageChange(string language)
+        {
+            //TODO: Thêm logic để áp dụng thay đổi ngôn ngữ trong game nếu cần
+        }
+
+        private void ApplyFPSChange(int fps)
+        {
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = fps;
+        }
+
         #endregion
 
         #region Helper Methods
