@@ -22,10 +22,10 @@ namespace LabDiner.Restaurant.Pooling
         /// <summary>
         /// API để kích hoạt hiệu ứng bay
         /// </summary>
-        public void SpawnFlyEffect(CurrencyType currencyType, Vector3 startPos, Vector3 targetPos, int amount, Action onOneGemReached = null)
+        public void SpawnFlyEffect(CurrencyType currencyType, Vector3 startPos, Vector3 targetPos, double amount, Action onOneGemReached = null)
         {
             // Giới hạn số lượng hiển thị để không tràn màn hình (Visual only)
-            int visualAmount = Mathf.Min(amount, 15);
+            int visualAmount = Mathf.Min((int)amount, 15);
 
             for (int i = 0; i < visualAmount; i++)
             {
