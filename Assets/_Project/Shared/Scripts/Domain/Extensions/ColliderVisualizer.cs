@@ -21,7 +21,7 @@ namespace LabDiner.LevelSystem
 
     private PolygonCollider2D polyCollider;
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         // Chỉ chạy trong Editor
         #if UNITY_EDITOR

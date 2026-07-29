@@ -100,7 +100,7 @@ namespace LabDiner.Restaurant
             transform.position = new Vector3(pos.x, smoothedY, pos.z);
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             Camera cam = GetComponent<Camera>();
             if (cam == null) cam = Camera.main;

@@ -123,7 +123,7 @@ namespace LabDiner.Restaurant.UI
         [SerializeField] private bool _showGizmos = true;
         [SerializeField] private float _gizmoLineLength = 1f;
         [SerializeField] private float _gizmoArrowSize = 0.2f;
-        void OnDrawGizmos()
+        void OnDrawGizmosSelected()
         {
             if (!_showGizmos) return;
 

@@ -33,7 +33,7 @@ namespace LabDiner.Restaurant.Environment
         }
 
         #if UNITY_EDITOR
-        void OnDrawGizmos()
+        void OnDrawGizmosSelected()
         {
                 // 1. Vẽ vị trí ghế (Seat Position) - Dạng hình chữ nhật
                 Gizmos.color = IsOccupied ? Color.red : Color.green;

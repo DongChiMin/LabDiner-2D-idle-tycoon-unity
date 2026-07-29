@@ -12,7 +12,7 @@ namespace LabDiner.Restaurant.Environment
         [SerializeField] private Vector3 _spawnGizmoSize = Vector3.one * 1.5f;
         [SerializeField] private Vector3 _workGizmoSize = new Vector3(1.5f, 1.2f, 0.1f);
 
-        void OnDrawGizmos()
+        void OnDrawGizmosSelected()
         {
             if (spawnPos == null || workPos == null)
             {
