@@ -8,8 +8,11 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.Manager
 {
-    public partial class StaffSpawner : MonoBehaviour, IStaffUnboxer, ILevelInitializable
+    public partial class StaffSpawner : MonoBehaviour, IStaffUnboxer, ILevelInitializable, IGizmosDrawable
     {
+    [SerializeField] private bool _showGizmos = true;
+    public bool ShowGizmos { get => _showGizmos; set => _showGizmos = value; }
+
         [Header("Events")]
         [SerializeField] private StaffUpgradeEvent _onUpgradeStaff;
 

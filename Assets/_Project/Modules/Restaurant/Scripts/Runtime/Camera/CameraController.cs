@@ -8,8 +8,11 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant
 {
-    public class CameraController : Singleton<CameraController>, ILevelInitializable
+    public class CameraController : Singleton<CameraController>, ILevelInitializable, IGizmosDrawable
     {
+        [SerializeField] private bool _showGizmos = true;
+        public bool ShowGizmos { get => _showGizmos; set => _showGizmos = value; }
+
         [Header("Events")]
         [SerializeField] private LevelConfigEvent _onLevelInit;
 
@@ -100,8 +103,10 @@ namespace LabDiner.Restaurant
             transform.position = new Vector3(pos.x, smoothedY, pos.z);
         }
 
-        private void OnDrawGizmosSelected()
+        private void OnDrawGizmos()
         {
+            if(!_showGizmos) return;
+
             Camera cam = GetComponent<Camera>();
             if (cam == null) cam = Camera.main;
             if (cam == null || !cam.orthographic) return;

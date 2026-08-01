@@ -2,8 +2,11 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.Environment
 {
-    public class StationPosition : MonoBehaviour
+    public class StationPosition : MonoBehaviour, IGizmosDrawable
     {
+        [SerializeField] private bool _showGizmos = true;
+        public bool ShowGizmos { get => _showGizmos; set => _showGizmos = value; }
+
         [Header("References")]
         public Transform spawnPos;
         public Transform workPos;
@@ -12,9 +15,9 @@ namespace LabDiner.Restaurant.Environment
         [SerializeField] private Vector3 _spawnGizmoSize = Vector3.one * 1.5f;
         [SerializeField] private Vector3 _workGizmoSize = new Vector3(1.5f, 1.2f, 0.1f);
 
-        void OnDrawGizmosSelected()
+        void OnDrawGizmos()
         {
-            if (spawnPos == null || workPos == null)
+            if (!_showGizmos || spawnPos == null || workPos == null)
             {
                 return;
             }

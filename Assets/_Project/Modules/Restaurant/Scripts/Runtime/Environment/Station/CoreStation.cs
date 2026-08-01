@@ -245,7 +245,7 @@ namespace LabDiner.Restaurant.Environment
         {
             _currentProfitBuff += value;
             double rawProfit = _baseProfit * Mathf.Pow(_profitMultiplier, _currentLevel - 1);
-            _currentProfit = _currentProfit = Math.Floor(rawProfit * (1+ _currentProfitBuff));
+            _currentProfit = Math.Floor(rawProfit * (1+ _currentProfitBuff));
             OnDataChanged?.Invoke();
         }
 

@@ -1256,6 +1256,7 @@ GameObject:
   - component: {fileID: 571652241901407734}
   - component: {fileID: 8997222582616412512}
   - component: {fileID: 1987055239913936544}
+  - component: {fileID: 2647427431775582837}
   m_Layer: 10
   m_Name: BaseCoreStation
   m_TagString: Untagged
@@ -1413,6 +1414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1e3c322b99bb643b7a579c71ddd2f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showGizmos: 1
   _arrowAlignment: 1
   _stationData: {fileID: 11400000, guid: 71de0ce8923041146bf74047af20e4dd, type: 2}
   _buttonIcon: {fileID: 2586820197320652271}
@@ -1424,9 +1426,25 @@ MonoBehaviour:
   _layoutGroups:
   - {fileID: 6019944185792049714}
   - {fileID: 5003322660325763773}
-  _showGizmos: 1
   _gizmoLineLength: 1
   _gizmoArrowSize: 0.2
+--- !u!114 &2647427431775582837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3062329508670737593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9476a118273716448b736a8e39b200d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _step: 7
+  _orderInStep: 1
+  _elementLabel: "H\u01B0\u1EDBng m\u1EDF UI"
+  _hasUIOffset: 0
+  _uiPlacement: 0
 --- !u!1 &3078991116062238812
 GameObject:
   m_ObjectHideFlags: 0
@@ -2142,6 +2160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ec67d3dd5823f4d96522da12badd8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showGizmos: 1
   spawnPos: {fileID: 6162621665823912480}
   workPos: {fileID: 6137525865187486134}
   _spawnGizmoSize: {x: 1.5, y: 1.5, z: 1.5}
@@ -2249,6 +2268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ec67d3dd5823f4d96522da12badd8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showGizmos: 1
   spawnPos: {fileID: 3014629277086369766}
   workPos: {fileID: 6345583221734826050}
   _spawnGizmoSize: {x: 1.5, y: 1.5, z: 1.5}

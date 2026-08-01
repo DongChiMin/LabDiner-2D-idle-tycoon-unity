@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6229521056814861960}
+  - component: {fileID: 8647441331218227329}
   m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Untagged
@@ -31,6 +32,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1674762528944375241}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8647441331218227329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4242657050056530819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9476a118273716448b736a8e39b200d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _step: 1
+  _orderInStep: 2
+  _elementLabel: "V\u1ECB tr\xED spawn kh\xE1ch"
 --- !u!1 &7583996862649584025
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,6 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e751baf7cd9fc9947a9bf5b3ebfcf521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showGizmos: 1
   _coreStationRuntime: {fileID: 11400000, guid: 014d0306fd640c34d825b497c1c9b9f8, type: 2}
   _onGuestUpgrade: {fileID: 11400000, guid: 27a6a35ae2a54ce489278fe22e512cf6, type: 2}
   _guestPrefab: {fileID: 2867363319320583959, guid: c542f46721b0ba844af99a51114b3639, type: 3}
@@ -91,6 +108,9 @@ MonoBehaviour:
   _maxUniqueStations: 2
   _maxTotalQty: 10
   _guests: []
+  _gizmoSpawnColor: {r: 0, g: 1, b: 0, a: 1}
+  _gizmosExitColor: {r: 1, g: 0, b: 0, a: 1}
+  _restPointDimensions: {x: 0.6, y: 1.2, z: 0.1}
 --- !u!114 &2528222497265349335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 724997400809163468}
+  - component: {fileID: 3613830183399366712}
   m_Layer: 0
   m_Name: ExitPoint
   m_TagString: Untagged
@@ -138,3 +159,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1674762528944375241}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3613830183399366712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7892943937346007424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9476a118273716448b736a8e39b200d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _step: 1
+  _orderInStep: 3
+  _elementLabel: "V\u1ECB tr\xED kh\xE1ch exit "

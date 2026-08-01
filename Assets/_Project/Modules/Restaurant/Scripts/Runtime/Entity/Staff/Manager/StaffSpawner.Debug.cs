@@ -7,11 +7,10 @@ namespace LabDiner.Restaurant.Manager
     public partial class StaffSpawner : MonoBehaviour, IStaffUnboxer
     {
         [Header("[DEBUG]")]
-        [SerializeField] private bool _showGizmos = true;
         [SerializeField] private Color _gizmoColor = Color.cyan;
         [SerializeField] private Vector3 _restPointDimensions = new Vector3(0.6f, 1.2f, 0.1f); // Hình vuông cao cao
 
-        protected virtual void OnDrawGizmosSelected()
+        protected virtual void OnDrawGizmos()
         {
             if (!_showGizmos || _restPositions == null) return;
 

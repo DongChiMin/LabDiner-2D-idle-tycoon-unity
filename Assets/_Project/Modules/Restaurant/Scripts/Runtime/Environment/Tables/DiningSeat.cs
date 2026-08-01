@@ -7,8 +7,11 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.Environment
 {
-    public partial class DiningSeat : MonoBehaviour
+    public partial class DiningSeat : MonoBehaviour, IGizmosDrawable
     {
+        [SerializeField] private bool _showGizmos = true;
+        public bool ShowGizmos { get => _showGizmos; set => _showGizmos = value; }
+
         public bool IsOccupied => _occupiedGuest != null;
         public Transform WorkPos => _workPos;
         public Transform SitPos => _sitPos;
@@ -33,8 +36,10 @@ namespace LabDiner.Restaurant.Environment
         }
 
         #if UNITY_EDITOR
-        void OnDrawGizmosSelected()
+        void OnDrawGizmos()
         {
+            if(!_showGizmos) return;
+
                 // 1. Vẽ vị trí ghế (Seat Position) - Dạng hình chữ nhật
                 Gizmos.color = IsOccupied ? Color.red : Color.green;
                 Vector3 seatCenter = _sitPos.transform.position + _sitPosSize.y * 0.5f * Vector3.up; // Center của ghế được offset lên một nửa chiều cao

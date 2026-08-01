@@ -13,8 +13,11 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.Manager
 {
-    public partial class GuestSpawner : MonoBehaviour, ILevelInitializable
+    public partial class GuestSpawner : MonoBehaviour, ILevelInitializable, IGizmosDrawable
     {
+        [SerializeField] private bool _showGizmos = true;
+        public bool ShowGizmos { get => _showGizmos; set => _showGizmos = value; }
+
         [SerializeField] private CoreStationRuntimeSO _coreStationRuntime;
         [Header("Upgrade Events")]
         [SerializeField] private GuestUpgradeEvent _onGuestUpgrade;

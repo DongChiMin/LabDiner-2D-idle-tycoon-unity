@@ -9,8 +9,11 @@ namespace LabDiner.LevelSystem
 
     [ExecuteAlways] // Chạy cả trong chế độ Edit Mode để Designer thấy ngay kết quả
     [RequireComponent(typeof(PolygonCollider2D))]
-    public class ColliderVisualizer : MonoBehaviour
+    public class ColliderVisualizer : MonoBehaviour, IGizmosDrawable
     {
+        [SerializeField] private bool _showGizmos = true;
+        public bool ShowGizmos { get => _showGizmos; set => _showGizmos = value; }
+    
         [Header("Gizmos Settings")]
     [Tooltip("Màu sắc vùng bên trong đa giác")]
     public Color zoneColor = new Color(0f, 0.8f, 1f, 0.25f);
@@ -21,8 +24,10 @@ namespace LabDiner.LevelSystem
 
     private PolygonCollider2D polyCollider;
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
+        if(!_showGizmos) return;
+
         // Chỉ chạy trong Editor
         #if UNITY_EDITOR
         if (polyCollider == null)

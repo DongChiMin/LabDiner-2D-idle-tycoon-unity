@@ -3,8 +3,11 @@ using LabDiner.Restaurant.SO;
 using UnityEditor;
 using UnityEngine;
 
-public class BaseTutorialAnchor : MonoBehaviour
+public class BaseTutorialAnchor : MonoBehaviour, IGizmosDrawable
 {
+    [SerializeField] private bool _showGizmos = true;
+    public bool ShowGizmos { get => _showGizmos; set => _showGizmos = value; }
+
     public TutorialSO TutorialSO => _tutorialSO;
     public Vector2 FocusSize => focusSize;
     public Vector2 FocusPosition => (Vector2) Camera.main.WorldToScreenPoint(_focusTarget.position) + focusPositionOffset;
@@ -50,9 +53,11 @@ public class BaseTutorialAnchor : MonoBehaviour
 
 
 //Vẽ vùng focus
-void OnDrawGizmosSelected()
+void OnDrawGizmos()
     {
         if (!debugDrawGizmos) return;
+
+        if(!_showGizmos) return;
 
 #if UNITY_EDITOR
         // Lấy camera hiện tại đang dùng để render Scene view hoặc Game view

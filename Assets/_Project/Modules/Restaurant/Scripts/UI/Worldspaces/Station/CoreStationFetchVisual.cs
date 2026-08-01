@@ -18,8 +18,11 @@ namespace LabDiner.Restaurant.UI
         Right
     }
 
-    public class CoreStationFetchVisual : MonoBehaviour
+    public class CoreStationFetchVisual : MonoBehaviour, IGizmosDrawable
     {
+        [SerializeField] private bool _showGizmos = true;
+        public bool ShowGizmos { get => _showGizmos; set => _showGizmos = value; }
+
         [Header("Settings")]
         [SerializeField] private ArrowAlignment _arrowAlignment;
         [SerializeField] private CoreStationSO _stationData;
@@ -120,10 +123,9 @@ namespace LabDiner.Restaurant.UI
         }
 
         [Header("Gizmos Settings")]
-        [SerializeField] private bool _showGizmos = true;
         [SerializeField] private float _gizmoLineLength = 1f;
         [SerializeField] private float _gizmoArrowSize = 0.2f;
-        void OnDrawGizmosSelected()
+        void OnDrawGizmos()
         {
             if (!_showGizmos) return;
 

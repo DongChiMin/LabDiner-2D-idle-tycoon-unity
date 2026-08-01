@@ -21,12 +21,11 @@ namespace LabDiner.Restaurant.Manager
         }
 
         [Header("[DEBUG]")]
-        [SerializeField] private bool _showGizmos = true;
         [SerializeField] private Color _gizmoSpawnColor = Color.green;
         [SerializeField] private Color _gizmosExitColor = Color.red;
         [SerializeField] private Vector3 _restPointDimensions = new Vector3(0.6f, 1.2f, 0.1f); // Hình vuông cao cao
 
-        protected virtual void OnDrawGizmosSelected()
+        protected virtual void OnDrawGizmos()
         {
             if (!_showGizmos || _spawnPoint == null) return;
 
