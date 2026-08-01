@@ -24,6 +24,7 @@ namespace LabDiner.Restaurant.Humanoid
 
         [Header("Events")]
         [SerializeField] private GuestEvent _onGuestLeaveAngry;
+        [SerializeField] private CoreStationEvent _onGuestReceiveFood;  //thông báo khách nhận đc món gì
 
         [Header("Context")]
         [SerializeField] private GuestAI _guestAI;
@@ -57,6 +58,7 @@ namespace LabDiner.Restaurant.Humanoid
         public void ReceiveFood(Restaurant.Workflow.CookingTask cookingTask)
         {
             _guestLogic.ReceiveFood(cookingTask);
+            _onGuestReceiveFood.Raise(cookingTask.CoreStation);
         }
 
         public void LeaveAngry()

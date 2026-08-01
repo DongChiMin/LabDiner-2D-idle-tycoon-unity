@@ -1,77 +1,77 @@
-using System.Collections.Generic;
-using System.Linq;
-using LabDiner.Restaurant.Environment;
-using LabDiner.Restaurant.Manager;
-using LabDiner.Shared.Event;
-using UnityEngine;
+// using System.Collections.Generic;
+// using System.Linq;
+// using LabDiner.Restaurant.Environment;
+// using LabDiner.Restaurant.Manager;
+// using LabDiner.Shared.Event;
+// using UnityEngine;
 
-namespace LabDiner.Restaurant.SO
-{
-    public enum FinalMissionType
-    {
-        AllCoreStationLevel, // Tổng level của tất cả core Station đạt mốc nhất định nào đó
-    }
+// namespace LabDiner.Restaurant.SO
+// {
+//     public enum FinalMissionType
+//     {
+//         AllCoreStationLevel, // Tổng level của tất cả core Station đạt mốc nhất định nào đó
+//     }
 
-    /// <summary>
-    /// Nhiệm vụ yêu cầu nâng cấp level của tất cả core Station trong level lên một mốc nhất định nào đó (ví dụ: tổng level của tất cả core Station đạt 50)
-    /// Value của nhiệm vụ theo dạng %
-    /// </summary>
-    [CreateAssetMenu(fileName = "New Final Level Mission", menuName = "Game/Missions/Final Level Mission")]
-    public class FinalLevelMissionSO : BaseMissionSO
-    {
-        [Header("Target")]
-        public FinalMissionType MissionType;
-        [SerializeField] private CoreStationRuntimeSO _coreStationRuntimeSO;
+//     /// <summary>
+//     /// Nhiệm vụ yêu cầu nâng cấp level của tất cả core Station trong level lên một mốc nhất định nào đó (ví dụ: tổng level của tất cả core Station đạt 50)
+//     /// Value của nhiệm vụ theo dạng %
+//     /// </summary>
+//     [CreateAssetMenu(fileName = "New Final Level Mission", menuName = "Game/Missions/Final Level Mission")]
+//     public class FinalLevelMissionSO : BaseMissionSO
+//     {
+//         [Header("Target")]
+//         public FinalMissionType MissionType;
+//         [SerializeField] private CoreStationRuntimeSO _coreStationRuntimeSO;
 
-        void OnEnable()
-        {
-            if(_coreStationRuntimeSO != null)
-            {
-                _coreStationRuntimeSO.OnValueChanged += HandleCoreStationLevelChanged;
-            }
-        }
+//         void OnEnable()
+//         {
+//             if(_coreStationRuntimeSO != null)
+//             {
+//                 _coreStationRuntimeSO.OnValueChanged += HandleCoreStationLevelChanged;
+//             }
+//         }
 
-        void OnDisable()
-        {
-            if(_coreStationRuntimeSO != null)
-            {
-                _coreStationRuntimeSO.OnValueChanged -= HandleCoreStationLevelChanged;
-            }
-        }
+//         void OnDisable()
+//         {
+//             if(_coreStationRuntimeSO != null)
+//             {
+//                 _coreStationRuntimeSO.OnValueChanged -= HandleCoreStationLevelChanged;
+//             }
+//         }
 
-        public override float GetCurrentValue()
-        {
-            switch (MissionType)
-            {
-                case FinalMissionType.AllCoreStationLevel:
-                    List<CoreStation> coreStations = _coreStationRuntimeSO.CoreStations;
+//         public override float GetCurrentValue()
+//         {
+//             switch (MissionType)
+//             {
+//                 case FinalMissionType.AllCoreStationLevel:
+//                     List<CoreStation> coreStations = _coreStationRuntimeSO.CoreStations;
 
-                    // Debug.Log("Calculating Final Mission Progress: Total Core Station Levels / Max Possible Levels");
-                    // Debug.Log($"Total Core Station Levels: {coreStations.Sum(s => s.CurrentLevel)}");
-                    // Debug.Log($"Max Possible Levels: {coreStations.Sum(s => s.CoreStationSO.LevelPerStar * s.CoreStationSO.StationStars.Count)}");
+//                     // Debug.Log("Calculating Final Mission Progress: Total Core Station Levels / Max Possible Levels");
+//                     // Debug.Log($"Total Core Station Levels: {coreStations.Sum(s => s.CurrentLevel)}");
+//                     // Debug.Log($"Max Possible Levels: {coreStations.Sum(s => s.CoreStationSO.LevelPerStar * s.CoreStationSO.StationStars.Count)}");
 
-                    int totalCoreStationCurrentLevel = coreStations.Sum(s => s.CurrentLevel);
-                    int totalCoreStationMaxLevel = coreStations.Sum(s => s.CoreStationSO.LevelPerStar * s.CoreStationSO.StationStars.Count);
+//                     int totalCoreStationCurrentLevel = coreStations.Sum(s => s.CurrentLevel);
+//                     int totalCoreStationMaxLevel = coreStations.Sum(s => s.CoreStationSO.LevelPerStar * s.CoreStationSO.StationStars.Count);
 
-                    return totalCoreStationCurrentLevel/(float) totalCoreStationMaxLevel;
-                default:
-                    Debug.LogError("Unsupported Mission Type");
-                    return 0;
-            }
-        }
+//                     return totalCoreStationCurrentLevel/(float) totalCoreStationMaxLevel;
+//                 default:
+//                     Debug.LogError("Unsupported Mission Type");
+//                     return 0;
+//             }
+//         }
 
-        //Mặc định khi tạo SO sẽ để TargetValue là 1 (tức là 100%)
-        protected virtual void Reset()
-        {
-            TargetValue = 1;
-        }
+//         //Mặc định khi tạo SO sẽ để TargetValue là 1 (tức là 100%)
+//         protected virtual void Reset()
+//         {
+//             TargetValue = 1;
+//         }
 
-        private void HandleCoreStationLevelChanged()
-        {
-            if(MissionType == FinalMissionType.AllCoreStationLevel)
-            {
-                OnValueChanged?.Invoke();
-            }
-        }
-    }
-}
+//         private void HandleCoreStationLevelChanged()
+//         {
+//             if(MissionType == FinalMissionType.AllCoreStationLevel)
+//             {
+//                 OnValueChanged?.Invoke();
+//             }
+//         }
+//     }
+// }

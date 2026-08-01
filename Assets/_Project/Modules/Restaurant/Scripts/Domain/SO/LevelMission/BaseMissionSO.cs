@@ -18,6 +18,7 @@ namespace LabDiner.Restaurant.SO
     {
         public string Id => name; // Mặc định ID của mission sẽ là tên của ScriptableObject, đảm bảo tính duy nhất
         public Action OnValueChanged;
+        public Action OnMissionStart;
 
         [Header("Mission Info")]
         public string Title;

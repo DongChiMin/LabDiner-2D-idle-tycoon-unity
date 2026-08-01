@@ -189,7 +189,7 @@ namespace LabDiner.Restaurant.Environment
             if(_currentLevel >= maxLevel)
             {
                 OnMaxLevel?.Invoke(_maxStar);
-                _coreStationRuntimeSO.OnValueChanged?.Invoke();
+                _coreStationRuntimeSO.OnAnyStationChanged?.Invoke();
                 return;
             }
 
@@ -198,7 +198,7 @@ namespace LabDiner.Restaurant.Environment
             if (!isFromLoadProgress)
             {
                 _coinRuntimeData.Add(0);
-                _coreStationRuntimeSO.OnValueChanged?.Invoke();
+                _coreStationRuntimeSO.OnAnyStationChanged?.Invoke();
                 OnDataChanged?.Invoke();
             }
         }
@@ -370,7 +370,7 @@ namespace LabDiner.Restaurant.Environment
             }
 
             // Sau khi load xong xuôi toàn bộ level thực tế:
-            _coreStationRuntimeSO.OnValueChanged?.Invoke();
+            _coreStationRuntimeSO.OnAnyStationChanged?.Invoke();
             OnDataChanged?.Invoke();
         }
 

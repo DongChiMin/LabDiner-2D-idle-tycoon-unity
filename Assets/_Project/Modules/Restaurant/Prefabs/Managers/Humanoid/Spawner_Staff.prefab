@@ -173,7 +173,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e371ae3b66aa8f449b96cc050a1144a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showGizmos: 1
   _onUpgradeStaff: {fileID: 11400000, guid: 8594b9a565217f748a4b682fae331de3, type: 2}
+  _onStaffSpawn: {fileID: 11400000, guid: 2c7cf855e3d8a084ba908e69a947b474, type: 2}
+  _onStaffListClear: {fileID: 11400000, guid: b00ef5aafa79d2f48bbcee4ff91217ff, type: 2}
   _prefabRepository:
   - {fileID: 695742487319327825, guid: 0a4ae17815a80e54fa0465e3785c0777, type: 3}
   - {fileID: 3054657543311258127, guid: ec12fb9c391ef4947ab78fce0c04351c, type: 3}
@@ -185,7 +188,6 @@ MonoBehaviour:
   - {fileID: 6281633305823398005}
   _spawnInBox: 1
   _spawnedStaffs: []
-  _showGizmos: 1
   _gizmoColor: {r: 0, g: 1, b: 1, a: 1}
   _restPointDimensions: {x: 1.5, y: 2.25, z: 0.1}
 --- !u!1 &8694703192594328721

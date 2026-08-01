@@ -14,12 +14,14 @@ namespace LabDiner.Restaurant.Environment
     {
         [SerializeField] private TextMeshProUGUI _tipAmountText;
         [SerializeField] private DoubleRuntimeSO _coinData;
+        [SerializeField] private DoubleEvent _onTipReceived;
         private double _tipAmount;
 
         public void OnInteract()
         {
             _coinData.Add(_tipAmount);
             PoolContext.Instance.CoinTipPool.ReturnToPool(this);
+            _onTipReceived?.Raise(_tipAmount);
         }
 
         public bool CanInteract()

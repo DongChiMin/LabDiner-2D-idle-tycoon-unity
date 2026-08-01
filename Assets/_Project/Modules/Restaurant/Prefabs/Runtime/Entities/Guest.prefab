@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onGuestLeaveAngry: {fileID: 11400000, guid: f742d52c9cabb064fb2b4824bab06a08, type: 2}
+  _onGuestReceiveFood: {fileID: 11400000, guid: 0f2324de9061c294291ce6eb4d892b90, type: 2}
   _guestAI: {fileID: 2867363319320583959}
   _guestBehavior: {fileID: 1362104788878941351}
   _guestMover: {fileID: 6383195246782047440}

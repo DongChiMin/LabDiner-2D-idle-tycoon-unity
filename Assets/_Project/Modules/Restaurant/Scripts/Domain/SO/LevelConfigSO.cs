@@ -43,23 +43,23 @@ namespace LabDiner.Restaurant.SO
             FetchGuestQuantity();
 
             //Đảm bảo value nhiệm vụ upgrade ko vượt quá số lượng upgrade có thể có trong level
-            foreach(var mission in AvailableMissions)
-            {
-                if(mission is UpgradeMissionSO upgradeMission)
-                {
-                    //Kiểm tra nếu nhiệm vụ có target upgrade cụ thể, thì upgrade đó phải nằm trong danh sách AvailableUpgrades của level
-                    if(upgradeMission.TargetUpgrade != null && !AvailableUpgrades.Contains(upgradeMission.TargetUpgrade))
-                    {
-                        Debug.LogWarning($"Mission {upgradeMission.name} has target upgrade {upgradeMission.TargetUpgrade.name} that is not in AvailableUpgrades list. Please add it to the list or clear the target.");
-                    }
+            // foreach(var mission in AvailableMissions)
+            // {
+            //     if(mission is UpgradeMissionSO upgradeMission)
+            //     {
+            //         //Kiểm tra nếu nhiệm vụ có target upgrade cụ thể, thì upgrade đó phải nằm trong danh sách AvailableUpgrades của level
+            //         if(upgradeMission.TargetUpgrade != null && !AvailableUpgrades.Contains(upgradeMission.TargetUpgrade))
+            //         {
+            //             Debug.LogWarning($"Mission {upgradeMission.name} has target upgrade {upgradeMission.TargetUpgrade.name} that is not in AvailableUpgrades list. Please add it to the list or clear the target.");
+            //         }
 
-                    //Kiểm tra tổng số upgrade nhỏ hơn missionValue 
-                    if(upgradeMission.TargetUpgrade == null && upgradeMission.TargetValue > AvailableUpgrades.Count)
-                    {
-                        Debug.LogWarning($"Mission {upgradeMission.name} has mission value {upgradeMission.TargetValue} that exceeds the total number of available upgrades {AvailableUpgrades.Count}. Please adjust the mission value.");
-                    }
-                }
-            }
+            //         //Kiểm tra tổng số upgrade nhỏ hơn missionValue 
+            //         if(upgradeMission.TargetUpgrade == null && upgradeMission.TargetValue > AvailableUpgrades.Count)
+            //         {
+            //             Debug.LogWarning($"Mission {upgradeMission.name} has mission value {upgradeMission.TargetValue} that exceeds the total number of available upgrades {AvailableUpgrades.Count}. Please adjust the mission value.");
+            //         }
+            //     }
+            // }
         }
 
         private int FetchGuestQuantity()

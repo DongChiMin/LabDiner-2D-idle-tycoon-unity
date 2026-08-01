@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using LabDiner.Restaurant.Environment;
 using LabDiner.Restaurant.Manager;
 using LabDiner.Shared.Event;
 using UnityEngine;
@@ -7,7 +9,9 @@ namespace LabDiner.Restaurant.SO
 {
     public enum CoreStationMissionType
     {
-        UpgradeCoreStation,      // Nâng cấp core station a đến level b
+        UpgradeStation,      // Nâng cấp core station a đến level b
+        UnlockStation,      // Mở khóa core station a
+        MaxLevelAllStation  // Tất cả core station đạt max level
     }
 
     /// <summary>
@@ -27,7 +31,7 @@ namespace LabDiner.Restaurant.SO
         {
             if(coreStationRuntimeSO != null)
             {
-                coreStationRuntimeSO.OnValueChanged += HandleValueChanged;
+                coreStationRuntimeSO.OnAnyStationChanged += HandleValueChanged;
             }
         }
 
@@ -35,7 +39,7 @@ namespace LabDiner.Restaurant.SO
         {
             if (coreStationRuntimeSO != null)
             {
-                coreStationRuntimeSO.OnValueChanged -= HandleValueChanged;
+                coreStationRuntimeSO.OnAnyStationChanged -= HandleValueChanged;
             }
         }
 
@@ -48,15 +52,41 @@ namespace LabDiner.Restaurant.SO
         {
             switch (MissionType)
             {
-                case CoreStationMissionType.UpgradeCoreStation:
+                case CoreStationMissionType.UpgradeStation:
                     //Lấy level hiện tại của core station tương ứng từ CoreStationRuntimeSO
                     int currentLevel = coreStationRuntimeSO.GetCoreStationLevel(TargetCoreStation);
                     return currentLevel;
+                case CoreStationMissionType.UnlockStation:
+                    // Kiểm tra xem core station có được mở khóa không
+                    return coreStationRuntimeSO.IsCoreStationUnlocked(TargetCoreStation) ? 1 : 0;
+                case CoreStationMissionType.MaxLevelAllStation:
+                    List<CoreStation> coreStations = coreStationRuntimeSO.CoreStations;
+
+                    int totalCoreStationCurrentLevel = coreStations.Sum(s => s.CurrentLevel);
+                    int totalCoreStationMaxLevel = coreStations.Sum(s => s.CoreStationSO.LevelPerStar * s.CoreStationSO.StationStars.Count);
+
+                    return totalCoreStationCurrentLevel/(float) totalCoreStationMaxLevel;
                 default:
                     Debug.LogError("Unsupported Mission Type");
                     return 0;
             }
             
         }
+
+#if UNITY_EDITOR
+        void OnValidate()
+        {
+            switch(MissionType)
+            {
+                case CoreStationMissionType.UnlockStation:
+                    TargetValue = 0;
+                    break;
+                case CoreStationMissionType.MaxLevelAllStation:
+                    TargetValue = 0;
+                    TargetCoreStation = null;
+                    break;
+            }
+        }
+        #endif
     }
 }

@@ -67,6 +67,7 @@ namespace LabDiner.Restaurant.UI
             {
                 if(_currentMission != null) _currentMission.OnValueChanged -= HandleProgressUpdate;
                 _currentMission = _remainingMissions[0];
+                _currentMission.OnMissionStart?.Invoke();
                 _currentMission.OnValueChanged += HandleProgressUpdate;
                 _remainingMissions.RemoveAt(0);
                 _missionHUD.ToggleProgressText(true);
@@ -93,7 +94,6 @@ namespace LabDiner.Restaurant.UI
         {
             if (_currentMission == null) return;
 
-            // Logic tracking nhiệm vụ cuối (nếu là dạng AllCoreStation)
             if (_isFinalMission && _currentMission.IsCompleted())
             {
                 _missionHUD.UpdateProgress();

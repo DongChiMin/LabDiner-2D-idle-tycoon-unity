@@ -12,8 +12,8 @@ namespace LabDiner.Restaurant.SO
     [CreateAssetMenu(fileName = "CoreStationRuntimeSet", menuName = "SO/Runtime/CoreStation")]
     public class CoreStationRuntimeSO : ScriptableObject
     {
-        //Được gọi khi có trạm bất kỳ được cập nhật
-        public Action OnValueChanged;
+        //Được gọi khi có trạm bất kỳ được cập nhật level
+        public Action OnAnyStationChanged;
 
         // Danh sách CoreStation có trên level, được quản lý bởi CoreStationManager
         public List<CoreStation> CoreStations => coreStations;
@@ -35,6 +35,12 @@ namespace LabDiner.Restaurant.SO
         {
             var station = coreStations.Find(s => s.CoreStationSO == coreStationSO);
             return station != null ? station.CurrentLevel : 0;
+        }
+
+        public bool IsCoreStationUnlocked(CoreStationSO coreStationSO)
+        {
+            var station = coreStations.Find(s => s.CoreStationSO == coreStationSO);
+            return station != null && station.IsUnlocked;
         }
 
         /// <summary>
