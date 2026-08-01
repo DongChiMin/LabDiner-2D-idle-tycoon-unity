@@ -24,9 +24,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5e74207989c443c4097488e7925767ad, type: 2}
   - {fileID: 11400000, guid: bf3b90d994c7cff438a7615474cb9059, type: 2}
   AvailableMissions:
-  - {fileID: 11400000, guid: 92bbddd981cb49c4489e7ede1876fc78, type: 2}
+  - {fileID: 11400000, guid: 59cf129eda947b843bc63977123f0e7e, type: 2}
   - {fileID: 11400000, guid: 0e1840ab8fa35674abcea46df69668eb, type: 2}
-  - {fileID: 11400000, guid: c1279d1ef45aea24d90cae73c7b1c2e3, type: 2}
+  - {fileID: 11400000, guid: 92bbddd981cb49c4489e7ede1876fc78, type: 2}
+  - {fileID: 11400000, guid: bbdab5781cff236459f00171691c9727, type: 2}
   WaitingLine: 0
   InitialStaffs:
   - {fileID: 3054657543311258127, guid: ec12fb9c391ef4947ab78fce0c04351c, type: 3}

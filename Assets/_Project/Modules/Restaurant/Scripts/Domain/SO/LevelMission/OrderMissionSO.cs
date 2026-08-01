@@ -94,8 +94,9 @@ namespace LabDiner.Restaurant.SO
         }
 
 #if UNITY_EDITOR
-        void OnValidate()
+        protected override void OnValidate()
         {
+            base.OnValidate();
             if(MissionType == OrderMissionType.SellQuantityFromAllStations)
             {
                 TargetCoreStation = null; // Không cần target core station khi mission type là SellQuantityFromAllStations

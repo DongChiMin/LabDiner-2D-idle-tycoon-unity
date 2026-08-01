@@ -74,8 +74,9 @@ namespace LabDiner.Restaurant.SO
         }
 
 #if UNITY_EDITOR
-        void OnValidate()
+        protected override void OnValidate()
         {
+            base.OnValidate();
             switch(MissionType)
             {
                 case CoreStationMissionType.UnlockStation:

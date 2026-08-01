@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0347c7e512574ac4c957b74f526c9621, type: 3}
-  m_Name: 1_3
+  m_Name: Collect tip_20
   m_EditorClassIdentifier: 
   Title: Collect tip
   MissionIcon: {fileID: 0}
