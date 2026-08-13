@@ -13,7 +13,18 @@ MonoBehaviour:
   m_Name: TaskRuntimeSet
   m_EditorClassIdentifier: 
   _filterType: 0
-  _viewingTasks: []
+  _viewingTasks:
+  - rid: 8779595147370823797
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 8779595147370823797
+      type: {class: ServingTask, ns: LabDiner.Restaurant.Workflow, asm: LabDiner.Restaurant}
+      data:
+        _type: 0
+        _location: {fileID: 0}
+        _isAssigned: 1
+        _order:
+          OrderBy: {fileID: 0}
+          Profit: 0
+          IsServed: 0

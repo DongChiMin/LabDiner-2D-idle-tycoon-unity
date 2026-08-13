@@ -53,6 +53,12 @@ namespace LabDiner.Restaurant.SO
             return null;
         }
 
+        public void Clear()
+        {
+            _taskQueues.Clear();
+            Debug_FetchData();
+        }
+
         partial void Debug_FetchData();
     }
 }

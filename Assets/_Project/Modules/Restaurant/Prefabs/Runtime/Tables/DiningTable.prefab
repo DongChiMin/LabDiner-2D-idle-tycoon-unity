@@ -201,6 +201,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1611938600071350114, guid: b2daa3c3a6847b04ca23b94c39f7fad8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 3906446568473829134, guid: b2daa3c3a6847b04ca23b94c39f7fad8, type: 3}
       propertyPath: m_Name
       value: DiningSeat (2)
@@ -279,6 +283,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1611938600071350114, guid: b2daa3c3a6847b04ca23b94c39f7fad8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 3906446568473829134, guid: b2daa3c3a6847b04ca23b94c39f7fad8, type: 3}
       propertyPath: m_Name
       value: DiningSeat
@@ -352,6 +360,10 @@ PrefabInstance:
     - target: {fileID: 576389216456677995, guid: b2daa3c3a6847b04ca23b94c39f7fad8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1611938600071350114, guid: b2daa3c3a6847b04ca23b94c39f7fad8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 3906446568473829134, guid: b2daa3c3a6847b04ca23b94c39f7fad8, type: 3}
       propertyPath: m_Name
