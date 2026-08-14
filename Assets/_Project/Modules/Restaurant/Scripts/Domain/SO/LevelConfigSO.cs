@@ -6,6 +6,13 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.SO
 {
+    [Serializable]
+    public struct InitialStaffQuantity
+    {
+        public StaffType StaffType; 
+        public int Quantity;
+    }
+
     [CreateAssetMenu(fileName = "Level Config", menuName = "Game/Level Config")]
     public class LevelConfigSO : ScriptableObject
     {
@@ -22,7 +29,7 @@ namespace LabDiner.Restaurant.SO
 
         [Header("Feature Settings")]
         public bool WaitingLine;
-        public List<Staff> InitialStaffs;
+        public List<InitialStaffQuantity> InitialStaffs;
         public double InitialMoney = 10;
         public int InitialGuestQuantity = 2;
 

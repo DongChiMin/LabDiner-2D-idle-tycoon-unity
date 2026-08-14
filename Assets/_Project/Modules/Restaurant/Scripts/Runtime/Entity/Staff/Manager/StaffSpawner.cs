@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using LabDiner.LevelSystem.Domain;
 using LabDiner.Restaurant.Event;
 using LabDiner.Restaurant.Interface;
 using LabDiner.Restaurant.Pooling;
@@ -8,10 +9,11 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.Manager
 {
-    public partial class StaffSpawner : MonoBehaviour, IStaffUnboxer, ILevelInitializable, IGizmosDrawable
+    public class StaffSpawner : MonoBehaviour, IStaffUnboxer, ILevelInitializable, ILevelRebuildable
     {
-        [SerializeField] private bool _showGizmos = true;
-        public bool ShowGizmos { get => _showGizmos; set => _showGizmos = value; }
+
+        [Header("Data")]
+        [SerializeField] private StaffPrefabRepository _staffRepository;
 
         [Header("Events")]
         [SerializeField] private StaffUpgradeEvent _onUpgradeStaff;
@@ -19,11 +21,11 @@ namespace LabDiner.Restaurant.Manager
         [SerializeField] private StaffEvent _onStaffListClear;
 
         [Header("Base Settings")]
-        [SerializeField] private List<Staff> _prefabRepository; // Danh sách prefab nhân viên có thể spawn
-        [SerializeField] private Transform _spawnParent;
-
-        [SerializeField] private List<Transform> _restPositions;
         [SerializeField] private bool _spawnInBox = true;
+
+        [Header("References")]
+        [SerializeField] private StaffRestPosController _restPosController;
+        [SerializeField] private Transform _spawnParent;
 
         [Header("[Runtime]")]
 
@@ -44,12 +46,34 @@ namespace LabDiner.Restaurant.Manager
             _spawnedStaffs.Clear();
             _onStaffListClear?.Raise(null);
 
-
-            foreach (Staff staffPrefab in config.InitialStaffs)
+            
+            foreach (InitialStaffQuantity staffQuantity in config.InitialStaffs)
             {
-                Staff staff = CreateInstance(staffPrefab);
-                staff.gameObject.SetActive(true);
+                //Đọc dữ liệu từ levelConfig xem cần spawn các loại nhân viên nào
+                int quantity = staffQuantity.Quantity;
+                StaffType targetType = staffQuantity.StaffType;
+
+                //Tìm prefab tương ứng với loại nhân viên trong StaffRepository
+                Staff prefab = _staffRepository.GetStaffPrefab(targetType);
+                if (prefab != null)
+                {
+                    //Sinh ra số lượng nhân viên tương ứng
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        Staff staff = CreateInstance(prefab);
+                        staff.gameObject.SetActive(true);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"No prefab found for staff type: {staffQuantity.StaffType}");
+                }
             }
+        }
+
+        public void Rebuild()
+        {
+            _restPosController.Rebuild();
         }
 
         private void HandleUpgradeStaff(StaffUpgradeSO upgradeSO)
@@ -79,8 +103,9 @@ namespace LabDiner.Restaurant.Manager
 
             if (target == StaffType.All)
             {
+                List<Staff> _allPrefabs = _staffRepository.GetAllStaffPrefabs();
                 //Nếu target là All, sinh ra nhân viên cho tất cả các loại trạm
-                foreach (Staff prefab in _prefabRepository)
+                foreach (Staff prefab in _allPrefabs)
                 {
                     List<Staff> staff = CreateInstance(prefab, quantity);
                     staffToSpawn.AddRange(staff);
@@ -88,7 +113,7 @@ namespace LabDiner.Restaurant.Manager
             }
             else
             {
-                Staff prefab = _prefabRepository.Find(p => p.StaffType == target);
+                Staff prefab = _staffRepository.GetStaffPrefab(target);
                 if (prefab != null && prefab.StaffType != StaffType.All)
                 {
                     List<Staff> staff = CreateInstance(prefab, quantity);
@@ -146,17 +171,23 @@ namespace LabDiner.Restaurant.Manager
 
         protected Staff CreateInstance(Staff prefab)
         {
-            int index = _spawnedStaffs.Count;
-            Transform restPoint = _restPositions[index % _restPositions.Count];
+            //Tìm vị trí nghỉ ngơi cho nhân viên mới dựa trên số lượng nhân viên đã spawn và staffType của vị trí đó
+            StaffType staffType = prefab.StaffType;
+            StaffRestPos restPos = _restPosController.GetAvailableRestPos(staffType);
 
-            if (index >= _restPositions.Count)
-                Debug.LogWarning($"Not enough rest positions for {typeof(Staff).Name}!");
+            if(restPos != null)
+            {
+                restPos.SetOccupied(true);
+                Transform restPoint = restPos.transform;
+                Staff staff = Instantiate(prefab, restPoint.position, Quaternion.identity, _spawnParent);
+                staff.RestPosition = restPoint;
+                _spawnedStaffs.Add(staff);
+                _onStaffSpawn?.Raise(staff);
+                return staff;
+            }
 
-            Staff staff = Instantiate(prefab, restPoint.position, Quaternion.identity, _spawnParent);
-            staff.RestPosition = restPoint;
-            _spawnedStaffs.Add(staff);
-            _onStaffSpawn?.Raise(staff);
-            return staff;
+            Debug.LogWarning($"No available rest position for staff type: {staffType}");
+            return null;
         }
 
         public void UnboxStaff(Component staff)

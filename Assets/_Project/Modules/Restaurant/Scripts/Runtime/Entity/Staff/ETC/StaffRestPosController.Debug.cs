@@ -2,11 +2,13 @@
 using LabDiner.Restaurant.Interface;
 using UnityEngine;
 
-namespace LabDiner.Restaurant.Manager
+namespace LabDiner.Restaurant
 {
-    public partial class StaffSpawner : MonoBehaviour, IStaffUnboxer
+    public partial class StaffRestPosController : MonoBehaviour, IGizmosDrawable
     {
-        [Header("[DEBUG]")]
+        [Header("[Gizmos]")]
+        [SerializeField] private bool _showGizmos = true;
+        public bool ShowGizmos { get => _showGizmos; set => _showGizmos = value; }
         [SerializeField] private Color _gizmoColor = Color.cyan;
         [SerializeField] private Vector3 _restPointDimensions = new Vector3(0.6f, 1.2f, 0.1f); // Hình vuông cao cao
 
@@ -20,7 +22,7 @@ namespace LabDiner.Restaurant.Manager
             {
                 if (_restPositions[i] == null) continue;
 
-                Vector3 pos = _restPositions[i].position;
+                Vector3 pos = _restPositions[i].transform.position;
 
                 // Vẽ hình hộp đứng (đại diện cho vị trí nhân viên đứng nghỉ)
                 // Center được offset lên một nửa chiều cao để hình nằm trên mặt sàn
@@ -31,9 +33,16 @@ namespace LabDiner.Restaurant.Manager
                 Gizmos.color = _gizmoColor;
 
                 // Ghi số thứ tự điểm nghỉ (tùy chọn)
-                UnityEditor.Handles.Label(pos + Vector3.up * (_restPointDimensions.y + 0.2f), $"Rest {i}");
+                UnityEditor.Handles.Label(pos + Vector3.up * (_restPointDimensions.y + 0.2f), $"{_restPositions[i].StaffType}");
             }
         }
+
+        #if UNITY_EDITOR
+        void OnValidate()
+        {
+            Rebuild();
+        }
+        #endif
     }
 }
 #endif
