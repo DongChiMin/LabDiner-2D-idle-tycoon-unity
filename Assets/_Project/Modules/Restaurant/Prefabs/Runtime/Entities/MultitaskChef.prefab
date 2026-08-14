@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4571446582360611254}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.65, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -118,6 +118,7 @@ MonoBehaviour:
     _passTableTarget: {fileID: 0}
     _stationTarget: {fileID: 0}
     _profit: 0
+  _taskRuntimeSO: {fileID: 0}
   _mover: {fileID: 3484565846713683997}
   cookMultiplier: 3
   _giveFoodDuration: 0

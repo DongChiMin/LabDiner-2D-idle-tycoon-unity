@@ -14,6 +14,9 @@ namespace LabDiner.Restaurant.Workflow
 {
     public partial class CookingSkill : StaffSkill
     {
+        [Header("References")]
+        [SerializeField] private TaskRuntimeSO _taskRuntimeSO;
+
         [Header("Cook Settings")]
         [SerializeField] private StaffMover _mover;
         [SerializeField] private float cookMultiplier = 1f;
@@ -64,6 +67,9 @@ namespace LabDiner.Restaurant.Workflow
                     _progressPieUI.StartProgressPie(placeOnPassTableDuration);
                     yield return new WaitForSeconds(placeOnPassTableDuration);
                     _carryDishUI.Finish(cookingTask);
+
+                    //Tạo task giao đồ ắn
+                    _taskRuntimeSO.Add(new ShippingTask(passTable, passTable.WorkPos_PickUp, cookingTask));
                 }
                 //3.2. Nếu không có PassTable thì đi thẳng đến khách
                 else

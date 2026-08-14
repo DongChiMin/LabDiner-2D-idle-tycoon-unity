@@ -1,5 +1,124 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1661377484322343259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7099334181067619236}
+  - component: {fileID: 38447060822086014}
+  m_Layer: 0
+  m_Name: Square
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7099334181067619236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661377484322343259}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 296138450049286756}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &38447060822086014
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661377484322343259}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -6883160442577325585, guid: 1cab068ea3848964a8c3ce8379ba53b7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &6991890073817968159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 296138450049286756}
+  m_Layer: 0
+  m_Name: Visual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &296138450049286756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6991890073817968159}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7099334181067619236}
+  m_Father: {fileID: 3986369322799580840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7534851222353265248
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3986369322799580840}
   - component: {fileID: 2725018928318462815}
+  - component: {fileID: 7017847142046843970}
   m_Layer: 0
   m_Name: Manager_PassTable
   m_TagString: Untagged
@@ -30,6 +150,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 296138450049286756}
   - {fileID: 2638086778198847884}
   - {fileID: 3443491259046577856}
   - {fileID: 487090884457880072}
@@ -53,6 +174,19 @@ MonoBehaviour:
   - {fileID: 3169919193454702975}
   - {fileID: 213379113176296887}
   - {fileID: 4707196068088338966}
+  _passTableRuntimeSet: {fileID: 11400000, guid: 9471fea5369dd2b40a37efd6fcf47f7b, type: 2}
+--- !u!210 &7017847142046843970
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7534851222353265248}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1001 &3628786892748765825
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61,17 +195,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3986369322799580840}
     m_Modifications:
+    - target: {fileID: 1388097612627404091, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7581856885116838756, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_Name
       value: PassTable (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8290946120518426775, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
+      propertyPath: _showGizmos
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8591520267539994408, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.87
+      value: 2.21
       objectReference: {fileID: 0}
     - target: {fileID: 8591520267539994408, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.62
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 8591520267539994408, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -134,17 +276,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3986369322799580840}
     m_Modifications:
+    - target: {fileID: 1388097612627404091, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7581856885116838756, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_Name
       value: PassTable
       objectReference: {fileID: 0}
+    - target: {fileID: 8290946120518426775, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
+      propertyPath: _showGizmos
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8591520267539994408, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.76
+      value: -2.89
       objectReference: {fileID: 0}
     - target: {fileID: 8591520267539994408, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.62
+      value: 0.42
       objectReference: {fileID: 0}
     - target: {fileID: 8591520267539994408, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -207,17 +357,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3986369322799580840}
     m_Modifications:
+    - target: {fileID: 1388097612627404091, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7581856885116838756, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_Name
       value: PassTable (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8290946120518426775, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
+      propertyPath: _showGizmos
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8591520267539994408, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.26
+      value: -1.24
       objectReference: {fileID: 0}
     - target: {fileID: 8591520267539994408, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.62
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 8591520267539994408, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -280,17 +438,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3986369322799580840}
     m_Modifications:
+    - target: {fileID: 1388097612627404091, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7581856885116838756, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_Name
       value: PassTable (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8290946120518426775, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
+      propertyPath: _showGizmos
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8591520267539994408, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.24
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 8591520267539994408, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.62
+      value: 0.49
       objectReference: {fileID: 0}
     - target: {fileID: 8591520267539994408, guid: 84f08c266b576994e89c694ea95b5cfe, type: 3}
       propertyPath: m_LocalPosition.z

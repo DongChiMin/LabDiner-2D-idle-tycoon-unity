@@ -179,7 +179,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
-  m_Color: {r: 0, g: 0.9607844, b: 0.043137256, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -484,6 +484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8591520267539994408}
   - component: {fileID: 8290946120518426775}
+  - component: {fileID: 3245261091126616899}
   m_Layer: 0
   m_Name: PassTable
   m_TagString: Untagged
@@ -528,6 +529,25 @@ MonoBehaviour:
   _dishIcon: {fileID: 7115879528822815068}
   _priceText: {fileID: 2387826505070839853}
   tasksOnPassTable: []
+  _showGizmos: 1
+  _putOnPosSize: {x: 1.5, y: 2.25, z: 0.1}
+  _pickUpPosSize: {x: 1.5, y: 2.25, z: 0.1}
+--- !u!114 &3245261091126616899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7581856885116838756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9476a118273716448b736a8e39b200d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _step: 5
+  _orderInStep: 1
+  _elementLabel: "V\u1ECB tr\xED \u0111\u1EB7t \u0111\u1ED3 \u0103n v\xE0 v\u1ECB
+    tr\xED l\u1EA5y \u0111\u1ED3 \u0103n"
 --- !u!1 &7764667571575039176
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +574,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4601637394414573087}

@@ -13,14 +13,6 @@ namespace LabDiner.LevelEditor
             Step7_UIOrientation = 7     // UI Orientation
         }
 
-        public enum UIPlacementOffset
-        {
-            Center,
-            Left,
-            Right,
-            Top
-        }
-
         public class LevelElementMarker : MonoBehaviour
         {
             [Header("Classification")]
@@ -28,16 +20,10 @@ namespace LabDiner.LevelEditor
             [SerializeField] private int _orderInStep = 1;
             [SerializeField] private string _elementLabel = "Element";
 
-            [Header("UI Configuration")]
-            [SerializeField] private bool _hasUIOffset = false;
-            [SerializeField] private UIPlacementOffset _uiPlacement = UIPlacementOffset.Center;
-
             // Public Getters để Editor Tool đọc dữ liệu
             public LevelDesignStep Step => _step;
             public int OrderInStep => _orderInStep;
             public string ElementLabel => _elementLabel;
-            public bool HasUIOffset => _hasUIOffset;
-            public UIPlacementOffset UIPlacement => _uiPlacement;
         }
     
 }

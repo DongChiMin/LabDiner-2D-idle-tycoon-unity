@@ -1,4 +1,4 @@
 namespace LabDiner.Restaurant.Enum
 {
-    public enum TaskType { Serving, Cooking, Cashier, Cleaning }
+    public enum TaskType { Serving, Cooking, Shipping, Cashier, Cleaning }
 }

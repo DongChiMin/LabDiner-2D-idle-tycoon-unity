@@ -1444,8 +1444,6 @@ MonoBehaviour:
   _step: 7
   _orderInStep: 1
   _elementLabel: "H\u01B0\u1EDBng m\u1EDF UI"
-  _hasUIOffset: 0
-  _uiPlacement: 0
 --- !u!1 &3078991116062238812
 GameObject:
   m_ObjectHideFlags: 0
@@ -2182,8 +2180,6 @@ MonoBehaviour:
   _step: 3
   _orderInStep: 2
   _elementLabel: "V\u1ECB tr\xED spawn v\xE0 work c\u1EE7a b\u1EBFp"
-  _hasUIOffset: 0
-  _uiPlacement: 0
 --- !u!1 &4500873465411350375
 GameObject:
   m_ObjectHideFlags: 0
@@ -2308,8 +2304,6 @@ MonoBehaviour:
   _step: 3
   _orderInStep: 2
   _elementLabel: "V\u1ECB tr\xED spawn v\xE0 work c\u1EE7a b\u1EBFp"
-  _hasUIOffset: 0
-  _uiPlacement: 0
 --- !u!1 &4648096283621609074
 GameObject:
   m_ObjectHideFlags: 0
@@ -2346,7 +2340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 3}
+  m_AnchoredPosition: {x: 0, y: 2.5}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!223 &1048585406625754323

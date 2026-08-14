@@ -14,6 +14,16 @@ namespace LabDiner.Restaurant.SO
         // Danh sách PassTable có trên level, được quản lý bởi PassTableManager
         [SerializeField] private List<PassTable> _passTables = new List<PassTable>();
 
+        public void Add(PassTable table)
+        {
+            if (!_passTables.Contains(table)) _passTables.Add(table);
+        }
+
+        public void Remove(PassTable table)
+        {
+            if (_passTables.Contains(table)) _passTables.Remove(table);
+        }
+
         public PassTable GetAvailablePassTable()
         {
             if (_passTables == null || _passTables.Count == 0)

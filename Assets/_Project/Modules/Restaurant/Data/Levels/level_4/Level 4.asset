@@ -29,10 +29,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3991f04b88649fa449b0d8ad0747b0d3, type: 2}
   WaitingLine: 0
   InitialStaffs:
-  - {fileID: 3054657543311258127, guid: ec12fb9c391ef4947ab78fce0c04351c, type: 3}
+  - {fileID: 6286194886011084684, guid: 0a4ae17815a80e54fa0465e3785c0777, type: 3}
+  - {fileID: 4107475475481364124, guid: f7f5e114a04c6a048b608289fc6a5eda, type: 3}
   InitialMoney: 15
   InitialGuestQuantity: 2
   MaxUniqueStations: 2
   MaxTotalQtyPerOrder: 5
-  minVerticalPos: 0
+  minVerticalPos: -7
   maxVerticalPos: 0

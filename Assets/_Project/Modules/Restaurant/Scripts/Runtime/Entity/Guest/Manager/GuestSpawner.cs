@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,6 +28,7 @@ namespace LabDiner.Restaurant.Manager
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private Transform _exitPoint;
         [SerializeField] private float _spawnInterval = 5f;
+        [SerializeField] private Vector2 _spawnIntervalRandomRange = new Vector2(5f, 12f);
 
         [Header("Event")]
         [SerializeField] private GuestEvent _onGuestLeft;
@@ -81,11 +83,20 @@ namespace LabDiner.Restaurant.Manager
         {
             while (true)
             {
-                yield return new WaitForSeconds(_spawnInterval);
+                float randomInterval = UnityEngine.Random.Range(_spawnIntervalRandomRange.x, _spawnIntervalRandomRange.y);
+                yield return new WaitForSeconds(randomInterval);
+                // yield return new WaitForSeconds(_spawnInterval);
 
+                // // Nếu chưa có trạm nào được mở khóa, không spawn khách
                 if (!_coreStationRuntime.HasAnyUnlockedStation())
                 {
-                    continue; // Nếu chưa có trạm nào được mở khóa, không spawn khách
+                    continue;
+                }
+
+                //Nếu số lượng khách hiện tại đã đạt giới hạn, không spawn thêm
+                if (_guests.Count >= _currentMaxGuests)
+                {
+                    continue;
                 }
 
                 GuestContext guest = SpawnGuest();

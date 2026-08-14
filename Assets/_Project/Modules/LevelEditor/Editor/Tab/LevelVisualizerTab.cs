@@ -112,11 +112,6 @@ namespace LabDiner.LevelEditor
                         string label = $"[#{marker.OrderInStep}] {marker.ElementLabel}  ({marker.gameObject.name})";
                         EditorGUILayout.LabelField(label, EditorStyles.label);
 
-                        if (marker.HasUIOffset)
-                        {
-                            GUILayout.Label($"[UI: {marker.UIPlacement}]", EditorStyles.miniBoldLabel, GUILayout.Width(75));
-                        }
-
                         // Kiểm tra xem object có component nào implement IGizmosDrawable hay không
                         if (marker.TryGetComponent<IGizmosDrawable>(out var gizmoDrawable))
                         {
