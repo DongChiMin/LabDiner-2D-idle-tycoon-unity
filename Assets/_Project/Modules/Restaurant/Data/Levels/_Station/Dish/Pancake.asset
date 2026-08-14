@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4473bafd6a351e54093bbb0b8f221c51, type: 3}
+  m_Name: Pancake
+  m_EditorClassIdentifier: 
+  Name: Pancake
+  DishIcon: {fileID: 2255580716522117994, guid: 5f23a5fe10cf24c428a517b5ac81af83, type: 3}
+  StationIcon: {fileID: -262208241541741471, guid: 1500c6a509ecb924f9a01b74acf91833, type: 3}

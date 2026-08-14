@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c414d637959dde8438e851592fed9e5b, type: 3}
-  m_Name: Staff
+  m_Name: Hire Chef_4
   m_EditorClassIdentifier: 
   Title: Hire Chef
   MissionIcon: {fileID: 0}

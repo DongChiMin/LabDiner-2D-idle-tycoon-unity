@@ -354,7 +354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1795377721103224398, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: m_text
-      value: Apple Juice
+      value: Apple
       objectReference: {fileID: 0}
     - target: {fileID: 1835648993928521716, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: m_LocalPosition.x
@@ -431,7 +431,7 @@ PrefabInstance:
     - target: {fileID: 2586820197320652271, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 3246793097361146182, guid: f9b476ed6896fc34496c6b6cd4a32757, type: 3}
+      objectReference: {fileID: 2641698482785147981, guid: c79e1e14d34769d42a87e2d2668d9546, type: 3}
     - target: {fileID: 2586820197320652271, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -570,7 +570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5334337308763206176, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: m_text
-      value: Apple Juice
+      value: Apple
       objectReference: {fileID: 0}
     - target: {fileID: 5800805037061594790, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: m_SizeDelta.x
@@ -606,7 +606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: _name
-      value: Apple Juice
+      value: Apple
       objectReference: {fileID: 0}
     - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: _maxStar
@@ -627,7 +627,7 @@ PrefabInstance:
     - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: _coreStationSO
       value: 
-      objectReference: {fileID: 11400000, guid: 9b5d547358c30024a9944407e9f6cacf, type: 2}
+      objectReference: {fileID: 11400000, guid: 71de0ce8923041146bf74047af20e4dd, type: 2}
     - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: _currentProfit
       value: 10
@@ -679,7 +679,7 @@ PrefabInstance:
     - target: {fileID: 7833157844522542132, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -8414445453311855943, guid: e4f6a7f501bd1a64e8f2e5918fc2a777, type: 3}
+      objectReference: {fileID: -4197890398980553806, guid: 7688d0565f7160e40b7315a1519d762b, type: 3}
     - target: {fileID: 8536485592585913923, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.2
@@ -784,10 +784,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1e3c322b99bb643b7a579c71ddd2f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showGizmos: 1
+  _arrowAlignment: 0
+  _stationData: {fileID: 11400000, guid: 71de0ce8923041146bf74047af20e4dd, type: 2}
   _buttonIcon: {fileID: 2310396877190320803}
   _unlockStationIcon: {fileID: 8017218180446880632}
   _upgradeStationText: {fileID: 1953542432184445186}
   _unlockStationName: {fileID: 5328120642303825260}
+  _panelRect: {fileID: 0}
+  _panelOffset: 1.5
+  _layoutGroups: []
+  _gizmoLineLength: 1
+  _gizmoArrowSize: 0.2
 --- !u!224 &4493270124638734295 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4444309170286764187, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}

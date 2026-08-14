@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using LabDiner.Restaurant.Interface;
 using LabDiner.Restaurant.Pooling;
+using LabDiner.Restaurant.SO;
 using UnityEngine;
 
 namespace LabDiner.Restaurant.Environment
@@ -31,7 +32,7 @@ namespace LabDiner.Restaurant.Environment
 
         #region API
 
-        public Station RequestSpawn(bool isFromLoadProgress = false)
+        public Station RequestSpawn(CoreStationSO coreStationSO, bool isFromLoadProgress = false)
         {
             int nextIndex = _spawnedStations.Count;
 
@@ -39,6 +40,7 @@ namespace LabDiner.Restaurant.Environment
             {
                 // Sinh máy mới ngay tại vị trí đã định sẵn, đặt lại vị trí làm việc
                 Station newStation = Instantiate(_stationPrefab, _stationPos[nextIndex].spawnPos.position, Quaternion.identity, _spawnParent);
+                newStation.SetStationSprite(coreStationSO.Dish.StationIcon);
                 newStation.SetWorkPos(_stationPos[nextIndex].workPos);
                 newStation.SetStatus(false);
                 _spawnedStations.Add(newStation);

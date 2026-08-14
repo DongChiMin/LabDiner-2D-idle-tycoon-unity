@@ -297,7 +297,7 @@ namespace LabDiner.Restaurant.Environment
         {
             for(int i = 0; i < quantity; i++)
             {
-                Station newStation = _stationSpawner.RequestSpawn(isFromLoadProgress);
+                Station newStation = _stationSpawner.RequestSpawn(_coreStationSO, isFromLoadProgress);
                 _stations.Add(newStation);
                 newStation.OnClickStation += HandleStationClick;
             }

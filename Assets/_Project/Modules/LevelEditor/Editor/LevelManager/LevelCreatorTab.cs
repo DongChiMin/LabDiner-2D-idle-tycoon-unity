@@ -102,9 +102,13 @@ namespace LabDiner.LevelEditor
             try 
             {
                 PlayerSave progress = PlayerSaveFile.LoadFromFile();
-                progress.StartNewLevel(levelConfig.ID);
+                
+                // Thay vì dùng levelConfig.ID, hãy thử truyền levelConfig.LevelIndex 
+                // (hoặc nếu hàm StartNewLevel nhận int, hãy truyền trực tiếp LevelIndex vào)
+                progress.StartNewLevel(levelConfig.ID); // Hoặc levelConfig.ID tùy thuộc vào kiểu dữ liệu hàm StartNewLevel yêu cầu
+                
                 PlayerSaveFile.SaveToFile(progress);
-                Debug.Log($"<color=cyan>[Playtest]</color> Đã nạp thành công dữ liệu Level ID [<b>{levelConfig.ID}</b>] vào hệ thống lưu trữ!");
+                Debug.Log($"<color=cyan>[Playtest]</color> Đã nạp thành công dữ liệu Level [<b>{levelConfig.ID}</b>] vào hệ thống lưu trữ!");
             }
             catch (System.Exception e)
             {

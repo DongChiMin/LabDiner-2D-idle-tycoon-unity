@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4473bafd6a351e54093bbb0b8f221c51, type: 3}
+  m_Name: Coffee
+  m_EditorClassIdentifier: 
+  Name: Coffee
+  DishIcon: {fileID: 4687309882487268517, guid: ef22046a6b405c44585a338400a83807, type: 3}
+  StationIcon: {fileID: -2098498005892181406, guid: 168add1a3497b844384501ecfc0dc12b, type: 3}

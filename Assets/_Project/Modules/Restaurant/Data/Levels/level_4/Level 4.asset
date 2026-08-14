@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9781a546e8ce7db41b5ef091387ab3ea, type: 3}
+  m_Name: Level 4
+  m_EditorClassIdentifier: 
+  ID: level_4
+  LevelPrefab: {fileID: 696747529043693107, guid: fb28facb56f3ca842bb80c6e7de94c4f, type: 3}
+  LevelIndex: 4
+  LevelName: Level 4
+  LevelDescription: Day la level 4
+  LevelIcon: {fileID: 0}
+  AvailableUpgrades:
+  - {fileID: 11400000, guid: b1c0487012d980641b470aacba56ac55, type: 2}
+  - {fileID: 11400000, guid: 76f276daa20029347b795b4b2c066021, type: 2}
+  - {fileID: 11400000, guid: 26dfeff9736b18f47aa712183d497813, type: 2}
+  AvailableMissions:
+  - {fileID: 11400000, guid: 0702d43d43d490d4aa4de0c4b315cdc5, type: 2}
+  - {fileID: 11400000, guid: 00696dfc99c77c9499808dbf3f5b0123, type: 2}
+  - {fileID: 11400000, guid: 95bad2b936d0a5441abbfc98070456ca, type: 2}
+  - {fileID: 11400000, guid: 3991f04b88649fa449b0d8ad0747b0d3, type: 2}
+  WaitingLine: 0
+  InitialStaffs:
+  - {fileID: 3054657543311258127, guid: ec12fb9c391ef4947ab78fce0c04351c, type: 3}
+  InitialMoney: 15
+  InitialGuestQuantity: 2
+  MaxUniqueStations: 2
+  MaxTotalQtyPerOrder: 5
+  minVerticalPos: 0
+  maxVerticalPos: 0

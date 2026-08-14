@@ -5854,6 +5854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
+  _showGizmos: 0
   _onLevelInit: {fileID: 11400000, guid: 15e61c252f3eb7c439540b5b66730d1e, type: 2}
   _dragSensitivity: 0.01
   _smoothSpeed: 10
@@ -5946,7 +5947,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15
+  orthographic size: 13
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6263,6 +6264,17 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 201
   m_TargetDisplay: 0
+--- !u!114 &1793469334 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 666376542612591611, guid: 125b208debc0d634c8357ec87cc1fd9f, type: 3}
+  m_PrefabInstance: {fileID: 6028557414120969920}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1821467519
 GameObject:
   m_ObjectHideFlags: 0
@@ -8408,6 +8420,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7787464870643370626, guid: 125b208debc0d634c8357ec87cc1fd9f, type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 1793469334}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

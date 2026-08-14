@@ -117,6 +117,30 @@ namespace LabDiner.LevelEditor
                             GUILayout.Label($"[UI: {marker.UIPlacement}]", EditorStyles.miniBoldLabel, GUILayout.Width(75));
                         }
 
+                        // Kiểm tra xem object có component nào implement IGizmosDrawable hay không
+                        if (marker.TryGetComponent<IGizmosDrawable>(out var gizmoDrawable))
+                        {
+                            EditorGUI.BeginChangeCheck();
+                            bool newState = EditorGUILayout.Toggle(gizmoDrawable.ShowGizmos, GUILayout.Width(20));
+                            if (EditorGUI.EndChangeCheck())
+                            {
+                                gizmoDrawable.ShowGizmos = newState;
+                                EditorUtility.SetDirty((MonoBehaviour)gizmoDrawable);
+
+                                if (_isInPrefabMode)
+                                {
+                                    EditorSceneManager.MarkSceneDirty(marker.gameObject.scene);
+                                }
+
+                                SceneView.RepaintAll();
+                            }
+                        }
+                        else
+                        {
+                            // Khoảng trống giữ chỗ nếu object không có Gizmo để layout không bị lệch
+                            GUILayout.Space(20);
+                        }
+
                         EditorGUILayout.EndHorizontal();
                     }
                     EditorGUI.indentLevel--;

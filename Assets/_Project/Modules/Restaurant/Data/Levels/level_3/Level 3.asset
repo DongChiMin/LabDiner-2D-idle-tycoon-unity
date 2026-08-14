@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9781a546e8ce7db41b5ef091387ab3ea, type: 3}
+  m_Name: Level 3
+  m_EditorClassIdentifier: 
+  ID: level_3
+  LevelPrefab: {fileID: 696747529043693107, guid: b484575ad7a650a4fa4f4272729a58d0, type: 3}
+  LevelIndex: 3
+  LevelName: Level 3
+  LevelDescription: Day la level 3
+  LevelIcon: {fileID: 0}
+  AvailableUpgrades: []
+  AvailableMissions: []
+  WaitingLine: 0
+  InitialStaffs:
+  - {fileID: 3054657543311258127, guid: ec12fb9c391ef4947ab78fce0c04351c, type: 3}
+  InitialMoney: 15
+  InitialGuestQuantity: 2
+  MaxUniqueStations: 2
+  MaxTotalQtyPerOrder: 5
+  minVerticalPos: 0
+  maxVerticalPos: 0

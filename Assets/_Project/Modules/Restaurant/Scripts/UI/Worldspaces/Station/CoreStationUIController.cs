@@ -1,4 +1,5 @@
 using LabDiner.Restaurant.Environment;
+using LabDiner.Shared;
 using LabDiner.Shared.Event;
 using LabDiner.Shared.Input;
 using LabDiner.Shared.SO;
@@ -6,13 +7,14 @@ using UnityEngine;
 
 namespace LabDiner.Restaurant.UI
 {
-    public class CoreStationUIController : MonoBehaviour, IInteractable
+    public class CoreStationUIController : MonoBehaviour
     {
         
         [Header("Events")]
         [SerializeField] private DoubleRuntimeSO _coinData;
 
         [Header("View")]
+        [SerializeField] private CoreStationButton _clickBounceEffect;
         [SerializeField] private CoreStationUI _CoreStationUI;
         [SerializeField] private CoreStationStarUI _CoreStationStarUI;
         [SerializeField] private CoreStationUnlockUI _CoreStationUnlockUI;
@@ -30,6 +32,8 @@ namespace LabDiner.Restaurant.UI
 
             _CoreStationUI.OnUpgradeButtonClicked += RequestUpgrade;
             _CoreStationUnlockUI.OnUpgradeButtonClicked += RequestUpgrade;
+        
+            _clickBounceEffect.OnClick += OnInteract;
         }
 
         private void OnDisable()
@@ -41,6 +45,8 @@ namespace LabDiner.Restaurant.UI
 
             _CoreStationUI.OnUpgradeButtonClicked -= RequestUpgrade;
             _CoreStationUnlockUI.OnUpgradeButtonClicked -= RequestUpgrade;
+
+            _clickBounceEffect.OnClick -= OnInteract;
         }
 
         #region API
@@ -52,7 +58,7 @@ namespace LabDiner.Restaurant.UI
 
         #endregion
 
-        #region IInteractable Implementation
+        #region Click Handling
         //Khi click vào trạm:
         // Nếu chưa mở khóa: Hiện UI mở khóa, hiển thị thông tin về trạm và yêu cầu người chơi chi tiền để mở khóa
         // Nếu đã mở khóa: Hiện UI nâng cấp, hiển thị thông tin về trạm, lợi nhuận hiện tại, chi phí nâng cấp và tiến trình sao. Cho phép người chơi nâng cấp trạm nếu có đủ tiền.
