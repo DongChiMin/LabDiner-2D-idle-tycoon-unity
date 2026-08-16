@@ -2,23 +2,30 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using LabDiner.Restaurant.SO;
+using LabDiner.Shared.Extension;
 
 namespace LabDiner.Restaurant.UI
 {
     public class LevelUpgradeItem : MonoBehaviour
-    {         
+    {
         public BaseUpgradeSO UpgradeSO => _baseUpgradeSO;
         public Button UpgradeButton => _upgradeButton;
-        
+
         [Header("UI References")]
         [SerializeField] private TextMeshProUGUI _titleText;
         [SerializeField] private TextMeshProUGUI _descriptionText;
-        [SerializeField] private TextMeshProUGUI _costText;
         [SerializeField] private Image _iconImage;
         [SerializeField] private Image _upgradeTypeImage;
+
+        [Header("Button Settings")]
         [SerializeField] private Button _upgradeButton;
+        [SerializeField] private Image _buttonCoinIcon;
+        [SerializeField] private TextMeshProUGUI _costText;
 
         private BaseUpgradeSO _baseUpgradeSO;
+        private bool _isInitColor = false;
+        private Color _buttonTextColorOn;
+        private Color _buttonIconColorOn;
 
         #region API
 
@@ -28,16 +35,38 @@ namespace LabDiner.Restaurant.UI
 
             _titleText.text = upgradeSO.Title;
             _descriptionText.text = upgradeSO.Description;
-            _costText.text = upgradeSO.UpgradeCost.ToString("F0");
+            _costText.text = CurrencyFormatter.Format(upgradeSO.UpgradeCost);
             _iconImage.sprite = upgradeSO.Icon;
             _upgradeTypeImage.sprite = upgradeSO.UpgradeTypeSprite;
         }
 
-        public void ToggleUpgradeButton(bool isOn)
+        private void InitColor()
         {
-            _upgradeButton.interactable = isOn;
+            _buttonTextColorOn = _costText.color;
+            _buttonIconColorOn = _buttonCoinIcon.color;
         }
 
-       #endregion
+        public void ToggleUpgradeButton(bool isOn)
+        {
+
+            if (!_isInitColor)
+            {
+                _isInitColor = true;
+                InitColor();
+            }
+            _upgradeButton.interactable = isOn;
+            if (!isOn)
+            {
+                _costText.color = _upgradeButton.colors.disabledColor;
+                _buttonCoinIcon.color = _upgradeButton.colors.disabledColor;
+            }
+            else
+            {
+                _costText.color = _buttonTextColorOn;
+                _buttonCoinIcon.color = _buttonIconColorOn;
+            }
+        }
+
+        #endregion
     }
 }

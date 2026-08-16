@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd247311fa39d4c4c9152aaff851aa5a, type: 3}
   m_Name: StaffRepository
   m_EditorClassIdentifier: 
+  StaffPrefabs:
+  - StaffType: 1
+    Prefab: {fileID: 6286194886011084684, guid: 0a4ae17815a80e54fa0465e3785c0777, type: 3}
+  - StaffType: 2
+    Prefab: {fileID: 4107475475481364124, guid: f7f5e114a04c6a048b608289fc6a5eda, type: 3}
+  - StaffType: 3
+    Prefab: {fileID: 3054657543311258127, guid: ec12fb9c391ef4947ab78fce0c04351c, type: 3}

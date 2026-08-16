@@ -6,6 +6,7 @@ using LabDiner.Restaurant.Humanoid;
 using LabDiner.Restaurant.Pooling;
 using LabDiner.Restaurant.SO;
 using LabDiner.Restaurant.UI;
+using LabDiner.Shared.Enum;
 using LabDiner.Shared.Event;
 using LabDiner.Shared.SO;
 using UnityEngine;
@@ -81,11 +82,14 @@ namespace LabDiner.Restaurant.Workflow
                     guest.ReceiveFood(cookingTask);
                     yield return new WaitForSeconds(_giveFoodDuration);
                     _carryDishUI.Finish(cookingTask);
+
+                _coinData.Add(cookingTask.Profit);
+                PoolContext.Instance.CurrencyBurstPool.SpawnBurstEffect(CurrencyType.Coin, guest.transform.position, cookingTask.Profit, true);
                 }
 
                 //4. Hoàn thành
                 Debug_FetchData(null);
-                _coinData.Add(cookingTask.Profit);
+
                 onComplete?.Invoke();
 
                 //5. Di chuyển về vị trí nghỉ ngơi

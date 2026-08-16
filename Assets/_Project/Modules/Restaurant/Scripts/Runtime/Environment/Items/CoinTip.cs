@@ -2,8 +2,11 @@ using System;
 using LabDiner.Restaurant.Event;
 using LabDiner.Restaurant.Pooling;
 using LabDiner.Restaurant.SO;
+using LabDiner.Shared.Enum;
+using LabDiner.Shared.Extension;
 using LabDiner.Shared.Input;
 using LabDiner.Shared.SO;
+using LabDiner.Shared.UI;
 using TMPro;
 using UnityEngine;
 
@@ -15,11 +18,27 @@ namespace LabDiner.Restaurant.Environment
         [SerializeField] private TextMeshProUGUI _tipAmountText;
         [SerializeField] private DoubleRuntimeSO _coinData;
         [SerializeField] private DoubleEvent _onTipReceived;
-        private double _tipAmount;
+
+        [Header("Effect")]
+        [SerializeField] private VerticalSwingEffect _swingEffect;
+        [SerializeField] private double _tipAmount;
+
+        void OnEnable()
+        {
+            _swingEffect.Show();
+            _tipAmountText.text = CurrencyFormatter.Format(_tipAmount);
+        }
+
+        void OnDisable()
+        {
+            _swingEffect.Hide();
+        }
 
         public void OnInteract()
         {
             _coinData.Add(_tipAmount);
+            
+            PoolContext.Instance.CurrencyBurstPool.SpawnBurstEffect(CurrencyType.Coin, transform.position, _tipAmount, true);
             PoolContext.Instance.CoinTipPool.ReturnToPool(this);
             _onTipReceived?.Raise(_tipAmount);
         }

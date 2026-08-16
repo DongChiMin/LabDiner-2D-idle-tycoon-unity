@@ -72,9 +72,13 @@ namespace LabDiner.LevelEditor
                 GUILayout.Space(5);
 
                 GUI.backgroundColor = new Color(0.4f, 0.8f, 0.4f);
-                if (GUILayout.Button("▶️ LƯU PROGRESS & CHẠY THỬ", GUILayout.Height(40)))
+                if (GUILayout.Button("▶️ XÓA DỮ LIỆU & CHẠY LEVEL CHỈ ĐỊNH", GUILayout.Height(40)))
                 {
-                    PlayTestLevel(_parent.GetCurrentSelectedLevelConfig());
+                    if (EditorUtility.DisplayDialog("Xác nhận xóa", "Bạn có chắc chắn muốn xóa toàn bộ file save hiện tại không?", "Xóa ngay", "Hủy"))
+                    {
+                        ClearSaveData();
+                        PlayTestLevel(_parent.GetCurrentSelectedLevelConfig());
+                    }
                 }
                 GUI.backgroundColor = Color.white;
             }

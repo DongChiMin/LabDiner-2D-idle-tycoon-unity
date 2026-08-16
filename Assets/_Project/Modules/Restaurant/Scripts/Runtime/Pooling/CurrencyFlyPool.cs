@@ -18,7 +18,7 @@ namespace LabDiner.Restaurant.Pooling
         [SerializeField] private float _scatterDuration = 0.4f;   // Thời gian tỏa ra
         [SerializeField] private float _flyDuration = 0.6f;       // Thời gian bay về đích
         [SerializeField] private float _maxRandomDelay = 0.15f;   // Độ trễ ngẫu nhiên để các coin không bay cùng 1 lúc y hệt nhau
-
+        
         /// <summary>
         /// API để kích hoạt hiệu ứng bay
         /// </summary>

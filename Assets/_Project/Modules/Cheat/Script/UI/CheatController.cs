@@ -1,3 +1,8 @@
+using LabDiner.LevelSystem.Domain;
+using LabDiner.Restaurant.Event;
+using LabDiner.Restaurant.Interface;
+using LabDiner.Restaurant.SO;
+using LabDiner.Shared;
 using LabDiner.Shared.Event;
 using LabDiner.Shared.Extension;
 using LabDiner.Shared.SO;
@@ -22,7 +27,7 @@ public class CheatController : MonoBehaviour
     [Header("Coin Currency")]
     [SerializeField] private LevelCoinFlyEvent _onCoinFlyAdded;
     [SerializeField] private Transform _coinFlyStartPos;
-    [SerializeField] private string _fixedCoinValue = "1000";
+    [SerializeField] private string _fixedCoinValue = "10000";
     [SerializeField] private TMP_InputField _inputCoinValue;
     [SerializeField] private Button _btnAddCoinValue;
     [SerializeField] private Button _btnAddFixedCoin;
@@ -35,6 +40,22 @@ public class CheatController : MonoBehaviour
     [SerializeField] private Button _btnAddGemValue;
     [SerializeField] private Button _btnAddFixedGem;
 
+    [Header("Level")]
+    [SerializeField] private LevelConfigEvent _onLevelComplete;
+    [SerializeField] private Button _btnSkipCurrentLevel;
+    [SerializeField] private Button _btnSkipToValueLevel;
+
+    [Header("Level Load")]
+    [SerializeField] private LevelRegistrySO _levelRegistry;
+    [SerializeField] private ProgressSaveRuntimeSO _progressRuntimeSO;
+    
+    bool isFetchProgress = false;
+    void FetchProgress()
+    {
+        PlayerSave progress = _progressRuntimeSO.PlayerSave;
+        _currentLevelConfigSO = _levelRegistry.GetConfigByID(progress.CurrentLevelID);
+    }
+
     void OnEnable()
     {
         _onPopupShow.Register(HandlePopupShow);
@@ -44,6 +65,8 @@ public class CheatController : MonoBehaviour
         _btnAddFixedCoin.onClick.AddListener(HandleAddFixedCoin);
         _btnAddGemValue.onClick.AddListener(HandleAddGemValue);
         _btnAddFixedGem.onClick.AddListener(HandleAddFixedGem);
+        _btnSkipCurrentLevel.onClick.AddListener(HandleSkipCurrentLevel);
+        _btnSkipToValueLevel.onClick.AddListener(HandleSkipToValueLevel);
     }
 
     void OnDisable()
@@ -55,6 +78,8 @@ public class CheatController : MonoBehaviour
         _btnAddFixedCoin.onClick.RemoveListener(HandleAddFixedCoin);
         _btnAddGemValue.onClick.RemoveListener(HandleAddGemValue);
         _btnAddFixedGem.onClick.RemoveListener(HandleAddFixedGem);
+        _btnSkipCurrentLevel.onClick.RemoveListener(HandleSkipCurrentLevel);
+        _btnSkipToValueLevel.onClick.RemoveListener(HandleSkipToValueLevel);
     }
 
     private void HandlePopupShow()
@@ -120,4 +145,29 @@ public class CheatController : MonoBehaviour
 
     #endregion
 
+    #region Handle Level
+
+    private LevelConfigSO _currentLevelConfigSO;
+    private void HandleSkipCurrentLevel()
+    {
+        if(!isFetchProgress)
+        {
+            FetchProgress();
+            isFetchProgress = true;
+        }
+        _onLevelComplete.Raise(_currentLevelConfigSO);
+        _panel.Hide();
+    }
+
+    private void HandleSkipToValueLevel()
+    {
+        if(!isFetchProgress)
+        {
+            FetchProgress();
+            isFetchProgress = true;
+        }
+        // Implementation for skipping level with value
+    }
+
+    #endregion
 }

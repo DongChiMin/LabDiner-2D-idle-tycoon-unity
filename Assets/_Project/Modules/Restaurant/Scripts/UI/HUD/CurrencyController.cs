@@ -79,7 +79,7 @@ namespace LabDiner.Restaurant.UI
         private void HandleGemFlyAdded(GemRewardData data)
         {
             _currencyHUD.PlayGemFlyAnimation(data);
-            _coinRuntimeData.SetValue(_coinRuntimeData.Value + data.RewardValue);
+            _gemRuntimeData.SetValue(_gemRuntimeData.Value + data.RewardValue);
         }
     }
 }

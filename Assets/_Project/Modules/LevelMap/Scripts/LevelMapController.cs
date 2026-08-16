@@ -67,6 +67,8 @@ namespace LabDiner.LevelMap.UI
                 item.Setup(levelConfig);
                 _levelMapItems.Add(item);
             }
+
+            _panel.SetTitle(chapter.ChapterName);
         }
 
         public void LoadProgress(ProgressSaveRuntimeSO progressRuntimeSO)
