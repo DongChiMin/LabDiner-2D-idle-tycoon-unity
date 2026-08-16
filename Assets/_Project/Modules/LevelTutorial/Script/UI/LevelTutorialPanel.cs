@@ -45,6 +45,8 @@ public class LevelTutorialPanel : MonoBehaviour
 
     IEnumerator StartFocus(float timeDelay, float effectDuration, Vector2 focusPosition, Vector2 focusSize)
 {
+    _unmask.DOKill();
+    (_arrow.transform as RectTransform)?.DOKill();
     Debug.Log("[Tutorial] StartFocusTutorial: Position = " + focusPosition + ", Size = " + focusSize);
     _arrow.gameObject.SetActive(false);
     _canvasGroup.alpha = 0f;

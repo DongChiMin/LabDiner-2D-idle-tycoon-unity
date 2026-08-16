@@ -28,6 +28,7 @@ namespace LabDiner.Shared.UI
             transform.DOKill();
             
             // Đưa mũi tên về vị trí gốc ban đầu
+            _startLocalPosition = transform.localPosition;
 
             // Kích hoạt hiệu ứng di chuyển lên xuống vô hạn (-1 là lặp vô hạn, LoopType.Yoyo là đi tới đi lui)
             _swingTween = transform.DOLocalMoveY(_startLocalPosition.y - _swingDistance, _duration)

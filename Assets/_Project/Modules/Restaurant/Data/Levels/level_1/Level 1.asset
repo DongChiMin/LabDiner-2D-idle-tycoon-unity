@@ -17,7 +17,7 @@ MonoBehaviour:
   LevelIndex: 1
   LevelName: Level 1
   LevelDescription: 'This is description for level '
-  LevelIcon: {fileID: 0}
+  LevelIcon: {fileID: 9006614987098792798, guid: 8bd9d29e84e2aa84d83faea6bf5d036b, type: 3}
   AvailableUpgrades:
   - {fileID: 11400000, guid: 39d9c934703c43e4b8eddf932f83e6f0, type: 2}
   - {fileID: 11400000, guid: 82b4ca4b1a76d464493f5936b1427edc, type: 2}
@@ -25,6 +25,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bf3b90d994c7cff438a7615474cb9059, type: 2}
   AvailableMissions:
   - {fileID: 11400000, guid: 92bbddd981cb49c4489e7ede1876fc78, type: 2}
+  - {fileID: 11400000, guid: 0e1840ab8fa35674abcea46df69668eb, type: 2}
+  - {fileID: 11400000, guid: bbdab5781cff236459f00171691c9727, type: 2}
+  - {fileID: 11400000, guid: 59cf129eda947b843bc63977123f0e7e, type: 2}
   WaitingLine: 0
   InitialStaffs:
   - StaffType: 3

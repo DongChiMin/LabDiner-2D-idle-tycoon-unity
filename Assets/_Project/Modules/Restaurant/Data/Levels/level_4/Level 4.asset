@@ -17,7 +17,7 @@ MonoBehaviour:
   LevelIndex: 4
   LevelName: Level 4
   LevelDescription: Day la level 4
-  LevelIcon: {fileID: 0}
+  LevelIcon: {fileID: -9218411026924045847, guid: 6091d5a02d8536042842a3c77a2b66bf, type: 3}
   AvailableUpgrades:
   - {fileID: 11400000, guid: b1c0487012d980641b470aacba56ac55, type: 2}
   - {fileID: 11400000, guid: 76f276daa20029347b795b4b2c066021, type: 2}

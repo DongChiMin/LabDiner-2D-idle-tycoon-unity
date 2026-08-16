@@ -150,13 +150,13 @@ public class CheatController : MonoBehaviour
     private LevelConfigSO _currentLevelConfigSO;
     private void HandleSkipCurrentLevel()
     {
+        _panel.Hide();
         if(!isFetchProgress)
         {
             FetchProgress();
             isFetchProgress = true;
         }
         _onLevelComplete.Raise(_currentLevelConfigSO);
-        _panel.Hide();
     }
 
     private void HandleSkipToValueLevel()

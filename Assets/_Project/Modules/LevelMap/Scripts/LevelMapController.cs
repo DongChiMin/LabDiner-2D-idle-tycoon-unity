@@ -73,7 +73,6 @@ namespace LabDiner.LevelMap.UI
 
         public void LoadProgress(ProgressSaveRuntimeSO progressRuntimeSO)
         {
-            Debug.Log("[LevelMapController] Loading progress for level map items.");
             PlayerSave playerSave = progressRuntimeSO.PlayerSave;
             List<PlayedLevel> playedLevels = playerSave.PlayedLevels;
 

@@ -34,7 +34,7 @@ namespace LabDiner.LevelMap.UI
 
         public void Init(LevelConfigSO levelConfigSO)
         {
-            
+            _panel.Init(levelConfigSO);
         }
 
         #endregion
@@ -42,11 +42,13 @@ namespace LabDiner.LevelMap.UI
         private void HandleLevelComplete(LevelConfigSO levelConfigSO)
         {
             _panel.Show();
+            _panel.RotationEffect.Show();
         }
 
         private void HandleContinue()
         {
             _panel.Hide();
+            _panel.RotationEffect.Hide();
             // LevelManagerContext.Instance.LoadNextLevel();
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(currentSceneIndex);
