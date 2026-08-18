@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: Luxury Burger
   Description: Burger profit x4
-  Icon: {fileID: 2641698482785147981, guid: c79e1e14d34769d42a87e2d2668d9546, type: 3}
+  Icon: {fileID: 6234330970754847308, guid: b5a755502f02c1543a81729e54cbbfa2, type: 3}
   UpgradeTypeSprite: {fileID: 0}
   UpgradeCost: 40000
   UpgradeValue: 4

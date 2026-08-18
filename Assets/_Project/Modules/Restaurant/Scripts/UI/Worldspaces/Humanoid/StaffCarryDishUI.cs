@@ -1,4 +1,5 @@
 using LabDiner.Restaurant.Workflow;
+using LabDiner.Shared.Extension;
 using TMPro;
 using UnityEngine;
 
@@ -42,7 +43,7 @@ namespace LabDiner.Restaurant.UI
         private void ToggleCarryDish(bool isOn)
         {
             _carryDishObject.SetActive(isOn);
-            _priceText.text = currentPrice.ToString();
+            _priceText.text = CurrencyFormatter.Format(currentPrice);
         }
     }
 }

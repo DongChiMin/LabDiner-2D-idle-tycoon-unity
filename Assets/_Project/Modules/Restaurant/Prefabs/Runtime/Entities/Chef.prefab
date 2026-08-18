@@ -192,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 7212645033190223429}
   _stoppingDistance: 0.1
-  _speed: 15
+  _speed: 5
 --- !u!114 &2308727001833039947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
     _profit: 0
   _taskRuntimeSO: {fileID: 11400000, guid: 728242de5e1b9534e96d49351d7255cc, type: 2}
   _mover: {fileID: 6241149267632710497}
-  cookMultiplier: 3
+  cookMultiplier: 0
   _giveFoodDuration: 0
   placeOnPassTableDuration: 0
   _progressPieUI: {fileID: 5622035633664392647}

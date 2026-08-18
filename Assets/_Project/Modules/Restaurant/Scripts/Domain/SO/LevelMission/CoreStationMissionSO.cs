@@ -79,10 +79,10 @@ namespace LabDiner.Restaurant.SO
             switch(MissionType)
             {
                 case CoreStationMissionType.UnlockStation:
-                    TargetValue = 0;
+                    TargetValue = 1;
                     break;
                 case CoreStationMissionType.MaxLevelAllStation:
-                    TargetValue = 0;
+                    TargetValue = 1;
                     TargetCoreStation = null;
                     break;
             }

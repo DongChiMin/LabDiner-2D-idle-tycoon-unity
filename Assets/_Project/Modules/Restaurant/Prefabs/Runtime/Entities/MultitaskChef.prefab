@@ -92,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 4656851777660996879}
   _stoppingDistance: 0.1
-  _speed: 15
+  _speed: 5
 --- !u!114 &8730692302361930692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
     _profit: 0
   _taskRuntimeSO: {fileID: 0}
   _mover: {fileID: 3484565846713683997}
-  cookMultiplier: 3
+  cookMultiplier: 0
   _giveFoodDuration: 0
   placeOnPassTableDuration: 0
   _progressPieUI: {fileID: 2192753701787223607}
@@ -149,7 +149,7 @@ MonoBehaviour:
       Profit: 0
       IsServed: 0
   _taskRuntimeSO: {fileID: 11400000, guid: 728242de5e1b9534e96d49351d7255cc, type: 2}
-  _serveDuration: 1
+  _serveDuration: 3
   _mover: {fileID: 3484565846713683997}
   _progressPieUI: {fileID: 2192753701787223607}
 --- !u!1 &8930665214384260867

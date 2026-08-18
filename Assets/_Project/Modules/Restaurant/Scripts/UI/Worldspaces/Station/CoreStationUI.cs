@@ -73,10 +73,10 @@ namespace LabDiner.Restaurant.UI
 
         public void Setup(CoreStationUIData data)
         {
-            if(_isMaxLevel)
-            {
-                return;
-            }
+            // if(_isMaxLevel)
+            // {
+            //     return;
+            // }
 
             string formattedProfit = CurrencyFormatter.Format(data.CurrentProfit);
             string formattedCost = CurrencyFormatter.Format(data.CurrentCost);

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using LabDiner.Restaurant.Workflow;
+using LabDiner.Shared.Extension;
 using TMPro;
 using UnityEngine;
 
@@ -56,7 +57,7 @@ namespace LabDiner.Restaurant.Environment
         private void UpdateDishVisual(CookingTask task)
         {
             _dishIcon.sprite = task.CoreStation.DishIcon;
-            _priceText.text = task.Profit.ToString();
+            _priceText.text = CurrencyFormatter.Format(task.Profit);
         }
 
         private void ToggleDishVisual(bool isOn)

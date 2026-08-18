@@ -20,18 +20,18 @@ namespace LabDiner.Restaurant.Environment
         [SerializeField] private DoubleEvent _onTipReceived;
 
         [Header("Effect")]
-        [SerializeField] private VerticalSwingEffect _swingEffect;
+        // [SerializeField] private VerticalSwingEffect _swingEffect;
         [SerializeField] private double _tipAmount;
 
         void OnEnable()
         {
-            _swingEffect.Show();
-            _tipAmountText.text = CurrencyFormatter.Format(_tipAmount);
+            _tipAmountText.text = CurrencyFormatter.Format(_tipAmount);     
+            // _swingEffect.Show();
         }
 
         void OnDisable()
         {
-            _swingEffect.Hide();
+            // _swingEffect.Hide();
         }
 
         public void OnInteract()
@@ -51,7 +51,7 @@ namespace LabDiner.Restaurant.Environment
         public void SetTipAmount(double amount)
         {
             _tipAmount = amount;
-            _tipAmountText.text = amount.ToString("F0");
+            _tipAmountText.text = CurrencyFormatter.Format(_tipAmount);
         }
     }
 }

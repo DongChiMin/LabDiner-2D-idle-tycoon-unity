@@ -250,7 +250,6 @@ GameObject:
   - component: {fileID: 581399516700615202}
   - component: {fileID: 1602192830767960940}
   - component: {fileID: 4232517160861600872}
-  - component: {fileID: 4897652986707646885}
   m_Layer: 10
   m_Name: CoinTip
   m_TagString: Untagged
@@ -289,7 +288,8 @@ MonoBehaviour:
   _tipAmountText: {fileID: 9025413054777422004}
   _coinData: {fileID: 11400000, guid: dfffcaeb65047244ba51b6f65e6fbaf8, type: 2}
   _onTipReceived: {fileID: 11400000, guid: 94d51df467069504eb26823dcb9cf467, type: 2}
-  _swingEffect: {fileID: 4897652986707646885}
+  _swingEffect: {fileID: 0}
+  _tipAmount: 0
 --- !u!212 &1602192830767960940
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -381,18 +381,3 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.345}
   m_Radius: 0.345
---- !u!114 &4897652986707646885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8664473342832381537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 268dc543985d8ff4599377b632e60b63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _duration: 0.5
-  _swingDistance: 0.1
-  _swingEase: 7

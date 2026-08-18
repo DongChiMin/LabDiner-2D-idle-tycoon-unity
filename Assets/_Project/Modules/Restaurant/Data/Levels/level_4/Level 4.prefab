@@ -8342,9 +8342,37 @@ PrefabInstance:
       value: Pancake
       objectReference: {fileID: 0}
     - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
+      propertyPath: _maxStar
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
+      propertyPath: _baseProfit
+      value: 2700
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
+      propertyPath: _currentCost
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
+      propertyPath: _levelPerStar
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: _coreStationSO
       value: 
       objectReference: {fileID: 11400000, guid: 920c4a25b430f7646b738f78c6c3a2e2, type: 2}
+    - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
+      propertyPath: _currentProfit
+      value: 2700
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
+      propertyPath: _baseUpgradeCost
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
+      propertyPath: _currentProcessTime
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7833157844522542132, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -8515,7 +8543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3169919193454702975, guid: fae9b2ed584ed094a839d9026cedc66f, type: 3}
       propertyPath: _showGizmos
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3443491259046577856, guid: fae9b2ed584ed094a839d9026cedc66f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8668,7 +8696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1364897164712616629, guid: d84f78321bfe0844b8cb2c119417f6d6, type: 3}
       propertyPath: _showGizmos
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1801926977513842992, guid: d84f78321bfe0844b8cb2c119417f6d6, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
@@ -8971,6 +8999,10 @@ PrefabInstance:
       value: Burger
       objectReference: {fileID: 0}
     - target: {fileID: 6141854544881101309, guid: d84f78321bfe0844b8cb2c119417f6d6, type: 3}
+      propertyPath: _showGizmos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6141854544881101309, guid: d84f78321bfe0844b8cb2c119417f6d6, type: 3}
       propertyPath: _restPositions.Array.size
       value: 8
       objectReference: {fileID: 0}
@@ -9044,7 +9076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7541031544064258583, guid: d84f78321bfe0844b8cb2c119417f6d6, type: 3}
       propertyPath: _showGizmos
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7859937331727422026, guid: d84f78321bfe0844b8cb2c119417f6d6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9091,12 +9123,20 @@ PrefabInstance:
       value: Burger
       objectReference: {fileID: 0}
     - target: {fileID: 8772979351625325851, guid: d84f78321bfe0844b8cb2c119417f6d6, type: 3}
+      propertyPath: _maxStar
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772979351625325851, guid: d84f78321bfe0844b8cb2c119417f6d6, type: 3}
+      propertyPath: _levelPerStar
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8772979351625325851, guid: d84f78321bfe0844b8cb2c119417f6d6, type: 3}
       propertyPath: _coreStationSO
       value: 
       objectReference: {fileID: 11400000, guid: f38f5fc21cffd0242b8256820964ccf7, type: 2}
     - target: {fileID: 8881038659543305162, guid: d84f78321bfe0844b8cb2c119417f6d6, type: 3}
       propertyPath: _showGizmos
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8913585998549285362, guid: d84f78321bfe0844b8cb2c119417f6d6, type: 3}
       propertyPath: _staffType
@@ -9571,9 +9611,37 @@ PrefabInstance:
       value: Coffee
       objectReference: {fileID: 0}
     - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
+      propertyPath: _maxStar
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
+      propertyPath: _baseProfit
+      value: 7500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
+      propertyPath: _currentCost
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
+      propertyPath: _levelPerStar
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: _coreStationSO
       value: 
       objectReference: {fileID: 11400000, guid: 47c3fbdae29f7ef4396492317e5212b5, type: 2}
+    - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
+      propertyPath: _currentProfit
+      value: 7500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
+      propertyPath: _baseUpgradeCost
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484946389738070242, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
+      propertyPath: _currentProcessTime
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7833157844522542132, guid: 28062a2ea8a38134b8c586afa719b438, type: 3}
       propertyPath: m_Sprite
       value: 

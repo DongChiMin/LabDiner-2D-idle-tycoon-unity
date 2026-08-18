@@ -231,7 +231,7 @@ namespace LabDiner.Restaurant.Environment
                 CurrentProfit = _currentProfit,
                 CurrentCost = _currentCost,
                 CurrentProcessTime = _currentProcessTime,
-                CanUpgrade = currentCoin >= _currentCost
+                CanUpgrade = currentCoin >= _currentCost && !IsMaxLevel
             };
             return data;
         }
@@ -305,8 +305,8 @@ namespace LabDiner.Restaurant.Environment
 
         private void HandleCoinUpdated(double currentCoin)
         {
-            bool canUpgrade = currentCoin >= _currentCost;
             bool isMaxLevel = _currentLevel >= _maxStar * _levelPerStar;
+            bool canUpgrade = currentCoin >= _currentCost && !isMaxLevel;
             if(!isMaxLevel && canUpgrade && !_upgradeSprite.gameObject.activeSelf)
             {
                 _upgradeSprite.gameObject.SetActive(true);
@@ -346,7 +346,7 @@ namespace LabDiner.Restaurant.Environment
                 {
                     case StationStarBuffType.MultiplyProfit:
                         _currentProfitBuff += buff.Value; 
-                        if(!isFromLoadProgress) _CoreStationUIController.ShowUpgradeEffect($"Profit x{buff.Value:F1}");
+                        if(!isFromLoadProgress) _CoreStationUIController.ShowUpgradeEffect($"Profit buff +{buff.Value:F1}");
                         break;
                     case StationStarBuffType.CreateNewStation:
                         CreateNewStation(buff.Value, isFromLoadProgress);

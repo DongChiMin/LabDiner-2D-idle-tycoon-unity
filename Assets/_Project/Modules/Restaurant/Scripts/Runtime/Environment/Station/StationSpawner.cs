@@ -48,7 +48,8 @@ namespace LabDiner.Restaurant.Environment
                 if (_spawnInBox && !isFromLoadProgress)
                 {
                     newStation.gameObject.SetActive(false);
-                    var box = PoolContext.Instance.StationBoxPool.Get(newStation.transform.position, Quaternion.identity);
+                    StationBox box = PoolContext.Instance.StationBoxPool.Get(newStation.transform.position, Quaternion.identity);
+                    box.transform.SetParent(_spawnParent);
                     box.Setup(newStation, this);
                 }
                 else
