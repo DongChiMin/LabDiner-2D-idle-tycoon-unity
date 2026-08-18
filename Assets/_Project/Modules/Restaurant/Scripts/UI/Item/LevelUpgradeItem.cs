@@ -37,6 +37,8 @@ namespace LabDiner.Restaurant.UI
             _descriptionText.text = upgradeSO.Description;
             _costText.text = CurrencyFormatter.Format(upgradeSO.UpgradeCost);
             _iconImage.sprite = upgradeSO.Icon;
+
+            _upgradeTypeImage.gameObject.SetActive(upgradeSO.UpgradeTypeSprite != null);
             _upgradeTypeImage.sprite = upgradeSO.UpgradeTypeSprite;
         }
 

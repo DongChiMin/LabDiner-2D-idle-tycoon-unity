@@ -27,15 +27,8 @@ namespace LabDiner.Restaurant.UI
         /// <returns></returns>
         public bool DecreaseQuantity()
         {
-            if (int.TryParse(_quantityText.text, out int currentQuantity))
-            {
-                currentQuantity = Mathf.Max(0, currentQuantity - 1);
-                _quantityText.text = currentQuantity.ToString();
-            }
-            else
-            {
-                Debug.LogWarning("Failed to parse quantity text.");
-            }
+            _quantity = Mathf.Max(0, _quantity - 1);
+            _quantityText.text = _quantity.ToString();
             return _quantity > 0;
         }
         

@@ -26,6 +26,7 @@ namespace LabDiner.Restaurant.UI
                 if (mission is CoreStationMissionSO coreStationMission)
                 {
                     CoreStationSO targetCoreStation = coreStationMission.TargetCoreStation;
+                    CoreStationMissionType missionType = coreStationMission.MissionType;
                     var targetStation = coreStations.FirstOrDefault(s => s.CoreStationSO == targetCoreStation);
                     if(targetStation != null)
                     {
@@ -37,7 +38,10 @@ namespace LabDiner.Restaurant.UI
                     }
                     else
                     {
-                        Debug.LogError($"[LevelMissionController] Không tìm thấy trạm chính nào phù hợp với yêu cầu của nhiệm vụ {mission.Title}, vui lòng điều chỉnh lại data của nhiệm vụ này để tránh lỗi khi chạy game!");
+                        if(missionType != CoreStationMissionType.MaxLevelAllStation)
+                        {
+                            Debug.LogError($"[LevelMissionController] Không tìm thấy trạm chính nào phù hợp với yêu cầu của nhiệm vụ {mission.Title}, vui lòng điều chỉnh lại data của nhiệm vụ này để tránh lỗi khi chạy game!");
+                        }
                     }
                 }
             }

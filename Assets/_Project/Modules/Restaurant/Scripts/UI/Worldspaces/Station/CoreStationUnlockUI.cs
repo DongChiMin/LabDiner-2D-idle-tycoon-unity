@@ -1,4 +1,5 @@
 using System;
+using LabDiner.Shared.Extension;
 using LabDiner.Shared.UI;
 using TMPro;
 using UnityEngine;
@@ -54,8 +55,10 @@ namespace LabDiner.Restaurant.UI
         {
             _currentCost = data.CurrentCost;
 
+            string formattedCost = CurrencyFormatter.Format(_currentCost);
+
             _nameText.text = data.CoreStationSO.Dish.Name;
-            _costText.text = $"${data.CurrentCost:F0}";
+            _costText.text = formattedCost;
 
             if(_iconImage.sprite != data.CoreStationSO.Dish.StationIcon)
             {

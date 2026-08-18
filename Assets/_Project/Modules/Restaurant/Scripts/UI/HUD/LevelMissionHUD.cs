@@ -14,6 +14,7 @@ namespace LabDiner.Restaurant.UI
 
         [Header("Common UI")]
         [SerializeField] private Image _missionIcon;
+        [SerializeField] private Image _missionIconCompleted;
 
         [Header("Mission UI")]
         [SerializeField] private GameObject _missionUI;    //UI phiên bản đang thực thi nhiệm vụ
@@ -46,6 +47,7 @@ namespace LabDiner.Restaurant.UI
             
             //Common UI Setup
             _missionIcon.sprite = mission.MissionIcon;
+            _missionIconCompleted.sprite = mission.MissionIcon;
 
             //Upgradable UI Setup
             _missionUI.SetActive(true);
