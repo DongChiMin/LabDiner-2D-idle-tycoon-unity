@@ -49,9 +49,13 @@ namespace LabDiner.LevelMap.UI
         {
             _panel.Hide();
             _panel.RotationEffect.Hide();
-            // LevelManagerContext.Instance.LoadNextLevel();
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(currentSceneIndex);
+
+            // // Load lại scene gameplay
+            // int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            // SceneManager.LoadScene(currentSceneIndex);
+        
+            // Load scene bootstrap
+            SceneManager.LoadScene("Bootstrap", LoadSceneMode.Single);
         }
     }
 }

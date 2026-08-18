@@ -140,6 +140,9 @@ public class BootstrapManager : Singleton<BootstrapManager>
             yield return null;
         }
         canvasGroup.blocksRaycasts = false;
+
+        // Sau khi fade out xong, unload scene loading
+        SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 
     private IEnumerator UpdateProgressBar(float targetProgress)
