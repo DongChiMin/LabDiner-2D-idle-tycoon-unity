@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4225d683536636544915599d251ed919, type: 3}
+  m_Name: sell_dish_count
+  m_EditorClassIdentifier: 
+  Title: Sell Pancake
+  MissionIcon: {fileID: 2255580716522117994, guid: 5f23a5fe10cf24c428a517b5ac81af83, type: 3}
+  TargetValue: 15
+  Reward: {fileID: 11400000, guid: ffb41465a61665b4eaa5aa0ed4bdf7bd, type: 2}
+  RewardValue: 1
+  TargetCoreStation: {fileID: 11400000, guid: 920c4a25b430f7646b738f78c6c3a2e2, type: 2}
+  MissionType: 0
+  _onGuestReceiveFood: {fileID: 11400000, guid: 0f2324de9061c294291ce6eb4d892b90, type: 2}

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78bd421c7ac59f7459a0ce4dd13f523a, type: 3}
+  m_Name: guest_quantity
+  m_EditorClassIdentifier: 
+  Title: Invite Friends
+  Description: Customer quantity +1
+  Icon: {fileID: -3490642724265753091, guid: c4c537998cc0ad04b8af36120579f730, type: 3}
+  UpgradeTypeSprite: {fileID: 0}
+  UpgradeCost: 150
+  UpgradeValue: 1
+  IsFromLoadProgress: 0
+  UpgradeType: 0
+  OnUpgradeRaised: {fileID: 11400000, guid: 27a6a35ae2a54ce489278fe22e512cf6, type: 2}

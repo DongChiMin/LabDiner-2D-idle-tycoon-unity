@@ -15,19 +15,19 @@ MonoBehaviour:
   ID: level_1
   LevelPrefab: {fileID: 9118704021934944520, guid: 3edc8ab7bd22cc942b4d4b0d13269354, type: 3}
   LevelIndex: 1
-  LevelName: Level 1
-  LevelDescription: 'This is description for level '
+  LevelName: Apple Shop
+  LevelDescription: Start a new journey
   LevelIcon: {fileID: 9006614987098792798, guid: 8bd9d29e84e2aa84d83faea6bf5d036b, type: 3}
   AvailableUpgrades:
-  - {fileID: 11400000, guid: 39d9c934703c43e4b8eddf932f83e6f0, type: 2}
-  - {fileID: 11400000, guid: 82b4ca4b1a76d464493f5936b1427edc, type: 2}
-  - {fileID: 11400000, guid: 5e74207989c443c4097488e7925767ad, type: 2}
-  - {fileID: 11400000, guid: bf3b90d994c7cff438a7615474cb9059, type: 2}
+  - {fileID: 11400000, guid: 352024dd2dc58af4cac414fbb1a2aff8, type: 2}
+  - {fileID: 11400000, guid: 3998d070301aded4d80c6c216d392188, type: 2}
+  - {fileID: 11400000, guid: bcd3f3739f2a9bc4384bafb7f2c227b8, type: 2}
+  - {fileID: 11400000, guid: 504615785478ad149be7e552643b3268, type: 2}
+  - {fileID: 11400000, guid: 3b6560422188f6847a43ab97f2fd4e2a, type: 2}
   AvailableMissions:
-  - {fileID: 11400000, guid: 92bbddd981cb49c4489e7ede1876fc78, type: 2}
-  - {fileID: 11400000, guid: 0e1840ab8fa35674abcea46df69668eb, type: 2}
-  - {fileID: 11400000, guid: bbdab5781cff236459f00171691c9727, type: 2}
-  - {fileID: 11400000, guid: 59cf129eda947b843bc63977123f0e7e, type: 2}
+  - {fileID: 11400000, guid: 92aab3df0d484254995f9fc5f664b387, type: 2}
+  - {fileID: 11400000, guid: a5912b4dad2936848b0de5aad8c8cefc, type: 2}
+  - {fileID: 11400000, guid: 4a203b27388525a4f950b157ae90634e, type: 2}
   WaitingLine: 0
   InitialStaffs:
   - StaffType: 3

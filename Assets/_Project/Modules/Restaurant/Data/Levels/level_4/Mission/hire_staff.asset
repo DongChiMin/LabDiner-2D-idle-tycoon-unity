@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c414d637959dde8438e851592fed9e5b, type: 3}
+  m_Name: hire_staff
+  m_EditorClassIdentifier: 
+  Title: Hire Chef
+  MissionIcon: {fileID: 879064974757451034, guid: c8d95ea84c69e3d4d8095d2d51eb8a1f, type: 3}
+  TargetValue: 2
+  Reward: {fileID: 11400000, guid: ffb41465a61665b4eaa5aa0ed4bdf7bd, type: 2}
+  RewardValue: 1
+  TargetStaff: 1
+  _onStaffSpawn: {fileID: 11400000, guid: 2c7cf855e3d8a084ba908e69a947b474, type: 2}
+  _onStaffListClear: {fileID: 11400000, guid: b00ef5aafa79d2f48bbcee4ff91217ff, type: 2}

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0347c7e512574ac4c957b74f526c9621, type: 3}
+  m_Name: collect_tip_count
+  m_EditorClassIdentifier: 
+  Title: Collect tip
+  MissionIcon: {fileID: -5993173569519109337, guid: 4af4d17461bab3e439b111a3df229a02, type: 3}
+  TargetValue: 20
+  Reward: {fileID: 11400000, guid: ffb41465a61665b4eaa5aa0ed4bdf7bd, type: 2}
+  RewardValue: 1
+  MissionType: 0
+  _onTipReceived: {fileID: 11400000, guid: 94d51df467069504eb26823dcb9cf467, type: 2}

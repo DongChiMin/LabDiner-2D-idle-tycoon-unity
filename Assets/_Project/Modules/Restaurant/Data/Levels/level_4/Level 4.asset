@@ -19,14 +19,31 @@ MonoBehaviour:
   LevelDescription: Day la level 4
   LevelIcon: {fileID: -9218411026924045847, guid: 6091d5a02d8536042842a3c77a2b66bf, type: 3}
   AvailableUpgrades:
-  - {fileID: 11400000, guid: b1c0487012d980641b470aacba56ac55, type: 2}
-  - {fileID: 11400000, guid: 76f276daa20029347b795b4b2c066021, type: 2}
-  - {fileID: 11400000, guid: 26dfeff9736b18f47aa712183d497813, type: 2}
+  - {fileID: 11400000, guid: 94a9f5fb717648845b5ea888850253b9, type: 2}
+  - {fileID: 11400000, guid: ed95bb4259a64024ca191cebf3cd26af, type: 2}
+  - {fileID: 11400000, guid: 9e6ee3dbad4bae44a951a4767df4a673, type: 2}
+  - {fileID: 11400000, guid: 8ce64c4f5d318eb4ea1d7c948b792b2d, type: 2}
+  - {fileID: 11400000, guid: 3aca19d271052f14e9c40b97f34bf52c, type: 2}
+  - {fileID: 11400000, guid: 143e957370c41bb489d37fd0c9f76efa, type: 2}
+  - {fileID: 11400000, guid: 082d08f473b5e1541951da782c4da2c2, type: 2}
+  - {fileID: 11400000, guid: a1b436938b7d01e4bb6cc6c2379e7a0a, type: 2}
+  - {fileID: 11400000, guid: c309eeb8213d2344d9e50fdee899e80f, type: 2}
+  - {fileID: 11400000, guid: a13cc9a8bd692104db6804d24bac0c1f, type: 2}
+  - {fileID: 11400000, guid: df7cc9c5b945c2f4685410d6bee96e37, type: 2}
   AvailableMissions:
-  - {fileID: 11400000, guid: 0702d43d43d490d4aa4de0c4b315cdc5, type: 2}
-  - {fileID: 11400000, guid: 00696dfc99c77c9499808dbf3f5b0123, type: 2}
-  - {fileID: 11400000, guid: 95bad2b936d0a5441abbfc98070456ca, type: 2}
-  - {fileID: 11400000, guid: 3991f04b88649fa449b0d8ad0747b0d3, type: 2}
+  - {fileID: 11400000, guid: 9f5969f4de154b14ba76f3e4bcde572f, type: 2}
+  - {fileID: 11400000, guid: 0cfc5feca598efc488704d54766731a2, type: 2}
+  - {fileID: 11400000, guid: 9bd6148aab8c80649af9be51f10233e1, type: 2}
+  - {fileID: 11400000, guid: 05ed286f259fdf84e9d57da5a4afcbd4, type: 2}
+  - {fileID: 11400000, guid: 42f4d9a29fb89f048a9988e0acc46cc8, type: 2}
+  - {fileID: 11400000, guid: 56be09be0a3cbd8458d9ef4573b56cc6, type: 2}
+  - {fileID: 11400000, guid: de340b12a7ca2854ea6484c09c541422, type: 2}
+  - {fileID: 11400000, guid: 0a43c80cfa0aee746a69ea8c088471ed, type: 2}
+  - {fileID: 11400000, guid: 5159f387a3ac4f848a9e5658a48b7806, type: 2}
+  - {fileID: 11400000, guid: 74f8abe13caa62943893de5f3419ad70, type: 2}
+  - {fileID: 11400000, guid: aa9e9240bbbf58d40bf2a76fa262746c, type: 2}
+  - {fileID: 11400000, guid: 1bd961ac85c85b344aac5d9020e3498b, type: 2}
+  - {fileID: 11400000, guid: 7a6dc24810593d24c900bf9066f273dc, type: 2}
   WaitingLine: 0
   InitialStaffs:
   - StaffType: 1

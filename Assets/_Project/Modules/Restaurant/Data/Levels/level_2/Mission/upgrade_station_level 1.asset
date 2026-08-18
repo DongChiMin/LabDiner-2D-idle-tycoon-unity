@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99c987d14107ff04fbfafd6bf2eac133, type: 3}
-  m_Name: Unlock Apple Juice_1
+  m_Name: upgrade_station_level 1
   m_EditorClassIdentifier: 
-  Title: Unlock Apple Juice
-  MissionIcon: {fileID: -8414445453311855943, guid: e4f6a7f501bd1a64e8f2e5918fc2a777, type: 3}
-  TargetValue: 0
+  Title: Upgrade Apple Juice
+  MissionIcon: {fileID: 3609355917801263868, guid: e14e8452151e88245819c917c3bbb5a0, type: 3}
+  TargetValue: 25
   Reward: {fileID: 11400000, guid: ffb41465a61665b4eaa5aa0ed4bdf7bd, type: 2}
   RewardValue: 1
   TargetCoreStation: {fileID: 11400000, guid: 9b5d547358c30024a9944407e9f6cacf, type: 2}
-  MissionType: 1
+  MissionType: 0
   coreStationRuntimeSO: {fileID: 11400000, guid: 014d0306fd640c34d825b497c1c9b9f8, type: 2}

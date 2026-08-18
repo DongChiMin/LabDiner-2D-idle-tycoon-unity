@@ -18,15 +18,30 @@ MonoBehaviour:
   LevelName: Level 2
   LevelDescription: This is description for level 2
   LevelIcon: {fileID: 4931217934216961141, guid: 3753a249076b9b14da0dc6a34c33cc25, type: 3}
-  AvailableUpgrades: []
+  AvailableUpgrades:
+  - {fileID: 11400000, guid: 2741da49e67cdec4380ff93183bb2d25, type: 2}
+  - {fileID: 11400000, guid: 5d1c5b8f634e46f409a1ca69a3b860e1, type: 2}
+  - {fileID: 11400000, guid: e0ad529645de66f41a57fcd87b36fadc, type: 2}
+  - {fileID: 11400000, guid: 48d10c856deb7804f86b8d59111932e5, type: 2}
+  - {fileID: 11400000, guid: 0cbc785287923304ca38d298820ee436, type: 2}
+  - {fileID: 11400000, guid: d7d99a7e9c951574194a9176cdacaaa6, type: 2}
+  - {fileID: 11400000, guid: 9c6195cf209ca7b4ebb6956d52f760c0, type: 2}
+  - {fileID: 11400000, guid: ff978d7b8056c994786aecb21f7f1377, type: 2}
+  - {fileID: 11400000, guid: 9a5a1c3cd6eb5974dad82f29f6d6885c, type: 2}
   AvailableMissions:
+  - {fileID: 11400000, guid: 55f36c9f42dda2c40bd8ee4dc0d2998e, type: 2}
+  - {fileID: 11400000, guid: 4ea21658907f42240b61e742f407e641, type: 2}
+  - {fileID: 11400000, guid: 839547e0b90ec0643aa26f7b3816182f, type: 2}
   - {fileID: 11400000, guid: 238a08c43cb85f0419972a828910aae5, type: 2}
+  - {fileID: 11400000, guid: 4d99dd67495f204498c9a205632eed6a, type: 2}
+  - {fileID: 11400000, guid: 7b90490660e313546a979463394cd7c0, type: 2}
+  - {fileID: 11400000, guid: 87d17c70e26434942bf2ffec3b3e2a7a, type: 2}
   WaitingLine: 0
   InitialStaffs:
-  - StaffType: 0
-    Quantity: 0
-  InitialMoney: 10
-  InitialGuestQuantity: 4
+  - StaffType: 3
+    Quantity: 1
+  InitialMoney: 15
+  InitialGuestQuantity: 3
   MaxUniqueStations: 2
   MaxTotalQtyPerOrder: 5
   minVerticalPos: 0
