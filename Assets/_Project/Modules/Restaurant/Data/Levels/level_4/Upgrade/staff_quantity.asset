@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: Add 1 chef
   Icon: {fileID: 879064974757451034, guid: c8d95ea84c69e3d4d8095d2d51eb8a1f, type: 3}
   UpgradeTypeSprite: {fileID: 0}
-  UpgradeCost: 2000
+  UpgradeCost: 500
   UpgradeValue: 1
   IsFromLoadProgress: 0
   UpgradeType: 2

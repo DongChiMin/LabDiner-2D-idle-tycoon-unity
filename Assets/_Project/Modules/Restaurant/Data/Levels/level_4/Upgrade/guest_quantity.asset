@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: Customer quantity +1
   Icon: {fileID: -3490642724265753091, guid: c4c537998cc0ad04b8af36120579f730, type: 3}
   UpgradeTypeSprite: {fileID: 0}
-  UpgradeCost: 1000
+  UpgradeCost: 5000
   UpgradeValue: 1
   IsFromLoadProgress: 0
   UpgradeType: 0

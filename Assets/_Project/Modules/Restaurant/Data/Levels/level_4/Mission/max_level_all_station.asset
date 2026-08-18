@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: max_level_all_station
   m_EditorClassIdentifier: 
   Title: Max level all Station
-  MissionIcon: {fileID: -2098498005892181406, guid: 168add1a3497b844384501ecfc0dc12b, type: 3}
+  MissionIcon: {fileID: 4687309882487268517, guid: ef22046a6b405c44585a338400a83807, type: 3}
   TargetValue: 0
   Reward: {fileID: 11400000, guid: ffb41465a61665b4eaa5aa0ed4bdf7bd, type: 2}
   RewardValue: 1

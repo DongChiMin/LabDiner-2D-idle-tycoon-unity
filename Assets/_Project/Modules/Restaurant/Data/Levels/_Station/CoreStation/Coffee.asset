@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: Coffee
   m_EditorClassIdentifier: 
   Dish: {fileID: 11400000, guid: 6d38d213cfb001048ac3d25d0a58c941, type: 2}
-  LevelPerStar: 10
+  LevelPerStar: 25
   StationStars:
   - {fileID: 11400000, guid: bf58ef3e9ce26074e82be8749f31957b, type: 2}
   - {fileID: 11400000, guid: 54bb59c629dfab744823ac02029698fb, type: 2}
   - {fileID: 11400000, guid: bf58ef3e9ce26074e82be8749f31957b, type: 2}
-  BaseProfit: 10
-  BaseProcessTime: 5
-  BaseUpgradeCost: 15
+  - {fileID: 11400000, guid: bf58ef3e9ce26074e82be8749f31957b, type: 2}
+  BaseProfit: 7500
+  BaseProcessTime: 20
+  BaseUpgradeCost: 5000
   CostMultiplier: 1.07
   ProfitMultiplier: 1.15
-  MaxLevel: 30
-  MaxStar: 3
+  MaxLevel: 100
+  MaxStar: 4
   MaxQuantity: 2

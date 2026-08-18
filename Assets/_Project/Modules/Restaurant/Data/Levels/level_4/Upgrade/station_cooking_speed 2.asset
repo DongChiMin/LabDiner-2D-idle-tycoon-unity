@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d96dea47aec7634286554d9d8e08ca3, type: 3}
   m_Name: station_cooking_speed 2
   m_EditorClassIdentifier: 
-  Title: Morden Apple Station
-  Description: Speed up Production speed
-  Icon: {fileID: -4197890398980553806, guid: 7688d0565f7160e40b7315a1519d762b, type: 3}
+  Title: Fast Coffee
+  Description: Speed up Coffee speed
+  Icon: {fileID: -2098498005892181406, guid: 168add1a3497b844384501ecfc0dc12b, type: 3}
   UpgradeTypeSprite: {fileID: 21300000, guid: 3a4468f1de0d8df4784e298619e1d8bd, type: 3}
-  UpgradeCost: 500
+  UpgradeCost: 115000
   UpgradeValue: 2
   IsFromLoadProgress: 0
   UpgradeType: 0
-  TargetDish: {fileID: 11400000, guid: 5fb6c1ff8a5604143820488853beb000, type: 2}
+  TargetDish: {fileID: 11400000, guid: 6d38d213cfb001048ac3d25d0a58c941, type: 2}
   OnUpgradeRaised: {fileID: 11400000, guid: 3d0d7d492590bf040ae4badd8ecbeb2d, type: 2}

@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: Speed up Burger speed
   Icon: {fileID: 5161360832057212993, guid: 2153bee0075d2e741b7efd2d502117fc, type: 3}
   UpgradeTypeSprite: {fileID: 21300000, guid: 3a4468f1de0d8df4784e298619e1d8bd, type: 3}
-  UpgradeCost: 500
+  UpgradeCost: 2000
   UpgradeValue: 2
   IsFromLoadProgress: 0
   UpgradeType: 0

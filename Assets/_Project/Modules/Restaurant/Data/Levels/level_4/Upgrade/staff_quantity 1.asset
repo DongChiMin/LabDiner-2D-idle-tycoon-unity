@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: Add 1 Waiter
   Icon: {fileID: -2847235124302637210, guid: 48040aae9260a87409fa737a409ac856, type: 3}
   UpgradeTypeSprite: {fileID: 0}
-  UpgradeCost: 2000
+  UpgradeCost: 15600
   UpgradeValue: 1
   IsFromLoadProgress: 0
   UpgradeType: 2

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: guest_quantity 1
   m_EditorClassIdentifier: 
   Title: Invite Friends
-  Description: Customer quantity +2
+  Description: Customer quantity +1
   Icon: {fileID: -3490642724265753091, guid: c4c537998cc0ad04b8af36120579f730, type: 3}
   UpgradeTypeSprite: {fileID: 0}
-  UpgradeCost: 1000
-  UpgradeValue: 2
+  UpgradeCost: 65700
+  UpgradeValue: 1
   IsFromLoadProgress: 0
   UpgradeType: 0
   OnUpgradeRaised: {fileID: 11400000, guid: 27a6a35ae2a54ce489278fe22e512cf6, type: 2}

@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: AppleJuice
   m_EditorClassIdentifier: 
   Dish: {fileID: 11400000, guid: e1c2d725fbe4edc458d879bd895492d5, type: 2}
-  LevelPerStar: 10
+  LevelPerStar: 25
   StationStars:
   - {fileID: 11400000, guid: bf58ef3e9ce26074e82be8749f31957b, type: 2}
   - {fileID: 11400000, guid: 54bb59c629dfab744823ac02029698fb, type: 2}
   - {fileID: 11400000, guid: bf58ef3e9ce26074e82be8749f31957b, type: 2}
-  BaseProfit: 10
-  BaseProcessTime: 5
-  BaseUpgradeCost: 15
+  BaseProfit: 1500
+  BaseProcessTime: 10
+  BaseUpgradeCost: 1000
   CostMultiplier: 1.07
   ProfitMultiplier: 1.15
-  MaxLevel: 30
+  MaxLevel: 75
   MaxStar: 3
   MaxQuantity: 2

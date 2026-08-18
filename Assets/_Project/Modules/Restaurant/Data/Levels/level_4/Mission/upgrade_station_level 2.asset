@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: upgrade_station_level 2
   m_EditorClassIdentifier: 
   Title: Upgrade Pancake
-  MissionIcon: {fileID: -262208241541741471, guid: 1500c6a509ecb924f9a01b74acf91833, type: 3}
+  MissionIcon: {fileID: 2255580716522117994, guid: 5f23a5fe10cf24c428a517b5ac81af83, type: 3}
   TargetValue: 100
   Reward: {fileID: 11400000, guid: ffb41465a61665b4eaa5aa0ed4bdf7bd, type: 2}
   RewardValue: 1
