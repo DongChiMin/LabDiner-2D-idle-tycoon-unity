@@ -183,6 +183,7 @@ public class CheatController : MonoBehaviour
         }
 
         LevelConfigSO nextLevel = _levelRegistry.GetConfigByIndex(levelIndex);
+        _progressRuntimeSO.LevelProgressSave.SetLevelCompleted();
         _progressRuntimeSO.PlayerSave.UpdateCurrentLevelID(nextLevel.ID);
 
         //Reload Scene
