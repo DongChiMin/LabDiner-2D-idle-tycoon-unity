@@ -66,7 +66,6 @@ namespace LabDiner.Restaurant.Environment
         }
 
         #region Gizmos
-#if UNITY_EDITOR
 
         [Header("Gizmos Settings")]
         public bool ShowGizmos { get => _showGizmos; set => _showGizmos = value; }
@@ -98,7 +97,6 @@ namespace LabDiner.Restaurant.Environment
             UnityEditor.Handles.Label(_pickUpPos.transform.position + Vector3.up * 0.5f, label);
         }
 
-#endif
 
         #endregion
     }
