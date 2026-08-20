@@ -9,6 +9,7 @@ using LabDiner.Shared.SO;
 using LabDiner.Shared.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CheatController : MonoBehaviour
@@ -42,12 +43,15 @@ public class CheatController : MonoBehaviour
 
     [Header("Level")]
     [SerializeField] private LevelConfigEvent _onLevelComplete;
+    [SerializeField] private TMP_InputField _inputLevelIndexValue;
     [SerializeField] private Button _btnSkipCurrentLevel;
     [SerializeField] private Button _btnSkipToValueLevel;
 
-    [Header("Level Load")]
     [SerializeField] private LevelRegistrySO _levelRegistry;
     [SerializeField] private ProgressSaveRuntimeSO _progressRuntimeSO;
+
+    [Header("Delete Data")]
+    [SerializeField] private Button _btnDeleteData;
     
     bool isFetchProgress = false;
     void FetchProgress()
@@ -67,6 +71,7 @@ public class CheatController : MonoBehaviour
         _btnAddFixedGem.onClick.AddListener(HandleAddFixedGem);
         _btnSkipCurrentLevel.onClick.AddListener(HandleSkipCurrentLevel);
         _btnSkipToValueLevel.onClick.AddListener(HandleSkipToValueLevel);
+        _btnDeleteData.onClick.AddListener(HandleDeleteData);
     }
 
     void OnDisable()
@@ -80,6 +85,7 @@ public class CheatController : MonoBehaviour
         _btnAddFixedGem.onClick.RemoveListener(HandleAddFixedGem);
         _btnSkipCurrentLevel.onClick.RemoveListener(HandleSkipCurrentLevel);
         _btnSkipToValueLevel.onClick.RemoveListener(HandleSkipToValueLevel);
+        _btnDeleteData.onClick.RemoveListener(HandleDeleteData);
     }
 
     private void HandlePopupShow()
@@ -166,7 +172,44 @@ public class CheatController : MonoBehaviour
             FetchProgress();
             isFetchProgress = true;
         }
-        // Implementation for skipping level with value
+
+        // Cập nhật level mới vào playerSave
+        int levelIndex = int.TryParse(_inputLevelIndexValue.text, out int parsedIndex) ? parsedIndex : -1;
+
+        if(levelIndex < 0)
+        {
+            Debug.LogError($"[CheatController] Invalid level index: {levelIndex}");
+            return;
+        }
+
+        LevelConfigSO nextLevel = _levelRegistry.GetConfigByIndex(levelIndex);
+        _progressRuntimeSO.PlayerSave.UpdateCurrentLevelID(nextLevel.ID);
+
+        //Reload Scene
+        SceneManager.LoadScene("Bootstrap", LoadSceneMode.Single);
+    }
+
+    #endregion
+
+    #region Delete Data
+    private void HandleDeleteData()
+    {
+        //Tạo bản Save mới
+        PlayerSave emptyPlayerSave = new PlayerSave();
+        PlayerSaveFile.SaveToFile(emptyPlayerSave);
+
+        LevelProgressSave emptyLevelSave = new LevelProgressSave();
+        LevelProgressSaveFile.SaveToFile(emptyLevelSave);
+
+        _progressRuntimeSO.Init();
+        PlayerPrefs.DeleteAll();
+
+        //Tắt ứng dụng
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
     }
 
     #endregion

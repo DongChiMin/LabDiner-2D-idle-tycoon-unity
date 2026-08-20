@@ -43,6 +43,22 @@ namespace LabDiner.LevelSystem.Domain
             return chapter.Levels;
         }
 
+        public LevelConfigSO GetConfigByIndex(int index)
+        {
+            foreach (LevelChapterSO chapter in chapters)
+            {
+                foreach (LevelConfigSO config in chapter.Levels)
+                {
+                    if (config.LevelIndex == index)
+                    {
+                        return config;
+                    }
+                }
+            }
+            Debug.LogError($"[LevelRegistrySO] No config found for level index {index}!");
+            return null;
+        }
+
         public LevelConfigSO GetConfigByID(string ID)
         {
             foreach(LevelChapterSO chapter in chapters)
