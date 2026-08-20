@@ -72,6 +72,8 @@ namespace LabDiner.Restaurant.Environment
         [SerializeField] private bool _showGizmos = true;
         [SerializeField] private Vector3 _putOnPosSize = new Vector3(1.5f, 2.25f, 0.1f);
         [SerializeField] private Vector3 _pickUpPosSize = new Vector3(1.5f, 2.25f, 0.1f);
+
+        #if UNITY_EDITOR
         void OnDrawGizmos()
         {
             if (!_showGizmos) return;
@@ -96,7 +98,7 @@ namespace LabDiner.Restaurant.Environment
             UnityEditor.Handles.color = Color.white;
             UnityEditor.Handles.Label(_pickUpPos.transform.position + Vector3.up * 0.5f, label);
         }
-
+        #endif
 
         #endregion
     }

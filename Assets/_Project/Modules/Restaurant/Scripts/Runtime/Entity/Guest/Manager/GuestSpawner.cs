@@ -41,6 +41,7 @@ namespace LabDiner.Restaurant.Manager
         [SerializeField] private int _currentMaxGuests = 1;
         [SerializeField] private int _maxUniqueStations = 2;
         [SerializeField] private int _maxTotalQty = 3;
+        [SerializeField] private List<GuestContext> _guests = new List<GuestContext>();
 
         private float _currentSpawntimeBuff = 0;
 

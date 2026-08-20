@@ -7,8 +7,6 @@ namespace LabDiner.Restaurant.Manager
 {
     public partial class GuestSpawner
     {
-        [Header("[EDITOR ONLY DEBUG]")]
-        [SerializeField] private List<GuestContext> _guests = new List<GuestContext>();
 
         partial void Debug_AddGuest(GuestContext guest)
         {
